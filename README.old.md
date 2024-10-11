@@ -1,2 +1,0 @@
-# Frontend
-Фронтенд приложения BlogPoint
