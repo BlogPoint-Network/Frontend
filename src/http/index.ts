@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'https://jsonplaceholder.typicode.com/users'
+export const API_URL = 'http://localhost:8000/api'
 
 const $api = axios.create({
     withCredentials: true,

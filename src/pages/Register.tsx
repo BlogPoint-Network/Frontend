@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Group  } from '@mantine/core';
 
 const Register = () => {
+    const [submittedValues, setSubmittedValues] = useState('');
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -20,12 +21,18 @@ const Register = () => {
         <div style={{
             marginLeft: '20rem',
             marginRight: '20rem',
+            marginTop: '4rem',
             border: "solid grey 1px",
             padding: "15px 20px",
-            borderRadius: "20px"
+            borderRadius: "20px",
+            background: "white",
         }}>
             <Group justify="center" grow>
-                <form onSubmit={form.onSubmit(console.log)}>
+                <form
+                    onSubmit={form.onSubmit((values) => {
+                        setSubmittedValues(JSON.stringify(values, null, 2))
+                        console.log(form.values)
+                })}>
                     <TextInput
                         label="Логин"
                         placeholder="Логин"
@@ -44,13 +51,10 @@ const Register = () => {
                         mt="sm"
                         label="Введите пароль"
                         placeholder="Пароль"
+                        key={form.key('password')}
+                        {...form.getInputProps('password')}
                     />
-                    <TextInput
-                        type="password"
-                        mt="sm"
-                        label="Подтвердите пароль"
-                        placeholder="Пароль"
-                    />
+
                     <Button type="submit" mt="sm">
                         Submit
                     </Button>

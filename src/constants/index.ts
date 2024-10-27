@@ -1,1 +1,1 @@
-export const mainBackgroundColor = "#cbcbcb";
+export const mainBackgroundColor = "#afafaf";

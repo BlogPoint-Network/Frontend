@@ -8,9 +8,9 @@ function ForTest() {
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
-            firstName: 'Jane',
-            lastName: 'Doe',
-            age: '33',
+            firstName: '',
+            lastName: '',
+            age: '',
         },
     });
 

@@ -5,6 +5,7 @@ import AppRouter from "./components/AppRouter";
 import {ProfileContext} from "./context";
 import {useEffect} from "react";
 import useProfile from "./hooks/useProfile";
+import './App.css';
 
 export default function App() {
 
