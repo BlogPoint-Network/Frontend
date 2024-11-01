@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Group  } from '@mantine/core';
 import {ProfileContext} from "../context";
+import {skyBlueColor} from "../constants";
 
 const Register = () => {
     const profile = useContext(ProfileContext)
@@ -56,7 +57,7 @@ const Register = () => {
                         {...form.getInputProps('password')}
                     />
                     <TextInput
-                        type="checkPassword"
+                        type="password"
                         mt="sm"
                         label="Подтвердите пароль"
                         placeholder="Пароль"
@@ -64,7 +65,7 @@ const Register = () => {
                         {...form.getInputProps('repeatPassword')}
                     />
 
-                    <Button type="submit" mt="sm">
+                    <Button type="submit" mt="sm" color={skyBlueColor}>
                         Submit
                     </Button>
                 </form>

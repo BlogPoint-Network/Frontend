@@ -8,6 +8,7 @@ import useProfile from "./hooks/useProfile";
 import './App.css';
 import AppComponent from "./components/AppComponent";
 
+
 export default function App() {
 
     const profileManager = useProfile()

@@ -1,21 +1,35 @@
-import React from 'react';
-import {IconHome2} from "@tabler/icons-react";
-import MyLink from "../MyLink/MyLink";
+import React, {useState} from 'react';
+import {IconHome, IconUserCircle, IconLogin, IconUserPlus, IconAbacus} from "@tabler/icons-react";
+import {NavLink} from "@mantine/core";
+import {skyBlueColor} from "../../constants";
 
 const Navigation = () => {
     const pages = [
-        {name: "Home", icon: <IconHome2/>, href: '../', label: 'Home'},
-        {name: "Регистрвция", icon: <IconHome2/>, href: '../Register', label: 'Register'},
+        {name: "Главная", icon: IconHome, href: '../', label: 'Главная'},
+        {name: "Авторизация", icon: IconLogin, href: '../Login', label: 'Авторизация'},
+        {name: "Регистрация", icon: IconUserPlus, href: '../Register', label: 'Регистрация'},
+        {name: "Профиль", icon: IconUserCircle, href: '../Profile', label: 'Профиль'},
+        {name: "Тестовая", icon: IconAbacus, href: '../Test', label: 'Для тестов'},
     ]
+    const [active, setActive] = useState(0);
 
-    
-
-    return (
-        <>
-
-            <MyLink href={pages[0].href} label={pages[0].label} icon={pages[0].icon} />
-        </>
-    );
+     return (
+         <>
+             <h1>Навигация</h1>
+             {pages.map((page, index) =>
+                 <NavLink
+                     active={index === active}
+                     key={index}
+                     href={page.href}
+                     label={page.label}
+                     leftSection={<page.icon size="1.5rem" stroke={1.5} color={skyBlueColor}/>}
+                     onClick={(e) => {
+                        setActive(index)
+                     }}
+                 />
+             )}
+         </>
+     )
 };
 
 export default Navigation;

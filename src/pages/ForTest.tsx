@@ -1,56 +1,11 @@
-import { useState } from 'react';
-import { useForm } from '@mantine/form';
-import { TextInput, Button, Code } from '@mantine/core';
+import React from 'react';
 
-function ForTest() {
-    const [submittedValues, setSubmittedValues] = useState('');
-
-    const form = useForm({
-        mode: 'uncontrolled',
-        initialValues: {
-            firstName: '',
-            lastName: '',
-            age: '',
-        },
-    });
-
+const ForTest = () => {
     return (
-        <>
-            <form
-                onSubmit={form.onSubmit((values) => console.log(values))} // form.onSubmit((values) => {console.log(form.values)})
-            >
-                <TextInput
-                    label="First name"
-                    placeholder="First name"
-                    key={form.key('firstName')}
-                    {...form.getInputProps('firstName')}
-                />
-                <TextInput
-                    label="Last name"
-                    placeholder="Last name"
-                    mt="md"
-                    key={form.key('lastName')}
-                    {...form.getInputProps('lastName')}
-                />
-                <TextInput
-                    type="number"
-                    label="Age"
-                    placeholder="Age"
-                    mt="md"
-                    key={form.key('age')}
-                    {...form.getInputProps('age')}
-                />
-                <Button type="submit" mt="md">
-                    Submit
-                </Button>
-            </form>
-
-            {submittedValues && (
-                <Code block mt="md">
-                    {submittedValues}
-                </Code>
-            )}
-        </>
+        <div>
+            
+        </div>
     );
-}
+};
+
 export default ForTest;

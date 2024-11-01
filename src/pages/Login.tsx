@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Group } from '@mantine/core';
 import {ProfileContext} from "../context";
+import {skyBlueColor} from "../constants";
 
 const Login = () => {
 
@@ -46,7 +47,7 @@ const Login = () => {
                         key={form.key('password')}
                         {...form.getInputProps('password')}
                     />
-                    <Button type="submit" mt="sm">
+                    <Button type="submit" mt="sm" color={skyBlueColor}>
                         Submit
                     </Button>
                 </form>
