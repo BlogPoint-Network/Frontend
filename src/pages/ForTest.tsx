@@ -17,10 +17,7 @@ function ForTest() {
     return (
         <>
             <form
-                onSubmit={form.onSubmit((values) => {
-                    setSubmittedValues(JSON.stringify(values, null, 2))
-                    console.log(form.values)
-                })}
+                onSubmit={form.onSubmit((values) => console.log(values))} // form.onSubmit((values) => {console.log(form.values)})
             >
                 <TextInput
                     label="First name"

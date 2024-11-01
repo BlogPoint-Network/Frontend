@@ -6,6 +6,7 @@ import {ProfileContext} from "./context";
 import {useEffect} from "react";
 import useProfile from "./hooks/useProfile";
 import './App.css';
+import AppComponent from "./components/AppComponent";
 
 export default function App() {
 
@@ -19,7 +20,7 @@ export default function App() {
         <MantineProvider>
             <ProfileContext.Provider value={profileManager}>
                 <BrowserRouter>
-                    <AppRouter/>
+                    <AppComponent/>
                 </BrowserRouter>
             </ProfileContext.Provider>
         </MantineProvider>
