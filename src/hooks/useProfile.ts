@@ -18,7 +18,7 @@ function useProfile() {
 
     async function registrationProfile(email: string, login: string, password: string) {
         try {
-            await AuthService.registerUserAuth(email,login, password);
+            await AuthService.registerUserAuth(login,email, password);
         } catch (e) {
             console.log(e);
         }

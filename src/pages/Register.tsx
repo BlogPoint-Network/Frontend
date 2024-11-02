@@ -33,7 +33,7 @@ const Register = () => {
                 <form
                     onSubmit={form.onSubmit((values) => {
                         console.log(values);
-                        profile?.registrationProfile(values.email, values.password, values.login);
+                        profile?.registrationProfile(values.login, values.email, values.password);
                     })}>
                     <TextInput
                         label="Логин"
