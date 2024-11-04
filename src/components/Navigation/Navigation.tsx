@@ -1,14 +1,25 @@
 import React, {useState} from 'react';
-import {IconHome, IconUserCircle, IconLogin, IconUserPlus, IconAbacus} from "@tabler/icons-react";
+import {
+    IconHome,
+    IconAbacus,
+    IconUsersGroup,
+    IconUserHeart,
+    IconChartBarPopular,
+    IconTrendingUp,
+    IconQuestionMark, IconUser
+} from "@tabler/icons-react";
 import {NavLink} from "@mantine/core";
 import {skyBlueColor} from "../../constants";
 
 const Navigation = () => {
     const pages = [
-        {name: "Главная", icon: IconHome, href: '../', label: 'Главная'},
-        {name: "Авторизация", icon: IconLogin, href: '../Login', label: 'Авторизация'},
-        {name: "Регистрация", icon: IconUserPlus, href: '../Register', label: 'Регистрация'},
-        {name: "Профиль", icon: IconUserCircle, href: '../Profile', label: 'Профиль'},
+        {label: 'Главная', icon: IconHome, href: '../'},
+        {label: 'Профиль', icon: IconUser, href: '../Profile'},
+        {label: 'Подписки', icon: IconUserHeart, href: '../'},
+        {label: 'Мой канал', icon: IconUsersGroup, href: '../'},
+        {label: 'Рекомендации', icon: IconChartBarPopular, href: '../'},
+        {label: 'Популярные каналы', icon: IconTrendingUp, href: '../'},
+        {label: 'Рейтинг каналов', icon: IconQuestionMark, href: '../'},
         {name: "Тестовая", icon: IconAbacus, href: '../Test', label: 'Для тестов'},
     ]
     const [active, setActive] = useState(0);
@@ -23,7 +34,7 @@ const Navigation = () => {
                      href={page.href}
                      label={page.label}
                      leftSection={<page.icon size="1.5rem" stroke={1.5} color={skyBlueColor}/>}
-                     onClick={(e) => {
+                     onClick={() => {
                         setActive(index)
                      }}
                  />
