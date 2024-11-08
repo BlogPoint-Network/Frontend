@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     IconHome,
     IconAbacus,
@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import {NavLink} from "@mantine/core";
 import {skyBlueColor} from "../../constants";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Navigation = () => {
     const pages = [
@@ -22,20 +23,30 @@ const Navigation = () => {
         {label: 'Рейтинг каналов', icon: IconQuestionMark, href: '../RatingOfChannels'},
         {name: "Тестовая", icon: IconAbacus, href: '../Test', label: 'Для тестов'},
     ]
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(() => {
+        return localStorage.getItem('activePathIndex') || 0;
+    });
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const currentPage = location.pathname;
+        setActive(currentPage);
+        localStorage.setItem('activePath', currentPage);
+    }, [location.pathname]);
 
      return (
          <>
              <h1>Навигация</h1>
              {pages.map((page, index) =>
                  <NavLink
-                     active={index === active}
+
                      key={index}
                      href={page.href}
                      label={page.label}
                      leftSection={<page.icon size="1.5rem" stroke={1.5} color={skyBlueColor}/>}
                      onClick={() => {
-                        setActive(index)
+
                      }}
                  />
              )}

@@ -4,13 +4,16 @@ import { useDisclosure } from '@mantine/hooks';
 import AppRouter from "./AppRouter";
 
 import Navigation from "./Navigation/Navigation";
+import Header from "./Header/Header";
 
 const AppComponent = () => {
     const [opened, { toggle }] = useDisclosure();
 
     return (
         <AppShell
-            header={{ height: 60 }}
+            header={{
+                height: 52,
+            }}
             navbar={{
                 width: 250,
                 breakpoint: 'sm',
@@ -25,7 +28,7 @@ const AppComponent = () => {
                     hiddenFrom="sm"
                     size="sm"
                 />
-                <div>Logo</div>
+                <Header/>
             </AppShell.Header>
 
             <AppShell.Navbar p="md">
