@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "plugins": [{
+      "name": "typescript-plugin-css-modules",
+    }],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,7 +23,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+
   "include": [
     "src"
   ]
 }
+
