@@ -2,7 +2,7 @@ type TUser = {
     id: string;
     role_id: string;
     email: string;
-    username: string;
+    login: string;
     password: string;
 }
 

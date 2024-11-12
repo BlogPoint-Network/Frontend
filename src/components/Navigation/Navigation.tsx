@@ -40,7 +40,6 @@ const Navigation = () => {
              <h1>Навигация</h1>
              {pages.map((page, index) =>
                  <NavLink
-
                      key={index}
                      href={page.href}
                      label={page.label}

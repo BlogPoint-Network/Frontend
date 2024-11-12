@@ -12,7 +12,7 @@ const AppComponent = () => {
     return (
         <AppShell
             header={{
-                height: 52,
+                height: 55,
             }}
             navbar={{
                 width: 250,
