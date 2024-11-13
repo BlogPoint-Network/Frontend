@@ -10,6 +10,7 @@ import PopularChannels from "../pages/PopularChannels";
 import RatingOfChannels from "../pages/RatingOfChannels";
 import Recommendations from "../pages/Recommendations";
 import ChannelsSubscribe from "../pages/ChannelsSubscribe";
+import ChangeProfile from "../pages/ChangeProfile";
 
 const AppRouter = () => {
 
@@ -25,6 +26,7 @@ const AppRouter = () => {
         <Route path="/ratingofchannels" element={<RatingOfChannels/>} />
         <Route path="/recommendations" element={<Recommendations/>} />
         <Route path="/channelsubscribe" element={<ChannelsSubscribe/>} />
+        <Route path="/changeprofile" element={<ChangeProfile/>} />
     </Routes>
 );
 };

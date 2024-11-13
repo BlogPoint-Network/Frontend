@@ -22,10 +22,12 @@ const Register = () => {
 
     return (
         <div style={{
-            border: "solid grey 1px",
-            padding: "15px 20px",
-            borderRadius: "20px",
-            background: "white",
+            padding: '10px 30px 15px 30px',
+            marginLeft: '200px',
+            marginRight: '200px',
+            background: '#D9D9D9',
+            border: '1px solid black',
+            borderRadius: '30px',
 
         }}>
             <h1>Регистрация пользователя</h1>

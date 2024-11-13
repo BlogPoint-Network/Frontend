@@ -19,4 +19,8 @@ export default class AuthService {
     static async infoUserAuth(): Promise<AxiosResponse<TUser>> {
         return $api.post('/user', {token: localStorage.getItem('token')})
     }
+
+    static async changeProfileAuth(email: string, login: string, password: string): Promise<AxiosResponse<{user: TUser}>> {
+        return $api.post('/changeprofile', {login, email, password})
+    }
 }

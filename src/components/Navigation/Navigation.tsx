@@ -22,6 +22,7 @@ const Navigation = () => {
         {label: 'Популярные каналы', icon: IconTrendingUp, href: '../PopularChannels'},
         {label: 'Рейтинг каналов', icon: IconQuestionMark, href: '../RatingOfChannels'},
         {name: "Тестовая", icon: IconAbacus, href: '../Test', label: 'Для тестов'},
+        {name: "Тестовая", icon: IconAbacus, href: '../ChangeProfile', label: 'Для изменения профиля'},
     ]
     const [active, setActive] = useState(() => {
         return localStorage.getItem('activePathIndex') || 0;

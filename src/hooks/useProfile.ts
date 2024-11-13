@@ -24,6 +24,14 @@ function useProfile() {
         }
     }
 
+    async function changeProfile(email: string, login: string, password: string) {
+        try {
+            await AuthService.changeProfileAuth(login,email, password);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     function logoutProfile() {
         try {
             localStorage.removeItem('token');
@@ -47,6 +55,7 @@ function useProfile() {
         registrationProfile,
         logoutProfile,
         infoProfile,
+        changeProfile,
         user,
     }
 }

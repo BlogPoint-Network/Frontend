@@ -4,10 +4,12 @@ import {greyColor, skyBlueColor} from "../constants";
 import {ProfileContext} from "../context";
 
 import MyLabel from "../components/MyLabel/MyLabel";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
 
     const profile = useContext(ProfileContext)
+    const navigate = useNavigate()
     console.log(profile?.user)
 
     const btnProps = {
@@ -60,11 +62,9 @@ const Profile = () => {
                     </Grid.Col>
 
                     <Grid.Col span={12}>
-                        <MyLabel title={'Пароль'} text={profile?.user ? profile.user?.email : ''} />
-                    </Grid.Col>
-
-                    <Grid.Col span={12}>
-                        <Button{...btnProps} bg={skyBlueColor}><Text size={'lg'}>Изменить</Text></Button>
+                        <Button{...btnProps} bg={skyBlueColor} onClick={() => {
+                            navigate('/changeprofile')
+                        }}><Text size={'lg'}>Изменить</Text></Button>
                         <Button{...btnProps} bg={greyColor}><Text size={'lg'} c='black'>Удалить</Text></Button>
                     </Grid.Col>
 
