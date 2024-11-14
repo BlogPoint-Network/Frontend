@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {ProfileContext} from "../context";
 import {Button, Flex, Grid, Image, Text, TextInput} from "@mantine/core";
 import {greyColor, skyBlueColor} from "../constants";
@@ -21,8 +21,7 @@ const ChangeProfile = () => {
     };
 
     const form = useForm({
-        mode: 'uncontrolled',
-        initialValues: { login: '', email: '', oldPassword: '' , newPassword: '', repeatPassword: ''},
+        initialValues: { login: profile?.user?.login ?? '', email: profile?.user?.email ?? '', oldPassword: '' , newPassword: '', repeatPassword: ''},
 
         validate: {
             login: (value) => (value.length < 6 ? 'Логин должен состоять болше чем 6 символов' : null),
@@ -81,7 +80,6 @@ const ChangeProfile = () => {
                         <Grid.Col span={12}>
                             <TextInput
                                 label={<Text size={'lg'}>Логин</Text>}
-                                placeholder={profile?.user?.login}
                                 key={form.key('login')}
                                 {...form.getInputProps('login')}
                             />
@@ -90,7 +88,6 @@ const ChangeProfile = () => {
                         <Grid.Col span={12}>
                             <TextInput
                                 label={<Text size={'lg'}>Почта</Text>}
-                                placeholder={profile?.user?.email}
                                 key={form.key('email')}
                                 {...form.getInputProps('email')}
                             />

@@ -1,16 +1,22 @@
 import {useState} from "react";
 import TUser from "../types/TUser";
 import AuthService from "../services/AuthService";
-
+import {useMutation} from "@tanstack/react-query";
 
 function useProfile() {
     const [user, setUser] = useState<TUser | null>(null)
+
+    const infoUserMutation = useMutation({
+        mutationFn: async () => {
+            return await AuthService.infoUserAuth()
+        }, onSuccess: response  => {
+            setUser(response.data)
+    }})
 
     async function loginProfile(login: string, password: string) {
         try {
             const response = await AuthService.loginUserAuth(login, password);
             localStorage.setItem('token', response.data.token);
-
         } catch (e) {
             console.log(e)
         }
@@ -57,6 +63,7 @@ function useProfile() {
         infoProfile,
         changeProfile,
         user,
+        infoUserMutation,
     }
 }
 

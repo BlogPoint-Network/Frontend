@@ -30,7 +30,6 @@ const Login = () => {
             <Group justify="center" grow>
                 <form
                     onSubmit={form.onSubmit((values) => {
-                        console.log(values);
                         profile?.loginProfile(values.login, values.password);
                     })}>
                     <TextInput

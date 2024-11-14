@@ -10,11 +10,10 @@ const Profile = () => {
 
     const profile = useContext(ProfileContext)
     const navigate = useNavigate()
-    console.log(profile?.user)
 
     const btnProps = {
         h: 40,
-        w: 170,
+        w: 150,
         radius: "md",
         bd: 'solid black 1px',
         mr: 15,
@@ -52,6 +51,7 @@ const Profile = () => {
                             src='/assets/images/EmptyPng.png'
                             mb={10}
                         />
+                        <Button{...btnProps} bg={skyBlueColor}><Text size={'lg'}>Загрузить</Text></Button>
                     </Grid.Col>
                     <Grid.Col span={12}>
                         <MyLabel title={'Логин'} text={profile?.user ? profile.user?.login : ''} />
@@ -62,12 +62,20 @@ const Profile = () => {
                     </Grid.Col>
 
                     <Grid.Col span={12}>
+                        <MyLabel title={'Другая информация'} text={''} />
+                    </Grid.Col>
+
+                    <Grid.Col span={12}>
                         <Button{...btnProps} bg={skyBlueColor} onClick={() => {
                             navigate('/changeprofile')
                         }}><Text size={'lg'}>Изменить</Text></Button>
-                        <Button{...btnProps} bg={greyColor}><Text size={'lg'} c='black'>Удалить</Text></Button>
+                        <Button{...btnProps} bg="rgba(255, 99, 99, 1)"><Text size={'lg'} c='black'>Удалить профиль</Text></Button>
                     </Grid.Col>
 
+                    <Grid.Col span={12}>
+                        <Text size={'xl'}>Пароль</Text>
+                        <Button{...btnProps} bg={greyColor}><Text size={'lg'} c='black'>Изменить</Text></Button>
+                    </Grid.Col>
                 </Grid>
             </Flex>
         </div>
