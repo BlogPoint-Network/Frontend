@@ -15,8 +15,8 @@ function PopularChannelItem(props: PopularChannelItemProps) {
     return (
         <Card
             radius="md"
-            h='230px'
-            w='750px'
+            h='280px'
+            w='800px'
             m='15px 0px'
             bd='1px solid black'
             id={'PopularChannelItem'+props.id}
@@ -31,7 +31,7 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                 justify='space-between'
                 h='100%'
             >
-                <div style={{width: '240px'}}>
+                <div style={{width: '280px'}}>
                     <Image
                         // minWidth: '140px',  не работает
                         style={{
@@ -39,7 +39,7 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                             marginRight: 'auto',
                             height: '100%',
                             width: 'auto',
-                            maxWidth: '250px', // для
+                            maxWidth: '280px', // для
                             border: '1px solid black'
                         }}
                         src={props.imageURL ? props.imageURL: '../../../public/assets/images/icons/default_post.jpg'}
@@ -51,17 +51,16 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                     justify='space-between'
                     style={{
                         overflow: 'hidden',
-                        maxWidth: '420px'
+                        maxWidth: '430px'
                     }}
                 >
                     <Flex // Заглавие|описание
                         direction='column'
                         gap='10px'
-                        style={{overflow: 'hidden'}}
                     >
                         <Text
                             style={{
-                                fontSize: '24px',
+                                fontSize: '26px',
 
                                 // для переноса строк
                                 textOverflow: 'ellipsis',
@@ -75,10 +74,10 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                         <Text
                             style={{
                                 // для переноса строк
-                                maxHeight: '4.5em',
+                                fontSize: '18px',
                                 fontWeight: 'bold',
                                 display: '-webkit-box',
-                                WebkitLineClamp: 3,
+                                WebkitLineClamp: 4,
                                 WebkitBoxOrient: 'vertical',
 
                                 overflow: 'hidden',

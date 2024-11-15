@@ -1,7 +1,8 @@
-// import { Carousel } from '@mantine/carousel';
+import { Carousel } from '@mantine/carousel';
+import '@mantine/carousel/styles.css';
 import {Flex, Container, Image} from '@mantine/core';
 import RecommendationPost from "../components/BlogPost/RecommendationPost";
-import {darkBackgroundColor, mainBackgroundColor} from "../constants";
+import {darkBackgroundColor, mainBackgroundColor, skyBlueColor} from "../constants";
 import PopularChannelItem from "../components/PopularChannelItem/PopularChannelItem";
 
 function MainPage() {
@@ -12,8 +13,6 @@ function MainPage() {
         {id: 3, title: 'Узнайте, как чувствовать себя уверенно и стильно каждый день!', text: 'Узнайте, как чувствовать себя уверенно и стильно каждый день!', channelName: 'Мир моды', mediaType: 'asdasdasdasdads'},
         {id: 4, title: 'Ничего интересного', text: '---', channelName: 'Научное сообщество Научное сообщество Научное сообщество Научное сообщество', mediaType: 'image', mediaURL: 'https://'},
         {id: 5, title: 'Узнайте, как чувствовать себя уверенно и стильно каждый день!', text: 'Узнайте, как чувствовать себя уверенно и стильно каждый день!', channelName: 'Мир моды', mediaType: 'asdasdasdasdads', mediaURL: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'},
-
-
     ]
 
     const popularChannels = [
@@ -26,6 +25,8 @@ function MainPage() {
     ]
 
     return (
+
+
         <Flex
             ml={{sm: '50px', base: '0px'}} // в совсем узких окнах отступа нет
             id='mainPageFlexbox'
@@ -70,48 +71,69 @@ function MainPage() {
                 id='recommendationContainer'
             >
                 <div style={{textAlign: 'center', marginBottom: '40px'}}>
-                    <span style={{fontSize: '35px'}} >
+                    <span style={{fontSize: '48px', fontWeight: 600}} >
                         Рекомендации
                     </span>
                 </div>
-                <div style={{overflow:'hidden'}}>
-                    <Flex
-                        id='recommendationFeed'
-                        mb='40px 0px 30px'
-                        gap='30px'
-                        w='auto'
-                    >
-                        {/*<Carousel*/}
-                        {/*    withIndicators*/}
-                        {/*    slideSize="auto" // Делаем слайды "автоматическими" по ширине контейнера*/}
-                        {/*    slideGap="sm" // Устанавливаем небольшой промежуток между слайдами*/}
-                        {/*    loop*/}
-                        {/*    align="start" // Выравнивание слайдов по началу*/}
-                        {/*    dragFree // Отключаем возможность вертикальной прокрутки*/}
-                        {/*    styles={{*/}
-                        {/*        container: {*/}
-                        {/*            overflow: 'hidden', // Убираем лишний отступ и перенос*/}
-                        {/*        },*/}
-                        {/*        indicator: {*/}
-                        {/*            top: '50%', // Центрируем индикаторы*/}
-                        {/*        },*/}
-                        {/*    }}*/}
-                        {/*>*/}
-                            {recommendations.map((el, _) =>
-                                // <Carousel.Slide key={el.id}>
-                                    <RecommendationPost
-                                        id={el.id}
-                                        title={el.title}
-                                        text={el.text}
-                                        channelName={el.channelName}
-                                        mediaType={el.mediaType}
-                                        mediaURL={el.mediaURL}/>
+                {/*<div style={{overflow:'hidden'}}>*/}
+                {/*    <Flex*/}
+                {/*        id='recommendationFeed'*/}
+                {/*        mb='40px 0px 30px'*/}
+                {/*        gap='40px'*/}
+                {/*        w='auto'*/}
+                {/*    >*/}
+                        <Carousel
+                            id='recommendationFeed'
+                            withIndicators
+                            slideSize='33.333333%'
+                            slideGap='40px'
+                            loop
+                            controlSize='50'
 
-                                // </Carousel.Slide>
-                            )}
-                        {/*</Carousel>*/}
-                    </Flex>
-                </div>
+                            styles={{
+                                // border: `2px solid ${mainBackgroundColor}`, // Цвет границы
+                                // borderRadius: '12px', // Скругление для контролов
+
+                                control: {
+                                    backgroundColor: skyBlueColor,
+                                    color: 'white',
+                                    transform: 'translateY(-50%)', // позиционирует стрелки по центру по вертикали
+                                    zIndex: 10, // Выводит стрелки поверх слайдов
+                                },
+                                controls: {
+                                    top: '50%',
+                                    left: 'calc(-100px)', // сдвигает левую стрелку за пределы карусели
+                                    right: 'calc(-100px)', // сдвигает правую стрелку за пределы карусели
+                                },
+                                indicator: {
+                                    backgroundColor: skyBlueColor,
+                                    margin: '10px 0 10px',
+                                    width: '30px',
+                                    height: '10px',
+                                    transition: 'width 250ms ease',
+                                },
+                                indicators: {
+                                    position: 'relative', // Делает индикаторы отдельным блоком
+                                    top: '20px', // Добавляет отступ сверху
+                                },
+                            }}
+                        >
+
+                            {recommendations.map((el, _) => (
+                                <Carousel.Slide key={el.id}>
+                                    <RecommendationPost
+                                            id={el.id}
+                                            title={el.title}
+                                            text={el.text}
+                                            channelName={el.channelName}
+                                            mediaType={el.mediaType}
+                                            mediaURL={el.mediaURL}
+                                    />
+                                </Carousel.Slide>
+                            ))}
+                        </Carousel>
+                    {/*</Flex>*/}
+                {/*</div>*/}
 
 
             </Container>
@@ -119,7 +141,7 @@ function MainPage() {
             {/*Просто линия*/}
             <Container
                 fluid
-                h='10px'
+                h='8px'
                 m='0px'
                 bg={darkBackgroundColor}
             ></Container>
@@ -128,15 +150,16 @@ function MainPage() {
                 id='popularChannelsContainer'
             >
                 <div style={{textAlign: 'center'}}>
-                    <span style={{fontSize: '35px'}}>
+                    <span style={{fontSize: '48px', fontWeight: 600}}>
                         Популярные каналы
                     </span>
                 </div>
-                    <Flex
-                        id='recommendationFeed'
+                <Flex
+                    id='recommendationFeed'
                         m='20px 0px'
                         gap='30px'
                         direction='column'
+                        w='100%'
                     >
                         {popularChannels.map((el, _) =>
                             <PopularChannelItem

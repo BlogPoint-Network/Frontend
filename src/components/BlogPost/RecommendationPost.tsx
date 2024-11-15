@@ -1,7 +1,7 @@
 import { Card, Text, Button, Flex} from '@mantine/core';
 import PostMedia from "./PostMedia";
 import {styleBlueButton} from "../../styles/styles";
-import {darkBackgroundColor, mainBackgroundColor} from "../../constants";
+import {darkBackgroundColor} from "../../constants";
 
 
 interface RecommendationPostProps {
@@ -31,8 +31,8 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
             bd='1px solid black'
             id={'RecommendationPost'+props.id}
             style={{
-                height: '460px',
-                width: '320px',
+                height: '550px',
+                width: '380px',
                 flexShrink: 0,
             }}
         >
@@ -52,7 +52,7 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
                         style={{
                             // для переноса строк
                             textAlign: 'center', // Центрирование текста по каждой строке
-                            fontSize: '20px',
+                            fontSize: '26px',
                             marginBottom: '10px',
                             padding: '0px 20px',
 
@@ -86,9 +86,12 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
                     <Text
                         style={{
                             fontWeight: 'bold',
+                            textDecoration: 'underline',
                             width: '100%', // без него выходит за рамки
                             textAlign: 'center',
                             padding: '0px 20px',
+                            marginBottom: '5px',
+                            fontSize: '22px',
 
                             whiteSpace: 'nowrap',  // Без переноса строки
                             overflow: 'hidden',
@@ -104,6 +107,7 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
                         style={{
                             textAlign: 'center',
                             padding: '0px 20px',
+                            fontSize: '18px',
 
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',

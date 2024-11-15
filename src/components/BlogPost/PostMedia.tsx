@@ -13,7 +13,7 @@ function PostMedia({id, mediaURL, mediaType}: PostMediaProps) {
     // для хранения элемента
     let mediaContent;
     const mediaProps = {
-        h: '160px',
+        h: '200px',
         bd: '1px solid black',
         p: '-20px',
     }
