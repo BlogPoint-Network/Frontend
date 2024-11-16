@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     IconHome,
     IconAbacus,
@@ -8,9 +8,9 @@ import {
     IconTrendingUp,
     IconQuestionMark, IconUser
 } from "@tabler/icons-react";
-import {NavLink} from "@mantine/core";
+import {NavLink as MNavLink} from "@mantine/core";
+import {NavLink as RNavLink} from "react-router-dom";
 import {skyBlueColor} from "../../constants";
-import {useLocation, useNavigate} from "react-router-dom";
 
 const Navigation = () => {
     const pages = [
@@ -24,32 +24,25 @@ const Navigation = () => {
         {name: "Тестовая", icon: IconAbacus, href: '../Test', label: 'Для тестов'},
         {name: "Тестовая", icon: IconAbacus, href: '../ChangeProfile', label: 'Для изменения профиля'},
     ]
-    const [active, setActive] = useState(() => {
-        return localStorage.getItem('activePathIndex') || 0;
-    });
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    useEffect(() => {
-        const currentPage = location.pathname;
-        setActive(currentPage);
-        localStorage.setItem('activePath', currentPage);
-    }, [location.pathname]);
+    const [active, setActive] = useState(0);
 
      return (
          <>
              <h1>Навигация</h1>
              {pages.map((page, index) =>
-                 <NavLink
-                     key={index}
-                     href={page.href}
-                     label={page.label}
-                     leftSection={<page.icon size="1.5rem" stroke={1.5} color={skyBlueColor}/>}
-                     onClick={() => {
-
-                     }}
-                 />
+                <RNavLink
+                    to={page.href}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                >
+                    <MNavLink
+                        label={page.label}
+                        leftSection={<page.icon size="1.5rem" stroke={1.5} color={skyBlueColor}/>}
+                        active={index === active}
+                        onClick={() => setActive(index)}
+                    />
+                </RNavLink>
              )}
+
          </>
      )
 };
