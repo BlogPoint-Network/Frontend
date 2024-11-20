@@ -1,0 +1,61 @@
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Container, Flex, Image, Text } from '@mantine/core';
+import { ProfileContext } from '../../../../app/context';
+import { greyColor, skyBlueColor } from '@constants';
+
+export const Header = () => {
+  const btnProps = {
+    h: 40,
+    w: 150,
+    radius: 'md',
+    bd: 'solid black 1px',
+  };
+  const navigate = useNavigate();
+  const profile = useContext(ProfileContext);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (profile?.user != null) {
+      setIsAuthenticated(true);
+    }
+  }, [profile?.user]);
+
+  return (
+    <Flex>
+      <Flex align="center" ml={15}>
+        <Image radius="md" h={50} w="auto" src={'/assets/images/logo.png'} />
+        <Text size="30px" w={200} fw={700}>
+          BlogPoint
+        </Text>
+      </Flex>
+
+      <Container></Container>
+
+      <Flex align="center" gap="md" justify="flex-end" mr={15}>
+        <Button
+          {...btnProps}
+          bg={greyColor}
+          onClick={() => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            isAuthenticated ? profile?.logoutProfile() : navigate('login');
+          }}
+        >
+          <Text size="lg" c="black">
+            {isAuthenticated ? 'Выйти' : 'Войти'}
+          </Text>
+        </Button>
+        <Button
+          {...btnProps}
+          bg={skyBlueColor}
+          onClick={() => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            isAuthenticated ? navigate('profile') : navigate('register');
+          }}
+        >
+          <Text size="lg">{isAuthenticated ? 'Профиль' : 'Регистрация'}</Text>
+        </Button>
+      </Flex>
+    </Flex>
+  );
+};
