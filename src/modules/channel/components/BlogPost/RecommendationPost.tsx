@@ -1,6 +1,6 @@
 import { Card, Text, Button, Flex} from '@mantine/core';
 import PostMedia from "./PostMedia";
-import {styleBlueButton} from "../../styles/styles";
+import {styleBlueButton} from "../../../../styles/styles";
 import {darkBackgroundColor} from "../../constants";
 
 

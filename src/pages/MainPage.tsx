@@ -1,8 +1,10 @@
 import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import {Flex, Container, Image} from '@mantine/core';
+import {darkBackgroundColor, mainBackgroundColor, skyBlueColor} from "@constants";
+
 import RecommendationPost from "../components/BlogPost/RecommendationPost";
-import {darkBackgroundColor, mainBackgroundColor, skyBlueColor} from "../constants";
+
 import PopularChannelItem from "../components/PopularChannelItem/PopularChannelItem";
 
 function MainPage() {

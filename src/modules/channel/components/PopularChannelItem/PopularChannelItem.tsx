@@ -1,5 +1,5 @@
 import {Button, Card, Text, Flex, Image} from "@mantine/core";
-import {styleBlueButton} from '../../styles/styles'
+import {styleBlueButton} from '../../../../styles/styles'
 import {IconAccessible} from "@tabler/icons-react";
 
 interface PopularChannelItemProps {
