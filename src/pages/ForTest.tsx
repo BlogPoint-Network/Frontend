@@ -1,11 +1,16 @@
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const ForTest = () => {
-    return (
-        <div>
-            <h1>Для тестов</h1>
-        </div>
-    );
+  return (
+    <NavLink
+      to="/messages"
+      className={({ isActive, isPending }) =>
+        isPending ? 'pending' : isActive ? 'active' : ''
+      }
+    >
+      Messages
+    </NavLink>
+  );
 };
 
 export default ForTest;
