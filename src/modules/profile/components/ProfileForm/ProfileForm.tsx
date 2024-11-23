@@ -9,7 +9,6 @@ interface IProfileFormProps {
 }
 
 export const ProfileForm: FC<IProfileFormProps> = props => {
-
   return (
     <FormBox>
       <Flex justify="center" align="center" direction="column">

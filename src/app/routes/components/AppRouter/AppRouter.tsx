@@ -8,6 +8,7 @@ import PopularChannels from '@pages/PopularChannels.tsx';
 import RatingOfChannels from '@pages/RatingOfChannels.tsx';
 import Recommendations from '@pages/Recommendations.tsx';
 import { ProfileLoader } from '@routes/components/ProfileLoader/ProfileLoader.tsx';
+import CreateChannel from '@pages/CreateChannel.tsx';
 
 const AppRouter = () => {
   return (
@@ -18,7 +19,9 @@ const AppRouter = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/test" element={<ForTest />} />
-        <Route path="/mychannel" element={<MyChannel />} />
+        <Route path="/test" element={<ForTest />} />
+        <Route path="/create-channel" element={<CreateChannel />} />
+        <Route path="/my-channel" element={<MyChannel />} />
         <Route path="/popularchannels" element={<PopularChannels />} />
         <Route path="/ratingofchannels" element={<RatingOfChannels />} />
         <Route path="/recommendations" element={<Recommendations />} />

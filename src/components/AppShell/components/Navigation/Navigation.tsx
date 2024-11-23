@@ -16,7 +16,7 @@ export const Navigation = () => {
     { label: 'Главная', icon: IconHome, href: '../' },
     { label: 'Профиль', icon: IconUser, href: '../Profile' },
     { label: 'Подписки', icon: IconUserHeart, href: '../ChannelSubscribe' },
-    { label: 'Мой канал', icon: IconUsersGroup, href: '../MyChannel' },
+    { label: 'Мой канал', icon: IconUsersGroup, href: '../create-channel' },
     {
       label: 'Рекомендации',
       icon: IconChartBarPopular,
