@@ -6,8 +6,7 @@ import {
   validationLogin,
   validationPassword,
 } from '@modules/profile/constants/validation.ts';
-import { Button } from '@ui/Button';
-import { FormBox } from '@ui/FormBox';
+import { Button, FormBox } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
@@ -57,9 +56,7 @@ export const LoginForm = () => {
             {...form.getInputProps('password')}
           />
           <Button type="submit" mt="sm" color={skyBlueColor}>
-            <Text size={'lg'}>
-              Пароль
-            </Text>
+            <Text size={'lg'}>Пароль</Text>
           </Button>
         </form>
       </Group>

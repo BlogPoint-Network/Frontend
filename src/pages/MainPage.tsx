@@ -1,8 +1,19 @@
+import {
+  CommonFrame,
+  MainPageLogoContainer,
+  MainPagePopularChannelsContainer,
+  MainPageRecommendationPostsContainer,
+} from '@modules/channel';
+import { Line } from '@ui';
+
 const MainPage = () => {
   return (
-    <div>
-      <h1>Главная страница</h1>
-    </div>
+    <CommonFrame>
+      <MainPageLogoContainer />
+      <MainPageRecommendationPostsContainer />
+      <Line height="8px" />
+      <MainPagePopularChannelsContainer />
+    </CommonFrame>
   );
 };
 

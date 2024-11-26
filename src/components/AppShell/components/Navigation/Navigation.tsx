@@ -14,7 +14,7 @@ export const Navigation = () => {
           style={({ isActive }) => ({
             color: isActive ? 'red' : 'black',
             textDecoration: 'none',
-            fontWeight: isActive ? 'bold' : 'normal'
+            fontWeight: isActive ? 'bold' : 'normal',
           })}
         >
           <Flex gap={15} align={'center'} h={'100%'}>

@@ -4,8 +4,7 @@ import { greyColor, skyBlueColor } from '@constants';
 import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { Button } from '@ui/Button';
-import { Label } from '@ui/Label';
+import { Button, Label } from '@ui';
 
 interface IEditProfileInfoProps {
   user?: IUser;

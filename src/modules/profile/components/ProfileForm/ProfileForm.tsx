@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { IUser } from '@app-types';
 import { Flex, Grid } from '@mantine/core';
-import { FormBox } from '@ui/FormBox';
+import { FormBox } from '@ui';
 
 interface IProfileFormProps {
   user?: IUser;
@@ -9,7 +9,6 @@ interface IProfileFormProps {
 }
 
 export const ProfileForm: FC<IProfileFormProps> = props => {
-
   return (
     <FormBox>
       <Flex justify="center" align="center" direction="column">

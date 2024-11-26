@@ -3,8 +3,8 @@ import { IUser } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
 import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { Button } from '@ui';
 import { useDisclosure } from '@mantine/hooks';
-import { Button } from '@ui/Button';
 
 interface IEditProfilePasswordProps {
   user?: IUser;

@@ -9,8 +9,7 @@ import {
   validationRepeatPassword,
 } from '@modules/profile/constants/validation.ts';
 import { IRegistrationData } from '@modules/profile/types/IRegistrationData.ts';
-import { Button } from '@ui/Button';
-import { FormBox } from '@ui/FormBox';
+import { Button, FormBox } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
