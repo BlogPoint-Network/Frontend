@@ -2,7 +2,7 @@ import { darkBackgroundColor, skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
 import { Container } from '@mantine/core';
 import RecommendationPost from '@modules/channel/components/RecommendationPost/RecommendationPost.tsx';
-import { recommendations } from '@modules/channel/constants/stoppers.ts';
+import { recommendations } from '@modules/channel/constants/recomendationStoppers.ts';
 
 export const MainPageRecommendationPostsContainer = () => {
   return (

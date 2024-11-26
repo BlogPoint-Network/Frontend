@@ -1,6 +1,6 @@
 import { Container, Flex } from '@mantine/core';
 import PopularChannelItem from '@modules/channel/components/PopularChannelItem/PopularChannelItem.tsx';
-import { popularChannels } from '@modules/channel/constants/stoppers.ts';
+import { popularChannels } from '@modules/channel/constants/channelsStoppers.ts';
 
 export const MainPagePopularChannelsContainer = () => {
   return (
