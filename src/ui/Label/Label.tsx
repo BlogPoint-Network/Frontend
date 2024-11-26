@@ -15,11 +15,10 @@ export const Label: FC<ILabelProps> = props => {
       <div
         style={{
           border: 'solid 1px black',
-          borderRadius: '10px',
-          padding: '10px',
+          borderRadius: '15px',
+          padding: '5px 15px 0 15px',
           background: 'white',
-          marginBottom: '5px',
-          height: '40px',
+          height: '42px',
         }}
       >
         <Text size={'lg'}>{props.text}</Text>

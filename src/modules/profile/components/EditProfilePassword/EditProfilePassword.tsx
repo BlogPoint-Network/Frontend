@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
-import { greyColor } from '@constants';
-import { Flex, Grid, Text, TextInput } from '@mantine/core';
+import { greyColor, skyBlueColor } from '@constants';
+import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { modals } from '@mantine/modals';
+import { useDisclosure } from '@mantine/hooks';
 import { Button } from '@ui/Button';
 
 interface IEditProfilePasswordProps {
@@ -11,6 +11,7 @@ interface IEditProfilePasswordProps {
 }
 
 export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const form = useForm({
     initialValues: {
       oldPassword: '',
@@ -27,13 +28,13 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
         value !== values.newPassword ? 'Пароли не совпадают' : null,
     },
   });
-
-  const openModal = () =>
-    modals.openConfirmModal({
-      title: 'Подтверждение пароля пользователя',
-      closeOnConfirm: false,
-      labels: { confirm: 'Продолжить', cancel: 'Отменить' },
-      children: (
+  return (
+    <>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={<Text size="lg">Изменение пароля пользователя</Text>}
+      >
         <form
           onSubmit={form.onSubmit(values => {
             console.log(values);
@@ -49,56 +50,48 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
                   {...form.getInputProps('oldPassword')}
                 />
               </Grid.Col>
+              <Grid.Col span={12}>
+                <TextInput
+                  label={<Text size={'lg'}>Новый пароль</Text>}
+                  key={form.key('newPassword')}
+                  {...form.getInputProps('newPassword')}
+                />
+              </Grid.Col>
+
+              <Grid.Col span={12}>
+                <TextInput
+                  label={<Text size={'lg'}>Подтвердите новый пароль</Text>}
+                  key={form.key('repeatPassword')}
+                  {...form.getInputProps('repeatPassword')}
+                />
+              </Grid.Col>
             </Grid>
           </Flex>
-        </form>
-      ),
-      onCancel: () => console.log('Cancel'),
-      onConfirm: () =>
-        modals.openConfirmModal({
-          title: 'Изменения пароля пользователя',
-          labels: { confirm: 'Close modal', cancel: 'Back' },
-          closeOnConfirm: false,
-          children: (
-            <form
-              onSubmit={form.onSubmit(values => {
-                console.log(values);
-                // profile?.changeProfile(values.login, values.email, values.newPassword);
-              })}
+          <Group mt="lg" justify="flex-end">
+            <Button
+              onClick={() => {
+                form.reset();
+                close();
+              }}
+              color={greyColor}
             >
-              <Flex>
-                <Grid>
-                  <Grid.Col span={12}>
-                    <TextInput
-                      label={<Text size={'lg'}>Новый пароль</Text>}
-                      key={form.key('newPassword')}
-                      {...form.getInputProps('newPassword')}
-                    />
-                  </Grid.Col>
+              Отменить
+            </Button>
+            <Button type="submit" color={skyBlueColor}>
+              Сохранить
+            </Button>
+          </Group>
+        </form>
+      </Modal>
 
-                  <Grid.Col span={12}>
-                    <TextInput
-                      label={<Text size={'lg'}>Подтвердите новый пароль</Text>}
-                      key={form.key('repeatPassword')}
-                      {...form.getInputProps('repeatPassword')}
-                    />
-                  </Grid.Col>
-                </Grid>
-              </Flex>
-            </form>
-          ),
-          onConfirm: modals.closeAll,
-        }),
-    });
-
-  return (
-    <Grid.Col span={12}>
-      <Text size={'xl'}>Пароль</Text>
-      <Button color={greyColor} onClick={openModal}>
-        <Text size={'lg'} c="black">
-          Изменить
-        </Text>
-      </Button>
-    </Grid.Col>
+      <Grid.Col span={12}>
+        <Text size={'xl'}>Пароль</Text>
+        <Button color={greyColor} onClick={open}>
+          <Text size={'lg'} c="black">
+            Изменить
+          </Text>
+        </Button>
+      </Grid.Col>
+    </>
   );
 };

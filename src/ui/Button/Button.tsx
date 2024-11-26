@@ -11,7 +11,7 @@ export const Button: FC<PolymorphicComponentProps<'button', ButtonProps>> = ({
 }) => {
   const btnStyleProps = {
     h: 40,
-    w: 150,
+    w: 160,
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,

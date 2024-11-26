@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, Flex, Image, Text } from '@mantine/core';
-import { ProfileContext } from '../../../../app/context';
+import logo from '@assets/images/logo.png';
 import { greyColor, skyBlueColor } from '@constants';
+import { Button, Container, Flex, Image, Text } from '@mantine/core';
+
+import { ProfileContext } from '../../../../app/context';
 
 export const Header = () => {
   const btnProps = {
@@ -24,7 +26,7 @@ export const Header = () => {
   return (
     <Flex>
       <Flex align="center" ml={15}>
-        <Image radius="md" h={50} w="auto" src={'/assets/images/logo.png'} />
+        <Image radius="md" h={50} w="auto" src={logo} />
         <Text size="30px" w={200} fw={700}>
           BlogPoint
         </Text>

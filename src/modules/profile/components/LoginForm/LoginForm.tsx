@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { skyBlueColor } from '@constants';
-import { Button, Group, TextInput } from '@mantine/core';
+import { Group, PasswordInput, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationLogin,
   validationPassword,
 } from '@modules/profile/constants/validation.ts';
+import { Button } from '@ui/Button';
 import { FormBox } from '@ui/FormBox';
 
 import { ProfileContext } from '../../../../app/context';
@@ -32,19 +33,33 @@ export const LoginForm = () => {
           })}
         >
           <TextInput
-            label="Логин"
+            size="md"
+            mt="sm"
+            radius="lg"
+            label={
+              <Text size={'xl'} mb={10}>
+                Логин
+              </Text>
+            }
             key={form.key('login')}
             {...form.getInputProps('login')}
           />
-          <TextInput
-            type="password"
+          <PasswordInput
+            size="md"
             mt="sm"
-            label="Введите пароль"
+            radius="lg"
+            label={
+              <Text size={'xl'} mb={10}>
+                Пароль
+              </Text>
+            }
             key={form.key('password')}
             {...form.getInputProps('password')}
           />
           <Button type="submit" mt="sm" color={skyBlueColor}>
-            Submit
+            <Text size={'lg'}>
+              Пароль
+            </Text>
           </Button>
         </form>
       </Group>

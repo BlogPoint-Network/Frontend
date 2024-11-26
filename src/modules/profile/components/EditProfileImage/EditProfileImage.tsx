@@ -1,46 +1,70 @@
 import { useState } from 'react';
-import { skyBlueColor } from '@constants';
-import { FileInput, Grid, Image, Text } from '@mantine/core';
-import { modals } from '@mantine/modals';
+import Empty from '@assets/images/EmptyPng.png';
+import { greyColor, skyBlueColor } from '@constants';
+import {
+  FileInput,
+  Flex,
+  Grid,
+  Group,
+  Image,
+  Modal,
+  Text,
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Button } from '@ui/Button';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
-  const openModal = () =>
-    modals.openConfirmModal({
-      title: 'Загрузите изображение профиля',
-      children: (
-        <>
-          <Text size="sm">Ваше фото</Text>
-          <FileInput value={fileImg} onChange={setFileImg} />
-        </>
-      ),
-      labels: { confirm: 'Confirm', cancel: 'Cancel' },
-      onCancel: () => console.log('Cancel'),
-      onConfirm: () => console.log(fileImg),
-    });
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <Grid.Col span={6}>
-      <Text size="xl" mb={10}>
-        Аватар пользователя
-      </Text>
-      <Image
-        w={300}
-        h={300}
-        radius="md"
-        src="/assets/images/EmptyPng.png"
-        mb={10}
-      />
-      <Button
-        color={skyBlueColor}
-        onClick={() => {
-          console.log('Открыл');
-          openModal();
-        }}
+    <>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={<Text size="lg">Изменение фото пользователя</Text>}
       >
-        <Text size={'lg'}>Загрузить</Text>
-      </Button>
-    </Grid.Col>
+        <Text size="lg">Ваше фото</Text>
+        <FileInput accept="image/png,image/jpeg,image/jpg" value={fileImg} onChange={setFileImg} />
+        <Group mt="lg" justify="flex-end">
+          <Button onClick={close} color={greyColor}>
+            Отменить
+          </Button>
+          <Button
+            color={skyBlueColor}
+            onClick={() => {
+              console.log(fileImg);
+              close();
+            }}
+          >
+            Сохранить
+          </Button>
+        </Group>
+      </Modal>
+
+      <Grid.Col span={6}>
+        <Text size="xl" mb={10}>
+          Аватар пользователя
+        </Text>
+        <Flex
+          mih={50}
+          gap="md"
+          justify="flex-start"
+          align="flex-end"
+          direction="row"
+        >
+          <Image w={300} h={300} radius="md" src={Empty} mb={10} />
+          <Button
+            color={skyBlueColor}
+            onClick={() => {
+              console.log('Открыл');
+              open();
+            }}
+          >
+            <Text size={'lg'}>Загрузить</Text>
+          </Button>
+        </Flex>
+      </Grid.Col>
+    </>
   );
 };

@@ -1,51 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { Text } from '@mantine/core';
-import {
-  IconAbacus,
-  IconChartBarPopular,
-  IconHome,
-  IconQuestionMark,
-  IconTrendingUp,
-  IconUser,
-  IconUserHeart,
-  IconUsersGroup,
-} from '@tabler/icons-react';
+import { pages } from '@components/AppShell/constants/pagesAndIcons.ts';
+import { skyBlueColor } from '@constants';
+import { Flex, Text } from '@mantine/core';
 
 export const Navigation = () => {
-  const pages = [
-    { label: 'Главная', icon: IconHome, href: '../' },
-    { label: 'Профиль', icon: IconUser, href: '../Profile' },
-    { label: 'Подписки', icon: IconUserHeart, href: '../ChannelSubscribe' },
-    { label: 'Мой канал', icon: IconUsersGroup, href: '../MyChannel' },
-    {
-      label: 'Рекомендации',
-      icon: IconChartBarPopular,
-      href: '../Recommendations',
-    },
-    {
-      label: 'Популярные каналы',
-      icon: IconTrendingUp,
-      href: '../PopularChannels',
-    },
-    {
-      label: 'Рейтинг каналов',
-      icon: IconQuestionMark,
-      href: '../RatingOfChannels',
-    },
-    {
-      name: 'Тестовая',
-      icon: IconAbacus,
-      href: '../Test',
-      label: 'Для тестов',
-    },
-    {
-      name: 'Тестовая',
-      icon: IconAbacus,
-      href: '../ChangeProfile',
-      label: 'Для изменения профиля',
-    },
-  ];
-
   return (
     <>
       <h1>Навигация</h1>
@@ -53,9 +11,16 @@ export const Navigation = () => {
         <NavLink
           key={index}
           to={page.href}
-          style={{ textDecoration: 'none', color: 'black' }}
+          style={({ isActive }) => ({
+            color: isActive ? 'red' : 'black',
+            textDecoration: 'none',
+            fontWeight: isActive ? 'bold' : 'normal'
+          })}
         >
-          <Text>{page.label}</Text>
+          <Flex gap={15} align={'center'} h={'100%'}>
+            {<page.icon color={skyBlueColor} />}
+            <Text>{page.label}</Text>
+          </Flex>
         </NavLink>
       ))}
     </>
