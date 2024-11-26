@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { FormBox } from '@ui/FormBox';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
-import { Button } from '@ui/Button';
-import { skyBlueColor } from '@constants';
+import { FullWidthBox } from '@ui';
 
 interface IChannelMyChannelDescriptionProps {
   id: number;
@@ -17,14 +15,10 @@ export const ChannelMyChannelDescription: FC<
   IChannelMyChannelDescriptionProps
 > = props => {
   return (
-    <FormBox>
-      <Flex
-        direction='column'
-        gap={'lg'}
-        align={'center'}
-      >
+    <FullWidthBox>
+      <Flex direction="column" gap={'lg'} align={'center'}>
         <Text
-          mt='sm'
+          mt="sm"
           style={{
             fontSize: '30px',
             fontWeight: 'bold',
@@ -38,7 +32,7 @@ export const ChannelMyChannelDescription: FC<
           {props.channelName}
         </Text>
         <Card
-          p='lg'
+          p="lg"
           radius="md"
           h="280px"
           w="800px"
@@ -77,7 +71,7 @@ export const ChannelMyChannelDescription: FC<
             <Flex // Верхний блок|нижний блок
               direction="column"
               justify="space-between"
-              gap='30px'
+              gap="30px"
               style={{
                 overflow: 'hidden',
                 maxWidth: '430px',
@@ -121,7 +115,7 @@ export const ChannelMyChannelDescription: FC<
           </Flex>
         </Card>
       </Flex>
-    </FormBox>
+    </FullWidthBox>
   );
 };
 

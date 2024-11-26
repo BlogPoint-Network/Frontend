@@ -1,11 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
 import { Flex, Text } from '@mantine/core';
-import { LongButton } from '@ui/Button';
-import { FormBox } from '@ui/FormBox';
-import { useNavigate } from 'react-router-dom';
+import { FormBox, LongButton } from '@ui';
 
-export const ChannelNotLogged = () => {
-  const navigate = useNavigate()
+export const NotLogged = () => {
+  const navigate = useNavigate();
 
   return (
     <FormBox>

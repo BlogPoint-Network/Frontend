@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { skyBlueColor } from '@constants';
 import { FileInput, Grid, Image, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { Button } from '@ui/Button';
+import { Button } from '@ui';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);

@@ -1,7 +1,7 @@
 import { darkBackgroundColor, skyBlueColor } from '@constants';
 import { Card, Flex, Text } from '@mantine/core';
 import PostMedia from '@modules/channel/components/PostMedia/PostMedia.tsx';
-import { Button } from '@ui/Button';
+import { Button } from '@ui';
 
 interface RecommendationPostProps {
   id: number;

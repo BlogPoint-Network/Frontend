@@ -6,7 +6,7 @@ import {
   validationLogin,
   validationPassword,
 } from '@modules/profile/constants/validation.ts';
-import { FormBox } from '@ui/FormBox';
+import { FormBox } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 

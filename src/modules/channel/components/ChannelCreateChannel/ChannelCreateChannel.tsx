@@ -9,7 +9,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { FormBox } from '@ui/FormBox';
+import { FormBox } from '@ui';
 
 export const ChannelCreateChannel = () => {
   const navigate = useNavigate();

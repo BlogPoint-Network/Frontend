@@ -1,11 +1,16 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
 import { skyBlueColor } from '@constants';
-import { Flex, Grid, Text, TextInput, Button as MantineButton } from '@mantine/core';
+import {
+  Button as MantineButton,
+  Flex,
+  Grid,
+  Text,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
-import { Button } from '@ui/Button';
-import { Label } from '@ui/Label';
+import { Button, Label } from '@ui';
 
 interface IEditProfileInfoProps {
   user?: IUser;
@@ -52,7 +57,11 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
                   {...form.getInputProps('email')}
                 />
               </Grid.Col>
-              <MantineButton fullWidth onClick={() => modals.closeAll()} mt="md">
+              <MantineButton
+                fullWidth
+                onClick={() => modals.closeAll()}
+                mt="md"
+              >
                 Submit
               </MantineButton>
             </Grid>

@@ -1,7 +1,7 @@
+import { skyBlueColor } from '@constants';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
-import { Button } from '@ui/Button';
-import { skyBlueColor } from '@constants';
+import { Button } from '@ui';
 
 interface PopularChannelItemProps {
   id: number;

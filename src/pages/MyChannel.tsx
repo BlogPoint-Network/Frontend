@@ -3,7 +3,7 @@ import { Text } from '@mantine/core';
 import { CommonFrame } from '@modules/channel';
 import { ChannelMyChannelDescription } from '@modules/channel';
 import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
-import { LongButton } from '@ui/Button';
+import { LongButton } from '@ui';
 
 const MyChannel = () => {
   return (

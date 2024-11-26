@@ -4,7 +4,7 @@ import {
   MainPagePopularChannelsContainer,
   MainPageRecommendationPostsContainer,
 } from '@modules/channel';
-import { Line } from '@ui/Line';
+import { Line } from '@ui';
 
 const MainPage = () => {
   return (

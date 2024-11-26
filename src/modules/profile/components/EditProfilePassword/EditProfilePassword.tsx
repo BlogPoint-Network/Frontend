@@ -4,7 +4,7 @@ import { greyColor } from '@constants';
 import { Flex, Grid, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { modals } from '@mantine/modals';
-import { Button } from '@ui/Button';
+import { Button } from '@ui';
 
 interface IEditProfilePasswordProps {
   user?: IUser;

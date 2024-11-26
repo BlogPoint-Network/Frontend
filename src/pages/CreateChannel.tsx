@@ -1,6 +1,6 @@
 // import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChannelCreateChannel, ChannelNotLogged } from '@modules/channel';
+import { ChannelCreateChannel, NotLogged } from '@modules/channel';
 import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
 
 // import { ProfileContext } from '../app/context';
@@ -28,7 +28,7 @@ const CreateChannel = () => {
 
   // Если пользователь не авторизован
   if (!isLogged) {
-    return <ChannelNotLogged />;
+    return <NotLogged />;
   }
 
   // Если пользователь авторизован, но у него нет канала
