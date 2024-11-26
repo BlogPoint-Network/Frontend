@@ -25,7 +25,11 @@ export const EditProfileImage = () => {
         title={<Text size="lg">Изменение фото пользователя</Text>}
       >
         <Text size="lg">Ваше фото</Text>
-        <FileInput accept="image/png,image/jpeg,image/jpg" value={fileImg} onChange={setFileImg} />
+        <FileInput
+          accept="image/png,image/jpeg,image/jpg"
+          value={fileImg}
+          onChange={setFileImg}
+        />
         <Group mt="lg" justify="flex-end">
           <Button onClick={close} color={greyColor}>
             Отменить

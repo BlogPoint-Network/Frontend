@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
-import { IUser } from '@app-types';
 import { api } from '@api/instance.ts';
+import { IUser } from '@app-types';
+import { AxiosResponse } from 'axios';
 
 export class AuthService {
   static async loginUserAuth(
