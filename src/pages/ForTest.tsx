@@ -1,9 +1,7 @@
+import { Heading1 } from '@ui';
+
 const ForTest = () => {
-  return (
-    <>
-      Для тестов
-    </>
-  );
+  return <Heading1 ta="center">Для тестов</Heading1>;
 };
 
 export default ForTest;

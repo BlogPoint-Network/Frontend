@@ -5,22 +5,21 @@ import {
   PolymorphicComponentProps,
 } from '@mantine/core';
 
-export const LongButton: FC<PolymorphicComponentProps<'button', ButtonProps>> = ({
-  children,
-  ...props
-}) => {
-  const btnStyleProps = {
+export const LongButton: FC<
+  PolymorphicComponentProps<'button', ButtonProps>
+> = ({ children, color, ...props }) => {
+  const btnProps = {
     h: 40,
     w: 'fit-content',
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,
     mb: 15,
-    bg: props.color,
+    bg: color,
   };
 
   return (
-    <MantineButton {...btnStyleProps} {...props}>
+    <MantineButton {...btnProps} {...props}>
       {children}
     </MantineButton>
   );

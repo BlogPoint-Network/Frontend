@@ -1,18 +1,13 @@
-import { FC } from 'react';
 import { darkBackgroundColor } from '@constants';
 import { Container } from '@mantine/core';
 
-interface ILineProps {
-  height: string;
-}
+export const Line = ({ ...props }) => {
+  const LineProps = {
+    h: '8px',
+    m: '0px',
+    w: '100%',
+    bg: darkBackgroundColor,
+  };
 
-export const Line: FC<ILineProps> = props => {
-  return (
-    <Container
-      fluid
-      h={props.height}
-      m="0px"
-      bg={darkBackgroundColor}
-    ></Container>
-  );
+  return <Container fluid {...props} {...LineProps} />;
 };

@@ -4,7 +4,7 @@ import { greyColor, skyBlueColor } from '@constants';
 import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Label } from '@ui';
+import { Button, Heading3, Heading4, Heading2, Label } from '@ui';
 
 interface IEditProfileInfoProps {
   user?: IUser;
@@ -30,7 +30,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Text size="lg">Изменения информации пользователя</Text>}
+        title={<Heading3>Изменения информации пользователя</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -42,7 +42,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
             <Grid w="auto" ml={20} mr={20}>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Логин</Text>}
+                  label={<Heading4>Логин</Heading4>}
                   key={form.key('login')}
                   {...form.getInputProps('login')}
                 />
@@ -50,7 +50,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
 
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Почта</Text>}
+                  label={<Heading4>Почта</Heading4>}
                   key={form.key('email')}
                   {...form.getInputProps('email')}
                 />
@@ -75,9 +75,9 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       </Modal>
 
       <Grid.Col span={12}>
-        <Text size="xl" mb={10}>
+        <Heading2>
           Информация о пользователе
-        </Text>
+        </Heading2>
       </Grid.Col>
       <Grid.Col span={12}>
         <Label title={'Логин'} text={props.user ? props.user?.login : ''} />

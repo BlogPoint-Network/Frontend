@@ -1,7 +1,7 @@
 import { darkBackgroundColor, skyBlueColor } from '@constants';
 import { Card, Flex, Text } from '@mantine/core';
 import PostMedia from '@modules/channel/components/PostMedia/PostMedia.tsx';
-import { Button } from '@ui';
+import { Button, Heading2, Heading3, Heading4 } from '@ui';
 
 interface RecommendationPostProps {
   id: number;
@@ -13,13 +13,6 @@ interface RecommendationPostProps {
 }
 
 function RecommendationPost(props: RecommendationPostProps): JSX.Element {
-  // не работает
-  // const textProps = {
-  //     textOverflow: 'ellipsis',
-  //     overflow: 'hidden',
-  //     whiteSpace: 'nowrap'
-  // }
-
   return (
     <Card
       radius="md"
@@ -44,25 +37,9 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
           direction="column"
           style={{ alignItems: 'center' }}
         >
-          <Text
-            style={{
-              // для переноса строк
-              textAlign: 'center', // Центрирование текста по каждой строке
-              fontSize: '26px',
-              marginBottom: '10px',
-              padding: '0px 20px',
-
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-
-              display: '-webkit-box',
-              WebkitLineClamp: 2, // Лимит в две строки
-              WebkitBoxOrient: 'vertical',
-            }}
-            // style={textProps} не сработает, т.к. style объявлен 2 раза
-          >
+          <Heading2 lineClamp={2} ta="center" p="0px 20px">
             {props.title}
-          </Text>
+          </Heading2>
 
           <Card.Section
             style={{ background: darkBackgroundColor, width: '100%' }}
@@ -81,40 +58,19 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
             )}
           </Card.Section>
 
-          <Text
-            style={{
-              fontWeight: 'bold',
-              textDecoration: 'underline',
-              width: '100%', // без него выходит за рамки
-              textAlign: 'center',
-              padding: '0px 20px',
-              marginBottom: '5px',
-              fontSize: '22px',
-
-              whiteSpace: 'nowrap', // Без переноса строки
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
+          <Heading3
+            lineClamp={1}
+            ta="center"
+            p="0 20px"
+            fw="bold"
+            td="underline"
           >
             {props.channelName}
-          </Text>
+          </Heading3>
 
-          <Text
-            style={{
-              textAlign: 'center',
-              padding: '0px 20px',
-              fontSize: '18px',
-
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-
-              display: '-webkit-box',
-              WebkitLineClamp: 3, // Ограничение на три строки
-              WebkitBoxOrient: 'vertical',
-            }}
-          >
+          <Heading4 lineClamp={3} ta="center" p="0 20px">
             {props.title}
-          </Text>
+          </Heading4>
         </Flex>
 
         <Button color={skyBlueColor}>

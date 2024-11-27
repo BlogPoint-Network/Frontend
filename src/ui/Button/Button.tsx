@@ -7,20 +7,21 @@ import {
 
 export const Button: FC<PolymorphicComponentProps<'button', ButtonProps>> = ({
   children,
+  color,
   ...props
 }) => {
-  const btnStyleProps = {
+  const btnProps = {
     h: 40,
     w: 160,
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,
     mb: 15,
-    bg: props.color,
+    bg: color,
   };
 
   return (
-    <MantineButton {...btnStyleProps} {...props}>
+    <MantineButton {...btnProps} {...props}>
       {children}
     </MantineButton>
   );

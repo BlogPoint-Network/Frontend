@@ -11,7 +11,7 @@ const MainPage = () => {
     <CommonFrame>
       <MainPageLogoContainer />
       <MainPageRecommendationPostsContainer />
-      <Line height="8px" />
+      <Line h="8px" />
       <MainPagePopularChannelsContainer />
     </CommonFrame>
   );

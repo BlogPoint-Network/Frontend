@@ -1,9 +1,7 @@
+import { Heading1 } from '@ui';
+
 const PopularChannels = () => {
-  return (
-    <div>
-      <h1>Популярные каналы</h1>
-    </div>
-  );
+  return <Heading1 ta="center">Популярные каналы</Heading1>;
 };
 
 export default PopularChannels;

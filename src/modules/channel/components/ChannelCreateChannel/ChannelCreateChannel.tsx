@@ -1,25 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
-import {
-  Button,
-  FileInput,
-  Flex,
-  Text,
-  Textarea,
-  TextInput,
-} from '@mantine/core';
+import { FileInput, Flex, Text, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { FormBox } from '@ui';
+import { Button, FormBox } from '@ui';
 
 export const ChannelCreateChannel = () => {
   const navigate = useNavigate();
-
-  const btnProps = {
-    h: 40,
-    w: 200,
-    radius: 'md',
-    bd: 'solid black 1px',
-  };
 
   const form = useForm({
     initialValues: {
@@ -34,39 +20,57 @@ export const ChannelCreateChannel = () => {
           ? 'Название канала должно быть длиннее 3 символов'
           : null,
       description: value =>
-        value.length < 10 ? 'Описание должно быть длиннее 10 символов' : null,
+        value && value.length < 10 ? 'Описание должно быть длиннее 10 символов' : null,
       image: value => (value ? null : 'Изображение обязательно'),
     },
   });
 
   return (
     <FormBox>
-      <Flex direction="column" gap="md">
-        <TextInput
-          label="Название канала"
-          placeholder="Введите название канала"
-          {...form.getInputProps('name')}
-        />
-        <Textarea
-          label="Описание канала"
-          placeholder="Введите описание"
-          {...form.getInputProps('description')}
-        />
-        <FileInput
-          label="Загрузить изображение"
-          placeholder="Выберите файл"
-          {...form.getInputProps('image')}
-        />
-        <Button
-          {...btnProps}
-          bg={skyBlueColor}
-          onClick={() => {
-            navigate('../my-channel');
-          }}
-        >
-          <Text size="lg">Создать канал</Text>
-        </Button>
-      </Flex>
+      <form
+        onSubmit={form.onSubmit(() => {
+          navigate('../MyChannel');
+          // console.log(values);
+          // profile?.registrationProfile(
+          //   values.login,
+          //   values.email,
+          //   values.password,
+          // );
+        })}
+      >
+        <Flex direction="column" gap="md">
+          <TextInput
+            label={
+              <Text size={'xl'} mb={10}>
+                Название канала
+              </Text>
+            }
+            placeholder="Введите название канала"
+            {...form.getInputProps('name')}
+          />
+          <Textarea
+            label={
+              <Text size={'xl'} mb={10}>
+                Описание канала
+              </Text>
+            }
+            placeholder="Введите описание"
+            {...form.getInputProps('description')}
+          />
+          <FileInput
+            label={
+              <Text size={'xl'} mb={10}>
+                Загрузить изображение
+              </Text>
+            }
+            placeholder="Выберите файл"
+            {...form.getInputProps('image')}
+          />
+          <Button type="submit" color={skyBlueColor}>
+            <Text size="lg">Создать канал</Text>
+          </Button>
+        </Flex>
+      </form>
     </FormBox>
   );
 };

@@ -11,7 +11,7 @@ import {
   Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Button } from '@ui';
+import { Button, Heading3, Heading4 } from '@ui';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
@@ -22,9 +22,9 @@ export const EditProfileImage = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Text size="lg">Изменение фото пользователя</Text>}
+        title={<Heading3>Изменение фото пользователя</Heading3>}
       >
-        <Text size="lg">Ваше фото</Text>
+        <Heading4>Ваше фото</Heading4>
         <FileInput
           accept="image/png,image/jpeg,image/jpg"
           value={fileImg}
@@ -47,9 +47,7 @@ export const EditProfileImage = () => {
       </Modal>
 
       <Grid.Col span={6}>
-        <Text size="xl" mb={10}>
-          Аватар пользователя
-        </Text>
+        <Heading4 mb="5px">Аватар пользователя</Heading4>
         <Flex
           mih={50}
           gap="md"

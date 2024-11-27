@@ -3,8 +3,8 @@ import { IUser } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
 import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Button } from '@ui';
 import { useDisclosure } from '@mantine/hooks';
+import { Button, Heading3, Heading4, Label } from '@ui';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
@@ -33,7 +33,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Text size="lg">Изменение пароля пользователя</Text>}
+        title={<Heading3>Изменение пароля пользователя</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -45,14 +45,14 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
             <Grid w="auto" ml={20} mr={20}>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Старый пароль</Text>}
+                  label={<Heading4>Старый пароль</Heading4>}
                   key={form.key('oldPassword')}
                   {...form.getInputProps('oldPassword')}
                 />
               </Grid.Col>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Новый пароль</Text>}
+                  label={<Heading4>Новый пароль</Heading4>}
                   key={form.key('newPassword')}
                   {...form.getInputProps('newPassword')}
                 />
@@ -60,7 +60,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
 
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Подтвердите новый пароль</Text>}
+                  label={<Heading4>Подтвердите новый пароль</Heading4>}
                   key={form.key('repeatPassword')}
                   {...form.getInputProps('repeatPassword')}
                 />
@@ -85,7 +85,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       </Modal>
 
       <Grid.Col span={12}>
-        <Text size={'xl'}>Пароль</Text>
+        <Label title={'Пароль'} text="" />
         <Button color={greyColor} onClick={open}>
           <Text size={'lg'} c="black">
             Изменить

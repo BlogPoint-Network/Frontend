@@ -3,13 +3,14 @@ import { Carousel } from '@mantine/carousel';
 import { Container } from '@mantine/core';
 import RecommendationPost from '@modules/channel/components/RecommendationPost/RecommendationPost.tsx';
 import { recommendations } from '@modules/channel/constants/recomendationStoppers.ts';
+import { Heading1 } from '@ui';
 
 export const MainPageRecommendationPostsContainer = () => {
   return (
-    <Container id="RecommendationPostsContainer">
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <span style={{ fontSize: '48px', fontWeight: 600 }}>Рекомендации</span>
-      </div>
+    <Container id="RecommendationPostsContainer" mb="40px">
+      <Heading1 ta="center" mb="40px">
+        Рекомендации
+      </Heading1>
       <Carousel
         id="recommendationFeed"
         withIndicators
@@ -17,8 +18,8 @@ export const MainPageRecommendationPostsContainer = () => {
         slideGap="40px"
         loop
         controlSize="50"
+        bd={`3px solid ${darkBackgroundColor}`}
         style={{
-          border: `3px solid ${darkBackgroundColor}`, // Цвет границы
           borderRadius: '4px', // Скругление для контролов
         }}
         styles={{

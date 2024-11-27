@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
-import { FullWidthBox } from '@ui';
+import { FullWidthBox, Heading1, Heading4 } from '@ui';
 
 interface IChannelMyChannelDescriptionProps {
   id: number;
@@ -11,26 +11,15 @@ interface IChannelMyChannelDescriptionProps {
   imageURL?: string | undefined;
 }
 
-export const ChannelMyChannelDescription: FC<
+export const ChannelPageChannelDescription: FC<
   IChannelMyChannelDescriptionProps
 > = props => {
   return (
     <FullWidthBox>
       <Flex direction="column" gap={'lg'} align={'center'}>
-        <Text
-          mt="sm"
-          style={{
-            fontSize: '30px',
-            fontWeight: 'bold',
-
-            // для переноса строк
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-          }}
-        >
+        <Heading1 mt="sm" lineClamp={1}>
           {props.channelName}
-        </Text>
+        </Heading1>
         <Card
           p="lg"
           radius="md"
@@ -53,11 +42,11 @@ export const ChannelMyChannelDescription: FC<
             <div style={{ width: '280px' }}>
               <Image
                 // minWidth: '140px',  не работает
+                ml="auto"
+                mr="auto"
+                h="100%"
+                w="auto"
                 style={{
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  height: '100%',
-                  width: 'auto',
                   maxWidth: '280px', // для
                   border: '1px solid black',
                 }}
@@ -77,21 +66,14 @@ export const ChannelMyChannelDescription: FC<
                 maxWidth: '430px',
               }}
             >
-              <Text
+              <Heading4
                 style={{
-                  // для переноса строк
-                  fontSize: '18px',
-
-                  display: '-webkit-box',
-
                   overflowY: 'scroll',
                   overflowX: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'normal',
                 }}
               >
                 {props.description}
-              </Text>
+              </Heading4>
               <Flex // ИконкаПодписчик|Число
                 gap="10px"
                 align="center"
@@ -102,12 +84,7 @@ export const ChannelMyChannelDescription: FC<
                   // color={skyBlueColor}
                   color="#3ec96f"
                 />
-                <Text
-                  style={{
-                    textOverflow: 'ellipsis',
-                    fontSize: '1.2rem',
-                  }}
-                >
+                <Text size="1.2rem">
                   <i>{addSpacesToNumber(props.subscriberNumber)}</i>
                 </Text>
               </Flex>
