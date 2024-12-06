@@ -1,5 +1,4 @@
 export * from './Box/FormBox.tsx';
-export * from './Box/FullWidthBox.tsx';
 export * from './Button/BlueButton.tsx';
 export * from './Button/GreyButton.tsx';
 export * from './Button/RedButton.tsx';

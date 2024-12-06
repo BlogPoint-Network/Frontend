@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Text } from '@mantine/core';
+import { Box } from '@mantine/core';
 import { Heading4 } from '@ui/Text/Heading4.tsx';
 
 interface ILabelProps {
@@ -11,7 +11,7 @@ export const Label: FC<ILabelProps> = ({ title, text }) => {
   return (
     <Box w={600}>
       <Heading4 mb='5px'>
-        {title}{' '}
+        {title}
       </Heading4>
       <div
         style={{
@@ -22,7 +22,7 @@ export const Label: FC<ILabelProps> = ({ title, text }) => {
           height: '42px',
         }}
       >
-        <Text size={'lg'}>{text}</Text>
+        <Heading4>{text}</Heading4>
       </div>
     </Box>
   );

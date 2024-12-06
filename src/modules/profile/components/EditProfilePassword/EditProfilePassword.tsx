@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
-import { greyColor, skyBlueColor } from '@constants';
-import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
+import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { BlueButton, Heading3, Heading4, Label } from '@ui';
+import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
@@ -68,28 +67,23 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
             </Grid>
           </Flex>
           <Group mt="lg" justify="flex-end">
-            <BlueButton
+            <GreyButton
               onClick={() => {
                 form.reset();
                 close();
               }}
-              color={greyColor}
             >
               Отменить
-            </BlueButton>
-            <BlueButton type="submit" color={skyBlueColor}>
-              Сохранить
-            </BlueButton>
+            </GreyButton>
+            <BlueButton type="submit">Сохранить</BlueButton>
           </Group>
         </form>
       </Modal>
 
       <Grid.Col span={12}>
         <Label title={'Пароль'} text="" />
-        <BlueButton color={greyColor} onClick={open}>
-          <Text size={'lg'} c="black">
-            Изменить
-          </Text>
+        <BlueButton mt="16px" onClick={open}>
+          Изменить
         </BlueButton>
       </Grid.Col>
     </>

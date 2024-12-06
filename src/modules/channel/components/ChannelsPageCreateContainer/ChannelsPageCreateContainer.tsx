@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { skyBlueColor } from '@constants';
 import { BlueButton } from '@ui';
 
 export const ChannelsPageCreateContainer = () => {
@@ -10,8 +9,6 @@ export const ChannelsPageCreateContainer = () => {
   };
 
   return (
-    <BlueButton color={skyBlueColor} onClick={navigateToCreation}>
-      Создать новый канал
-    </BlueButton>
+    <BlueButton onClick={navigateToCreation}>Создать новый канал</BlueButton>
   );
 };

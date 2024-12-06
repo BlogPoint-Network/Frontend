@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { skyBlueColor } from '@constants';
 import { Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
@@ -58,7 +57,7 @@ export const RegisterForm = () => {
               {...form.getInputProps(field.key)}
             />
           ))}
-          <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
+          <BlueButton type="submit" mt="sm">
             Подтвердить
           </BlueButton>
         </form>

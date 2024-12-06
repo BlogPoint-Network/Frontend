@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChannelCreateChannel } from '@modules/channel';
+import { CreateChannelForm } from '@modules/channel';
 
 const CreateChannel = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const CreateChannel = () => {
   });
 
   // Если пользователь авторизован
-  return <ChannelCreateChannel />;
+  return <CreateChannelForm />;
 };
 
 export default CreateChannel;

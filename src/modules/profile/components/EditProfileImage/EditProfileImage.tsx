@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
-import { greyColor, skyBlueColor } from '@constants';
-import {
-  FileInput,
-  Flex,
-  Grid,
-  Group,
-  Image,
-  Modal
-} from '@mantine/core';
+import { FileInput, Flex, Grid, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BlueButton, Heading3, Heading4 } from '@ui';
+import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
@@ -30,11 +22,8 @@ export const EditProfileImage = () => {
           onChange={setFileImg}
         />
         <Group mt="lg" justify="flex-end">
-          <BlueButton onClick={close} bg={greyColor}>
-            Отменить
-          </BlueButton>
+          <GreyButton onClick={close}>Отменить</GreyButton>
           <BlueButton
-            bg={skyBlueColor}
             onClick={() => {
               console.log(fileImg);
               close();
@@ -56,7 +45,6 @@ export const EditProfileImage = () => {
         >
           <Image w={300} h={300} radius="md" src={Empty} mb={10} />
           <BlueButton
-            bg={skyBlueColor}
             onClick={() => {
               console.log('Открыл');
               open();

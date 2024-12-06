@@ -15,7 +15,7 @@ export const BlueButton: FC<
     style: {
       minWidth: '160px',
     },
-    bg: { skyBlueColor },
+    bg: skyBlueColor,
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,

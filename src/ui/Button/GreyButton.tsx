@@ -15,7 +15,7 @@ export const GreyButton: FC<
     style: {
       minWidth: '160px',
     },
-    bg: { greyColor },
+    bg: greyColor,
     c: 'black',
     radius: 'md',
     bd: 'solid black 1px',

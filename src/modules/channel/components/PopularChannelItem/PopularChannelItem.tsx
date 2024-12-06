@@ -1,4 +1,3 @@
-import { skyBlueColor } from '@constants';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, Heading2, Heading4 } from '@ui';
@@ -74,19 +73,12 @@ function PopularChannelItem(props: PopularChannelItemProps) {
               gap="10px"
               align="center"
             >
-              <IconAccessible
-                size="2.2rem"
-                stroke={2.5}
-                // color={skyBlueColor}
-                color="#3ec96f"
-              />
+              <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
               <Text size="1.2rem">
                 <i>{addSpacesToNumber(props.subscriberNumber)}</i>
               </Text>
             </Flex>
-            <BlueButton color={skyBlueColor}>
-              <Text size={'lg'}>Перейти</Text>
-            </BlueButton>
+            <BlueButton>Перейти</BlueButton>
           </Flex>
         </Flex>
       </Flex>
