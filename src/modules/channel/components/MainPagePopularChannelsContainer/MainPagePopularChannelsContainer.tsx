@@ -9,7 +9,8 @@ export const MainPagePopularChannelsContainer = () => {
       <Heading1 ta="center">Популярные каналы</Heading1>
       <Flex
         id="recommendationFeed"
-        m="20px 0px"
+        mt="20px"
+        p='0'
         gap="30px"
         direction="column"
         w="100%"

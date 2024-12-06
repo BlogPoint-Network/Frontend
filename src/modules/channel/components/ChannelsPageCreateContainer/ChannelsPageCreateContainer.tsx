@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
-import { Text } from '@mantine/core';
-import { LongButton } from '@ui';
+import { BlueButton } from '@ui';
 
 export const ChannelsPageCreateContainer = () => {
   const navigate = useNavigate();
@@ -11,8 +10,8 @@ export const ChannelsPageCreateContainer = () => {
   };
 
   return (
-    <LongButton color={skyBlueColor} onClick={navigateToCreation}>
-      <Text size={'lg'}>Создать новый канал</Text>
-    </LongButton>
+    <BlueButton color={skyBlueColor} onClick={navigateToCreation}>
+      Создать новый канал
+    </BlueButton>
   );
 };

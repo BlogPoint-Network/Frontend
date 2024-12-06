@@ -1,10 +1,17 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
-import { greyColor, skyBlueColor } from '@constants';
-import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
+import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Heading3, Heading4, Heading2, Label } from '@ui';
+import {
+  BlueButton,
+  GreyButton,
+  Heading2,
+  Heading3,
+  Heading4,
+  Label,
+  RedButton,
+} from '@ui';
 
 interface IEditProfileInfoProps {
   user?: IUser;
@@ -58,26 +65,21 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
             </Grid>
           </Flex>
           <Group mt="lg" justify="flex-end">
-            <Button
+            <GreyButton
               onClick={() => {
                 form.reset();
                 close();
               }}
-              color={greyColor}
             >
               Отменить
-            </Button>
-            <Button type="submit" color={skyBlueColor}>
-              Сохранить
-            </Button>
+            </GreyButton>
+            <BlueButton type="submit">Сохранить</BlueButton>
           </Group>
         </form>
       </Modal>
 
       <Grid.Col span={12}>
-        <Heading2>
-          Информация о пользователе
-        </Heading2>
+        <Heading2>Информация о пользователе</Heading2>
       </Grid.Col>
       <Grid.Col span={12}>
         <Label title={'Логин'} text={props.user ? props.user?.login : ''} />
@@ -92,14 +94,8 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       </Grid.Col>
 
       <Grid.Col span={12}>
-        <Button color={skyBlueColor} onClick={open}>
-          <Text size={'lg'}>Изменить</Text>
-        </Button>
-        <Button color="rgba(255, 99, 99, 1)">
-          <Text size={'lg'} c="black">
-            Удалить профиль
-          </Text>
-        </Button>
+        <BlueButton onClick={open}>Изменить</BlueButton>
+        <RedButton>Удалить профиль</RedButton>
       </Grid.Col>
     </>
   );

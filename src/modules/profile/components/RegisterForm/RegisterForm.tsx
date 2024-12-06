@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { skyBlueColor } from '@constants';
-import { Group, Text, TextInput } from '@mantine/core';
+import { Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationEmail,
@@ -9,7 +9,7 @@ import {
   validationRepeatPassword,
 } from '@modules/profile/constants/validation.ts';
 import { IRegistrationData } from '@modules/profile/types/IRegistrationData.ts';
-import { Button, FormBox, Heading1, Heading4 } from '@ui';
+import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
@@ -53,18 +53,14 @@ export const RegisterForm = () => {
               size="md"
               mt="sm"
               radius="lg"
-              label={
-                <Heading4 mb="5px">
-                  {field.label}
-                </Heading4>
-              }
+              label={<Heading4 mb="5px">{field.label}</Heading4>}
               key={form.key(field.key)}
               {...form.getInputProps(field.key)}
             />
           ))}
-          <Button type="submit" mt="sm" color={skyBlueColor}>
-            <Text size={'lg'}>Подтвердить</Text>
-          </Button>
+          <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
+            Подтвердить
+          </BlueButton>
         </form>
       </Group>
     </FormBox>

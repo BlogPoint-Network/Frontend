@@ -4,23 +4,27 @@ import {
   ButtonProps,
   PolymorphicComponentProps,
 } from '@mantine/core';
+import { Heading4 } from '@ui/Text/Heading4.tsx';
 
-export const LongButton: FC<
+export const RedButton: FC<
   PolymorphicComponentProps<'button', ButtonProps>
-> = ({ children, color, ...props }) => {
+> = ({ children, ...props }) => {
   const btnProps = {
     h: 40,
-    w: 'fit-content',
+    style: {
+      minWidth: '160px',
+    },
+    bg: 'rgba(255, 99, 99, 1)',
+    c: 'black',
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,
     mb: 15,
-    bg: color,
   };
 
   return (
     <MantineButton {...btnProps} {...props}>
-      {children}
+      <Heading4 pb="0">{children}</Heading4>
     </MantineButton>
   );
 };

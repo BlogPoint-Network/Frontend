@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { skyBlueColor } from '@constants';
-import { Group, PasswordInput, Text, TextInput } from '@mantine/core';
+import { Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationLogin,
   validationPassword,
 } from '@modules/profile/constants/validation.ts';
-import { Button, FormBox, Heading1, Heading4 } from '@ui';
+import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
@@ -47,9 +47,9 @@ export const LoginForm = () => {
             key={form.key('password')}
             {...form.getInputProps('password')}
           />
-          <Button type="submit" mt="sm" color={skyBlueColor}>
-            <Text size={'lg'}>Пароль</Text>
-          </Button>
+          <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
+            Подтвердить
+          </BlueButton>
         </form>
       </Group>
     </FormBox>

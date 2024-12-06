@@ -1,9 +1,7 @@
-import { skyBlueColor } from '@constants';
-import { Text } from '@mantine/core';
 import { CommonFrame } from '@modules/channel';
 import { ChannelPageChannelDescription } from '@modules/channel';
 import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
-import { LongButton } from '@ui';
+import { BlueButton } from '@ui';
 
 const MyChannel = () => {
   return (
@@ -15,9 +13,7 @@ const MyChannel = () => {
         subscriberNumber={testChannelProps.subscriberNumber}
         imageURL={testChannelProps.imageURL}
       />
-      <LongButton bg={skyBlueColor}>
-        <Text size={'lg'}>Создать новую запись</Text>
-      </LongButton>
+      <BlueButton>Создать новую запись</BlueButton>
     </CommonFrame>
   );
 };

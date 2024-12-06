@@ -7,11 +7,10 @@ import {
   Grid,
   Group,
   Image,
-  Modal,
-  Text,
+  Modal
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Button, Heading3, Heading4 } from '@ui';
+import { BlueButton, Heading3, Heading4 } from '@ui';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
@@ -31,18 +30,18 @@ export const EditProfileImage = () => {
           onChange={setFileImg}
         />
         <Group mt="lg" justify="flex-end">
-          <Button onClick={close} color={greyColor}>
+          <BlueButton onClick={close} bg={greyColor}>
             Отменить
-          </Button>
-          <Button
-            color={skyBlueColor}
+          </BlueButton>
+          <BlueButton
+            bg={skyBlueColor}
             onClick={() => {
               console.log(fileImg);
               close();
             }}
           >
             Сохранить
-          </Button>
+          </BlueButton>
         </Group>
       </Modal>
 
@@ -56,15 +55,15 @@ export const EditProfileImage = () => {
           direction="row"
         >
           <Image w={300} h={300} radius="md" src={Empty} mb={10} />
-          <Button
-            color={skyBlueColor}
+          <BlueButton
+            bg={skyBlueColor}
             onClick={() => {
               console.log('Открыл');
               open();
             }}
           >
-            <Text size={'lg'}>Загрузить</Text>
-          </Button>
+            Загрузить
+          </BlueButton>
         </Flex>
       </Grid.Col>
     </>

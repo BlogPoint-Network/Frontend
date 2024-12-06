@@ -1,13 +1,13 @@
 import { darkBackgroundColor } from '@constants';
-import { Container } from '@mantine/core';
+import { Box } from '@mantine/core';
 
 export const Line = ({ ...props }) => {
   const LineProps = {
-    h: '8px',
-    m: '0px',
-    w: '100%',
-    bg: darkBackgroundColor,
+    h: '8px', // Высота полосы
+    // ml: '-500px', // Убираем отступы
+    w: '130vw', // Ширина полосы на всю ширину окна
+    bg: darkBackgroundColor, // Цвет фона полосы
   };
 
-  return <Container fluid {...props} {...LineProps} />;
+  return <Box {...props} {...LineProps} />;
 };

@@ -5,7 +5,6 @@ import { channels } from '@modules/channel/constants/channelsStoppers.ts';
 import { Heading1 } from '@ui/Text/Heading1.tsx';
 
 export const ChannelsPageChannelsContainer = () => {
-  // const navigate = useNavigate();
   return (
     <>
       <Heading1 ta="center">Мои каналы</Heading1>

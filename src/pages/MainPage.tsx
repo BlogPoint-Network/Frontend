@@ -8,12 +8,16 @@ import { Line } from '@ui';
 
 const MainPage = () => {
   return (
-    <CommonFrame>
-      <MainPageLogoContainer />
-      <MainPageRecommendationPostsContainer />
+    <>
+      <CommonFrame>
+        <MainPageLogoContainer />
+        <MainPageRecommendationPostsContainer />
+      </CommonFrame>
       <Line h="8px" />
-      <MainPagePopularChannelsContainer />
-    </CommonFrame>
+      <CommonFrame>
+        <MainPagePopularChannelsContainer />
+      </CommonFrame>
+    </>
   );
 };
 

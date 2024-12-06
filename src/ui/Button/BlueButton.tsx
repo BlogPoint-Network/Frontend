@@ -1,28 +1,30 @@
 import { FC } from 'react';
+import { skyBlueColor } from '@constants';
 import {
   Button as MantineButton,
   ButtonProps,
   PolymorphicComponentProps,
 } from '@mantine/core';
+import { Heading4 } from '@ui/Text/Heading4.tsx';
 
-export const Button: FC<PolymorphicComponentProps<'button', ButtonProps>> = ({
-  children,
-  color,
-  ...props
-}) => {
+export const BlueButton: FC<
+  PolymorphicComponentProps<'button', ButtonProps>
+> = ({ children, ...props }) => {
   const btnProps = {
     h: 40,
-    w: 160,
+    style: {
+      minWidth: '160px',
+    },
+    bg: { skyBlueColor },
     radius: 'md',
     bd: 'solid black 1px',
     mr: 15,
     mb: 15,
-    bg: color,
   };
 
   return (
     <MantineButton {...btnProps} {...props}>
-      {children}
+      <Heading4 pb="0">{children}</Heading4>
     </MantineButton>
   );
 };

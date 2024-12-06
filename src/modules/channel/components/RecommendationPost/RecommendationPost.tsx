@@ -1,7 +1,7 @@
 import { darkBackgroundColor, skyBlueColor } from '@constants';
 import { Card, Flex, Text } from '@mantine/core';
 import PostMedia from '@modules/channel/components/PostMedia/PostMedia.tsx';
-import { Button, Heading2, Heading3, Heading4 } from '@ui';
+import { BlueButton, Heading2, Heading3, Heading4 } from '@ui';
 
 interface RecommendationPostProps {
   id: number;
@@ -73,9 +73,9 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
           </Heading4>
         </Flex>
 
-        <Button color={skyBlueColor}>
+        <BlueButton color={skyBlueColor}>
           <Text size={'lg'}>Читать</Text>
-        </Button>
+        </BlueButton>
       </Flex>
     </Card>
   );

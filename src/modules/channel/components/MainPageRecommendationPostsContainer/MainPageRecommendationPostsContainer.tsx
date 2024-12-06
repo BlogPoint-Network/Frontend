@@ -8,13 +8,15 @@ import { Heading1 } from '@ui';
 export const MainPageRecommendationPostsContainer = () => {
   return (
     <Container id="RecommendationPostsContainer" mb="40px">
-      <Heading1 ta="center" mb="40px">
+      <Heading1 id="RecommendationPostsContainer" ta="center" mb="40px">
         Рекомендации
       </Heading1>
       <Carousel
         id="recommendationFeed"
         withIndicators
-        slideSize="33.333333%"
+        slideSize="33.33%"
+        ml="60px"
+        w={{ sm: 'auto', base: '380px' }} // на малых экранах 1 пост
         slideGap="40px"
         loop
         controlSize="50"
@@ -31,8 +33,8 @@ export const MainPageRecommendationPostsContainer = () => {
           },
           controls: {
             top: '50%',
-            left: 'calc(-100px)', // сдвигает левую стрелку за пределы карусели
-            right: 'calc(-100px)', // сдвигает правую стрелку за пределы карусели
+            left: 'calc(-90px)', // сдвигает левую стрелку за пределы карусели
+            right: 'calc(-90px)', // сдвигает правую стрелку за пределы карусели
           },
           indicator: {
             backgroundColor: skyBlueColor,
