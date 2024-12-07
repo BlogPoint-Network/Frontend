@@ -14,12 +14,13 @@ import {
 interface IChannelMyChannelDescriptionButtonsProps {
   channelName: string;
   description: string;
+  subscriberNumber: number;
 }
 
 export const ChannelPageChannelDescriptionButtons: FC<
   IChannelMyChannelDescriptionButtonsProps
 > = props => {
-  const isAdmin: boolean = true;
+  const isAdmin: boolean = false;
 
   // Состояние для отслеживания текста и стилей кнопки
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -64,6 +65,10 @@ export const ChannelPageChannelDescriptionButtons: FC<
           gap="md"
           direction="column"
         >
+          <Heading4 fs="italic">
+            Количество подписчиков: {props.subscriberNumber}
+          </Heading4>
+          <Line h="2px" />
           <Heading2>{props.channelName}</Heading2>
           <Line h="8px" />
           <Heading4>{props.description}</Heading4>

@@ -22,12 +22,12 @@ export const CreateChannelForm = () => {
 
     validate: {
       name: value =>
-        value.length < 3
-          ? 'Название канала должно быть длиннее 3 символов'
+        value.length < 3 || value.length > 60
+          ? 'Название канала должно быть длиннее 3 символов и не более 60 символов'
           : null,
       description: value =>
-        value && value.length < 10
-          ? 'Описание должно быть длиннее 10 символов'
+        value && (value.length < 10 || value.length > 500)
+          ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
       image: value => (value ? null : 'Загрузите корректное изображение'),
     },
@@ -73,7 +73,7 @@ export const CreateChannelForm = () => {
                 setUploadStatus('reject');
                 console.log('Изображение отклонено', image);
               }}
-              maxSize={5 * 1024 ** 2}
+              maxSize={200 * 1024}
               accept={IMAGE_MIME_TYPE}
               bg="white"
               style={{
@@ -129,7 +129,7 @@ export const CreateChannelForm = () => {
                       это поле
                     </Heading3>
                     <Text size="sm" c="dimmed" inline mt={15}>
-                      Размером не более 5мб
+                      Размером не более 200Кб
                     </Text>
                   </div>
                 </Flex>

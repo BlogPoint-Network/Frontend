@@ -13,7 +13,7 @@ const MainPage = () => {
         <MainPageLogoContainer />
         <MainPageRecommendationPostsContainer />
       </CommonFrame>
-      <Line h="8px" />
+      <Line h="5px" />
       <CommonFrame>
         <MainPagePopularChannelsContainer />
       </CommonFrame>

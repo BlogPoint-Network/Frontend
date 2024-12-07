@@ -80,6 +80,7 @@ export const ChannelPageChannelDescription: FC<
           <ChannelPageChannelDescriptionButtons
             channelName={props.channelName}
             description={props.description}
+            subscriberNumber={props.subscriberNumber}
           />
         </Flex>
       </Flex>
