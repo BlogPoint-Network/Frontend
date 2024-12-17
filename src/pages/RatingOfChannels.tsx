@@ -1,8 +1,8 @@
+import { Heading1 } from '@ui';
+
 const RatingOfChannels = () => {
   return (
-    <div>
-      <h1>Рейтинг каналов</h1>
-    </div>
+    <Heading1 ta='center'>Рейтинг каналов</Heading1>
   );
 };
 

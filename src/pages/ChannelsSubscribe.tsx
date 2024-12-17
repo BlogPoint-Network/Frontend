@@ -1,9 +1,9 @@
-const MyChannels = () => {
+import { Heading1 } from '@ui';
+
+export const ChannelsSubscribe = () => {
   return (
-    <div>
-      <h1>Подписки (список каналов на которые подписан)</h1>
-    </div>
+    <Heading1 ta="center">
+      Подписки (список каналов на которые подписан)
+    </Heading1>
   );
 };
-
-export default MyChannels;

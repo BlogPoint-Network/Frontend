@@ -1,9 +1,7 @@
+import { Heading1 } from '@ui';
+
 const Recommendations = () => {
-  return (
-    <div>
-      <h1>Рекомендации</h1>
-    </div>
-  );
+  return <Heading1 ta="center">Рекомендации</Heading1>;
 };
 
 export default Recommendations;
