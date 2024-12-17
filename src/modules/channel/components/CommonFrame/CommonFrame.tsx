@@ -9,12 +9,14 @@ interface IMainPageFrame {
 export const CommonFrame: FC<IMainPageFrame> = props => {
   return (
     <Flex
-      // ml={{ sm: '50px', base: '0px' }} // в совсем узких окнах отступа нет
-      m="0 auto"
+      ml={{ sm: '50px', base: '0px' }} // в совсем узких окнах отступа нет
+      id="mainPageFlexbox"
       gap="25px"
       direction="column"
       wrap="wrap"
+      w="100%"
       align="center"
+      // style={{overflow: 'hidden'}}
     >
       {props.children}
     </Flex>

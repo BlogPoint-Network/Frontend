@@ -1,18 +1,17 @@
 import { FC } from 'react';
-import { Box } from '@mantine/core';
-import { Heading4 } from '@ui/Text/Heading4.tsx';
+import { Box, Text } from '@mantine/core';
 
 interface ILabelProps {
   title: string;
   text: string;
 }
 
-export const Label: FC<ILabelProps> = ({ title, text }) => {
+export const Label: FC<ILabelProps> = props => {
   return (
     <Box w={600}>
-      <Heading4 mb='5px'>
-        {title}
-      </Heading4>
+      <Text size={'xl'} mb={10}>
+        {props.title}{' '}
+      </Text>
       <div
         style={{
           border: 'solid 1px black',
@@ -22,7 +21,7 @@ export const Label: FC<ILabelProps> = ({ title, text }) => {
           height: '42px',
         }}
       >
-        <Heading4>{text}</Heading4>
+        <Text size={'lg'}>{props.text}</Text>
       </div>
     </Box>
   );

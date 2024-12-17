@@ -1,17 +1,10 @@
 import { FC, useContext } from 'react';
 import { IUser } from '@app-types';
-import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
+import { greyColor, skyBlueColor } from '@constants';
+import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import {
-  BlueButton,
-  GreyButton,
-  Heading2,
-  Heading3,
-  Heading4,
-  Label,
-  RedButton,
-} from '@ui';
+import { Button, Label } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
@@ -40,7 +33,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Изменения информации пользователя</Heading3>}
+        title={<Text size="lg">Изменения информации пользователя</Text>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -53,7 +46,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
             <Grid w="auto" ml={20} mr={20}>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Heading4>Логин</Heading4>}
+                  label={<Text size={'lg'}>Логин</Text>}
                   key={form.key('login')}
                   {...form.getInputProps('login')}
                 />
@@ -61,7 +54,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
 
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Heading4>Почта</Heading4>}
+                  label={<Text size={'lg'}>Почта</Text>}
                   key={form.key('email')}
                   {...form.getInputProps('email')}
                 />
@@ -69,21 +62,26 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
             </Grid>
           </Flex>
           <Group mt="lg" justify="flex-end">
-            <GreyButton
+            <Button
               onClick={() => {
                 form.reset();
                 close();
               }}
+              color={greyColor}
             >
               Отменить
-            </GreyButton>
-            <BlueButton type="submit">Сохранить</BlueButton>
+            </Button>
+            <Button type="submit" color={skyBlueColor}>
+              Сохранить
+            </Button>
           </Group>
         </form>
       </Modal>
 
       <Grid.Col span={12}>
-        <Heading2>Информация о пользователе</Heading2>
+        <Text size="xl" mb={10}>
+          Информация о пользователе
+        </Text>
       </Grid.Col>
       <Grid.Col span={12}>
         <Label title={'Логин'} text={props.user ? props.user?.login : ''} />
@@ -98,8 +96,14 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       </Grid.Col>
 
       <Grid.Col span={12}>
-        <BlueButton onClick={open}>Изменить</BlueButton>
-        <RedButton>Удалить профиль</RedButton>
+        <Button color={skyBlueColor} onClick={open}>
+          <Text size={'lg'}>Изменить</Text>
+        </Button>
+        <Button color="rgba(255, 99, 99, 1)">
+          <Text size={'lg'} c="black">
+            Удалить профиль
+          </Text>
+        </Button>
       </Grid.Col>
     </>
   );

@@ -1,12 +1,18 @@
+import { FC } from 'react';
 import { darkBackgroundColor } from '@constants';
-import { Box } from '@mantine/core';
+import { Container } from '@mantine/core';
 
-export const Line = ({ ...props }) => {
-  const LineProps = {
-    // ml: '-500px', // Убираем отступы
-    w: '130vw', // Ширина полосы на всю ширину окна
-    bg: darkBackgroundColor, // Цвет фона полосы
-  };
+interface ILineProps {
+  height: string;
+}
 
-  return <Box {...props} {...LineProps} />;
+export const Line: FC<ILineProps> = props => {
+  return (
+    <Container
+      fluid
+      h={props.height}
+      m="0px"
+      bg={darkBackgroundColor}
+    ></Container>
+  );
 };

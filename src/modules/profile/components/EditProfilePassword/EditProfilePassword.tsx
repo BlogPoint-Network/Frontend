@@ -1,10 +1,12 @@
 import { FC, useContext } from 'react';
 import { IUser } from '@app-types';
-import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
+import { greyColor, skyBlueColor } from '@constants';
+import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
+import { Button } from '@ui';
+
 import { ProfileContext } from '../../../../app/context';
-import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
@@ -34,7 +36,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Изменение пароля пользователя</Heading3>}
+        title={<Text size="lg">Изменение пароля пользователя</Text>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -49,14 +51,14 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
             <Grid w="auto" ml={20} mr={20}>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Heading4>Старый пароль</Heading4>}
+                  label={<Text size={'lg'}>Старый пароль</Text>}
                   key={form.key('oldPassword')}
                   {...form.getInputProps('oldPassword')}
                 />
               </Grid.Col>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Heading4>Новый пароль</Heading4>}
+                  label={<Text size={'lg'}>Новый пароль</Text>}
                   key={form.key('newPassword')}
                   {...form.getInputProps('newPassword')}
                 />
@@ -64,7 +66,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
 
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Heading4>Подтвердите новый пароль</Heading4>}
+                  label={<Text size={'lg'}>Подтвердите новый пароль</Text>}
                   key={form.key('repeatPassword')}
                   {...form.getInputProps('repeatPassword')}
                 />
@@ -72,24 +74,29 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
             </Grid>
           </Flex>
           <Group mt="lg" justify="flex-end">
-            <GreyButton
+            <Button
               onClick={() => {
                 form.reset();
                 close();
               }}
+              color={greyColor}
             >
               Отменить
-            </GreyButton>
-            <BlueButton type="submit">Сохранить</BlueButton>
+            </Button>
+            <Button type="submit" color={skyBlueColor}>
+              Сохранить
+            </Button>
           </Group>
         </form>
       </Modal>
 
       <Grid.Col span={12}>
-        <Label title={'Пароль'} text="" />
-        <BlueButton mt="16px" onClick={open}>
-          Изменить
-        </BlueButton>
+        <Text size={'xl'}>Пароль</Text>
+        <Button color={greyColor} onClick={open}>
+          <Text size={'lg'} c="black">
+            Изменить
+          </Text>
+        </Button>
       </Grid.Col>
     </>
   );

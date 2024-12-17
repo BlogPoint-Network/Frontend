@@ -1,19 +1,25 @@
+import { skyBlueColor } from '@constants';
+import { Text } from '@mantine/core';
 import { CommonFrame } from '@modules/channel';
-import { ChannelPageChannelDescription } from '@modules/channel';
+import { ChannelMyChannelDescription } from '@modules/channel';
 import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
-import { BlueButton } from '@ui';
+import { LongButton } from '@ui';
 
-export const MyChannel = () => {
+const MyChannel = () => {
   return (
     <CommonFrame>
-      <ChannelPageChannelDescription
+      <ChannelMyChannelDescription
         id={testChannelProps.id}
         channelName={testChannelProps.channelName}
         description={testChannelProps.description}
         subscriberNumber={testChannelProps.subscriberNumber}
         imageURL={testChannelProps.imageURL}
       />
-      <BlueButton>Создать новую запись</BlueButton>
+      <LongButton bg={skyBlueColor}>
+        <Text size={'lg'}>Создать новую запись</Text>
+      </LongButton>
     </CommonFrame>
   );
 };
+
+export default MyChannel;

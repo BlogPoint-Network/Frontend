@@ -1,22 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-import { Unauthorized } from '@components/Other/Unauthorized.tsx';
-import { CreatePostForm } from '@modules/posts/components/CreatePostForm/CreatePostForm.tsx';
-import { MyChannelsExample } from '@modules/posts/components/MyChannelsExample.tsx';
-import {
-  ChannelsSubscribe,
-  ForTest,
-  Login,
-  MyChannel,
-  MyChannels,
-  Profile,
-  Register,
-} from '@pages';
+import { ForTest, Login, Profile, Register } from '@pages';
+import ChannelsSubscribe from '@pages/ChannelsSubscribe.tsx';
 import CreateChannel from '@pages/CreateChannel.tsx';
 import MainPage from '@pages/MainPage.tsx';
+import MyChannel from '@pages/MyChannel.tsx';
 import PopularChannels from '@pages/PopularChannels.tsx';
 import RatingOfChannels from '@pages/RatingOfChannels.tsx';
 import Recommendations from '@pages/Recommendations.tsx';
 import { ProfileLoader } from '@routes/components/ProfileLoader/ProfileLoader.tsx';
+import { CreatePostForm } from '@modules/posts/components/CreatePostForm/CreatePostForm.tsx';
+import {
+  MyChannelsExample
+} from '@modules/posts/components/MyChannelsExample.tsx';
 
 const AppRouter = () => {
   return (
@@ -29,9 +24,6 @@ const AppRouter = () => {
         <Route path="/test" element={<ForTest />} />
         <Route path="/create-channel" element={<CreateChannel />} />
         <Route path="/my-channel" element={<MyChannel />} />
-        <Route path="/createChannel" element={<CreateChannel />} />
-        <Route path="/mychannels" element={<MyChannels />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/popularchannels" element={<PopularChannels />} />
         <Route path="/ratingofchannels" element={<RatingOfChannels />} />
         <Route path="/recommendations" element={<Recommendations />} />
