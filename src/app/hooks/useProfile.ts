@@ -37,14 +37,6 @@ export const useProfile = () => {
     }
   }
 
-  async function changeProfile(email: string, login: string, password: string) {
-    try {
-      await AuthService.changeProfileAuth(login, email, password);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   function logoutProfile() {
     try {
       localStorage.removeItem('token');
@@ -63,12 +55,39 @@ export const useProfile = () => {
     }
   }
 
+  const editProfileImg = async (img: File | null) => {
+    try {
+      await AuthService.editProfileImgAuth(img);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const editProfileInfo = async (email: string, login: string) => {
+    try {
+      await AuthService.editProfileInfoAuth(email, login);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const editProfilePassword = async (
+    oldPassword: string,
+    newPassword: string,
+  ) => {
+    try {
+      await AuthService.editProfilePasswordAuth(oldPassword, newPassword);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return {
     loginProfile,
     registrationProfile,
     logoutProfile,
+    editProfileImg,
+    editProfilePassword,
+    editProfileInfo,
     infoProfile,
-    changeProfile,
     user,
     infoUserMutation,
   };

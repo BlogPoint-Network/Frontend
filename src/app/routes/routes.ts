@@ -1,8 +1,7 @@
-import { Login, Profile, Register } from '@pages';
+import { ForTest, Login, Profile, Register } from '@pages';
 import MyChannels from '@pages/ChannelsSubscribe.tsx';
 import ChannelsSubscribe from '@pages/ChannelsSubscribe.tsx';
 import MyChannel from '@pages/MyChannel.tsx';
-import ForTest from '@pages/ForTest.tsx';
 import MainPage from '@pages/MainPage.tsx';
 import CreateChannel from '@pages/CreateChannel.tsx';
 import PopularChannels from '@pages/PopularChannels.tsx';

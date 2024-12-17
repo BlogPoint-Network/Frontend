@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
 import { greyColor, skyBlueColor } from '@constants';
 import {
@@ -12,10 +12,12 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Button } from '@ui';
+import { ProfileContext } from '../../../../app/context';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
+  const profile = useContext(ProfileContext);
 
   return (
     <>
@@ -37,6 +39,7 @@ export const EditProfileImage = () => {
           <Button
             color={skyBlueColor}
             onClick={() => {
+              profile?.editProfileImg(fileImg);
               console.log(fileImg);
               close();
             }}

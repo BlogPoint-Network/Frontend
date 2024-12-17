@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { IUser } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
 import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
@@ -6,12 +6,15 @@ import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { Button, Label } from '@ui';
 
+import { ProfileContext } from '../../../../app/context';
+
 interface IEditProfileInfoProps {
   user?: IUser;
 }
 
 export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
   const [opened, { open, close }] = useDisclosure(false);
+  const profile = useContext(ProfileContext);
   const form = useForm({
     initialValues: {
       login: props?.user?.login ?? '',
@@ -34,6 +37,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       >
         <form
           onSubmit={form.onSubmit(values => {
+            profile?.editProfileInfo(values.login, values.email);
             console.log(values);
             // profile?.changeProfile(values.login, values.email, values.newPassword);
           })}
