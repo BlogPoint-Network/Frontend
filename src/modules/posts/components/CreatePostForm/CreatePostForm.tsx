@@ -9,7 +9,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { Button } from '@ui';
+import { BlueButton } from '@ui';
 
 export const CreatePostForm = () => {
   const currentChannel = localStorage.getItem('currentChannel');
@@ -96,7 +96,7 @@ export const CreatePostForm = () => {
 
           <RichTextEditor.Content />
         </RichTextEditor>
-        <Button
+        <BlueButton
           onClick={() => {
             console.log(editor?.getHTML());
             if (currentChannel)
@@ -104,7 +104,7 @@ export const CreatePostForm = () => {
           }}
         >
           Сохранить
-        </Button>
+        </BlueButton>
       </Flex>
     </>
   );
