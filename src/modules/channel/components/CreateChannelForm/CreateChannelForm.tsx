@@ -136,7 +136,7 @@ export const CreateChannelForm = () => {
               </Group>
             </Dropzone>
             {/* Отображение ошибки */}
-            {form.errors.image && <Text color="red">{form.errors.image}</Text>}
+            {form.errors.image && <Text c="red">{form.errors.image}</Text>}
             <BlueButton type="submit" mt="sm" w={'fit-content'}>
               Подтвердить
             </BlueButton>

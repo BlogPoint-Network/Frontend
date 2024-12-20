@@ -10,7 +10,7 @@ export const MainPagePopularChannelsContainer = () => {
       <Flex
         id="recommendationFeed"
         mt="20px"
-        p='0'
+        p="0"
         gap="30px"
         direction="column"
         w="100%"
