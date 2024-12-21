@@ -1,13 +1,12 @@
 import { mainBackgroundColor } from '@constants';
 import { Container, Flex, Image } from '@mantine/core';
 
-export const MainPageLogoContainer = () => {
+export const LogoMainPage = () => {
   return (
     <Container
       id="LogoContainer"
       bg={mainBackgroundColor}
       h="160px"
-      // m='15px 0px' // выравнивание по началу
       m="15px auto"
       bd="2px solid black"
       display="flex"

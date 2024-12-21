@@ -3,6 +3,7 @@ export * from './ForTest';
 export * from './Login';
 export * from './MyChannel';
 export * from './MyChannel.tsx';
-export * from './MyChannels';
+export * from './MyChannels.tsx';
 export * from './Profile';
 export * from './Register';
+export * from './MainPage.tsx';

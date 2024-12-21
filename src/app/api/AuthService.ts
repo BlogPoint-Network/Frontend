@@ -15,6 +15,7 @@ export class AuthService {
     login: string,
     password: string,
   ): Promise<AxiosResponse<{ user: IUser }>> {
+    console.log('привет');
     return api.post('/register', { login, email, password });
   }
 
@@ -49,8 +50,9 @@ export class AuthService {
   static async createChannelAuth(
     name: string,
     description: string,
+    channelAuthor: string,
   ): Promise<AxiosResponse<{ channel: IChannel }>> {
-    return api.post('/createchannel', { name, description });
+    return api.post('/createchannel', { name, description, channelAuthor });
   }
 
   static async editChannelAuth(

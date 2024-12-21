@@ -1,24 +1,21 @@
 import {
   CommonFrame,
-  MainPageLogoContainer,
   MainPagePopularChannelsContainer,
   MainPageRecommendationPostsContainer,
 } from '@modules/channel';
-import { Line } from '@ui';
+import { Line, LogoMainPage } from '@ui';
 
-const MainPage = () => {
+export const MainPage = () => {
   return (
     <>
       <CommonFrame>
-        <MainPageLogoContainer />
+        <LogoMainPage />
         <MainPageRecommendationPostsContainer />
       </CommonFrame>
-      <Line h="5px" />
+      <Line h="3px" />
       <CommonFrame>
         <MainPagePopularChannelsContainer />
       </CommonFrame>
     </>
   );
 };
-
-export default MainPage;

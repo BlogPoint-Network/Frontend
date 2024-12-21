@@ -28,7 +28,7 @@ const AppShell = () => {
         <Navigation />
       </AppShellMantine.Navbar>
 
-      <AppShellMantine.Main>
+      <AppShellMantine.Main bg="rgb(241 241 241)">
         <AppRouter />
       </AppShellMantine.Main>
     </AppShellMantine>

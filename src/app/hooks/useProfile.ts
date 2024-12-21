@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { AuthService } from '@api';
+import { IUser } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
-
-import { IUser } from '../types/IUser.ts';
 
 export const useProfile = () => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -31,7 +30,7 @@ export const useProfile = () => {
     password: string,
   ) {
     try {
-      await AuthService.registerUserAuth(login, email, password);
+      await AuthService.registerUserAuth(email, login, password);
     } catch (e) {
       console.log(e);
     }

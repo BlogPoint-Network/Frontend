@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { Flex, Group, rem, Text, Textarea, TextInput } from '@mantine/core';
-import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { Dropzone, FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { IconCheck, IconPhoto, IconX } from '@tabler/icons-react';
 import { BlueButton, FormBox, Heading1, Heading3, Heading4 } from '@ui';
+//import { useChannel } from '@hooks';
 
 export const CreateChannelForm = () => {
-  const navigate = useNavigate();
+  //const channel = useChannel();
+
   // Состояние иконки
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'accept' | 'reject' | 'success'
@@ -40,7 +42,6 @@ export const CreateChannelForm = () => {
         <form
           onSubmit={form.onSubmit(values => {
             console.log(values);
-            navigate('../MyChannel');
           })}
         >
           <Flex direction="column" gap="md">
@@ -73,8 +74,12 @@ export const CreateChannelForm = () => {
                 setUploadStatus('reject');
                 console.log('Изображение отклонено', image);
               }}
-              maxSize={200 * 1024}
-              accept={IMAGE_MIME_TYPE}
+              maxSize={200 * 1024 ** 2}
+              accept={[
+                'image/png',
+                'image/jpeg',
+                'image/jpg',
+              ]}
               bg="white"
               style={{
                 borderRadius: '20px',

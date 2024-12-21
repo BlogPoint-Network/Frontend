@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
@@ -14,6 +15,7 @@ import { ProfileContext } from '../../../../app/context';
 
 export const RegisterForm = () => {
   const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
   const fields = [
     { label: 'Логин', key: 'login' },
     { label: 'Почта', key: 'email' },
@@ -40,11 +42,9 @@ export const RegisterForm = () => {
         <form
           onSubmit={form.onSubmit(values => {
             console.log(values);
-            profile?.registrationProfile(
-              values.login,
-              values.email,
-              values.password,
-            );
+            profile
+              ?.registrationProfile(values.login, values.email, values.password)
+              .then(() => navigate('/login'));
           })}
         >
           {fields.map(field => (
