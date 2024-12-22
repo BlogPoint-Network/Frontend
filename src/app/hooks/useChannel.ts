@@ -1,13 +1,10 @@
 import { AuthService } from '@api';
 
 export const useChannel = () => {
-  const createChannel = async (
-    name: string,
-    description: string,
-    channelAuthor: string,
-  ) => {
+  const createChannel = async (name: string, description: string) => {
     try {
-      await AuthService.createChannelAuth(name, description, channelAuthor);
+      const data = await AuthService.createChannelAuth(name, description);
+      console.log(`ответ: ${data}`);
     } catch (e) {
       console.log(e);
     }

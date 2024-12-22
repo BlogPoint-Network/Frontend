@@ -49,7 +49,6 @@ export const EditProfileImage = () => {
           <Image w={300} h={300} radius="md" src={Empty} mb={10} />
           <BlueButton
             onClick={() => {
-              console.log('Открыл');
               open();
             }}
           >

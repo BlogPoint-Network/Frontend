@@ -1,14 +1,24 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useChannel } from '@hooks';
 //import { useNavigate } from 'react-router-dom';
 import { Flex, Group, rem, Text, Textarea, TextInput } from '@mantine/core';
 import { Dropzone, FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { IconCheck, IconPhoto, IconX } from '@tabler/icons-react';
-import { BlueButton, FormBox, Heading1, Heading3, Heading4 } from '@ui';
+import {
+  BlueButton,
+  FormBox,
+  GreyButton,
+  Heading1,
+  Heading3,
+  Heading4,
+} from '@ui';
 //import { useChannel } from '@hooks';
 
 export const CreateChannelForm = () => {
-  //const channel = useChannel();
+  const channel = useChannel();
+  const navigate = useNavigate();
 
   // Состояние иконки
   const [uploadStatus, setUploadStatus] = useState<
@@ -31,7 +41,8 @@ export const CreateChannelForm = () => {
         value && (value.length < 10 || value.length > 500)
           ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
-      image: value => (value ? null : 'Загрузите корректное изображение'),
+      image: value => (value ? null : null),
+      //image: value => (value ? null : 'Загрузите корректное изображение'),
     },
   });
 
@@ -41,7 +52,7 @@ export const CreateChannelForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            console.log(values);
+            channel.createChannel(values.name, values.description).then(() => navigate('/my-channel'));
           })}
         >
           <Flex direction="column" gap="md">
@@ -75,11 +86,7 @@ export const CreateChannelForm = () => {
                 console.log('Изображение отклонено', image);
               }}
               maxSize={200 * 1024 ** 2}
-              accept={[
-                'image/png',
-                'image/jpeg',
-                'image/jpg',
-              ]}
+              accept={['image/png', 'image/jpeg', 'image/jpg']}
               bg="white"
               style={{
                 borderRadius: '20px',
@@ -142,9 +149,24 @@ export const CreateChannelForm = () => {
             </Dropzone>
             {/* Отображение ошибки */}
             {form.errors.image && <Text c="red">{form.errors.image}</Text>}
-            <BlueButton type="submit" mt="sm" w={'fit-content'}>
-              Подтвердить
-            </BlueButton>
+            <Flex
+              mih={50}
+              gap="xs"
+              justify="center"
+              align="center"
+              direction="row"
+            >
+              <GreyButton
+                mt="sm"
+                w={'fit-content'}
+                onClick={() => navigate('/')}
+              >
+                Отменить
+              </GreyButton>
+              <BlueButton type="submit" mt="sm" w={'fit-content'}>
+                Подтвердить
+              </BlueButton>
+            </Flex>
           </Flex>
         </form>
       </Group>

@@ -1,4 +1,5 @@
 import { FC, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IUser } from '@app-types';
 import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -22,6 +23,7 @@ interface IEditProfileInfoProps {
 export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
   const [opened, { open, close }] = useDisclosure(false);
   const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       login: props?.user?.login ?? '',
@@ -46,7 +48,6 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
           onSubmit={form.onSubmit(values => {
             profile?.editProfileInfo(values.login, values.email);
             console.log(values);
-            // profile?.changeProfile(values.login, values.email, values.newPassword);
           })}
         >
           <Flex justify="flex-center" align="center" direction="column">
@@ -93,13 +94,17 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
         <Label title={'Почта'} text={props.user ? props.user?.email : ''} />
       </Grid.Col>
 
-      <Grid.Col span={12}>
-        <Label title={'Другая информация'} text={''} />
-      </Grid.Col>
+      {/*<Grid.Col span={12}>*/}
+      {/*  <Label title={'Другая информация'} text={''} />*/}
+      {/*</Grid.Col>*/}
 
       <Grid.Col span={12}>
         <BlueButton onClick={open}>Изменить</BlueButton>
-        <RedButton>Удалить профиль</RedButton>
+        <RedButton
+          onClick={() => profile?.deleteProfile().then(() => navigate('/'))}
+        >
+          Удалить профиль
+        </RedButton>
       </Grid.Col>
     </>
   );

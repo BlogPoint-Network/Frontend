@@ -3,13 +3,13 @@ import {
   ChannelsSubscribe,
   ForTest,
   Login,
+  MainPage,
   MyChannel,
   MyChannels,
   Profile,
   Register,
 } from '@pages';
 import CreateChannel from '@pages/CreateChannel.tsx';
-import MainPage from '@pages/MainPage.tsx';
 import PopularChannels from '@pages/PopularChannels.tsx';
 import RatingOfChannels from '@pages/RatingOfChannels.tsx';
 import Recommendations from '@pages/Recommendations.tsx';

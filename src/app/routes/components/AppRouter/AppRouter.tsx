@@ -27,11 +27,10 @@ const AppRouter = () => {
       <Route path="/test" element={<ForTest />} />
       <Route path="/create-channel" element={<CreateChannel />} />
       <Route path="/my-channel" element={<MyChannel />} />
-      <Route path="/createChannel" element={<CreateChannel />} />
       <Route path="/mychannels" element={<MyChannels />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
-      <Route path="/popularchannels" element={<PopularChannels />} />
-      <Route path="/ratingofchannels" element={<RatingOfChannels />} />
+      <Route path="/popular-channels" element={<PopularChannels />} />
+      <Route path="/rating-of-channels" element={<RatingOfChannels />} />
       <Route path="/recommendations" element={<Recommendations />} />
       <Route path="/channelsubscribe" element={<ChannelsSubscribe />} />
       <Route path="/create-post" element={<CreatePostForm />} />

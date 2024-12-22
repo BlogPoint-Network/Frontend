@@ -86,7 +86,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       </Modal>
 
       <Grid.Col span={12}>
-        <Label title={'Пароль'} text="" />
+        <Label title={'Пароль'} text="########" />
         <BlueButton mt="16px" onClick={open}>
           Изменить
         </BlueButton>

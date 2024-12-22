@@ -3,7 +3,7 @@ import {
   MainPagePopularChannelsContainer,
   MainPageRecommendationPostsContainer,
 } from '@modules/channel';
-import { Line, LogoMainPage } from '@ui';
+import { LogoMainPage } from '@ui';
 
 export const MainPage = () => {
   return (
@@ -12,7 +12,7 @@ export const MainPage = () => {
         <LogoMainPage />
         <MainPageRecommendationPostsContainer />
       </CommonFrame>
-      <Line h="3px" />
+      {/*<Line h="3px" />*/}
       <CommonFrame>
         <MainPagePopularChannelsContainer />
       </CommonFrame>

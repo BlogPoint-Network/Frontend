@@ -1,7 +1,7 @@
 export interface IChannel {
-  channelId: string;
-  channelAuthor: string;
+  id: string;
+  ownerId: string;
   name: string;
   description: string;
-  subscribes: number;
+  subsCount: number;
 }

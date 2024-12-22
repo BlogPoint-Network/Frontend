@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
 import { Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -12,6 +13,7 @@ import { ProfileContext } from '../../../../app/context';
 
 export const LoginForm = () => {
   const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
 
   const form = useForm({
     mode: 'uncontrolled',
@@ -28,7 +30,9 @@ export const LoginForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            profile?.loginProfile(values.login, values.password);
+            profile?.loginProfile(values.login, values.password).then(() => {
+              navigate('/profile');
+            });
           })}
         >
           <TextInput

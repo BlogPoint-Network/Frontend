@@ -1,27 +1,19 @@
-import { useState } from 'react';
-import { Button, TextInput } from '@mantine/core';
+import { useContext } from 'react';
+import { Button } from '@mantine/core';
+import { ProfileContext } from '../app/context';
 
 export const ForTest = () => {
-  const [currentChannel, setCurrentChannel] = useState('');
-  const [currentUser, setCurrentUser] = useState('');
+  const profile = useContext(ProfileContext);
 
   return (
     <>
-      <TextInput onChange={e => setCurrentChannel(e.currentTarget.value)} />
       <Button
         onClick={() => {
-          console.log(currentChannel);
+          console.log(profile?.infoProfile());
+          console.log(profile?.user);
         }}
       >
         Ввести канал
-      </Button>
-      <TextInput onChange={e => setCurrentUser(e.currentTarget.value)} />
-      <Button
-        onClick={() => {
-          console.log(currentUser);
-        }}
-      >
-        Ввести пользователя
       </Button>
     </>
   );

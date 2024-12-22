@@ -1,4 +1,4 @@
-import { darkBackgroundColor, skyBlueColor } from '@constants';
+import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
 import { Container } from '@mantine/core';
 import RecommendationPost from '@modules/channel/components/RecommendationPost/RecommendationPost.tsx';
@@ -14,16 +14,14 @@ export const MainPageRecommendationPostsContainer = () => {
       <Carousel
         id="recommendationFeed"
         withIndicators
-        slideSize="33.33%"
-        ml="60px"
-        w={{ sm: 'auto', base: '380px' }} // на малых экранах 1 пост
-        slideGap="40px"
+        slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
+        slideGap={{ base: 0, sm: 'md' }}
+        // slideSize="33.33%"
+        // ml="60px"
+        // w={{ sm: 'auto', base: '380px' }} // на малых экранах 1 пост
+        // slideGap="40px"
         loop
         controlSize="50"
-        bd={`3px solid ${darkBackgroundColor}`}
-        style={{
-          borderRadius: '4px', // Скругление для контролов
-        }}
         styles={{
           control: {
             backgroundColor: skyBlueColor,

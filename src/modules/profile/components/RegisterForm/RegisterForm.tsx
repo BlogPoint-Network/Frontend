@@ -41,7 +41,7 @@ export const RegisterForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            console.log(values);
+            console.log(profile);
             profile
               ?.registrationProfile(values.login, values.email, values.password)
               .then(() => navigate('/login'));

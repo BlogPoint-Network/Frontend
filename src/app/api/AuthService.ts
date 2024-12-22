@@ -15,12 +15,15 @@ export class AuthService {
     login: string,
     password: string,
   ): Promise<AxiosResponse<{ user: IUser }>> {
-    console.log('привет');
     return api.post('/register', { login, email, password });
   }
 
   static async logoutUserAuth(): Promise<void> {
     return api.post('/logout');
+  }
+
+  static async deleteUserAuth(): Promise<AxiosResponse<IUser>> {
+    return api.post('/deleteprofile', { token: localStorage.getItem('token') });
   }
 
   static async infoUserAuth(): Promise<AxiosResponse<IUser>> {
@@ -31,7 +34,11 @@ export class AuthService {
     email: string,
     login: string,
   ): Promise<AxiosResponse<{ user: IUser }>> {
-    return api.post('/editprofile', { login, email });
+    return api.post('/editprofile', {
+      login,
+      email,
+      token: localStorage.getItem('token'),
+    });
   }
 
   static async editProfileImgAuth(
@@ -50,9 +57,12 @@ export class AuthService {
   static async createChannelAuth(
     name: string,
     description: string,
-    channelAuthor: string,
   ): Promise<AxiosResponse<{ channel: IChannel }>> {
-    return api.post('/createchannel', { name, description, channelAuthor });
+    return api.post('/createchannel', {
+      name,
+      description,
+      token: localStorage.getItem('token'),
+    });
   }
 
   static async editChannelAuth(
