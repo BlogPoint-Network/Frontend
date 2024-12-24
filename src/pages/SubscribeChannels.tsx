@@ -1,0 +1,36 @@
+import { useEffect, useState } from 'react';
+import { IChannel } from '@app-types';
+//import { useChannel } from '@hooks';
+import { Flex } from '@mantine/core';
+import { ChannelsList } from '@modules/channel';
+import { CommonFrame, Heading1 } from '@ui';
+
+export const SubscribeChannels = () => {
+  //const channelManager = useChannel();
+  const channelsExample: IChannel[] = [
+    {
+      id: 0,
+      name: 'Канал о людях',
+      description: 'Рассказываем про психологию людей',
+      ownerId: 0,
+      subsCount: 24,
+    },
+  ];
+  const [channels, setChannels] = useState<IChannel[]>(channelsExample);
+
+  // useEffect(() => {
+  //   const test = async () => {
+  //     setChannels((await channelManager.getSubscription()) ?? channelsExample);
+  //   };
+  //   test();
+  // }, []);
+
+  return (
+    <CommonFrame>
+      <Heading1 ta="center">Мои подписки</Heading1>
+      <Flex id="ChannelsFeed" m="20px 0px" gap="30px" direction="column">
+        <ChannelsList channels={channels} />
+      </Flex>
+    </CommonFrame>
+  );
+};

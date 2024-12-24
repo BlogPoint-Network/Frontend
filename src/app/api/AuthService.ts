@@ -57,10 +57,26 @@ export class AuthService {
   static async createChannelAuth(
     name: string,
     description: string,
-  ): Promise<AxiosResponse<{ channel: IChannel }>> {
+  ): Promise<AxiosResponse<IChannel>> {
     return api.post('/createchannel', {
       name,
       description,
+      token: localStorage.getItem('token'),
+    });
+  }
+
+  static async getChannelAuth(): Promise<AxiosResponse<IChannel>> {
+    return api.post(`/getChannel`, { token: localStorage.getItem('token') });
+  }
+
+  static async getUserChannelsAuth(): Promise<AxiosResponse<IChannel[]>> {
+    return api.post('/getuserchannels', {
+      token: localStorage.getItem('token'),
+    });
+  }
+
+  static async getSubscriptionAuth(): Promise<AxiosResponse<IChannel[]>> {
+    return api.post('/getusersubscriptions', {
       token: localStorage.getItem('token'),
     });
   }

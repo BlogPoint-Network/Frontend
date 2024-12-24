@@ -52,7 +52,11 @@ export const CreateChannelForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            channel.createChannel(values.name, values.description).then(() => navigate('/my-channel'));
+            channel
+              .createChannel(values.name, values.description)
+              .then(index => {
+                navigate(`/channel/${index}`);
+              });
           })}
         >
           <Flex direction="column" gap="md">
@@ -159,7 +163,7 @@ export const CreateChannelForm = () => {
               <GreyButton
                 mt="sm"
                 w={'fit-content'}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/user-channels')}
               >
                 Отменить
               </GreyButton>

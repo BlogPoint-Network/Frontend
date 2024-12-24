@@ -5,11 +5,10 @@ import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 
 interface IChannelMyChannelDescriptionProps {
-  id: number;
+  id: string;
   channelName: string;
   description: string;
-  subscriberNumber: number;
-  imageURL: string;
+  subsCount: number;
 }
 
 export const ChannelPageChannelDescription: FC<
@@ -49,7 +48,7 @@ export const ChannelPageChannelDescription: FC<
               border: '1px solid black',
               borderRadius: '30px',
             }}
-            src={props.imageURL}
+            src={""}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок
@@ -71,7 +70,7 @@ export const ChannelPageChannelDescription: FC<
               >
                 <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
                 <Text size="1.2rem">
-                  <i>{addSpacesToNumber(props.subscriberNumber)}</i>
+                  <i>{addSpacesToNumber(props.subsCount)}</i>
                 </Text>
               </Flex>
             </Flex>
@@ -80,7 +79,7 @@ export const ChannelPageChannelDescription: FC<
           <ChannelPageChannelDescriptionButtons
             channelName={props.channelName}
             description={props.description}
-            subscriberNumber={props.subscriberNumber}
+            subscriberNumber={props.subsCount}
           />
         </Flex>
       </Flex>

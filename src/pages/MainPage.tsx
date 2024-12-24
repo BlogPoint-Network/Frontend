@@ -1,9 +1,6 @@
-import {
-  CommonFrame,
-  MainPagePopularChannelsContainer,
-  MainPageRecommendationPostsContainer,
-} from '@modules/channel';
-import { LogoMainPage } from '@ui';
+import { MainPagePopularChannelsContainer } from '@modules/channel';
+import { MainPageRecommendationPostsContainer } from '@modules/mainpage/MainPageRecommendationPostsContainer/MainPageRecommendationPostsContainer.tsx';
+import { CommonFrame, LogoMainPage } from '@ui';
 
 export const MainPage = () => {
   return (

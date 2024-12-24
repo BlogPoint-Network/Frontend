@@ -1,11 +1,11 @@
 import { Unauthorized } from '@components/Other/Unauthorized.tsx';
 import {
-  ChannelsSubscribe,
+  SubscribeChannels,
   ForTest,
   Login,
   MainPage,
-  MyChannel,
-  MyChannels,
+  ChannelPage,
+  UserChannels,
   Profile,
   Register,
 } from '@pages';
@@ -16,9 +16,9 @@ import Recommendations from '@pages/Recommendations.tsx';
 
 export const privateRoutes = [
   { path: '/profile', component: Profile, exact: true },
-  { path: '/channels-subscribe', component: ChannelsSubscribe, exact: true },
-  { path: '/MyChannels', component: MyChannels, exact: true },
-  { path: '/MyChannel', component: MyChannel, exact: true },
+  { path: '/channels-subscribe', component: SubscribeChannels, exact: true },
+  { path: '/UserChannels', component: UserChannels, exact: true },
+  { path: '/ChannelPage', component: ChannelPage, exact: true },
   { path: '/createChannel', component: CreateChannel, exact: true },
   { path: '/Unauthorised', component: Unauthorized, exact: true },
 ];

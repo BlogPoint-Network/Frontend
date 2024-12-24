@@ -1,19 +1,16 @@
-import { useContext } from 'react';
+import { useChannel } from '@hooks';
 import { Button } from '@mantine/core';
-import { ProfileContext } from '../app/context';
 
 export const ForTest = () => {
-  const profile = useContext(ProfileContext);
-
+  const channel = useChannel();
   return (
     <>
       <Button
-        onClick={() => {
-          console.log(profile?.infoProfile());
-          console.log(profile?.user);
-        }}
+        onClick={() =>
+          channel.getUserChannels().then(value => console.log(value))
+        }
       >
-        Ввести канал
+        Получить данные канала
       </Button>
     </>
   );

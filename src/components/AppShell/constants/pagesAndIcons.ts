@@ -12,8 +12,8 @@ import {
 export const pages = [
   { label: 'Главная', icon: IconHome, href: '../' },
   { label: 'Профиль', icon: IconUser, href: '../Profile' },
-  { label: 'Подписки', icon: IconUserHeart, href: '../ChannelSubscribe' },
-  { label: 'Мои каналы', icon: IconUsersGroup, href: '../MyChannels' },
+  { label: 'Подписки', icon: IconUserHeart, href: '../channel-subscribe' },
+  { label: 'Мои каналы', icon: IconUsersGroup, href: '../user-channels' },
   {
     label: 'Рекомендации',
     icon: IconChartBarPopular,

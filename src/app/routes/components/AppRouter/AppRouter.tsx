@@ -3,14 +3,13 @@ import { Unauthorized } from '@components/Other/Unauthorized.tsx';
 import { CreatePostForm } from '@modules/posts/components/CreatePostForm/CreatePostForm.tsx';
 import { MyChannelsExample } from '@modules/posts/components/MyChannelsExample.tsx';
 import {
-  ChannelsSubscribe,
+  ChannelPage,
   ForTest,
   Login,
   MainPage,
-  MyChannel,
-  MyChannels,
   Profile,
-  Register,
+  Register, SubscribeChannels,
+  UserChannels,
 } from '@pages';
 import CreateChannel from '@pages/CreateChannel.tsx';
 import PopularChannels from '@pages/PopularChannels.tsx';
@@ -26,13 +25,13 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/test" element={<ForTest />} />
       <Route path="/create-channel" element={<CreateChannel />} />
-      <Route path="/my-channel" element={<MyChannel />} />
-      <Route path="/mychannels" element={<MyChannels />} />
+      <Route path="/channels/:id" element={<ChannelPage />} />
+      <Route path="/user-channels" element={<UserChannels />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="/popular-channels" element={<PopularChannels />} />
       <Route path="/rating-of-channels" element={<RatingOfChannels />} />
       <Route path="/recommendations" element={<Recommendations />} />
-      <Route path="/channelsubscribe" element={<ChannelsSubscribe />} />
+      <Route path="/channel-subscribe" element={<SubscribeChannels />} />
       <Route path="/create-post" element={<CreatePostForm />} />
       <Route path="/my-channel-example" element={<MyChannelsExample />} />
     </Routes>
