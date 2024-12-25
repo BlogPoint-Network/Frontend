@@ -1,4 +1,3 @@
-export * from './ChannelPage.tsx';
 export * from './ForTest';
 export * from './Login';
 export * from './MainPage.tsx';

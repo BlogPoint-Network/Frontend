@@ -1,14 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import { Unauthorized } from '@components/Other/Unauthorized.tsx';
+import { ChannelItemPage } from '@modules/channel';
 import { CreatePostForm } from '@modules/posts/components/CreatePostForm/CreatePostForm.tsx';
 import { MyChannelsExample } from '@modules/posts/components/MyChannelsExample.tsx';
 import {
-  ChannelPage,
   ForTest,
   Login,
   MainPage,
   Profile,
-  Register, SubscribeChannels,
+  Register,
+  SubscribeChannels,
   UserChannels,
 } from '@pages';
 import CreateChannel from '@pages/CreateChannel.tsx';
@@ -25,7 +26,7 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/test" element={<ForTest />} />
       <Route path="/create-channel" element={<CreateChannel />} />
-      <Route path="/channels/:id" element={<ChannelPage />} />
+      <Route path="/channel/:id" element={<ChannelItemPage />} />
       <Route path="/user-channels" element={<UserChannels />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="/popular-channels" element={<PopularChannels />} />

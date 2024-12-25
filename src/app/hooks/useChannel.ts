@@ -10,10 +10,18 @@ export const useChannel = () => {
     }
   };
 
-  const getChannel = async () => {
+  const getChannel = async (id: number) => {
     try {
-      const response = await AuthService.getChannelAuth();
+      const response = await AuthService.getChannelAuth(id);
       return response.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteChannel = async (id: string) => {
+    try {
+      await AuthService.deleteChannelAuth(id);
     } catch (e) {
       console.log(e);
     }
@@ -31,6 +39,8 @@ export const useChannel = () => {
   const getUserChannels = async () => {
     try {
       const response = await AuthService.getUserChannelsAuth();
+      console.log(response);
+      console.log(response.data);
       return response.data;
     } catch (e) {
       console.log(e);
@@ -42,5 +52,6 @@ export const useChannel = () => {
     getChannel,
     getSubscription,
     getUserChannels,
+    deleteChannel,
   };
 };

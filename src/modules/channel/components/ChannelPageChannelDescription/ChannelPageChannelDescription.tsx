@@ -1,19 +1,11 @@
 import { FC } from 'react';
+import { IChannel } from '@app-types';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { ChannelPageChannelDescriptionButtons } from '@modules/channel/components/ChannelPageChannelDescription/ChannelPageChannelDescriptionButtons.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 
-interface IChannelMyChannelDescriptionProps {
-  id: string;
-  channelName: string;
-  description: string;
-  subsCount: number;
-}
-
-export const ChannelPageChannelDescription: FC<
-  IChannelMyChannelDescriptionProps
-> = props => {
+export const ChannelPageChannelDescription: FC<IChannel> = props => {
   return (
     <Card
       radius="md"
@@ -48,7 +40,7 @@ export const ChannelPageChannelDescription: FC<
               border: '1px solid black',
               borderRadius: '30px',
             }}
-            src={""}
+            src={''}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок
@@ -63,7 +55,7 @@ export const ChannelPageChannelDescription: FC<
               justify="space-between"
               gap="20px"
             >
-              <Heading2 lineClamp={1}>{props.channelName}</Heading2>
+              <Heading2 lineClamp={1}>{props.name}</Heading2>
               <Flex // ИконкаПодписчик|Число
                 gap="10px"
                 align="center"
@@ -77,7 +69,7 @@ export const ChannelPageChannelDescription: FC<
             <Heading4 lineClamp={4}>{props.description}</Heading4>
           </Flex>
           <ChannelPageChannelDescriptionButtons
-            channelName={props.channelName}
+            channelName={props.name}
             description={props.description}
             subscriberNumber={props.subsCount}
           />

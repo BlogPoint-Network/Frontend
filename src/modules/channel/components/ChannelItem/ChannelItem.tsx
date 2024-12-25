@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+import { IChannel } from '@app-types';
+import { useChannel } from '@hooks';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
-import { BlueButton, Heading2, Heading4 } from '@ui';
-import { IChannel } from '@app-types';
+import { BlueButton, Heading2, Heading4, RedButton } from '@ui';
 
 export const ChannelItem = (props: IChannel) => {
+  const channelManager = useChannel();
+  const navigate = useNavigate();
   return (
     <Card
       radius="md"
@@ -72,7 +76,14 @@ export const ChannelItem = (props: IChannel) => {
                 <i>{addSpacesToNumber(props.subsCount)}</i>
               </Text>
             </Flex>
-            <BlueButton>Перейти</BlueButton>
+            <BlueButton onClick={() => navigate(`/channel/${props.id + ''}`)}>
+              Перейти
+            </BlueButton>
+            <RedButton
+              onClick={() => channelManager.deleteChannel(props.id + '')}
+            >
+              Удалить канал
+            </RedButton>
           </Flex>
         </Flex>
       </Flex>

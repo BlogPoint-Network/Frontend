@@ -55,7 +55,7 @@ export const CreateChannelForm = () => {
             channel
               .createChannel(values.name, values.description)
               .then(index => {
-                navigate(`/channel/${index}`);
+                navigate(`/channel/${index + ''}`);
               });
           })}
         >
