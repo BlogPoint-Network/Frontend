@@ -10,3 +10,4 @@ export * from './Text/Heading1.tsx';
 export * from './Text/Heading2.tsx';
 export * from './Text/Heading3.tsx';
 export * from './Text/Heading4.tsx';
+export * from './Dropzone/FormDropzone.tsx';

@@ -3,20 +3,12 @@ import { IChannel } from '@app-types';
 //import { useChannel } from '@hooks';
 import { Flex } from '@mantine/core';
 import { ChannelsList } from '@modules/channel';
+import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
 import { CommonFrame, Heading1 } from '@ui';
 
 export const SubscribeChannels = () => {
   //const channelManager = useChannel();
-  const channelsExample: IChannel[] = [
-    {
-      id: 0,
-      name: 'Канал о людях',
-      description: 'Рассказываем про психологию людей',
-      ownerId: 0,
-      subsCount: 24,
-    },
-  ];
-  const [channels, setChannels] = useState<IChannel[]>(channelsExample);
+  const [channels, setChannels] = useState<IChannel[]>(testChannelProps);
 
   // useEffect(() => {
   //   const test = async () => {

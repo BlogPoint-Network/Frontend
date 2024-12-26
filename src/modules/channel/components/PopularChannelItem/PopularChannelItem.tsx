@@ -4,9 +4,10 @@ import { BlueButton, Heading2, Heading4 } from '@ui';
 
 interface PopularChannelItemProps {
   id: number;
-  channelName: string;
+  ownerId: number;
+  name: string;
   description: string;
-  subscriberNumber: number;
+  subsCount: number;
   imageURL?: string | undefined;
 }
 
@@ -60,7 +61,7 @@ function PopularChannelItem(props: PopularChannelItemProps) {
             direction="column"
             gap="10px"
           >
-            <Heading2 lineClamp={1}>{props.channelName}</Heading2>
+            <Heading2 lineClamp={1}>{props.name}</Heading2>
 
             <Heading4 lineClamp={4} fw="bold">
               {props.description}
@@ -75,7 +76,7 @@ function PopularChannelItem(props: PopularChannelItemProps) {
             >
               <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
               <Text size="1.2rem">
-                <i>{addSpacesToNumber(props.subscriberNumber)}</i>
+                <i>{addSpacesToNumber(props.subsCount)}</i>
               </Text>
             </Flex>
             <BlueButton>Перейти</BlueButton>

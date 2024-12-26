@@ -39,10 +39,9 @@ export const ChannelItem = (props: IChannel) => {
               border: '1px solid black',
             }}
             src={
-              '../../../public/assets/images/icons/default_post.jpg'
-              // props.imageURL
-              //   ? props.imageURL
-              //   : '../../../public/assets/images/icons/default_post.jpg'
+              props.imageURL
+                ? props.imageURL
+                : '../../../public/assets/images/icons/default_post.jpg'
             }
           ></Image>
         </div>

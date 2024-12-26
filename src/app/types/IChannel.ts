@@ -4,4 +4,5 @@ export interface IChannel {
   description: string;
   ownerId: number;
   subsCount: number;
+  imageURL?: string | null;
 }

@@ -16,6 +16,7 @@ export const ChannelsList: FC<ChannelsListProps> = ({ channels }) => {
           name={channel.name}
           description={channel.description}
           subsCount={channel.subsCount}
+          imageURL={channel.imageURL}
         />
       ))}
     </>
