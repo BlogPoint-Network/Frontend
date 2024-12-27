@@ -77,12 +77,19 @@ export const ChannelPageChannelDescriptionButtons: FC<
 
       <Flex justify="space-between">
         <GreyButton onClick={open}>Подробнее</GreyButton>
-        {isAdmin && (
+        {isAdmin ? (
           <BlueButton
             onClick={handleSubscribe}
-            style={{ minWidth: '160px', ...buttonStyle }} // Объединение стилей
+            style={{ minWidth: '160px', ...buttonStyle }}
           >
             {isSubscribed ? 'Отписаться' : 'Подписаться'}
+          </BlueButton>
+        ) : (
+          <BlueButton
+            onClick={handleSubscribe}
+            style={{ minWidth: '160px', ...buttonStyle }}
+          >
+            Редактировать
           </BlueButton>
         )}
       </Flex>

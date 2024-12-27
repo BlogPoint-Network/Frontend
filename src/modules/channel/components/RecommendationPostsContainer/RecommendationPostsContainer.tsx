@@ -7,13 +7,11 @@ export const RecommendationPostsContainer = () => {
   return (
     <Carousel
       id="recommendationFeed"
-      withIndicators
-      slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
+      slideSize={{ md: '33%', base: '100%' }}
+      w={{ md: '1200px', base: '380px' }} // выравнивание по центру
       slideGap={{ base: 0, sm: 'md' }}
-      // slideSize="33.33%"
-      // ml="60px"
-      // w={{ sm: 'auto', base: '380px' }} // на малых экранах 1 пост
-      // slideGap="40px"
+      ml={{ xl: '-130px', lg: '0px', md: '60px', sm: '0px', base: '0px' }}
+      withIndicators
       loop
       controlSize="50"
       styles={{

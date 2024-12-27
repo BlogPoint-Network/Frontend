@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Flex, Group, rem, Text } from '@mantine/core';
 import {
-  Dropzone,
+  Dropzone as MantineDropzone,
   DropzoneProps,
   FileRejection,
   FileWithPath,
@@ -20,7 +20,7 @@ interface FormDropzoneProps extends Omit<DropzoneProps, 'onDrop' | 'onReject'> {
   onRejectFile: () => void;
 }
 
-export const FormDropzone: FC<FormDropzoneProps> = ({
+export const Dropzone: FC<FormDropzoneProps> = ({
   form,
   onDropFile,
   onRejectFile,
@@ -49,7 +49,7 @@ export const FormDropzone: FC<FormDropzoneProps> = ({
 
   return (
     <>
-      <Dropzone
+      <MantineDropzone
         onDrop={handleDrop}
         onReject={handleReject}
         maxSize={200 * 1024}
@@ -113,7 +113,7 @@ export const FormDropzone: FC<FormDropzoneProps> = ({
             </div>
           </Flex>
         </Group>
-      </Dropzone>
+      </MantineDropzone>
     </>
   );
 };

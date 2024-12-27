@@ -7,7 +7,7 @@ import { useForm } from '@mantine/form';
 import {
   BlueButton,
   FormBox,
-  FormDropzone,
+  Dropzone,
   GreyButton,
   Heading1,
   Heading4,
@@ -76,7 +76,7 @@ export const CreateChannelForm = () => {
               {...form.getInputProps('description')}
             />
             <Heading4>Изображение канала</Heading4>
-            <FormDropzone
+            <Dropzone
               form={form}
               onDropFile={handleDropFile}
               onRejectFile={handleRejectFile}

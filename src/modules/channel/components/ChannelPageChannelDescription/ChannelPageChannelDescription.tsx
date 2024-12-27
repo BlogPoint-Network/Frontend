@@ -5,7 +5,6 @@ import { ChannelPageChannelDescriptionButtons } from '@modules/channel/component
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 
-
 export const ChannelPageChannelDescription: FC<IChannel> = props => {
   return (
     <Card
@@ -16,8 +15,9 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
       bd="1px solid black"
       id={'PopularChannelItem' + props.id}
       style={{
-        minWidth: '800px',
-        // maxWidth: '1200px',
+        minWidth: '700px',
+        maxWidth: '900px',
+        // width: '100%', // Чтобы она могла растягиваться до maxWidth
         display: 'flex',
         alignItems: 'start',
       }}
@@ -26,7 +26,7 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
         w="100%"
         direction="row"
         gap="40px"
-        justify="space-between"
+        // justify="space-between"
         h="100%"
       >
         <div style={{ width: '280px' }}>
@@ -41,11 +41,12 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
               border: '1px solid black',
               borderRadius: '30px',
             }}
-            src={''}
+            src={props.imageURL}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок
           direction="column"
+          w="100%"
           justify="space-between"
         >
           <Flex // Заглавие|описание
@@ -56,8 +57,7 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
               justify="space-between"
               gap="20px"
             >
-              <Heading2 lineClamp={1}>Название</Heading2>
-              {/*<Heading2 lineClamp={1}>{props.name}</Heading2>*/}
+              <Heading2 lineClamp={1}>{props.name}</Heading2>
               <Flex // ИконкаПодписчик|Число
                 gap="10px"
                 align="center"
@@ -68,8 +68,7 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
                 </Text>
               </Flex>
             </Flex>
-            <Heading4 lineClamp={4}>Просто описание канала</Heading4>
-            {/*<Heading4 lineClamp={4}>{props.description}</Heading4>*/}
+            <Heading4 lineClamp={4}>{props.description}</Heading4>
           </Flex>
           <ChannelPageChannelDescriptionButtons
             channelName={props.name}

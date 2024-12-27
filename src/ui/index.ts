@@ -2,7 +2,7 @@ export * from './Button/BlueButton.tsx';
 export * from './Button/GreyButton.tsx';
 export * from './Button/RedButton.tsx';
 export * from '@ui/CommonFrame/CommonFrame.tsx';
-export * from './Dropzone/FormDropzone.tsx';
+export * from './Dropzone/Dropzone.tsx';
 export * from './FormBox/FormBox.tsx';
 export * from './Label/Label';
 export * from './Line/Line';
