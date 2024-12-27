@@ -1,11 +1,18 @@
 import { FC, useState } from 'react';
 import { Flex, Group, rem, Text } from '@mantine/core';
-import { Dropzone, DropzoneProps } from '@mantine/dropzone';
+import {
+  Dropzone,
+  DropzoneProps,
+  FileRejection,
+  FileWithPath,
+  IMAGE_MIME_TYPE,
+} from '@mantine/dropzone';
 import { IconCheck, IconPhoto, IconX } from '@tabler/icons-react';
 import { Heading3 } from '@ui/Text/Heading3.tsx';
 
 interface FormType {
-  errors: Record<string, string | undefined>; // Ошибки формы с неизвестными полями
+  // чтобы не было ошибки типизации
+  errors: Record<string, React.ReactNode | undefined>; // Поддержка типов useForm
 }
 interface FormDropzoneProps extends Omit<DropzoneProps, 'onDrop' | 'onReject'> {
   form: FormType;
@@ -23,19 +30,21 @@ export const FormDropzone: FC<FormDropzoneProps> = ({
     'idle' | 'accept' | 'reject' | 'success'
   >('idle');
 
-  const handleDrop = (files: File[]) => {
-    const [file] = files;
-    onDropFile(file);
+  const handleDrop = (files: FileWithPath[]) => {
+    const [file] = files; // Берем первый файл из массива
+    onDropFile(file); // Вызываем обработчик с первым файлом
     setUploadStatus('success');
-    console.log('Изображение загружено', files);
+    console.log('Изображение загружено', file);
   };
 
-  const handleReject = () => {
+  const handleReject = (fileRejections: FileRejection[]) => {
     onRejectFile();
     setUploadStatus('reject');
-    form.errors.image =
-      'Файл слишком большой или имеет неподдерживаемый формат';
-    console.log('Изображение отклонено');
+    if (fileRejections.length > 0) {
+      form.errors.image =
+        'Файл слишком большой или имеет неподдерживаемый формат';
+    }
+    console.log('Изображение отклонено', fileRejections);
   };
 
   return (
@@ -43,11 +52,12 @@ export const FormDropzone: FC<FormDropzoneProps> = ({
       <Dropzone
         onDrop={handleDrop}
         onReject={handleReject}
-        maxSize={200 * 1024 ** 2}
-        accept={['image/png', 'image/jpeg', 'image/jpg']}
+        maxSize={200 * 1024}
+        accept={IMAGE_MIME_TYPE}
         bg="white"
         style={{
           borderRadius: '20px',
+          // граница если изображение некорректно
           border: form.errors.image
             ? '1.5px solid var(--mantine-color-red-6)'
             : '',

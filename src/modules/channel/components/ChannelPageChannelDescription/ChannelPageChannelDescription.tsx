@@ -5,6 +5,7 @@ import { ChannelPageChannelDescriptionButtons } from '@modules/channel/component
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 
+
 export const ChannelPageChannelDescription: FC<IChannel> = props => {
   return (
     <Card
@@ -30,12 +31,12 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
       >
         <div style={{ width: '280px' }}>
           <Image
-            // minWidth: '140px',  не работает
             h="100%"
             w="auto"
             ml="auto"
             mr="auto"
             style={{
+              // minWidth: '140px', // не работает
               maxWidth: '280px',
               border: '1px solid black',
               borderRadius: '30px',
@@ -55,7 +56,8 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
               justify="space-between"
               gap="20px"
             >
-              <Heading2 lineClamp={1}>{props.name}</Heading2>
+              <Heading2 lineClamp={1}>Название</Heading2>
+              {/*<Heading2 lineClamp={1}>{props.name}</Heading2>*/}
               <Flex // ИконкаПодписчик|Число
                 gap="10px"
                 align="center"
@@ -66,7 +68,8 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
                 </Text>
               </Flex>
             </Flex>
-            <Heading4 lineClamp={4}>{props.description}</Heading4>
+            <Heading4 lineClamp={4}>Просто описание канала</Heading4>
+            {/*<Heading4 lineClamp={4}>{props.description}</Heading4>*/}
           </Flex>
           <ChannelPageChannelDescriptionButtons
             channelName={props.name}

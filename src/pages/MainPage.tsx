@@ -9,7 +9,9 @@ export const MainPage = () => {
       <CommonFrame>
         <LogoMainPage />
         <Container id="popularChannelsContainer">
-          <Heading1 ta="center">Популярные каналы</Heading1>
+          <Heading1 ta="center" mb="40px">
+            Популярные каналы
+          </Heading1>
           <RecommendationPostsContainer />
         </Container>
         <Container id="RecommendationPostsContainer" mb="40px">

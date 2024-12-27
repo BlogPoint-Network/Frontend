@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Image } from '@mantine/core';
 
 // не будет работать для видео с устройства
@@ -6,16 +7,22 @@ interface PostMediaProps {
   id: string; // так как id в виде {Post_string}{Post_number}-{mediaKey}
   mediaType: string;
   mediaURL: string;
+  [key: string]: unknown; // Позволяет любые дополнительные пропсы
 }
 
 // НУЖНА ПРОВЕРКА URL?
-function PostMedia({ id, mediaURL, mediaType }: PostMediaProps) {
+export const PostMedia: FC<PostMediaProps> = ({
+  id,
+  mediaURL,
+  mediaType,
+  ...props
+}) => {
   // для хранения элемента
   let mediaContent;
   const mediaProps = {
-    h: '200px',
     bd: '1px solid black',
     p: '-20px',
+    ...props,
   };
   console.log({ mediaURL });
 
@@ -45,14 +52,14 @@ function PostMedia({ id, mediaURL, mediaType }: PostMediaProps) {
     default:
       mediaContent = (
         <Image
+          {...mediaProps}
           src="../../../public/assets/images/icons/default_post.jpg"
-          height="160"
         />
       );
       break;
   }
   return mediaContent;
-}
+};
 
 // Функция для получения videoId, YouTube/RuTube/Vimeo
 function getThumbnailUrl(url: string): string | null {
@@ -74,5 +81,3 @@ function getThumbnailUrl(url: string): string | null {
   }
   return null; // Неподдерживаемая платформа
 }
-
-export default PostMedia;

@@ -9,16 +9,31 @@ interface ChannelsListProps {
 export const ChannelsList: FC<ChannelsListProps> = ({ channels }) => {
   return (
     <>
-      {channels.map(channel => (
-        <ChannelItem
-          id={channel.id}
-          ownerId={channel.ownerId}
-          name={channel.name}
-          description={channel.description}
-          subsCount={channel.subsCount}
-          imageURL={channel.imageURL}
-        />
-      ))}
+      {channels.map(
+        channel => (
+          // isSubscribeButton ? (
+          <ChannelItem
+            // если isSubscribeButton == true
+            id={channel.id}
+            ownerId={channel.ownerId}
+            name={channel.name}
+            description={channel.description}
+            subsCount={channel.subsCount}
+            imageURL={channel.imageURL}
+          />
+        ),
+        // ) : (
+        //   // если isSubscribeButton == false
+        //   <PopularChannelItem
+        //     id={channel.id}
+        //     ownerId={channel.ownerId}
+        //     name={channel.name}
+        //     description={channel.description}
+        //     subsCount={channel.subsCount}
+        //     imageURL={channel.imageURL}
+        //   />
+        // ),
+      )}
     </>
   );
 };

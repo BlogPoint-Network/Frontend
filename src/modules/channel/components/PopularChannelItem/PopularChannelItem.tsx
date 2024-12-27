@@ -8,7 +8,7 @@ interface PopularChannelItemProps {
   name: string;
   description: string;
   subsCount: number;
-  imageURL?: string | undefined;
+  imageURL?: string | null;
 }
 
 function PopularChannelItem(props: PopularChannelItemProps) {

@@ -10,9 +10,7 @@ interface ILabelProps {
 export const Label: FC<ILabelProps> = ({ title, text }) => {
   return (
     <Box w={600}>
-      <Heading4 mb='5px'>
-        {title}
-      </Heading4>
+      <Heading4 mb="5px">{title}</Heading4>
       <div
         style={{
           border: 'solid 1px black',

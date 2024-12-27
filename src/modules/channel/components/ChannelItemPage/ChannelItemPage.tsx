@@ -2,8 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IChannel } from '@app-types';
 import { useChannel } from '@hooks';
-import { CommonFrame } from '@ui';
 import { ChannelPageChannelDescription } from '@modules/channel';
+import { testChannelProps } from '@modules/channel/constants/testChannelProps.ts';
+import { CommonFrame } from '@ui';
 
 export const ChannelItemPage: FC = () => {
   const [channel, setChannel] = useState<IChannel | null>(null);
@@ -20,11 +21,17 @@ export const ChannelItemPage: FC = () => {
   return (
     <CommonFrame>
       <ChannelPageChannelDescription
-        id={channel?.id ?? 0}
-        name={channel?.name ?? ''}
-        description={channel?.description ?? ''}
-        subsCount={channel?.subsCount ?? 0}
-        ownerId={0}
+        // id={channel?.id ?? 0}
+        // name={channel?.name ?? ''}
+        // description={channel?.description ?? ''}
+        // subsCount={channel?.subsCount ?? 0}
+        // ownerId={0}
+        id={testChannelProps.id}
+        name={testChannelProps.name}
+        description={testChannelProps.description}
+        subsCount={testChannelProps.subsCount}
+        ownerId={testChannelProps.ownerId}
+        imageURL={testChannelProps.imageURL}
       />
     </CommonFrame>
   );

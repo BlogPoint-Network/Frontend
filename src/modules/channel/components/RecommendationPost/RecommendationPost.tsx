@@ -1,7 +1,6 @@
 import { darkBackgroundColor } from '@constants';
 import { Card, Flex } from '@mantine/core';
-import PostMedia from '@modules/channel/components/PostMedia/PostMedia.tsx';
-import { BlueButton, Heading2, Heading3, Heading4 } from '@ui';
+import { BlueButton, Heading2, Heading3, Heading4, PostMedia } from '@ui';
 
 interface RecommendationPostProps {
   id: number;
@@ -47,6 +46,7 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
             {/*проверка на пустые поля*/}
             {props.mediaType && props.mediaURL ? (
               <PostMedia
+                h="200px" // тут все работает
                 // уникальный ключ для каждого медиа
                 id={`RecommendationPost${props.id}Media`}
                 // если на этом шаге, значит массивы уже не пустые

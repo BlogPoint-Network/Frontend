@@ -38,8 +38,8 @@ export const CreateChannelForm = () => {
   });
 
   // для DropZone, иначе придется делать с провайдером для формы
-  const handleDropFile = (file: File) => {
-    form.setFieldValue('image', file);
+  const handleDropFile = (image: File) => {
+    form.setFieldValue('image', image);
   };
   const handleRejectFile = () => {
     form.setFieldValue('image', null);

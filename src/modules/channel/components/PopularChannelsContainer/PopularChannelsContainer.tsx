@@ -1,6 +1,6 @@
-import { ChannelsList } from '@modules/channel';
-import { popularChannels } from '@modules/channel/constants/popularChannelsStoppers.ts';
 import { Flex } from '@mantine/core';
+import { PopularChannelsList } from '@modules/channel/components/PopularChannelsList/PopularChannelsList.tsx';
+import { popularChannels } from '@modules/channel/constants/popularChannelsStoppers.ts';
 
 export const PopularChannelsContainer = () => {
   return (
@@ -12,7 +12,7 @@ export const PopularChannelsContainer = () => {
       direction="column"
       w="100%"
     >
-      <ChannelsList channels={popularChannels} />
+      <PopularChannelsList channels={popularChannels} />
     </Flex>
   );
 };
