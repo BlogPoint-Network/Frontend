@@ -41,7 +41,7 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
               border: '1px solid black',
               borderRadius: '30px',
             }}
-            src={props.imageURL}
+            src={''}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок

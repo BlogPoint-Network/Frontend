@@ -8,7 +8,7 @@ import {
   IMAGE_MIME_TYPE,
 } from '@mantine/dropzone';
 import { IconCheck, IconPhoto, IconX } from '@tabler/icons-react';
-import { Heading3 } from '@ui/Text/Heading3.tsx';
+import { Heading3 } from '@ui/Heading/Heading3.tsx';
 
 interface FormType {
   // чтобы не было ошибки типизации

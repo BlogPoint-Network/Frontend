@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Flex } from '@mantine/core';
 import { BlueButton, FormBox } from '@ui';
-import { Heading1 } from '@ui/Text/Heading1.tsx';
+import { Heading1 } from '@ui/Heading/Heading1.tsx';
 
 export const Unauthorized = () => {
   const navigate = useNavigate();

@@ -65,8 +65,10 @@ export class AuthService {
     });
   }
 
-  static async getChannelAuth(id: number): Promise<AxiosResponse<IChannel>> {
-    return api.post(`/getChannel`, { id });
+  static async getChannelAuth(
+    channelId: number,
+  ): Promise<AxiosResponse<IChannel>> {
+    return api.post(`/getChannel`, { channelId });
   }
 
   static async getUserChannelsAuth(): Promise<AxiosResponse<IChannel[]>> {
@@ -102,15 +104,13 @@ export class AuthService {
     channelId: string,
     title: string,
     content: string,
-    author: string,
     // images: Array<string[]>,
   ): Promise<AxiosResponse<{ post: IPost }>> {
     return api.post('/createpost', {
       channelId,
       title,
       content,
-      author,
-      // images,
+      token: localStorage.getItem('token'),
     });
   }
 
@@ -128,5 +128,16 @@ export class AuthService {
     id: string,
   ): Promise<AxiosResponse<{ post: IPost }>> {
     return api.post('/deletepost', { channelId, id });
+  }
+
+  static async getPosts(
+    channelId: number,
+    page: number,
+  ): Promise<AxiosResponse<IPost[]>> {
+    return api.post(`/getposts/?channelId=${channelId}&page=${page}`);
+  }
+
+  static async getPost(postId: number): Promise<AxiosResponse<IPost>> {
+    return api.post(`/getpost/${postId}`);
   }
 }

@@ -39,8 +39,6 @@ export const useChannel = () => {
   const getUserChannels = async () => {
     try {
       const response = await AuthService.getUserChannelsAuth();
-      console.log(response);
-      console.log(response.data);
       return response.data;
     } catch (e) {
       console.log(e);
