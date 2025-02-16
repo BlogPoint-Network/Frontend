@@ -38,11 +38,7 @@ export const ChannelItem = (props: IChannel) => {
               maxWidth: '280px',
               border: '1px solid black',
             }}
-            src={
-              props.imageURL
-                ? props.imageURL
-                : '../../../public/assets/images/icons/default_post.jpg'
-            }
+            src={'../../../public/assets/images/icons/default_post.jpg'}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок

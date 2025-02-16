@@ -4,16 +4,17 @@ import { IChannel } from '@app-types';
 import { useChannel } from '@hooks';
 import { Flex } from '@mantine/core';
 import { ChannelsList } from '@modules/channel';
+import { channelsExamples } from '@modules/channel/constants/channelsExamples.ts';
 import { BlueButton, CommonFrame, Heading1 } from '@ui';
 
 export const UserChannels = () => {
   const navigate = useNavigate();
   const channelManager = useChannel();
-  const [channels, setChannels] = useState<IChannel[]>([]);
+  const [channels, setChannels] = useState<IChannel[]>(channelsExamples);
 
   useEffect(() => {
     const test = async () => {
-      setChannels((await channelManager.getUserChannels()) ?? []);
+      setChannels((await channelManager.getUserChannels()) ?? channelsExamples);
     };
     test();
   }, []);

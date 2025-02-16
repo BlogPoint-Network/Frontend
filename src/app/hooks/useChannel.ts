@@ -30,6 +30,7 @@ export const useChannel = () => {
   const getSubscription = async () => {
     try {
       const response = await AuthService.getSubscriptionAuth();
+      console.log(response.data);
       return response.data;
     } catch (e) {
       console.log(e);
