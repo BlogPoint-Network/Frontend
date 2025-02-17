@@ -1,32 +1,50 @@
 import { FC, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IChannel, IPost } from '@app-types';
-import { useChannel, usePost } from '@hooks';
-import { Card, Flex, Pagination, Text } from '@mantine/core';
-import { ChannelPageChannelDescription } from '@modules/channel';
-import { PostItem } from '@modules/posts/components/PostItem/PostItem.tsx';
-import { BlueButton, CommonFrame, Heading2, List } from '@ui';
+import { useParams } from 'react-router-dom';
+import { IPost } from '@app-types';
+import { usePost } from '@hooks';
+import { Card, Flex } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
+import TextAlign from '@tiptap/extension-text-align';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import { Heading2 } from '@ui';
+import Image from '@tiptap/extension-image';
+import FileHandler from '@tiptap-pro/extension-file-handler';
+
 
 export const PostItemPage: FC = () => {
   const [post, setPost] = useState<IPost | null>(null);
   const postManager = usePost();
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const { channelId, postId } = useParams();
 
   useEffect(() => {
     const test = async () => {
-      setPost((await postManager.getPost(Number(id))) ?? null);
+      setPost(
+        (await postManager.getPost(Number(postId), Number(channelId))) ?? null,
+      );
     };
     test();
   }, []);
+  const content = post?.content;
+  console.log(content);
+  const editor = useEditor({
+    editable: false,
+    extensions: [
+      StarterKit,
+      Image,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      FileHandler.configure({
+        allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'], }),
+    ],
+    content,
+  });
 
   return (
     <Card
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
-      id={'RecommendationPost' + props.id}
+      id={'RecommendationPost' + post?.id}
       shadow="sm"
       style={{
         height: 'auto',
@@ -47,14 +65,12 @@ export const PostItemPage: FC = () => {
           direction="column"
           style={{ alignItems: 'center' }}
         >
-          <Heading2 lineClamp={2} ta="center" p="0px 20px">
-            {props.title}
+          <Heading2 lineClamp={2} ta="center" p="0px 10px">
+            {post?.title}
           </Heading2>
 
           <RichTextEditor editor={editor} w={700} bd={'white'}>
-            <Text lineClamp={4}>
-              <RichTextEditor.Content />
-            </Text>
+            <RichTextEditor.Content />
           </RichTextEditor>
         </Flex>
       </Flex>

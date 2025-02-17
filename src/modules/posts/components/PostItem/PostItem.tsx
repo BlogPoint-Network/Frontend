@@ -48,13 +48,17 @@ export const PostItem = (props: IPost) => {
             {props.title}
           </Heading2>
 
-          <RichTextEditor editor={editor} w={700} bd={'white'}>
+          <RichTextEditor editor={editor} w={700} bd={'white'} mb={20}>
             <Text lineClamp={4}>
               <RichTextEditor.Content />
             </Text>
           </RichTextEditor>
         </Flex>
-        <BlueButton onClick={() => navigate(`/post/${props.id}`)}>
+        <BlueButton
+          onClick={() =>
+            navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
+          }
+        >
           Читать
         </BlueButton>
       </Flex>

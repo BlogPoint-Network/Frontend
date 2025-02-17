@@ -22,9 +22,9 @@ export const usePost = () => {
     }
   };
 
-  const getPost = async (postId: number) => {
+  const getPost = async (postId: number, channelId: number) => {
     try {
-      const response = await AuthService.getPost(postId);
+      const response = await AuthService.getPost(postId, channelId);
       return response.data;
     } catch (error) {
       console.log(error);

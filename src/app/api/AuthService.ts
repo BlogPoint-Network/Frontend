@@ -104,7 +104,6 @@ export class AuthService {
     channelId: string,
     title: string,
     content: string,
-    // images: Array<string[]>,
   ): Promise<AxiosResponse<{ post: IPost }>> {
     return api.post('/createpost', {
       channelId,
@@ -137,7 +136,10 @@ export class AuthService {
     return api.post(`/getposts/?channelId=${channelId}&page=${page}`);
   }
 
-  static async getPost(postId: number): Promise<AxiosResponse<IPost>> {
-    return api.post(`/getpost/${postId}`);
+  static async getPost(
+    postId: number,
+    channelId: number,
+  ): Promise<AxiosResponse<IPost>> {
+    return api.post(`/getpost/?postId=${postId}&channelId=${channelId}`);
   }
 }

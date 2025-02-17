@@ -26,7 +26,7 @@ const AppRouter = () => {
       <Route path="/test" element={<ForTest />} />
       <Route path="/create-channel" element={<CreateChannel />} />
       <Route path="/channel/:id" element={<ChannelItemPage />} />
-      <Route path="/post/:id" element={<PostItemPage />} />
+      <Route path="/channel/:channelId/post/:postId" element={<PostItemPage />} />
       <Route path="/user-channels" element={<UserChannels />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="/popular-channels" element={<PopularChannels />} />
