@@ -1,20 +1,26 @@
-import {
-  CommonFrame,
-  MainPageLogoContainer,
-  MainPagePopularChannelsContainer,
-  MainPageRecommendationPostsContainer,
-} from '@modules/channel';
-import { Line } from '@ui';
+import { Container } from '@mantine/core';
+import { PopularChannelsContainer } from '@modules/channel';
+import { RecommendationPostsContainer } from '@modules/channel';
+import { CommonFrame, Heading1, LogoMainPage } from '@ui';
 
-const MainPage = () => {
+export const MainPage = () => {
   return (
-    <CommonFrame>
-      <MainPageLogoContainer />
-      <MainPageRecommendationPostsContainer />
-      <Line height="8px" />
-      <MainPagePopularChannelsContainer />
-    </CommonFrame>
+    <>
+      <CommonFrame>
+        <LogoMainPage />
+        <Container id="popularChannelsContainer">
+          <Heading1 ta="center" mb="40px">
+            Популярные каналы
+          </Heading1>
+          <RecommendationPostsContainer />
+        </Container>
+        <Container id="RecommendationPostsContainer" mb="40px">
+          <Heading1 id="RecommendationPostsContainer" ta="center" mb="40px">
+            Рекомендации
+          </Heading1>
+          <PopularChannelsContainer />
+        </Container>
+      </CommonFrame>
+    </>
   );
 };
-
-export default MainPage;

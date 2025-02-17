@@ -1,9 +1,3 @@
-const ForTest = () => {
-  return (
-    <>
-      Для тестов
-    </>
-  );
+export const ForTest = () => {
+  return <>Тестирую</>;
 };
-
-export default ForTest;

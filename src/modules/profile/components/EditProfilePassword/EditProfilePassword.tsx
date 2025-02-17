@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { IUser } from '@app-types';
-import { greyColor, skyBlueColor } from '@constants';
-import { Flex, Grid, Group, Modal, Text, TextInput } from '@mantine/core';
+import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Button } from '@ui';
 import { useDisclosure } from '@mantine/hooks';
+import { ProfileContext } from '../../../../app/context';
+import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
@@ -12,6 +12,7 @@ interface IEditProfilePasswordProps {
 
 export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const profile = useContext(ProfileContext);
   const form = useForm({
     initialValues: {
       oldPassword: '',
@@ -33,26 +34,29 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Text size="lg">Изменение пароля пользователя</Text>}
+        title={<Heading3>Изменение пароля пользователя</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {
+            profile?.editProfilePassword(
+              values.oldPassword,
+              values.newPassword,
+            );
             console.log(values);
-            // profile?.changeProfile(values.login, values.email, values.newPassword);
           })}
         >
           <Flex justify="flex-center" align="center" direction="column">
             <Grid w="auto" ml={20} mr={20}>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Старый пароль</Text>}
+                  label={<Heading4>Старый пароль</Heading4>}
                   key={form.key('oldPassword')}
                   {...form.getInputProps('oldPassword')}
                 />
               </Grid.Col>
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Новый пароль</Text>}
+                  label={<Heading4>Новый пароль</Heading4>}
                   key={form.key('newPassword')}
                   {...form.getInputProps('newPassword')}
                 />
@@ -60,7 +64,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
 
               <Grid.Col span={12}>
                 <TextInput
-                  label={<Text size={'lg'}>Подтвердите новый пароль</Text>}
+                  label={<Heading4>Подтвердите новый пароль</Heading4>}
                   key={form.key('repeatPassword')}
                   {...form.getInputProps('repeatPassword')}
                 />
@@ -68,29 +72,24 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
             </Grid>
           </Flex>
           <Group mt="lg" justify="flex-end">
-            <Button
+            <GreyButton
               onClick={() => {
                 form.reset();
                 close();
               }}
-              color={greyColor}
             >
               Отменить
-            </Button>
-            <Button type="submit" color={skyBlueColor}>
-              Сохранить
-            </Button>
+            </GreyButton>
+            <BlueButton type="submit">Сохранить</BlueButton>
           </Group>
         </form>
       </Modal>
 
       <Grid.Col span={12}>
-        <Text size={'xl'}>Пароль</Text>
-        <Button color={greyColor} onClick={open}>
-          <Text size={'lg'} c="black">
-            Изменить
-          </Text>
-        </Button>
+        <Label title={'Пароль'} text="########" />
+        <BlueButton mt="16px" onClick={open}>
+          Изменить
+        </BlueButton>
       </Grid.Col>
     </>
   );

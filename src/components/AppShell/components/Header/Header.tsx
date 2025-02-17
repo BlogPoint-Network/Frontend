@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '@assets/images/Logo.png';
+import logo from '@assets/images/logo.png';
 import { greyColor, skyBlueColor } from '@constants';
 import { Button, Container, Flex, Image, Text } from '@mantine/core';
 

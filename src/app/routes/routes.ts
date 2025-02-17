@@ -1,9 +1,14 @@
-import { Login, Profile, Register } from '@pages';
-import MyChannels from '@pages/ChannelsSubscribe.tsx';
-import ChannelsSubscribe from '@pages/ChannelsSubscribe.tsx';
-import MyChannel from '@pages/MyChannel.tsx';
-import ForTest from '@pages/ForTest.tsx';
-import MainPage from '@pages/MainPage.tsx';
+import { Unauthorized } from '@components/Other/Unauthorized.tsx';
+import {
+  SubscribeChannels,
+  ForTest,
+  Login,
+  MainPage,
+  ChannelPage,
+  UserChannels,
+  Profile,
+  Register,
+} from '@pages';
 import CreateChannel from '@pages/CreateChannel.tsx';
 import PopularChannels from '@pages/PopularChannels.tsx';
 import RatingOfChannels from '@pages/RatingOfChannels.tsx';
@@ -11,10 +16,11 @@ import Recommendations from '@pages/Recommendations.tsx';
 
 export const privateRoutes = [
   { path: '/profile', component: Profile, exact: true },
-  { path: '/my-channels', component: MyChannels, exact: true },
-  { path: '/channels-subscribe', component: ChannelsSubscribe, exact: true },
-  { path: '/my-channel', component: MyChannel, exact: true },
-  { path: '/create-channel', component: CreateChannel, exact: true },
+  { path: '/channels-subscribe', component: SubscribeChannels, exact: true },
+  { path: '/UserChannels', component: UserChannels, exact: true },
+  { path: '/ChannelPage', component: ChannelPage, exact: true },
+  { path: '/createChannel', component: CreateChannel, exact: true },
+  { path: '/Unauthorised', component: Unauthorized, exact: true },
 ];
 
 export const publicRoutes = [

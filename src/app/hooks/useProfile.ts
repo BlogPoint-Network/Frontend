@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { AuthService } from '@api';
-import { useMutation } from '@tanstack/react-query';
-
-import { IUser } from '../types/IUser.ts';
+import { IUser } from '@app-types';
+//import { useMutation } from '@tanstack/react-query';
 
 export const useProfile = () => {
   const [user, setUser] = useState<IUser | null>(null);
 
-  const infoUserMutation = useMutation({
-    mutationFn: async () => {
-      return await AuthService.infoUserAuth();
-    },
-    onSuccess: response => {
+  async function infoUser() {
+    try {
+      const response = await AuthService.infoUserAuth();
       setUser(response.data);
-    },
-  });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const loginProfile = async (login: string, password: string) => {
     try {
@@ -37,16 +36,18 @@ export const useProfile = () => {
     }
   }
 
-  async function changeProfile(email: string, login: string, password: string) {
+  function logoutProfile() {
     try {
-      await AuthService.changeProfileAuth(login, email, password);
+      localStorage.removeItem('token');
+      setUser(null);
     } catch (e) {
       console.log(e);
     }
   }
 
-  function logoutProfile() {
+  async function deleteProfile() {
     try {
+      await AuthService.deleteUserAuth();
       localStorage.removeItem('token');
       setUser(null);
     } catch (e) {
@@ -63,13 +64,50 @@ export const useProfile = () => {
     }
   }
 
+  const editProfileImg = async (img: File | null) => {
+    try {
+      await AuthService.editProfileImgAuth(img);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const editProfileInfo = async (email: string, login: string) => {
+    try {
+      await AuthService.editProfileInfoAuth(login, email);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const editProfilePassword = async (
+    oldPassword: string,
+    newPassword: string,
+  ) => {
+    try {
+      await AuthService.editProfilePasswordAuth(oldPassword, newPassword);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const infoUserMutation = useMutation({
+  //   mutationFn: async () => {
+  //     return await AuthService.infoUserAuth();
+  //   },
+  //   onSuccess: response => {
+  //     setUser(response.data);
+  //   },
+  // });
+
   return {
     loginProfile,
     registrationProfile,
     logoutProfile,
+    editProfileImg,
+    editProfilePassword,
+    editProfileInfo,
     infoProfile,
-    changeProfile,
     user,
-    infoUserMutation,
+    infoUser,
+    deleteProfile
   };
 };

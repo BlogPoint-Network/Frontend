@@ -4,7 +4,7 @@ import { AppShell as AppShellMantine, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import AppRouter from '@routes/components/AppRouter/AppRouter.tsx';
 
-const AppShell = () => {
+export const AppShell = () => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -28,11 +28,9 @@ const AppShell = () => {
         <Navigation />
       </AppShellMantine.Navbar>
 
-      <AppShellMantine.Main>
+      <AppShellMantine.Main bg="rgb(241 241 241)">
         <AppRouter />
       </AppShellMantine.Main>
     </AppShellMantine>
   );
 };
-
-export default AppShell;

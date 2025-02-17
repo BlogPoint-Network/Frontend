@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { skyBlueColor } from '@constants';
-import { Group, Text, TextInput } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
+import { Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationEmail,
@@ -9,12 +9,13 @@ import {
   validationRepeatPassword,
 } from '@modules/profile/constants/validation.ts';
 import { IRegistrationData } from '@modules/profile/types/IRegistrationData.ts';
-import { Button, FormBox } from '@ui';
+import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
 export const RegisterForm = () => {
   const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
   const fields = [
     { label: 'Логин', key: 'login' },
     { label: 'Почта', key: 'email' },
@@ -36,16 +37,14 @@ export const RegisterForm = () => {
 
   return (
     <FormBox>
-      <h1>Регистрация пользователя</h1>
+      <Heading1>Регистрация пользователя</Heading1>
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            console.log(values);
-            profile?.registrationProfile(
-              values.login,
-              values.email,
-              values.password,
-            );
+            console.log(profile);
+            profile
+              ?.registrationProfile(values.login, values.email, values.password)
+              .then(() => navigate('/login'));
           })}
         >
           {fields.map(field => (
@@ -53,18 +52,14 @@ export const RegisterForm = () => {
               size="md"
               mt="sm"
               radius="lg"
-              label={
-                <Text size={'xl'} mb={10}>
-                  {field.label}
-                </Text>
-              }
+              label={<Heading4 mb="5px">{field.label}</Heading4>}
               key={form.key(field.key)}
               {...form.getInputProps(field.key)}
             />
           ))}
-          <Button type="submit" mt="sm" color={skyBlueColor}>
-            <Text size={'lg'}>Подтвердить</Text>
-          </Button>
+          <BlueButton type="submit" mt="sm">
+            Подтвердить
+          </BlueButton>
         </form>
       </Group>
     </FormBox>

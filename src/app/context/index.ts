@@ -1,1 +1,1 @@
-export * from './profileContext.ts';
+export * from './ProfileContext.tsx';
