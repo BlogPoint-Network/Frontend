@@ -4,7 +4,7 @@ import {
   ButtonProps,
   PolymorphicComponentProps,
 } from '@mantine/core';
-import { Heading4 } from '@ui/Text/Heading4.tsx';
+import { Heading4 } from '@ui/Heading/Heading4.tsx';
 
 export const RedButton: FC<
   PolymorphicComponentProps<'button', ButtonProps>

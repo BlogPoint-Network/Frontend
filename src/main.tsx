@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import App from './App.tsx';
+import { ProfileContextProvider } from './app/context';
+import { App } from './App.tsx';
 
 import '@mantine/core/styles.css';
-import { ProfileContextProvider } from './app/context';
 
 const queryClient = new QueryClient();
 

@@ -1,20 +1,31 @@
+import { AuthService } from '@api';
+
 export const usePost = () => {
   const createPost = async (
     channelId: string,
     title: string,
-    content: string | undefined,
-    author: string,
-    // images: Array<string[]> | null,
+    content: string,
   ) => {
     try {
-      console.log([channelId, title, content, author]);
-      // await AuthService.createPostAuth(
-      //   channelId,
-      //   title,
-      //   content,
-      //   author,
-      //   images,
-      // );
+      await AuthService.createPostAuth(channelId, title, content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPosts = async (channelId: number, page: number) => {
+    try {
+      const response = await AuthService.getPosts(channelId, page);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPost = async (postId: number, channelId: number) => {
+    try {
+      const response = await AuthService.getPost(postId, channelId);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -22,5 +33,7 @@ export const usePost = () => {
 
   return {
     createPost,
+    getPosts,
+    getPost,
   };
 };

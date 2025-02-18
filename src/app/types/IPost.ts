@@ -3,6 +3,4 @@ export interface IPost {
   channelId: string;
   title: string;
   content: string;
-  author: string;
-  images: [];
 }

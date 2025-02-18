@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Box } from '@mantine/core';
-import { Heading4 } from '@ui/Text/Heading4.tsx';
+import { Heading4 } from '@ui/Heading/Heading4.tsx';
 
 interface ILabelProps {
   title: string;

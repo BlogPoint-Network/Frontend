@@ -1,22 +1,15 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    host: true,
-    port: 5173,
-    strictPort: true,
-  },
-  envPrefix: 'APP_',
   resolve: {
     alias: {
       '@ui': '/src/ui',
       '@components': '/src/components',
       '@modules': '/src/modules',
       '@pages': '/src/pages',
-      '@assets': '/src/app/assets',
       '@styles': '/src/app/styles',
       '@app-types': '/src/app/types',
       '@hooks': '/src/app/hooks',
@@ -26,6 +19,7 @@ export default defineConfig({
       '@constants': '/src/app/constants',
       '@routes': '/src/app/routes',
       '@api': '/src/app/api',
+      '@assets': '/src/app/assets',
     },
   },
 });
