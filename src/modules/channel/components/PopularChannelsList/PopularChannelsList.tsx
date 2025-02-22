@@ -14,6 +14,8 @@ export const PopularChannelsList: FC<ChannelsListProps> = ({ channels }) => {
           id={channel.id}
           ownerId={channel.ownerId}
           name={channel.name}
+          category={channel.category}
+          categoryColor={channel.categoryColor}
           description={channel.description}
           subsCount={channel.subsCount}
           imageURL={channel.imageURL}

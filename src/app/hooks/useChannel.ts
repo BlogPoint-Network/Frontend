@@ -1,9 +1,9 @@
 import { AuthService } from '@api';
 
 export const useChannel = () => {
-  const createChannel = async (name: string, description: string) => {
+  const createChannel = async (name: string, description: string, category: string) => {
     try {
-      const response = await AuthService.createChannelAuth(name, description);
+      const response = await AuthService.createChannelAuth(name, description, category);
       return response.data.id;
     } catch (e) {
       console.log(e);

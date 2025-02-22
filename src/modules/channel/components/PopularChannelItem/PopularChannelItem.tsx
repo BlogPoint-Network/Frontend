@@ -1,22 +1,15 @@
-import { Card, Flex, Image, Text } from '@mantine/core';
+import { IChannel } from '@app-types';
+import { Card, Container, Flex, Image, Text } from '@mantine/core';
+import Category from '@modules/channel/components/Category/Category.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, Heading2, Heading4 } from '@ui';
 
-interface PopularChannelItemProps {
-  id: number;
-  ownerId: number;
-  name: string;
-  description: string;
-  subsCount: number;
-  imageURL?: string | null;
-}
-
-function PopularChannelItem(props: PopularChannelItemProps) {
+function PopularChannelItem(props: IChannel) {
   return (
     <Card
       radius="md"
-      h="290px"
-      w="800px"
+      h={{ md: '290px', sm: 'fit-content', base: 'fit-content' }}
+      w={{ md: '800px', sm: 'fit-content', base: 'fit-content' }}
       m="15px 0px"
       bd="1px solid black"
       id={'PopularChannelItem' + props.id}
@@ -26,16 +19,17 @@ function PopularChannelItem(props: PopularChannelItemProps) {
       }}
     >
       <Flex // картинка|текстовый блок
-        direction="row"
-        gap="40px"
+        direction={{ md: 'row', sm: 'column', base: 'column' }}
+        gap={{ md: '40px', sm: '10px', base: '10px' }}
         justify="space-between"
+        // align={{ sm: 'center', base: 'center' }}
         h="100%"
       >
-        <div style={{ width: '280px' }}>
+        <Container w={{ base: '100%', sm: '100%', md: '280px' }}>
           <Image
             // minWidth: '140px',  не работает
-            h="100%"
-            w="auto"
+            h={{ md: '100%', sm: '280px', base: 'auto' }}
+            w={{ md: 'auto', sm: '100%', base: '100%' }}
             ml="auto"
             mr="auto"
             style={{
@@ -47,8 +41,8 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                 ? props.imageURL
                 : '../../../public/assets/images/icons/default_post.jpg'
             }
-          ></Image>
-        </div>
+          />
+        </Container>
         <Flex // Верхний блок|нижний блок
           direction="column"
           justify="space-between"
@@ -59,11 +53,14 @@ function PopularChannelItem(props: PopularChannelItemProps) {
         >
           <Flex // Заглавие|описание
             direction="column"
-            gap="10px"
+            align={{ md: 'start', sm: 'center', base: 'center' }}
           >
-            <Heading2 lineClamp={1}>{props.name}</Heading2>
+            <Heading2 lineClamp={1} fw="bold" td="underline">
+              {props.name}
+            </Heading2>
+            <Category name={props.category} color={props.categoryColor} />
 
-            <Heading4 lineClamp={4} fw="bold">
+            <Heading4 lineClamp={3} mt={'5px'}>
               {props.description}
             </Heading4>
           </Flex>
@@ -79,7 +76,7 @@ function PopularChannelItem(props: PopularChannelItemProps) {
                 <i>{addSpacesToNumber(props.subsCount)}</i>
               </Text>
             </Flex>
-            <BlueButton>Перейти</BlueButton>
+            <BlueButton mt="15px">Перейти</BlueButton>
           </Flex>
         </Flex>
       </Flex>

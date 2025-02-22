@@ -6,7 +6,7 @@ import Category from '@modules/channel/components/Category/Category.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, Heading2, Heading4, RedButton } from '@ui';
 
-export const ChannelItem = (props: IChannel) => {
+export const ChannelItem2 = (props: IChannel) => {
   const channelManager = useChannel();
   const navigate = useNavigate();
   return (
@@ -28,18 +28,23 @@ export const ChannelItem = (props: IChannel) => {
         justify="space-between"
         h="100%"
       >
-        {/* ЗДЕСЬ ПОДПИСЧИКИ НА МАЛЫХ ЭКРАНАХ */}
-        <Flex // ИконкаПодписчик|Число
-          mb="10px"
-          gap="10px"
-          align="center"
+        <Flex
           display={{ md: 'none', sm: 'flex', base: 'flex' }}
-          justify="end"
+          justify="space-between"
         >
-          <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
-          <Text size="1.2rem" style={{ whiteSpace: 'nowrap' }}>
-            <i>{addSpacesToNumber(props.subsCount)}</i>
-          </Text>
+          {/* ЗДЕСЬ КАТЕГОРИЯ НА БОЛЬШИХ ЭКРАНАХ */}
+          <Category name={props.category} color={props.categoryColor} />
+          {/* ЗДЕСЬ ПОДПИСЧИКИ НА МАЛЫХ ЭКРАНАХ */}
+          <Flex // ИконкаПодписчик|Число
+            mb="10px"
+            gap="10px"
+            align="center"
+          >
+            <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
+            <Text size="1.2rem" style={{ whiteSpace: 'nowrap' }}>
+              <i>{addSpacesToNumber(props.subsCount)}</i>
+            </Text>
+          </Flex>
         </Flex>
         <Container w={{ base: '100%', sm: '100%', md: '280px' }}>
           <Image
@@ -84,7 +89,10 @@ export const ChannelItem = (props: IChannel) => {
                 </Text>
               </Flex>
             </Flex>
-            <Category name={props.category} color={props.categoryColor} />
+            {/* ЗДЕСЬ КАТЕГОРИЯ НА БОЛЬШИХ ЭКРАНАХ */}
+            <Container ml={'-15px'} display={{ md: 'flex', sm: 'none', base: 'none' }}>
+              <Category name={props.category} color={props.categoryColor} />
+            </Container>
             <Heading4 mt={'5px'} lineClamp={3}>
               {props.description}
             </Heading4>

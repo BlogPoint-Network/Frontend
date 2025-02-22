@@ -57,10 +57,12 @@ export class AuthService {
   static async createChannelAuth(
     name: string,
     description: string,
+    category: string,
   ): Promise<AxiosResponse<IChannel>> {
     return api.post('/createchannel', {
       name,
       description,
+      category,
       token: localStorage.getItem('token'),
     });
   }

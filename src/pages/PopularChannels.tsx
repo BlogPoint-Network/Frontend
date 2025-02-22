@@ -1,7 +1,18 @@
-import { Heading1 } from '@ui';
+import { CommonFrame, Heading1 } from '@ui';
+import { PopularChannelsContainer } from '@modules/channel';
+import { Container } from '@mantine/core';
 
-const PopularChannels = () => {
-  return <Heading1 ta="center">Популярные каналы</Heading1>;
+export const PopularChannels = () => {
+  return (
+    <>
+      <CommonFrame>
+        <Container id="popularChannelsContainer" mb="40px">
+          <Heading1 ta="center" mb="40px">
+            Популярные каналы
+          </Heading1>
+          <PopularChannelsContainer />
+        </Container>
+      </CommonFrame>
+    </>
+  )
 };
-
-export default PopularChannels;

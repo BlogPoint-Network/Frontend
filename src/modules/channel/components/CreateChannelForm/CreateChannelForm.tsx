@@ -1,17 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { useChannel } from '@hooks';
 //import { useNavigate } from 'react-router-dom';
-import { Flex, Group, Text, Textarea, TextInput } from '@mantine/core';
+import {
+  Flex,
+  Group,
+  NativeSelect,
+  Text,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import {
   BlueButton,
-  FormBox,
   Dropzone,
+  FormBox,
   GreyButton,
   Heading1,
   Heading4,
 } from '@ui';
+import { CATEGORIES } from '@constants/categories.ts';
 //import { useChannel } from '@hooks';
 
 export const CreateChannelForm = () => {
@@ -22,6 +30,7 @@ export const CreateChannelForm = () => {
     initialValues: {
       name: '',
       description: '',
+      category: '',
       image: null as File | FileWithPath | null,
     },
     validate: {
@@ -33,6 +42,7 @@ export const CreateChannelForm = () => {
         value && (value.length < 10 || value.length > 500)
           ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
+      category: value => (value ? null : 'Выберите категорию канала из списка'),
       image: value => (value ? null : 'Загрузите корректное изображение'),
     },
   });
@@ -52,7 +62,7 @@ export const CreateChannelForm = () => {
         <form
           onSubmit={form.onSubmit(values => {
             channel
-              .createChannel(values.name, values.description)
+              .createChannel(values.name, values.description, values.category)
               .then(index => {
                 navigate(`/channel/${index + ''}`);
               });
@@ -74,6 +84,14 @@ export const CreateChannelForm = () => {
               label={<Heading4 mb={10}>Описание канала</Heading4>}
               placeholder="Введите описание"
               {...form.getInputProps('description')}
+            />
+            <NativeSelect
+              size="md"
+              mt="sm"
+              radius="lg"
+              label={<Heading4 mb={5}>Категория канала</Heading4>}
+              data={CATEGORIES}
+              {...form.getInputProps('category')}
             />
             <Heading4>Изображение канала</Heading4>
             <Dropzone

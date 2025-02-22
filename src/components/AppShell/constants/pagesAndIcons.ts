@@ -17,12 +17,12 @@ export const pages = [
   {
     label: 'Рекомендации',
     icon: IconChartBarPopular,
-    href: '../Recommendations',
+    href: '../recommendations',
   },
   {
     label: 'Популярные каналы',
     icon: IconTrendingUp,
-    href: '../PopularChannels',
+    href: '../popular-channels',
   },
   {
     label: 'Рейтинг каналов',

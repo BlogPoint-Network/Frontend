@@ -3,4 +3,4 @@ export * from './components/ChannelPageChannelDescription/ChannelPageChannelDesc
 export * from './components/ChannelsList/ChannelsList.tsx';
 export * from './components/CreateChannelForm/CreateChannelForm.tsx';
 export * from './components/PopularChannelsContainer/PopularChannelsContainer.tsx';
-export * from './components/RecommendationPostsContainer/RecommendationPostsContainer.tsx';
+export * from '@modules/channel/components/RecommendationPostsVerticalContainer/RecommendationPostsVerticalContainer.tsx';

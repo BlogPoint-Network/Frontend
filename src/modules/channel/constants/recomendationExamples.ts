@@ -1,4 +1,4 @@
-interface IReccomendations {
+interface IRecommendations {
   id: number;
   title: string;
   text: string;
@@ -7,7 +7,7 @@ interface IReccomendations {
   mediaURL?: string | undefined;
 }
 
-export const recommendations: IReccomendations[] = [
+export const recommendationsExamples: IRecommendations[] = [
   {
     id: 1,
     title:

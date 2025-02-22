@@ -10,11 +10,11 @@ import {
   Register,
   SubscribeChannels,
   UserChannels,
+  PopularChannels,
+  Recommendations,
 } from '@pages';
 import CreateChannel from '@pages/CreateChannel.tsx';
-import PopularChannels from '@pages/PopularChannels.tsx';
 import RatingOfChannels from '@pages/RatingOfChannels.tsx';
-import Recommendations from '@pages/Recommendations.tsx';
 
 const AppRouter = () => {
   return (
