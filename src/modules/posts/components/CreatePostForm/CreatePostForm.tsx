@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { usePost } from '@hooks/usePost.ts';
-import { Input, TextInput } from '@mantine/core';
+import { Input, MultiSelect, TextInput } from '@mantine/core';
 import { Link } from '@mantine/tiptap';
 import { RichTextEditor } from '@mantine/tiptap';
+import { tags } from '@modules/posts';
 import Highlight from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
 import SubScript from '@tiptap/extension-subscript';
@@ -19,6 +20,7 @@ export const CreatePostForm = () => {
   const postManager = usePost();
   const { id } = useParams();
   const [title, setTitle] = useState('');
+  const [selectTags, setSelectTags] = useState<string[]>([]);
 
   const editor = useEditor({
     extensions: [
@@ -59,8 +61,6 @@ export const CreatePostForm = () => {
         onPaste: (currentEditor, files, htmlContent) => {
           files.forEach(file => {
             if (htmlContent) {
-              // if there is htmlContent, stop manual insertion & let other extensions handle insertion via inputRule
-              // you could extract the pasted file from this url string and upload it to a server for example
               console.log(htmlContent);
               return false;
             }
@@ -139,6 +139,16 @@ export const CreatePostForm = () => {
               <RichTextEditor.Content />
             </RichTextEditor>
           </Input.Wrapper>
+        </div>
+        <div style={{ margin: '15px 0 15px 0' }}>
+          <MultiSelect
+            placeholder="Выберете от 1 до 5 тегов"
+            data={tags}
+            maxValues={5}
+            minLength={1}
+            value={selectTags}
+            onChange={setSelectTags}
+          />
         </div>
 
         <BlueButton

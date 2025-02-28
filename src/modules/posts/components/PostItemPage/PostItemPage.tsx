@@ -4,13 +4,13 @@ import { IPost } from '@app-types';
 import { usePost } from '@hooks';
 import { Card, Flex } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
+import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { Heading2 } from '@ui';
-import Image from '@tiptap/extension-image';
 import FileHandler from '@tiptap-pro/extension-file-handler';
-
+import { Heading2 } from '@ui';
+import { renderImgContent } from '@utils/renderImgContent.ts';
 
 export const PostItemPage: FC = () => {
   const [post, setPost] = useState<IPost | null>(null);
@@ -26,6 +26,11 @@ export const PostItemPage: FC = () => {
     test();
   }, []);
   const content = post?.content;
+  const processedContent = renderImgContent(
+    post?.content ?? '',
+    post?.images ?? [],
+  );
+
   console.log(content);
   const editor = useEditor({
     editable: false,
@@ -34,9 +39,15 @@ export const PostItemPage: FC = () => {
       Image,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       FileHandler.configure({
-        allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'], }),
+        allowedMimeTypes: [
+          'image/png',
+          'image/jpeg',
+          'image/gif',
+          'image/webp',
+        ],
+      }),
     ],
-    content,
+    content: processedContent,
   });
 
   return (
