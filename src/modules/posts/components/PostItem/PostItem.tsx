@@ -26,7 +26,7 @@ export const PostItem = (props: IPost) => {
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
-      id={'RecommendationPost' + props.id}
+      id={'RecommendationPost' + props.postId}
       shadow="sm"
       style={{
         height: 'auto',
@@ -59,7 +59,7 @@ export const PostItem = (props: IPost) => {
         </Flex>
         <BlueButton
           onClick={() =>
-            navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
+            navigate(`/channel/${props.channelId + ''}/post/${props.postId + ''}`)
           }
         >
           Читать

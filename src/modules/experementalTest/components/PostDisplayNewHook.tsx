@@ -1,59 +1,32 @@
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
-import { Card, Flex } from '@mantine/core';
+import { Card, Flex, Text } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
-import { usePostById } from '@modules/posts/hooks/usePostById.ts';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import FileHandler from '@tiptap-pro/extension-file-handler';
-import { Heading2 } from '@ui';
+import { BlueButton, Heading2 } from '@ui';
 import { renderImgContent } from '@utils/renderImgContent.ts';
 
-export const PostItemPage: FC = () => {
-  const [post, setPost] = useState<IPost | null>(null);
-  const { channelId, postId } = useParams();
-  const postController = usePostById(Number(channelId), Number(postId));
-
-  useEffect(() => {
-    const test = async () => {
-      setPost((await postController.data?.data) ?? null);
-    };
-    test();
-  }, []);
-  const content = post?.content;
-  const processedContent = renderImgContent(
-    post?.content ?? '',
-    post?.images ?? [],
-  );
-
-  console.log(content);
+export const PostDisplayNewHook = (props: IPost) => {
+  const processedContent = renderImgContent(props.content, props.images);
+  const navigate = useNavigate();
   const editor = useEditor({
     editable: false,
     extensions: [
       StarterKit,
       Image,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      FileHandler.configure({
-        allowedMimeTypes: [
-          'image/png',
-          'image/jpeg',
-          'image/gif',
-          'image/webp',
-        ],
-      }),
     ],
     content: processedContent,
   });
-
   return (
     <Card
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
-      id={'RecommendationPost' + post?.postId}
+      id={'RecommendationPost' + props.postId}
       shadow="sm"
       style={{
         height: 'auto',
@@ -74,14 +47,23 @@ export const PostItemPage: FC = () => {
           direction="column"
           style={{ alignItems: 'center' }}
         >
-          <Heading2 lineClamp={2} ta="center" p="0px 10px">
-            {post?.title}
+          <Heading2 lineClamp={2} ta="center" p="0px 20px">
+            {props.title}
           </Heading2>
 
-          <RichTextEditor editor={editor} w={700} bd={'white'}>
-            <RichTextEditor.Content />
+          <RichTextEditor editor={editor} w={700} bd={'white'} mb={20}>
+            <Text lineClamp={4}>
+              <RichTextEditor.Content />
+            </Text>
           </RichTextEditor>
         </Flex>
+        <BlueButton
+          onClick={() =>
+            navigate(`/channel/${props.channelId + ''}/post/${props.postId + ''}`)
+          }
+        >
+          Читать
+        </BlueButton>
       </Flex>
     </Card>
   );

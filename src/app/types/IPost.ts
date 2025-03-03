@@ -4,7 +4,7 @@ export interface IImage {
 }
 
 export interface IPost {
-  id: string;
+  postId: string;
   channelId: string;
   title: string;
   content: string;

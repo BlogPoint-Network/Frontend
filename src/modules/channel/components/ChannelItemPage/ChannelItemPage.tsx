@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IChannel, IPost } from '@app-types';
-import { useChannel, usePost } from '@hooks';
+import { useChannel } from '@hooks';
 import { Flex, Pagination } from '@mantine/core';
 import { ChannelPageChannelDescription } from '@modules/channel';
 import { PostItem } from '@modules/posts/components/PostItem/PostItem.tsx';
+import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import { BlueButton, CommonFrame, List } from '@ui';
 
 export const ChannelItemPage: FC = () => {
@@ -13,7 +14,6 @@ export const ChannelItemPage: FC = () => {
   const [activePage, setPage] = useState(1);
 
   const channelManager = useChannel();
-  const postManager = usePost();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -23,10 +23,11 @@ export const ChannelItemPage: FC = () => {
     };
     test();
   }, []);
+  const postController = usePosts(Number(id), activePage);
 
   useEffect(() => {
     const test = async () => {
-      setPosts((await postManager.getPosts(Number(id), activePage)) ?? []);
+      setPosts(postController.data?.data ?? []);
     };
     test();
   }, [activePage]);

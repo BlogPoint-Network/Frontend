@@ -1,9 +1,12 @@
-import { AuthService } from '@api';
+import { ChannelService } from '@api';
 
 export const useChannel = () => {
   const createChannel = async (name: string, description: string) => {
     try {
-      const response = await AuthService.createChannelAuth(name, description);
+      const response = await ChannelService.createChannelAuth(
+        name,
+        description,
+      );
       return response.data.id;
     } catch (e) {
       console.log(e);
@@ -12,7 +15,7 @@ export const useChannel = () => {
 
   const getChannel = async (id: number) => {
     try {
-      const response = await AuthService.getChannelAuth(id);
+      const response = await ChannelService.getChannel(id);
       return response.data;
     } catch (e) {
       console.log(e);
@@ -21,7 +24,7 @@ export const useChannel = () => {
 
   const deleteChannel = async (id: string) => {
     try {
-      await AuthService.deleteChannelAuth(id);
+      await ChannelService.deleteChannel(id);
     } catch (e) {
       console.log(e);
     }
@@ -29,7 +32,7 @@ export const useChannel = () => {
 
   const getSubscription = async () => {
     try {
-      const response = await AuthService.getSubscriptionAuth();
+      const response = await ChannelService.getSubscription();
       return response.data;
     } catch (e) {
       console.log(e);
@@ -38,7 +41,7 @@ export const useChannel = () => {
 
   const getUserChannels = async () => {
     try {
-      const response = await AuthService.getUserChannelsAuth();
+      const response = await ChannelService.getUserChannels();
       return response.data;
     } catch (e) {
       console.log(e);

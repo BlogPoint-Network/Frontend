@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { usePost } from '@hooks/usePost.ts';
 import { Input, MultiSelect, TextInput } from '@mantine/core';
 import { Link } from '@mantine/tiptap';
 import { RichTextEditor } from '@mantine/tiptap';
 import { tags } from '@modules/posts';
+import { usePostCreate } from '@modules/posts/hooks/usePostCreate.ts';
 import Highlight from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
 import SubScript from '@tiptap/extension-subscript';
@@ -15,9 +15,11 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import FileHandler from '@tiptap-pro/extension-file-handler';
 import { BlueButton, FormBox } from '@ui';
+import { transformHtmlWithImages } from '@utils';
 
 export const CreatePostForm = () => {
-  const postManager = usePost();
+  const createPostController = usePostCreate();
+
   const { id } = useParams();
   const [title, setTitle] = useState('');
   const [selectTags, setSelectTags] = useState<string[]>([]);
@@ -152,13 +154,18 @@ export const CreatePostForm = () => {
         </div>
 
         <BlueButton
-          onClick={() =>
-            id && contentHtml
-              ? postManager.createPost(id, title, contentHtml).then(() => {
-                  console.log(contentHtml);
-                })
-              : console.log('Не найден id')
-          }
+          onClick={() => {
+            const { transformedHtml, images } = transformHtmlWithImages(
+              contentHtml ?? '',
+            );
+            createPostController.mutate({
+              channelId: id ?? '',
+              title,
+              content: transformedHtml,
+              images,
+              tags: selectTags,
+            });
+          }}
         >
           Опубликовать
         </BlueButton>
