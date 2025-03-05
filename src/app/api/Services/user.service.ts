@@ -7,6 +7,7 @@ export class UserService {
     login: string,
     password: string,
   ): Promise<AxiosResponse<{ user: IUser } & { token: string }>> {
+    console.log(`получил ${localStorage.getItem('token')}`)
     return api.post('/login', { login, password });
   }
 
@@ -27,6 +28,7 @@ export class UserService {
   }
 
   static async infoUser(): Promise<AxiosResponse<IUser>> {
+    console.log(`установил ${localStorage.getItem('token')}`);
     return api.post('/user', { token: localStorage.getItem('token') });
   }
 

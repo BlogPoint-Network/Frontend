@@ -3,10 +3,13 @@ import { PostDisplayNewHook } from '@modules/experementalTest/components/PostDis
 import { TextDisplay } from '@modules/experementalTest/components/TextDisplay.tsx';
 import { TextEditor } from '@modules/experementalTest/components/TextEditor.tsx';
 import { usePostById } from '@modules/posts/hooks/usePostById.ts';
+import { usePosts } from '@modules/posts/hooks/usePosts.ts';
+import { List } from '@ui';
 
 export const ForTest = () => {
   const postView = examplePosts[0];
-  const displayPost = usePostById(1, 1);
+  const displayPost = usePostById(2, 1);
+  const displayPosts = usePosts(1, 1);
 
   return (
     <>
@@ -28,14 +31,25 @@ export const ForTest = () => {
       <div>
         <h2>Вывод поста с новым hook</h2>
         <PostDisplayNewHook
-          postId={displayPost.data?.data.postId ?? '101'}
-          channelId={displayPost.data?.data.channelId ?? '101'}
-          title={displayPost.data?.data.title ?? 'Привет'}
-          content={displayPost.data?.data.content ?? 'Контент'}
+          id={displayPost.data?.data.id ?? ''}
+          channelId={displayPost.data?.data.channelId ?? ''}
+          title={displayPost.data?.data.title ?? ''}
+          content={displayPost.data?.data.content ?? ''}
           images={displayPost.data?.data.images ?? []}
           tags={displayPost.data?.data.tags ?? []}
         />
       </div>
+      <div>
+        <h2>Несколько постов</h2>
+        <List items={displayPosts.data?.data ?? []} renderItem={PostDisplayNewHook} />
+      </div>
+      <div>
+        <h2>Проверка профиля</h2>
+      </div>
     </>
   );
 };
+
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAxMzcwOTksImlzcyI6IjEifQ.5BvYApkA-cw-D3Bh_-dMgA8UQrSrz-IFrB1AiL_zJyg
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDExOTIzODMsImlzcyI6IjQifQ.PWyT_UwV_fCA6jNiUGbs2fZw2GRGUtwvuisw9U8V2m4

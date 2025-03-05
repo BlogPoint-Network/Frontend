@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
@@ -8,14 +6,12 @@ import {
   validationPassword,
   validationRepeatPassword,
 } from '@modules/profile/constants/validation.ts';
+import { useProfileRegister } from '@modules/profile/hooks/useProfileRegister.ts';
 import { IRegistrationData } from '@modules/profile/types/IRegistrationData.ts';
 import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
-import { ProfileContext } from '../../../../app/context';
-
 export const RegisterForm = () => {
-  const profile = useContext(ProfileContext);
-  const navigate = useNavigate();
+  const profileRegister = useProfileRegister();
   const fields = [
     { label: 'Логин', key: 'login' },
     { label: 'Почта', key: 'email' },
@@ -41,10 +37,7 @@ export const RegisterForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            console.log(profile);
-            profile
-              ?.registrationProfile(values.login, values.email, values.password)
-              .then(() => navigate('/login'));
+            profileRegister.mutate(values);
           })}
         >
           {fields.map(field => (

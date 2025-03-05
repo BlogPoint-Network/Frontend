@@ -6,13 +6,13 @@ interface DeletePostParams {
   channelId: string;
 }
 
-export const usePostDelete = (onSuccess?: () => void) => {
+export const usePostDelete = () => {
   const controller = useMutation({
-    mutationFn: async ({ postId, channelId }: DeletePostParams) => {
-      return await PostService.deletePost(postId, channelId);
+    mutationFn: async ({ channelId, postId }: DeletePostParams) => {
+      return await PostService.deletePost(String(channelId), String(postId));
     },
     onSuccess: () => {
-      if (onSuccess) onSuccess();
+      console.log('Успешное удаление поста');
     },
     onError: error => {
       console.error('Ошибка при удалении поста:', error);

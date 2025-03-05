@@ -32,9 +32,9 @@ export class PostService {
 
   static async deletePost(
     channelId: string,
-    id: string,
+    postId: string,
   ): Promise<AxiosResponse<{ post: IPost }>> {
-    return api.post('/deletepost', { channelId, id });
+    return api.post('/deletepost', { channelId, postId });
   }
 
   static async getPosts(

@@ -5,14 +5,17 @@ import { EditProfilePassword } from '@modules/profile/components/EditProfilePass
 import { useProfile } from '@modules/profile/hooks/useProfile.ts';
 
 export const Profile = () => {
-  const { data: profile, isError, isPending } = useProfile();
-  if (isPending) return <p>Загрузка...</p>;
-  if (isError) return <p>Ошибка загрузки профиля</p>;
+  const profile = useProfile();
+  console.log(profile?.data?.data);
+  // if (isPending) return <p>Загрузка...</p>;
+  // if (isError) return <p>Ошибка загрузки профиля</p>;
+
+
 
   return (
-    <ProfileForm user={profile?.data ?? undefined}>
+    <ProfileForm user={profile?.data?.data ?? undefined}>
       <EditProfileImage />
-      <EditProfileInfo user={profile?.data ?? undefined} />
+      <EditProfileInfo user={profile?.data?.data ?? undefined} />
       <EditProfilePassword />
     </ProfileForm>
   );

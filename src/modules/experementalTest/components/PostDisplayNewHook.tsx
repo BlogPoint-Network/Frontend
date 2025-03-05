@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
-import { Card, Flex, Text } from '@mantine/core';
+import { Button, Card, Flex, Text } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
+import { usePostDelete } from '@modules/posts/hooks/usePostDelete.ts';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { BlueButton, Heading2 } from '@ui';
-import { renderImgContent } from '@utils/renderImgContent.ts';
 
 export const PostDisplayNewHook = (props: IPost) => {
-  const processedContent = renderImgContent(props.content, props.images);
+  const postDelete = usePostDelete();
   const navigate = useNavigate();
   const editor = useEditor({
     editable: false,
@@ -19,14 +19,13 @@ export const PostDisplayNewHook = (props: IPost) => {
       Image,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
-    content: processedContent,
   });
   return (
     <Card
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
-      id={'RecommendationPost' + props.postId}
+      id={'RecommendationPost' + props.id}
       shadow="sm"
       style={{
         height: 'auto',
@@ -55,15 +54,29 @@ export const PostDisplayNewHook = (props: IPost) => {
             <Text lineClamp={4}>
               <RichTextEditor.Content />
             </Text>
+            <Text>
+              channelId = {props.channelId}, postId = {props.id}
+            </Text>
           </RichTextEditor>
         </Flex>
         <BlueButton
           onClick={() =>
-            navigate(`/channel/${props.channelId + ''}/post/${props.postId + ''}`)
+            navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
           }
         >
           Читать
         </BlueButton>
+        <Button
+          bg={'red'}
+          onClick={() =>
+            postDelete.mutate({
+              channelId: props.channelId,
+              postId: props.id,
+            })
+          }
+        >
+          Удалить
+        </Button>
       </Flex>
     </Card>
   );
