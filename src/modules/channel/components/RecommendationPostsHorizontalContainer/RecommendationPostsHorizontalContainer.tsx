@@ -1,12 +1,13 @@
 import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
-import RecommendationPost from '@modules/channel/components/RecommendationPost/RecommendationPost.tsx';
+import ShortcutRecommendationPost from '@modules/channel/components/ShortcutRecommendationPost/ShortcutRecommendationPost.tsx';
 import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
 
 export const RecommendationPostsHorizontalContainer = () => {
   return (
     <Carousel
       id="recommendationFeed"
+      // draggable={{ md: false, base: true }} // не работает
       slideSize={{ md: '33%', base: '100%' }}
       w={{ md: '1200px', base: '380px' }} // выравнивание по центру
       slideGap={{ base: 0, sm: 'md' }}
@@ -40,7 +41,7 @@ export const RecommendationPostsHorizontalContainer = () => {
     >
       {recommendationsExamples.map(el => (
         <Carousel.Slide key={el.id}>
-          <RecommendationPost
+          <ShortcutRecommendationPost
             id={el.id}
             title={el.title}
             text={el.text}

@@ -1,17 +1,39 @@
-import { darkBackgroundColor } from '@constants';
-import { Card, Flex } from '@mantine/core';
-import { BlueButton, Heading2, Heading3, Heading4, PostMedia } from '@ui';
+import React, { useEffect, useRef, useState } from 'react';
+import { IRecommendation } from '@app-types';
+import dislike from '@assets/images/dislike.png';
+import like from '@assets/images/like.png';
+import view from '@assets/images/view.png';
+import { darkBackgroundColor, skyBlueColor } from '@constants';
+import { Button, Card, Container, Flex } from '@mantine/core';
+import { TagList } from '@modules/channel/components/TagList/TagList.tsx';
+import {
+  BlueButton,
+  ChannelIconImage,
+  Heading2,
+  Heading4,
+  Heading5,
+  PostMedia,
+  SmallIconImage,
+} from '@ui';
 
-interface RecommendationPostProps {
-  id: number;
-  title: string;
-  text: string;
-  channelName: string;
-  mediaType?: string | undefined; // тип указан неточно, изменить
-  mediaURL?: string | undefined;
-}
+function RecommendationPost(props: IRecommendation): JSX.Element {
+  // нужно для динамического расчета строк
+  const tagListRef = useRef<HTMLDivElement>(null);
+  const [maxLines, setMaxLines] = useState(5);
+  useEffect(() => {
+    if (tagListRef.current) {
+      const tagListHeight = tagListRef.current.clientHeight;
 
-function RecommendationPost(props: RecommendationPostProps): JSX.Element {
+      if (tagListHeight > 60) {
+        setMaxLines(3);
+      } else if (tagListHeight > 30) {
+        setMaxLines(4);
+      } else {
+        setMaxLines(5);
+      }
+    }
+  }, [props.tagList]); // Пересчитываем при изменении списка тегов
+
   return (
     <Card
       radius="md"
@@ -19,8 +41,9 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
       bd="1px solid black"
       id={'RecommendationPost' + props.id}
       style={{
-        height: '550px',
-        width: '380px',
+        position: 'relative', // для элементов, прижатых к углам
+        height: '670px',
+        width: '450px',
         flexShrink: 0,
       }}
     >
@@ -30,15 +53,41 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
         h="100%"
         style={{ alignItems: 'center' }}
       >
-        <Flex
+        <Flex // содержание
           gap="10px"
           w="100%"
           direction="column"
           style={{ alignItems: 'center' }}
         >
-          <Heading2 lineClamp={2} ta="center" p="0px 20px">
-            {props.title}
-          </Heading2>
+          <Flex // канал|картинка|текст
+            gap={'20px'}
+            pl="20px"
+            pr="80px"
+            direction="row"
+            align="center"
+            justify="flex-start"
+            style={{ width: '100%' }} // Добавляем ширину 100%
+          >
+            <ChannelIconImage src={props.channelIcon} />
+            <Container pl="0px" style={{ flexGrow: 1, minWidth: 0 }}>
+              <Heading4
+                fw="500"
+                style={{
+                  textDecoration: 'underline',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                }}
+              >
+                {props.channelName}
+              </Heading4>
+            </Container>
+            <Heading5
+              style={{ position: 'absolute', right: '15px', top: '15px' }}
+            >
+              {props.time}
+            </Heading5>
+          </Flex>
 
           <Card.Section
             style={{ background: darkBackgroundColor, width: '100%' }}
@@ -50,30 +99,76 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
                 // уникальный ключ для каждого медиа
                 id={`RecommendationPost${props.id}Media`}
                 // если на этом шаге, значит массивы уже не пустые
-                mediaType={props.mediaType!}
-                mediaURL={props.mediaURL!}
+                mediaType={props.mediaType[0]!}
+                mediaURL={props.mediaURL[0]!}
               />
             ) : (
               <hr style={{ backgroundColor: 'white', height: '140px' }} />
             )}
           </Card.Section>
 
-          <Heading3
-            lineClamp={1}
-            ta="center"
-            p="0 20px"
-            fw="bold"
-            td="underline"
-          >
-            {props.channelName}
-          </Heading3>
-
-          <Heading4 lineClamp={3} ta="center" p="0 20px">
+          <Heading2 fw={'600'} lineClamp={2} ta="center" p="0px 20px">
             {props.title}
-          </Heading4>
+          </Heading2>
+          <Flex // теги|текст
+            p="0 20"
+            direction={'column'}
+            gap="10px"
+          >
+            <Flex direction={'row'} gap="10px" wrap={'wrap'} ref={tagListRef}>
+              <TagList tags={props.tagList} />
+            </Flex>
+            <Heading4
+              style={{
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: maxLines, // Динамическое ограничение строк
+                overflow: 'hidden',
+                textAlign: 'center',
+              }}
+            >
+              {props.text}
+            </Heading4>
+          </Flex>
         </Flex>
 
-        <BlueButton>Читать</BlueButton>
+        <Flex // лайк-дизлайк|просмотры
+          ml={'0px'}
+          justify={'space-between'}
+          wrap={'nowrap'}
+          w={'90%'}
+        >
+          <Flex // лайк|дизлайк
+            gap="20px"
+          >
+            <Flex // лайк
+              align={'center'}
+              gap="5px"
+            >
+              <Button color={'transparent'} w={'42px'} h={'42px'} p={'0px'}>
+                <SmallIconImage src={like} />
+              </Button>
+              <Heading5 color={'green'}>{props.likes}</Heading5>
+            </Flex>
+            <Flex // дизлайк
+              align={'center'}
+              gap="5px"
+            >
+              <Button color={'transparent'} w={'42px'} h={'42px'} p={'0px'}>
+                <SmallIconImage src={dislike} />
+              </Button>
+              <Heading5 color={'red'}>{props.dislikes}</Heading5>
+            </Flex>
+          </Flex>
+          <Flex // просмотр
+            align={'center'}
+            gap="5px"
+          >
+            <SmallIconImage src={view} h={'1.5rem'}/>
+            <Heading5 color={skyBlueColor}>{props.views}</Heading5>
+          </Flex>
+        </Flex>
+        <BlueButton mb={'0px'}>Читать</BlueButton>
       </Flex>
     </Card>
   );

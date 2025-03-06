@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
-import { FileInput, Flex, Grid, Group, Image, Modal } from '@mantine/core';
+import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
+
 import { ProfileContext } from '../../../../app/context';
-import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
@@ -37,25 +38,24 @@ export const EditProfileImage = () => {
         </Group>
       </Modal>
 
-      <Grid.Col span={6}>
-        <Heading4 mb="5px">Аватар пользователя</Heading4>
-        <Flex
-          mih={50}
-          gap="md"
-          justify="flex-start"
-          align="flex-end"
-          direction="row"
+      <Heading2>Аватар пользователя</Heading2>
+      <Flex
+        mih={50}
+        mb={'20px'}
+        gap="md"
+        justify="flex-start"
+        align={{ md: 'end', sm: 'start', base: 'start' }}
+        direction={{ md: 'row', sm: 'column', base: 'column' }}
+      >
+        <Image w={300} h={300} radius="md" src={Empty} />
+        <BlueButton
+          onClick={() => {
+            open();
+          }}
         >
-          <Image w={300} h={300} radius="md" src={Empty} mb={10} />
-          <BlueButton
-            onClick={() => {
-              open();
-            }}
-          >
-            Загрузить
-          </BlueButton>
-        </Flex>
-      </Grid.Col>
+          Загрузить
+        </BlueButton>
+      </Flex>
     </>
   );
 };

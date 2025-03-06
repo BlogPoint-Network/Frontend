@@ -1,6 +1,8 @@
 import { Flex } from '@mantine/core';
 import RecommendationPost from '@modules/channel/components/RecommendationPost/RecommendationPost.tsx';
-import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
+import {
+  recommendationsNewExamples
+} from '@modules/channel/constants/recomendationNewExamples.ts';
 
 export const RecommendationPostsVerticalContainer = () => {
   return (
@@ -12,14 +14,20 @@ export const RecommendationPostsVerticalContainer = () => {
       direction="column"
       w="100%"
     >
-      {recommendationsExamples.map(el => (
+      {recommendationsNewExamples.map(el => (
         <RecommendationPost
           id={el.id}
-          title={el.title}
-          text={el.text}
           channelName={el.channelName}
+          channelIcon={el.channelIcon}
           mediaType={el.mediaType}
           mediaURL={el.mediaURL}
+          tagList={el.tagList}
+          title={el.title}
+          text={el.text}
+          time={el.time}
+          likes={el.likes}
+          dislikes={el.dislikes}
+          views={el.views}
         />
       ))}
     </Flex>

@@ -24,7 +24,7 @@ export const Header = () => {
   }, [profile?.user]);
 
   return (
-    <Flex>
+    <Flex ml={{ sm: '0px', base: '20px' }} mt={{ sm: '0px', base: '-30px' }}>
       <Flex align="center" ml={15}>
         <Image radius="md" h={50} w="auto" src={logo} />
         <Text size="30px" w={200} fw={700}>

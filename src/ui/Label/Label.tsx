@@ -9,7 +9,7 @@ interface ILabelProps {
 
 export const Label: FC<ILabelProps> = ({ title, text }) => {
   return (
-    <Box w={600}>
+    <Box w={'100%'}>
       <Heading4 mb="5px">{title}</Heading4>
       <div
         style={{
@@ -20,7 +20,7 @@ export const Label: FC<ILabelProps> = ({ title, text }) => {
           height: '42px',
         }}
       >
-        <Heading4>{text}</Heading4>
+        <Heading4 lineClamp={1}>{text}</Heading4>
       </div>
     </Box>
   );

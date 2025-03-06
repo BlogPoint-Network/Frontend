@@ -84,7 +84,11 @@ export const ChannelItem = (props: IChannel) => {
                 </Text>
               </Flex>
             </Flex>
-            <Category name={props.category} color={props.categoryColor} />
+            <Category
+              id={props.id}
+              name={props.category}
+              color={props.categoryColor}
+            />
             <Heading4 mt={'5px'} lineClamp={3}>
               {props.description}
             </Heading4>

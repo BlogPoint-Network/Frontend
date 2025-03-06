@@ -1,13 +1,10 @@
+import { ICategory } from '@app-types';
 import { Button } from '@mantine/core';
 
-interface CategoryProps {
-  name: string;
-  color: string;
-}
-
-function Category(props: CategoryProps) {
+function Category(props: ICategory) {
   return (
     <Button
+      id={`${props.id}`}
       variant="outline"
       mb="5px"
       w="fit-content"
