@@ -1,13 +1,20 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserService } from '@api';
-import { IUser } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
-export const useProfileLogout = (setUser: (user: IUser | null) => void) => {
+import { ProfileContext } from '../../../app/context';
+
+export const useProfileLogout = () => {
+  const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
   const controller = useMutation({
     mutationKey: ['user'],
     mutationFn: () => UserService.logoutUser(),
     onSuccess: () => {
-      setUser(null);
+      localStorage.clear();
+      profile?.setUser(null);
+      navigate('/');
     },
   });
 

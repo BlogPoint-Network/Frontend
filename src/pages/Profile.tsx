@@ -6,11 +6,6 @@ import { useProfile } from '@modules/profile/hooks/useProfile.ts';
 
 export const Profile = () => {
   const profile = useProfile();
-  console.log(profile?.data?.data);
-  // if (isPending) return <p>Загрузка...</p>;
-  // if (isError) return <p>Ошибка загрузки профиля</p>;
-
-
 
   return (
     <ProfileForm user={profile?.data?.data ?? undefined}>

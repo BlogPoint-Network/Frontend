@@ -17,8 +17,17 @@ export const examplePosts: IExamplePost[] = [
     id: '1233',
     channelId: '12345',
     title: 'Про тесты компов',
-    images: [],
-    content: ``,
+    images: [
+      {
+        id: 'img1',
+        src: `/assets/images/EmptyPng.png`,
+      },
+      {
+        id: 'img2',
+        src: '/assets/images/EmptyPng.png',
+      },
+    ],
+    content: `<img1><img2><p>Привет</p>`,
     tags: ['#ЧИЛЛЛ', '#КАЙФ', '#ИГРАТЬ'],
   },
 ];

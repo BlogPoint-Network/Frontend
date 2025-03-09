@@ -13,6 +13,7 @@ export const useProfileLogin = () => {
     mutationFn: ({ login, password }: { login: string; password: string }) =>
       UserService.loginUser(login, password),
     onSuccess: data => {
+      localStorage.setItem('token', data.data.token);
       profile?.setUser(data.data.user);
       navigate('/profile');
     },

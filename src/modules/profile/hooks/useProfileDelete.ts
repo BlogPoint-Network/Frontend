@@ -1,13 +1,24 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserService } from '@api';
-import { IUser } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
-export const useProfileDelete = (setUser: (user: IUser | null) => void) => {
+import { ProfileContext } from '../../../app/context';
+
+export const useProfileDelete = () => {
+  const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
   const controller = useMutation({
     mutationKey: ['user'],
     mutationFn: () => UserService.deleteUser(),
     onSuccess: () => {
-      setUser(null);
+      localStorage.clear();
+      profile?.setUser(null);
+      navigate('/');
+    },
+    onError: error => {
+      alert(error.message);
+      console.error(error);
     },
   });
 

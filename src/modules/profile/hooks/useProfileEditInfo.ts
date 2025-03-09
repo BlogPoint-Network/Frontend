@@ -1,10 +1,16 @@
 import { UserService } from '@api';
 import { useMutation } from '@tanstack/react-query';
 
-export const useProfileEditInfo = (email: string, login: string) => {
+interface ProfileEditInfo {
+  email: string;
+  login: string;
+}
+
+export const useProfileEditInfo = () => {
   const controller = useMutation({
     mutationKey: ['user'],
-    mutationFn: () => UserService.editProfileInfo(email, login),
+    mutationFn: ({ email, login }: ProfileEditInfo) =>
+      UserService.editProfileInfo(email, login),
   });
 
   return controller;

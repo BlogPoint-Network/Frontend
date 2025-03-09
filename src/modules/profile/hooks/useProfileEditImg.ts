@@ -1,10 +1,10 @@
 import { UserService } from '@api';
 import { useMutation } from '@tanstack/react-query';
 
-export const useProfileEditImg = (img: File) => {
+export const useProfileEditImg = () => {
   const controller = useMutation({
     mutationKey: ['user'],
-    mutationFn: () => UserService.editProfileImg(img),
+    mutationFn: (img: File) => UserService.editProfileImg(img),
   });
 
   return controller;
