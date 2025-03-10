@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { ITag } from '@app-types';
 import { Button } from '@mantine/core';
 
@@ -5,12 +6,7 @@ type TagProps = ITag & {
   selected?: boolean; // выбран ли тег
 }; // для передачи касточных стилей
 
-const Tag = ({
-  id,
-  color,
-  name,
-  selected = false
-}: TagProps) => {
+export const Tag: FC<TagProps> = ({ id, color, name, selected = false }) => {
   return (
     <Button
       id={`${id}`}
@@ -31,5 +27,3 @@ const Tag = ({
     </Button>
   );
 };
-
-export default Tag;

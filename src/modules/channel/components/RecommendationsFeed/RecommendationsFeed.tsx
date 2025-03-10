@@ -1,20 +1,21 @@
 import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
-import ShortcutRecommendationPost from '@modules/channel/components/ShortcutRecommendationPost/ShortcutRecommendationPost.tsx';
 import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
+import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
 
-export const RecommendationPostsHorizontalContainer = () => {
+export const RecommendationsFeed = () => {
   return (
     <Carousel
       id="recommendationFeed"
       // draggable={{ md: false, base: true }} // не работает
       slideSize={{ md: '33%', base: '100%' }}
-      w={{ md: '1200px', base: '380px' }} // выравнивание по центру
+      w={{ lg: '1400px', base: '450px' }} // выравнивание по центру
       slideGap={{ base: 0, sm: 'md' }}
       ml={{ xl: '-130px', lg: '0px', md: '60px', base: '0px' }}
       withIndicators
       loop
       controlSize="50"
+
       styles={{
         control: {
           backgroundColor: skyBlueColor,
@@ -41,13 +42,20 @@ export const RecommendationPostsHorizontalContainer = () => {
     >
       {recommendationsExamples.map(el => (
         <Carousel.Slide key={el.id}>
-          <ShortcutRecommendationPost
+          <PostItem
             id={el.id}
-            title={el.title}
-            text={el.text}
+            channelId={el.channelId}
             channelName={el.channelName}
+            channelIcon={el.channelIcon}
             mediaType={el.mediaType}
             mediaURL={el.mediaURL}
+            tagList={el.tagList}
+            title={el.title}
+            content={el.content}
+            time={el.time}
+            likes={el.likes}
+            dislikes={el.dislikes}
+            views={el.views}
           />
         </Carousel.Slide>
       ))}

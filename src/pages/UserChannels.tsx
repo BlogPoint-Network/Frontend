@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { IChannel } from '@app-types';
 import { useChannel } from '@hooks';
 import { Flex } from '@mantine/core';
-import { ChannelsList } from '@modules/channel';
+import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
 import { channelsExamples } from '@modules/channel/constants/channelsExamples.ts';
-import { BlueButton, CommonFrame, Heading1 } from '@ui';
+import { BlueButton, CommonFrame, Heading1, List } from '@ui';
 
 export const UserChannels = () => {
   const navigate = useNavigate();
@@ -23,7 +23,9 @@ export const UserChannels = () => {
     <CommonFrame>
       <Heading1 ta="center">Мои каналы</Heading1>
       <Flex id="ChannelsFeed" m="20px 0px" gap="30px" direction="column">
-        <ChannelsList channels={channels} />
+        <Flex gap={'30px'} direction="column">
+          <List items={channels} renderItem={ChannelItem} />
+        </Flex>
       </Flex>
       <BlueButton onClick={() => navigate('/create-channel')}>
         Создать новый канал

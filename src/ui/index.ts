@@ -1,6 +1,7 @@
 export * from './Button/BlueButton.tsx';
 export * from './Button/GreyButton.tsx';
 export * from './Button/RedButton.tsx';
+export * from './Category/Category.tsx';
 export * from './CommonFrame/CommonFrame.tsx';
 export * from './Dropzone/Dropzone.tsx';
 export * from './FormBox/FormBox.tsx';
@@ -16,3 +17,4 @@ export * from './Line/Line';
 export * from './List/List.tsx';
 export * from './LogoMainPage/LogoMainPage.tsx';
 export * from './Media/PostMedia.tsx';
+export * from './Tag/Tag.tsx';

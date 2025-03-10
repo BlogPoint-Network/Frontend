@@ -1,7 +1,8 @@
-import { Container } from '@mantine/core';
-import { RecommendationPostsVerticalContainer } from '@modules/channel';
+import { Container, Flex } from '@mantine/core';
 import { TagsFeed } from '@modules/channel/components/TagsFeed/TagsFeed.tsx';
-import { CommonFrame, Heading1 } from '@ui';
+import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
+import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
+import { CommonFrame, Heading1, List } from '@ui';
 
 export const Recommendations = () => {
   return (
@@ -12,7 +13,16 @@ export const Recommendations = () => {
           <Heading1 ta="center" mb="40px" mt={'10px'}>
             Рекомендации
           </Heading1>
-          <RecommendationPostsVerticalContainer />
+          <Flex
+            id="RecommendationsFeed"
+            mt="20px"
+            p="0"
+            gap="30px"
+            direction="column"
+            w="100%"
+          >
+            <List items={recommendationsExamples} renderItem={PostItem} />
+          </Flex>
         </Container>
       </CommonFrame>
     </>

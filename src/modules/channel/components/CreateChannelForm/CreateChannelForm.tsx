@@ -19,7 +19,7 @@ import {
   Heading1,
   Heading4,
 } from '@ui';
-import { CATEGORIES } from '@constants/categories.ts';
+import { categories } from '@constants/categories.ts';
 //import { useChannel } from '@hooks';
 
 export const CreateChannelForm = () => {
@@ -90,7 +90,7 @@ export const CreateChannelForm = () => {
               mt="sm"
               radius="lg"
               label={<Heading4 mb={5}>Категория канала</Heading4>}
-              data={CATEGORIES}
+              data={categories}
               {...form.getInputProps('category')}
             />
             <Heading4>Изображение канала</Heading4>

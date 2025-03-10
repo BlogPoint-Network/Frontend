@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import { ICategory } from '@app-types';
 import { Button } from '@mantine/core';
 
-function Category(props: ICategory) {
+export const Category: FC<ICategory> = props => {
   return (
     <Button
       id={`${props.id}`}
@@ -16,6 +17,6 @@ function Category(props: ICategory) {
       {props.name}
     </Button>
   );
-}
+};
 
 export default Category;

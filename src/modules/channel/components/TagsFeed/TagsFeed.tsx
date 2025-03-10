@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { ICategory, ITag } from '@app-types';
-import { CATEGORIES, skyBlueColor, TAGS } from '@constants';
+import { categories, skyBlueColor, tags } from '@constants';
 import { Carousel } from '@mantine/carousel';
 import { Button, Flex, Menu } from '@mantine/core';
-import Tag from '@modules/channel/components/Tag/Tag.tsx';
-import { Heading4 } from '@ui';
+import { Heading4, Tag } from '@ui';
 
 export const TagsFeed = () => {
   // для обозначения выбранного тега
@@ -40,12 +39,17 @@ export const TagsFeed = () => {
           },
         }}
       >
-        {CATEGORIES.map((category: ICategory) => {
+        {categories.map((category: ICategory) => {
           // если тег выбран, меняет стили кнопок
           const isTagSelected = selectedTag?.category_id == category.id;
           return (
             <Carousel.Slide key={category.id}>
-              <Menu trigger={'hover'} shadow="md" width={200} h={'45px'}>
+              <Menu
+                trigger={'hover'}
+                shadow="md"
+                width={200}
+                h={'45px'} // h={'45px'} РАБОТАЕТ, не убирать. Ошибкой не является
+              >
                 <Menu.Target>
                   <Button
                     w="100%"
@@ -55,7 +59,10 @@ export const TagsFeed = () => {
                       color: isTagSelected ? 'white' : category.color,
                     }}
                   >
-                    <Heading4 size={'20px'} color={isTagSelected ? 'white' : category.color}>
+                    <Heading4
+                      size={'20px'}
+                      color={isTagSelected ? 'white' : category.color}
+                    >
                       {isTagSelected ? `#${selectedTag?.name}` : category.name}
                     </Heading4>
                   </Button>
@@ -65,22 +72,22 @@ export const TagsFeed = () => {
                   w={'auto'}
                   style={{ border: `solid ${category.color} 1px` }}
                 >
-                  {TAGS.filter(
-                    (tag: ITag) => tag.category_id === category.id,
-                  ).map((tag: ITag) => (
-                    <Menu.Item
-                      key={tag.id}
-                      onClick={() => handleSelectTag(tag)}
-                    >
-                      <Tag
-                        id={tag.id}
-                        color={tag.color}
-                        name={tag.name}
-                        category_id={tag.category_id}
-                        selected={selectedTag?.id === tag.id}
-                      />
-                    </Menu.Item>
-                  ))}
+                  {tags
+                    .filter((tag: ITag) => tag.category_id === category.id)
+                    .map((tag: ITag) => (
+                      <Menu.Item
+                        key={tag.id}
+                        onClick={() => handleSelectTag(tag)}
+                      >
+                        <Tag
+                          id={tag.id}
+                          color={tag.color}
+                          name={tag.name}
+                          category_id={tag.category_id}
+                          selected={selectedTag?.id === tag.id}
+                        />
+                      </Menu.Item>
+                    ))}
                 </Menu.Dropdown>
               </Menu>
             </Carousel.Slide>

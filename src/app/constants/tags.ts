@@ -1,6 +1,6 @@
 import { ITag } from '@app-types';
 
-export const TAGS: ITag[] = [
+export const tags: ITag[] = [
   { id: 1, category_id: 1, name: 'Саморазвитие', color: '#FF9800' }, // Оранжевый (категория 'Личный блог')
   { id: 2, category_id: 1, name: 'Мотивация', color: '#FF9800' },
   { id: 3, category_id: 1, name: 'Продуктивность', color: '#FF9800' },

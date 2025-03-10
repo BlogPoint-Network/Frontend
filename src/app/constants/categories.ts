@@ -1,6 +1,6 @@
 import { ICategory } from '@app-types';
 
-export const CATEGORIES: ICategory[] = [
+export const categories: ICategory[] = [
   { id: 1, name: 'Личный блог', color: '#FF9800' }, // Оранжевый
   { id: 2, name: 'Образование', color: '#2196F3' }, // Голубой
   { id: 3, name: 'Бизнес', color: '#4CAF50' }, // Зеленый

@@ -1,13 +1,28 @@
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
-import { Card, Flex, Text } from '@mantine/core';
+import dislike from '@assets/images/dislike.png';
+import like from '@assets/images/like.png';
+import view from '@assets/images/view.png';
+import { darkBackgroundColor, skyBlueColor } from '@constants';
+import { Button, Card, Container, Flex } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
 import TextAlign from '@tiptap/extension-text-align';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { BlueButton, Heading2 } from '@ui';
+import {
+  BlueButton,
+  ChannelIconImage,
+  Heading2,
+  Heading4,
+  Heading5,
+  List,
+  PostMedia,
+  SmallIconImage,
+  Tag,
+} from '@ui';
 
-export const PostItem = (props: IPost) => {
+function PostItem(props: IPost): JSX.Element {
   const content = props.content;
   const navigate = useNavigate();
   const editor = useEditor({
@@ -18,18 +33,48 @@ export const PostItem = (props: IPost) => {
     ],
     content,
   });
+
+  // чтобы убрать padding с внутреннего элемента RichTextEditor
+  const editorRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (editorRef.current) {
+      const proseMirror = editorRef.current.querySelector(
+        '.tiptap.ProseMirror',
+      ) as HTMLElement;
+      if (proseMirror) {
+        proseMirror.style.padding = '0px';
+      }
+    }
+  }, []);
+
+  // нужно для динамического расчета строк
+  const tagListRef = useRef<HTMLDivElement>(null);
+  const [maxLines, setMaxLines] = useState(5);
+  useEffect(() => {
+    if (tagListRef.current) {
+      const tagListHeight = tagListRef.current.clientHeight;
+
+      if (tagListHeight > 60) {
+        setMaxLines(3);
+      } else if (tagListHeight > 30) {
+        setMaxLines(4);
+      } else {
+        setMaxLines(5);
+      }
+    }
+  }, [props.tagList]); // Пересчитываем при изменении списка тегов
+
   return (
     <Card
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
       id={'RecommendationPost' + props.id}
-      shadow="sm"
       style={{
-        height: 'auto',
-        width: '800px',
+        position: 'relative', // для элементов, прижатых к углам
+        height: '670px',
+        width: '450px',
         flexShrink: 0,
-        marginTop: 15,
       }}
     >
       <Flex // содержание|кнопка
@@ -38,23 +83,136 @@ export const PostItem = (props: IPost) => {
         h="100%"
         style={{ alignItems: 'center' }}
       >
-        <Flex
+        <Flex // содержание
           gap="10px"
           w="100%"
           direction="column"
           style={{ alignItems: 'center' }}
         >
-          <Heading2 lineClamp={2} ta="center" p="0px 20px">
+          <Flex // канал|картинка|текст
+            gap={'20px'}
+            pl="20px"
+            pr="80px"
+            direction="row"
+            align="center"
+            justify="flex-start"
+            style={{ width: '100%' }} // Добавляем ширину 100%
+          >
+            <ChannelIconImage src={props.channelIcon} />
+            <Container pl="0px" style={{ flexGrow: 1, minWidth: 0 }}>
+              <Heading4
+                fw="500"
+                style={{
+                  textDecoration: 'underline',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                }}
+              >
+                {props.channelName}
+              </Heading4>
+            </Container>
+            <Heading5
+              style={{ position: 'absolute', right: '15px', top: '15px' }}
+            >
+              {props.time}
+            </Heading5>
+          </Flex>
+
+          <Card.Section
+            style={{ background: darkBackgroundColor, width: '100%' }}
+          >
+            {/*проверка на пустые поля*/}
+            {props.mediaType && props.mediaURL ? (
+              <PostMedia
+                h="200px" // тут все работает
+                // уникальный ключ для каждого медиа
+                id={`RecommendationPost${props.id}Media`}
+                // если на этом шаге, значит массивы уже не пустые
+                mediaType={props.mediaType[0]!}
+                mediaURL={props.mediaURL[0]!}
+              />
+            ) : (
+              <hr style={{ backgroundColor: 'white', height: '140px' }} />
+            )}
+          </Card.Section>
+
+          <Heading2 fw={'600'} lineClamp={2} ta="center" p="0px 20px">
             {props.title}
           </Heading2>
+          <Flex // теги|текст
+            p="0 20"
+            direction={'column'}
+            gap="10px"
+          >
+            <Flex direction={'row'} gap="10px" wrap={'wrap'} ref={tagListRef}>
+              <List items={props.tagList} renderItem={Tag} />
+            </Flex>
+            <RichTextEditor editor={editor} bd={'none'} ref={editorRef}>
+              <Heading4
+                style={{
+                  display: '-webkit-box',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: maxLines, // Динамическое ограничение строк
+                  overflow: 'hidden',
+                  textAlign: 'center',
+                }}
+              >
+                <RichTextEditor.Content />
+              </Heading4>
+            </RichTextEditor>
+            {/*<Heading4*/}
+            {/*  style={{*/}
+            {/*    display: '-webkit-box',*/}
+            {/*    WebkitBoxOrient: 'vertical',*/}
+            {/*    WebkitLineClamp: maxLines, // Динамическое ограничение строк*/}
+            {/*    overflow: 'hidden',*/}
+            {/*    textAlign: 'center',*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  {props.content}*/}
+            {/*</Heading4>*/}
+          </Flex>
+        </Flex>
 
-          <RichTextEditor editor={editor} w={700} bd={'white'} mb={20}>
-            <Text lineClamp={4}>
-              <RichTextEditor.Content />
-            </Text>
-          </RichTextEditor>
+        <Flex // лайк-дизлайк|просмотры
+          ml={'0px'}
+          justify={'space-between'}
+          wrap={'nowrap'}
+          w={'90%'}
+        >
+          <Flex // лайк|дизлайк
+            gap="20px"
+          >
+            <Flex // лайк
+              align={'center'}
+              gap="5px"
+            >
+              <Button color={'transparent'} w={'42px'} h={'42px'} p={'0px'}>
+                <SmallIconImage src={like} />
+              </Button>
+              <Heading5 color={'green'}>{props.likes}</Heading5>
+            </Flex>
+            <Flex // дизлайк
+              align={'center'}
+              gap="5px"
+            >
+              <Button color={'transparent'} w={'42px'} h={'42px'} p={'0px'}>
+                <SmallIconImage src={dislike} />
+              </Button>
+              <Heading5 color={'red'}>{props.dislikes}</Heading5>
+            </Flex>
+          </Flex>
+          <Flex // просмотр
+            align={'center'}
+            gap="5px"
+          >
+            <SmallIconImage src={view} h={'1.5rem'} />
+            <Heading5 color={skyBlueColor}>{props.views}</Heading5>
+          </Flex>
         </Flex>
         <BlueButton
+          mb={'0px'}
           onClick={() =>
             navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
           }
@@ -64,4 +222,6 @@ export const PostItem = (props: IPost) => {
       </Flex>
     </Card>
   );
-};
+}
+
+export default PostItem;

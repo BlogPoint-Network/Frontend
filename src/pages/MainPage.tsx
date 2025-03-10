@@ -1,7 +1,8 @@
-import { Container } from '@mantine/core';
-import { PopularChannelsContainer } from '@modules/channel';
-import { RecommendationPostsHorizontalContainer } from '@modules/channel/components/RecommendationPostsHorizontalContainer/RecommendationPostsHorizontalContainer.tsx';
-import { CommonFrame, Heading1, LogoMainPage } from '@ui';
+import { Container, Flex } from '@mantine/core';
+import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
+import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
+import { popularChannelsExamples } from '@modules/channel/constants/popularChannelsExamples.ts';
+import { CommonFrame, Heading1, List, LogoMainPage } from '@ui';
 
 export const MainPage = () => {
   return (
@@ -12,13 +13,22 @@ export const MainPage = () => {
           <Heading1 ta="center" mb="40px">
             Рекомендации
           </Heading1>
-          <RecommendationPostsHorizontalContainer />
+          <RecommendationsFeed />
         </Container>
         <Container id="popularChannelsContainer" mb="40px">
           <Heading1 ta="center" mb="40px">
             Популярные каналы
           </Heading1>
-          <PopularChannelsContainer />
+          <Flex
+            id="PopularChannelFeed"
+            mt="20px"
+            p="0"
+            gap="30px"
+            direction="column"
+            w="100%"
+          >
+            <List items={popularChannelsExamples} renderItem={ChannelItem} />
+          </Flex>
         </Container>
       </CommonFrame>
     </>
