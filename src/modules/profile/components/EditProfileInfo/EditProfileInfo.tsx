@@ -50,24 +50,17 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
             console.log(values);
           })}
         >
-          <Flex justify="flex-center" align="center" direction="column">
-            <Grid w="auto" ml={20} mr={20}>
-              <Grid.Col span={12}>
-                <TextInput
-                  label={<Heading4>Логин</Heading4>}
-                  key={form.key('login')}
-                  {...form.getInputProps('login')}
-                />
-              </Grid.Col>
-
-              <Grid.Col span={12}>
-                <TextInput
-                  label={<Heading4>Почта</Heading4>}
-                  key={form.key('email')}
-                  {...form.getInputProps('email')}
-                />
-              </Grid.Col>
-            </Grid>
+          <Flex gap={'10px'} direction="column">
+            <TextInput
+              label={<Heading4>Логин</Heading4>}
+              key={form.key('login')}
+              {...form.getInputProps('login')}
+            />
+            <TextInput
+              label={<Heading4>Почта</Heading4>}
+              key={form.key('email')}
+              {...form.getInputProps('email')}
+            />
           </Flex>
           <Group mt="lg" justify="flex-end">
             <GreyButton
@@ -83,20 +76,17 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
         </form>
       </Modal>
 
-      <Grid.Col span={12}>
+      <Flex direction={'column'} gap={'15px'} mb={'20px'}>
         <Heading2>Информация о пользователе</Heading2>
-      </Grid.Col>
-      <Grid.Col span={12}>
         <Label title={'Логин'} text={props.user ? props.user?.login : ''} />
-      </Grid.Col>
-
-      <Grid.Col span={12}>
         <Label title={'Почта'} text={props.user ? props.user?.email : ''} />
-      </Grid.Col>
-
-      {/*<Grid.Col span={12}>*/}
-      {/*  <Label title={'Другая информация'} text={''} />*/}
-      {/*</Grid.Col>*/}
+        <Flex>
+          <BlueButton onClick={open}>Изменить</BlueButton>
+          <RedButton onClick={() => profileDelete.mutate()}>
+            Удалить профиль
+          </RedButton>
+        </Flex>
+      </Flex>
 
       <Grid.Col span={12}>
         <BlueButton onClick={open}>Изменить</BlueButton>

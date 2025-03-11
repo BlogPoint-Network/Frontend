@@ -11,13 +11,13 @@ interface RecommendationPostProps {
   mediaURL?: string | undefined;
 }
 
-function RecommendationPost(props: RecommendationPostProps): JSX.Element {
+function ShortcutRecommendationPost(props: RecommendationPostProps): JSX.Element {
   return (
     <Card
       radius="md"
       p="15px 0px" // для растяжения изображения на всю длину карточки
       bd="1px solid black"
-      id={'RecommendationPost' + props.id}
+      id={'ShortcutRecommendationPost' + props.id}
       style={{
         height: '550px',
         width: '380px',
@@ -79,4 +79,4 @@ function RecommendationPost(props: RecommendationPostProps): JSX.Element {
   );
 }
 
-export default RecommendationPost;
+export default ShortcutRecommendationPost;

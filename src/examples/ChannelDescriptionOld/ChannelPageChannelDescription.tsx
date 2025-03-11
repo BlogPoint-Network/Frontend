@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IChannel } from '@app-types';
 import { Card, Flex, Image, Text } from '@mantine/core';
-import { ChannelPageChannelDescriptionButtons } from '@modules/channel/components/ChannelPageChannelDescription/ChannelPageChannelDescriptionButtons.tsx';
+import { ChannelPageChannelDescriptionButtons } from './ChannelPageChannelDescriptionButtons.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 
@@ -41,7 +41,7 @@ export const ChannelPageChannelDescription: FC<IChannel> = props => {
               border: '1px solid black',
               borderRadius: '30px',
             }}
-            src={''}
+            src={'/src/app/assets/images/EmptyPng.png'}
           ></Image>
         </div>
         <Flex // Верхний блок|нижний блок

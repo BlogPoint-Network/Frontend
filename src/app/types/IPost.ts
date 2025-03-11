@@ -1,13 +1,18 @@
-export interface IImage {
-  id: string;
-  src: string;
-}
+import { IImage } from '@app-types/IImage.ts';
+import { ITag } from '@app-types/ITag.ts';
 
 export interface IPost {
-  id: string;
-  channelId: string;
+  id: number;
+  channelId: number;
+  channelName: string;
+  channelIcon: string;
+  previewImage: string;
+  tagList: ITag[];
   title: string;
   content: string;
   images: IImage[];
-  tags: string[];
+  dateOfCreation: string;
+  likes: number;
+  dislikes: number;
+  views: number;
 }

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Card, Flex, Image, Text } from '@mantine/core';
-import { ChannelPageChannelDescriptionButtons } from '@modules/channel/components/ChannelPageChannelDescription/ChannelPageChannelDescriptionButtons.tsx';
+import { ChannelPageChannelDescriptionButtons } from './ChannelDescriptionOld/ChannelPageChannelDescriptionButtons.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
 

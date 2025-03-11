@@ -9,7 +9,7 @@ export const Heading2: FC<PolymorphicComponentProps<'text', TextProps>> = ({
   const Heading2Props = {
     size: '26px',
     pb: '10px',
-    lh: '1.6',
+    lh: '1.5',
   };
 
   return (

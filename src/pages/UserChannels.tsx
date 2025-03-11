@@ -4,16 +4,17 @@ import { IChannel } from '@app-types';
 import { useChannel } from '@hooks';
 import { Flex } from '@mantine/core';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
+import { channelsExamples } from '@modules/channel/constants/channelsExamples.ts';
 import { BlueButton, CommonFrame, Heading1, List } from '@ui';
 
 export const UserChannels = () => {
   const navigate = useNavigate();
   const channelManager = useChannel();
-  const [channels, setChannels] = useState<IChannel[]>([]);
+  const [channels, setChannels] = useState<IChannel[]>(channelsExamples);
 
   useEffect(() => {
     const test = async () => {
-      setChannels((await channelManager.getUserChannels()) ?? []);
+      setChannels((await channelManager.getUserChannels()) ?? channelsExamples);
     };
     test();
   }, []);
@@ -22,7 +23,9 @@ export const UserChannels = () => {
     <CommonFrame>
       <Heading1 ta="center">Мои каналы</Heading1>
       <Flex id="ChannelsFeed" m="20px 0px" gap="30px" direction="column">
-        <List items={channels} renderItem={ChannelItem} />
+        <Flex gap={'30px'} direction="column">
+          <List items={channels} renderItem={ChannelItem} />
+        </Flex>
       </Flex>
       <BlueButton onClick={() => navigate('/create-channel')}>
         Создать новый канал
