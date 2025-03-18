@@ -17,7 +17,7 @@ export const LogoMainPage = () => {
       }}
     >
       <Flex align="center" justify="center" w="100%">
-        <Image h="80%" src={'/src/app/assets/images/Logo.png'} />
+        <Image h="80%" src={'icons/logo.png'} />
         <span style={{ fontSize: '65px' }}>BlogPoint</span>
       </Flex>
     </Container>

@@ -5,8 +5,6 @@ export interface IPost {
   channelId: number;
   channelName: string;
   channelIcon: string;
-  mediaType: string[];
-  mediaURL: string[];
   tagList: ITag[];
   title: string;
   content: string;

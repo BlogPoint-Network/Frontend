@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ProfileContextProvider } from './app/context';
 import { App } from './App.tsx';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import '@mantine/core/styles.css';
 
@@ -24,3 +25,6 @@ createRoot(document.getElementById('root')!).render(
     </QueryClientProvider>
   </StrictMode>,
 );
+
+// ✅ Регистрируем Service Worker
+serviceWorkerRegistration.register();
