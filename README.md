@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# 🌐 Frontend App with Docker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот проект представляет собой frontend-приложение, развёрнутое в контейнере с помощью Docker и Docker Compose. Приложение работает на Node.js 18 и использует Vite для разработки.
 
-Currently, two official plugins are available:
+## 📦 Технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 18
+- Vite
+- Docker
+- Docker Compose
 
-## Expanding the ESLint configuration
+Убедитесь, что у вас установлены:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-- Configure the top-level `parserOptions` property like this:
+### ⚙️ Развёртывание
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Клонируйте репозиторий:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ```bash
+   git clone <URL_репозитория>
+   cd <имя_папки_проекта>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. апустите сборку и приложение:
+   ```bash
+   docker-compose up --build
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3. Откройте в браузере:
+   ```bash
+   http://localhost:5173
+
+4. Остановить контейнеры:
+   ```bash
+   hdocker-compose down
+
+5. Остановить и удалить том node_modules:
+   ```bash
+   docker-compose down -v
+
