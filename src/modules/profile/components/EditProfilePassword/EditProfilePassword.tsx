@@ -1,11 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { IUser } from '@app-types';
 import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
 
-import { ProfileContext } from '../../../../app/context';
+import { useProfileEditPsw } from '@modules/profile/hooks/useProfileEditPsw.ts';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
@@ -13,7 +13,7 @@ interface IEditProfilePasswordProps {
 
 export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const profile = useContext(ProfileContext);
+  const changePassword = useProfileEditPsw();
   const form = useForm({
     initialValues: {
       oldPassword: '',
@@ -39,11 +39,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       >
         <form
           onSubmit={form.onSubmit(values => {
-            profile?.editProfilePassword(
-              values.oldPassword,
-              values.newPassword,
-            );
-            console.log(values);
+            changePassword.mutate(values);
           })}
         >
           <Flex gap={'10px'} direction="column">

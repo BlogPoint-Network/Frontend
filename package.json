@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "fix": "eslint . --fix",
@@ -18,32 +18,22 @@
     "@mantine/form": "^7.15.1",
     "@mantine/hooks": "^7.15.1",
     "@mantine/modals": "^7.15.1",
-    "@mantine/tiptap": "^7.15.1",
     "@tabler/icons-react": "^3.17.0",
     "@tanstack/react-query": "^5.60.5",
     "@tanstack/react-query-devtools": "^5.66.9",
-    "@tiptap-pro/extension-file-handler": "^2.17.4",
-    "@tiptap-pro/extension-unique-id": "^2.17.4",
-    "@tiptap/extension-highlight": "^2.10.3",
-    "@tiptap/extension-image": "^2.11.5",
-    "@tiptap/extension-link": "^2.10.3",
-    "@tiptap/extension-subscript": "^2.10.3",
-    "@tiptap/extension-superscript": "^2.10.3",
-    "@tiptap/extension-text-align": "^2.10.3",
-    "@tiptap/extension-underline": "^2.10.3",
-    "@tiptap/pm": "^2.10.3",
-    "@tiptap/react": "^2.10.3",
-    "@tiptap/starter-kit": "^2.10.3",
+    "@tinymce/tinymce-react": "^6.1.0",
     "axios": "^1.7.7",
-    "eslint-plugin-boundaries": "^4.2.2",
+    "eslint-plugin-boundaries": "^5.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "tinymce": "^7.7.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/tinymce": "^4.6.9",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.0",
     "eslint-import-resolver-typescript": "^3.6.3",
@@ -55,6 +45,6 @@
     "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.11"
+    "vite": "^6.2.2"
   }
 }

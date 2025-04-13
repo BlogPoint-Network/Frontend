@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
-import { Flex, Grid, Group, Modal, TextInput } from '@mantine/core';
+import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { useProfileDelete } from '@modules/profile/hooks/useProfileDelete.ts';
@@ -87,13 +87,6 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
           </RedButton>
         </Flex>
       </Flex>
-
-      <Grid.Col span={12}>
-        <BlueButton onClick={open}>Изменить</BlueButton>
-        <RedButton onClick={() => profileDelete.mutate()}>
-          Удалить профиль
-        </RedButton>
-      </Grid.Col>
     </>
   );
 };

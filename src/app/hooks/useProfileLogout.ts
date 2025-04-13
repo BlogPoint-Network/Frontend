@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserService } from '@api';
 import { useMutation } from '@tanstack/react-query';
 
-import { ProfileContext } from '../../../app/context';
+import { ProfileContext } from '../context';
 
 export const useProfileLogout = () => {
   const profile = useContext(ProfileContext);

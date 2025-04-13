@@ -4,7 +4,6 @@ import { IChannel, IPost } from '@app-types';
 import { useChannel, usePost } from '@hooks';
 import { Flex, Pagination } from '@mantine/core';
 import { ChannelPageChannelDescription } from '@modules/channel';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
 import { BlueButton, CommonFrame, List } from '@ui';
 
 export const OldChannelItemPage: FC = () => {

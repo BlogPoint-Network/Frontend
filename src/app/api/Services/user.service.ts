@@ -23,22 +23,20 @@ export class UserService {
   }
 
   static async deleteUser(): Promise<AxiosResponse<IUser>> {
-    return api.post('/deleteprofile', { token: localStorage.getItem('token') });
+    return api.delete('/deleteprofile');
   }
 
   static async infoUser(): Promise<AxiosResponse<IUser>> {
-    console.log(`установил ${localStorage.getItem('token')}`);
-    return api.post('/user', { token: localStorage.getItem('token') });
+    return api.get('/user');
   }
 
   static async editProfileInfo(
     email: string,
     login: string,
   ): Promise<AxiosResponse<{ user: IUser }>> {
-    return api.post('/editprofile', {
+    return api.patch('/editprofile', {
       login,
       email,
-      token: localStorage.getItem('token'),
     });
   }
 
@@ -53,5 +51,13 @@ export class UserService {
     newPassword: string,
   ): Promise<AxiosResponse<{ user: IUser }>> {
     return api.post('/editprofile', { oldPassword, newPassword });
+  }
+
+  static async requestEmailVerification() {
+    return api.post('/requestemailverification');
+  }
+
+  static async verifyEmail(data: { code: string }) {
+    return api.post('/verifyemail', data);
   }
 }

@@ -1,20 +1,27 @@
 import { PostService } from '@api';
-import { IPost } from '@app-types';
+import { IImage, ITag } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
-export const usePostEdit = (onSuccess?: () => void) => {
+interface EditPostParams {
+  channelId: string;
+  previewImage: string;
+  title: string;
+  content: string;
+  images: IImage[];
+  tagList: ITag[];
+}
+
+export function usePostEdit() {
   const controller = useMutation({
-    mutationFn: async (modifiedPost: Omit<IPost, 'postId'>) => {
+    mutationFn: async (modifiedPost: EditPostParams) => {
       return await PostService.editPost(
         modifiedPost.channelId,
+        modifiedPost.previewImage,
         modifiedPost.title,
         modifiedPost.content,
         modifiedPost.images,
-        modifiedPost.tags,
+        modifiedPost.tagList,
       );
-    },
-    onSuccess: () => {
-      if (onSuccess) onSuccess();
     },
     onError: error => {
       console.error('Ошибка при создании поста:', error);
@@ -22,4 +29,4 @@ export const usePostEdit = (onSuccess?: () => void) => {
     },
   });
   return controller;
-};
+}

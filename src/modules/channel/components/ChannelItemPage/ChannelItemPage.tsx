@@ -5,7 +5,6 @@ import { greyColor, skyBlueColor } from '@constants';
 import { Card, Flex, Image, Pagination, Text } from '@mantine/core';
 import { ChannelDescription } from '@modules/channel/components/ChannelDescription/ChannelDescription.tsx';
 import { useChannelById } from '@modules/channel/hooks/useChannelById.ts';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, CommonFrame, Heading2, Heading4, List } from '@ui';
@@ -161,7 +160,7 @@ export const ChannelItemPage: FC = () => {
         <BlueButton onClick={() => navigate(`/channel/${id + ''}/create-post`)}>
           Создать пост
         </BlueButton>
-        <List items={posts} renderItem={PostItem} />
+        {/*<List items={posts} renderItem={PostItem} />*/}
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>
     </>

@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useChannel } from '@hooks';
-//import { useNavigate } from 'react-router-dom';
+import { categories } from '@constants/categories.ts';
 import {
   Flex,
   Group,
@@ -9,8 +9,8 @@ import {
   Textarea,
   TextInput,
 } from '@mantine/core';
-import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
+import { useChannelCreate } from '@modules/channel/hooks/useChannelCreate.ts';
 import {
   BlueButton,
   Dropzone,
@@ -19,11 +19,12 @@ import {
   Heading1,
   Heading4,
 } from '@ui';
-import { categories } from '@constants/categories.ts';
-//import { useChannel } from '@hooks';
+
+import { ProfileContext } from '../../../../app/context';
 
 export const CreateChannelForm = () => {
-  const channel = useChannel();
+  const createChannel = useChannelCreate();
+  const profile = useContext(ProfileContext);
   const navigate = useNavigate();
 
   const form = useForm({
@@ -31,7 +32,8 @@ export const CreateChannelForm = () => {
       name: '',
       description: '',
       category: '',
-      image: null as File | FileWithPath | null,
+      imageBanner: '',
+      imageLogo: '',
     },
     validate: {
       name: value =>
@@ -43,7 +45,8 @@ export const CreateChannelForm = () => {
           ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
       category: value => (value ? null : 'Выберите категорию канала из списка'),
-      image: value => (value ? null : 'Загрузите корректное изображение'),
+      imageBanner: value => (value ? null : 'Загрузите корректное изображение'),
+      imageLogo: value => (value ? null : 'Загрузите корректное изображение'),
     },
   });
 
@@ -61,11 +64,14 @@ export const CreateChannelForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            channel
-              .createChannel(values.name, values.description, values.category)
-              .then(index => {
-                navigate(`/channel/${index + ''}`);
-              });
+            createChannel.mutate({
+              name: values.name,
+              description: values.description,
+              category: values.category,
+              imageBanner: values.imageBanner,
+              imageLogo: values.imageLogo,
+              ownerId: profile?.user?.id ?? '',
+            });
           })}
         >
           <Flex direction="column" gap="md">

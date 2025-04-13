@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreateChannelForm } from '@modules/channel';
 
-const CreateChannel = () => {
+export const CreateChannel = () => {
   const navigate = useNavigate();
 
   const isLogged: boolean = true;
@@ -17,5 +17,3 @@ const CreateChannel = () => {
   // Если пользователь авторизован
   return <CreateChannelForm />;
 };
-
-export default CreateChannel;

@@ -1,55 +1,54 @@
-import { examplePosts } from '@modules/experementalTest';
-import { PostDisplayNewHook } from '@modules/experementalTest/components/PostDisplayNewHook.tsx';
-import { TextDisplay } from '@modules/experementalTest/components/TextDisplay.tsx';
-import { TextEditor } from '@modules/experementalTest/components/TextEditor.tsx';
-import { usePostById } from '@modules/posts/hooks/usePostById.ts';
-import { usePosts } from '@modules/posts/hooks/usePosts.ts';
-import { List } from '@ui';
+import { IPost } from '@app-types';
+import { PostItemPage } from '@modules/posts';
+import { PostItem } from '@modules/posts/components/PostItem/PostItem.tsx';
 
 export const ForTest = () => {
-  const postView = examplePosts[0];
-  const displayPost = usePostById(2, 1);
-  const displayPosts = usePosts(1, 1);
+  const newExamplePost: IPost = {
+    id: '1',
+    channelId: '1',
+    channelName: 'Путешествия и путешествия',
+    channelIcon: {
+      filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+      url: 'https://cdn4.iconfinder.com/data/icons/business-conceptual-part1-1/513/business-1024.png',
+    },
+    previewImage: {
+      filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+      url: 'https://avatars.mds.yandex.net/i?id=b4362a1150fd6527d7035e79f8e9715e_l-5252229-images-thumbs&n=13',
+    },
+    title: 'Отправьтесь в путешествие уже сейчас!',
+    content:
+      `<p>Мы вышли в откртытое море <b>незабываемые путешествия</b> по разным уголкам мира! ` +
+      `Мы покажем экзотические страны, <h1>уникальные</h1> места и невероятные истории ` +
+      `из наших поездок.</p>`,
+    contentImages: [
+      {
+        name: 'img1',
+        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+      },
+    ],
+    tags: [
+      { id: 44, category_id: 6, name: 'КомпьютерныеИгры', color: 'red' },
+      { id: 51, category_id: 6, name: 'Киберспорт', color: 'red' },
+      { id: 52, category_id: 6, name: 'Стриминг', color: 'red' },
+      { id: 45, category_id: 6, name: 'СоревновательныеИгры', color: 'red' },
+    ],
+    mediaFiles: [
+      {
+        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+      },
+    ],
+    dateOfCreation: '15:00',
+    likes: 45,
+    dislikes: 1,
+    views: 1352,
+  };
 
   return (
     <>
-      <h2>Текстовый редактор</h2>
-      <div>
-        <TextEditor />
-      </div>
-      <h2>Текстовый отображатель</h2>
-      <div>
-        <TextDisplay
-          id={postView.id}
-          channelId={postView.channelId}
-          title={postView.title}
-          content={postView.content}
-          images={postView.images}
-          tags={postView.tags}
-        />
-      </div>
-      <div>
-        <h2>Вывод поста с новым hook</h2>
-        <PostDisplayNewHook
-          id={displayPost.data?.data.id ?? ''}
-          channelId={displayPost.data?.data.channelId ?? ''}
-          title={displayPost.data?.data.title ?? ''}
-          content={displayPost.data?.data.content ?? ''}
-          images={displayPost.data?.data.images ?? []}
-          tags={displayPost.data?.data.tags ?? []}
-        />
-      </div>
-      <div>
-        <h2>Несколько постов</h2>
-        <List items={displayPosts.data?.data ?? []} renderItem={PostDisplayNewHook} />
-      </div>
-      <div>
-        <h2>Проверка профиля</h2>
-      </div>
+      <h2>Тест страниц постов</h2>
+      <PostItemPage />
     </>
   );
 };
-
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAxMzcwOTksImlzcyI6IjEifQ.5BvYApkA-cw-D3Bh_-dMgA8UQrSrz-IFrB1AiL_zJyg
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDExOTIzODMsImlzcyI6IjQifQ.PWyT_UwV_fCA6jNiUGbs2fZw2GRGUtwvuisw9U8V2m4

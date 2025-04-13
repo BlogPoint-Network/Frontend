@@ -6,7 +6,7 @@ interface DeletePostParams {
   channelId: string;
 }
 
-export const usePostDelete = () => {
+export function usePostDelete() {
   const controller = useMutation({
     mutationFn: async ({ channelId, postId }: DeletePostParams) => {
       return await PostService.deletePost(String(channelId), String(postId));
@@ -20,4 +20,4 @@ export const usePostDelete = () => {
     },
   });
   return controller;
-};
+}

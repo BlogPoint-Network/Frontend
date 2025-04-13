@@ -1,1 +1,1 @@
-export * from './useChannel.ts';
+export * from './useProfileLogout.ts';

@@ -1,13 +1,16 @@
 import { UserService } from '@api';
 import { useMutation } from '@tanstack/react-query';
 
-export const useProfileEditPsw = (
-  oldPassword: string,
-  newPassword: string,
-) => {
+interface ProfileEditPsw {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export const useProfileEditPsw = () => {
   const controller = useMutation({
     mutationKey: ['user'],
-    mutationFn: () => UserService.editProfilePassword(oldPassword, newPassword),
+    mutationFn: ({ oldPassword, newPassword }: ProfileEditPsw) =>
+      UserService.editProfilePassword(oldPassword, newPassword),
   });
 
   return controller;

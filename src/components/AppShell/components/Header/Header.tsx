@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '@assets/images/logo.png';
 import { greyColor, skyBlueColor } from '@constants';
+import { useProfileLogout } from '@hooks/useProfileLogout.ts';
 import { Button, Container, Flex, Image, Text } from '@mantine/core';
 
 import { ProfileContext } from '../../../../app/context';
@@ -14,14 +15,15 @@ export const Header = () => {
     bd: 'solid black 1px',
   };
   const navigate = useNavigate();
-  const profile = useContext(ProfileContext);
+  const profileLogout = useProfileLogout();
+  const profileContext = useContext(ProfileContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (profile?.user != null) {
+    if (profileContext?.user != null) {
       setIsAuthenticated(true);
     }
-  }, [profile?.user]);
+  }, [profileContext?.user]);
 
   return (
     <Flex ml={{ sm: '0px', base: '20px' }} mt={{ sm: '0px', base: '-30px' }}>
@@ -40,7 +42,7 @@ export const Header = () => {
           bg={greyColor}
           onClick={() => {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            isAuthenticated ? profile?.logoutProfile() : navigate('login');
+            isAuthenticated ? profileLogout.mutate() : navigate('login');
           }}
         >
           <Text size="lg" c="black">

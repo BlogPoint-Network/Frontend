@@ -1,7 +1,7 @@
 import { FC } from 'react';
+import { darkBackgroundColor } from '@constants';
 import { PolymorphicComponentProps, TextProps } from '@mantine/core';
 import { Text } from '@mantine/core';
-import { darkBackgroundColor } from '@constants';
 
 export const Heading5: FC<PolymorphicComponentProps<'text', TextProps>> = ({
   children,

@@ -1,10 +1,14 @@
 import { UserService } from '@api';
+import { IUser } from '@app-types/IUser';
 import { useQuery } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 export const useProfile = () => {
-  const controller = useQuery({
+  return useQuery<IUser, Error>({
     queryKey: ['user'],
-    queryFn: () => UserService.infoUser(),
+    queryFn: async () => {
+      const response: AxiosResponse<IUser> = await UserService.infoUser();
+      return response.data; // Возвращаем только user, без AxiosResponse
+    },
   });
-  return controller;
-};
+}

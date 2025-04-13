@@ -18,5 +18,3 @@ export const Category: FC<ICategory> = props => {
     </Button>
   );
 };
-
-export default Category;

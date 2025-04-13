@@ -4,7 +4,7 @@ import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
 import { Button, Container, Flex } from '@mantine/core';
 import { popularChannelsExamples } from '@modules/channel/constants/popularChannelsExamples.ts';
-import { Heading4, ChannelIconImage } from '@ui';
+import { ChannelIconImage, Heading4 } from '@ui';
 
 export const ChannelsFeed = () => {
   // для обозначения выбранного канала

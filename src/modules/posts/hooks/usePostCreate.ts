@@ -1,16 +1,28 @@
 import { PostService } from '@api';
-import { IPost } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
+import { IContentImage, IMedia, ITag } from '@app-types';
 
-export const usePostCreate = () => {
+interface CreatePostParams {
+  channelId: string;
+  previewImage: IMedia;
+  title: string;
+  content: string;
+  contentImages: IContentImage[];
+  tags: ITag[];
+  mediaFiles: IMedia[];
+}
+
+export function usePostCreate() {
   const controller = useMutation({
-    mutationFn: async (newPost: Omit<IPost, 'postId'>) => {
+    mutationFn: async (newPost: CreatePostParams) => {
       return await PostService.createPost(
         newPost.channelId,
+        newPost.previewImage,
         newPost.title,
         newPost.content,
-        newPost.images,
+        newPost.contentImages,
         newPost.tags,
+        newPost.mediaFiles,
       );
     },
     onError: error => {
@@ -19,4 +31,4 @@ export const usePostCreate = () => {
     },
   });
   return controller;
-};
+}

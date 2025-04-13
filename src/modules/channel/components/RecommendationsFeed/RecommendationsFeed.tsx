@@ -1,7 +1,6 @@
 import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
 import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
 
 export const RecommendationsFeed = () => {
   return (
@@ -15,7 +14,6 @@ export const RecommendationsFeed = () => {
       withIndicators
       loop
       controlSize="50"
-
       styles={{
         control: {
           backgroundColor: skyBlueColor,
@@ -42,21 +40,7 @@ export const RecommendationsFeed = () => {
     >
       {recommendationsExamples.map(el => (
         <Carousel.Slide key={el.id}>
-          <PostItem
-            id={el.id}
-            channelId={el.channelId}
-            channelName={el.channelName}
-            channelIcon={el.channelIcon}
-            mediaType={el.mediaType}
-            mediaURL={el.mediaURL}
-            tagList={el.tagList}
-            title={el.title}
-            content={el.content}
-            time={el.time}
-            likes={el.likes}
-            dislikes={el.dislikes}
-            views={el.views}
-          />
+
         </Carousel.Slide>
       ))}
     </Carousel>

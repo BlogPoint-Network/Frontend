@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { IUser } from '@app-types';
-import { Flex, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import { FormBox, Heading1 } from '@ui';
 
 interface IProfileFormProps {
