@@ -1,4 +1,4 @@
-import { ConfirmEmail, ProfileForm } from '@modules/profile';
+import { EditEmailCode, ProfileForm } from '@modules/profile';
 import { EditProfileImage } from '@modules/profile/components/EditProfileImage/EditProfileImage.tsx';
 import { EditProfileInfo } from '@modules/profile/components/EditProfileInfo/EditProfileInfo.tsx';
 import { EditProfilePassword } from '@modules/profile/components/EditProfilePassword/EditProfilePassword.tsx';
@@ -14,7 +14,7 @@ export const Profile = () => {
     <ProfileForm user={user}>
       <EditProfileImage />
       <EditProfileInfo user={user} />
-      <ConfirmEmail />
+      <EditEmailCode />
       <EditProfilePassword />
     </ProfileForm>
   );

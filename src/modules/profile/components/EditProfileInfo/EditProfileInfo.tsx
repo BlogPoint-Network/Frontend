@@ -42,7 +42,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Изменения информации пользователя</Heading3>}
+        title={<Heading3>Изменение информации пользователя</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {

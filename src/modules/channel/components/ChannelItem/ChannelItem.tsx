@@ -62,9 +62,9 @@ export const ChannelItem = (props: IChannel) => {
               {props.name}
             </Heading2>
             <Category
-              name={props.name}
+              name={props.category.name}
               color={props.category.color}
-              id={props.id}
+              id={props.category.id}
             />
 
             <Heading4 lineClamp={3} mt={'5px'}>
