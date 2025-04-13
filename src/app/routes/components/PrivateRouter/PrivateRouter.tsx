@@ -1,7 +1,6 @@
-import { FC, ReactNode, useContext, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { ProfileContext } from '../../../context';
+import { useProfile } from '@modules/profile/hooks/useProfile.ts';
 
 interface IPrivateRouterProps {
   children?: ReactNode;
@@ -9,22 +8,18 @@ interface IPrivateRouterProps {
 
 export const PrivateRouter: FC<IPrivateRouterProps> = props => {
   const [isFetched, setIsFetched] = useState<boolean>(false);
-  const profile = useContext(ProfileContext);
+  const profileManager = useProfile();
   const navigate = useNavigate();
 
-  console.log('профиль', profile?.user);
-  console.log('загружен', profile?.infoUserMutation.isPending);
-  console.log('фетч', isFetched);
-
   useEffect(() => {
-    if (!profile?.infoUserMutation.isPending && isFetched) {
+    if (!profileManager.isPending && isFetched) {
       navigate('/');
     }
-  }, [profile?.user]);
+  }, [profileManager.data?.data]);
 
   useEffect(() => {
-    if (profile?.infoUserMutation.isPending) return setIsFetched(true);
-  }, [profile?.infoUserMutation.isPending]);
+    if (profileManager.isPending) return setIsFetched(true);
+  }, [profileManager.isPending]);
 
   return <>{props.children}</>;
 };

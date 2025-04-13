@@ -13,7 +13,7 @@ export const MainPage = () => {
           <Heading1 ta="center" mb="40px">
             Рекомендации
           </Heading1>
-          <RecommendationsFeed />
+          {/*<RecommendationsFeed />*/}
         </Container>
         <Container id="popularChannelsContainer" mb="40px">
           <Heading1 ta="center" mb="40px">

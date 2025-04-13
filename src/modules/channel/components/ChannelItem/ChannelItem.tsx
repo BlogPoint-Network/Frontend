@@ -62,8 +62,8 @@ export const ChannelItem = (props: IChannel) => {
               {props.name}
             </Heading2>
             <Category
-              name={props.category}
-              color={props.categoryColor}
+              name={props.name}
+              color={props.category.color}
               id={props.id}
             />
 
@@ -84,7 +84,9 @@ export const ChannelItem = (props: IChannel) => {
               </Text>
             </Flex>
             <BlueButton
-              mt={'15px'} onClick={() => navigate(`/channel/${props.id + ''}`)}>
+              mt={'15px'}
+              onClick={() => navigate(`/channel/${props.id + ''}`)}
+            >
               Перейти
             </BlueButton>
           </Flex>
@@ -92,7 +94,7 @@ export const ChannelItem = (props: IChannel) => {
       </Flex>
     </Card>
   );
-}
+};
 
 function addSpacesToNumber(num: number): string {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');

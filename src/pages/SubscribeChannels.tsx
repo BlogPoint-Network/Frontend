@@ -1,8 +1,8 @@
 import { Container, Flex } from '@mantine/core';
 import { ChannelsFeed } from '@modules/channel/components/ChannelsFeed/ChannelsFeed.tsx';
 import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
 import { CommonFrame, Heading1, List } from '@ui';
+import { PostItem } from '@modules/posts';
 
 export const SubscribeChannels = () => {
   // const channelManager = useChannel();

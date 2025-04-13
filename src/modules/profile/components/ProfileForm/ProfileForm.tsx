@@ -12,9 +12,9 @@ export const ProfileForm: FC<IProfileFormProps> = props => {
   return (
     <FormBox>
       <Heading1 mb="20px">Профиль пользователя {props.user?.login}</Heading1>
-      {/*<Group justify="center" grow>*/}
-      <Flex direction={'column'}>{props.children}</Flex>
-      {/*</Group>*/}
+      <Flex w="auto" ml={20} mr={20} direction="column">
+        {props.children}
+      </Flex>
     </FormBox>
   );
 };

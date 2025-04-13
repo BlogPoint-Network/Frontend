@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
 import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
-
-import { ProfileContext } from '../../../../app/context';
+import { BlueButton, GreyButton, Heading3, Heading4, Heading2 } from '@ui';
+import { useProfileEditImg } from '../../hooks/useProfileEditImg';
 
 export const EditProfileImage = () => {
   const [fileImg, setFileImg] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const profile = useContext(ProfileContext);
+  const editProfileImg = useProfileEditImg();
+  const fallbackFile = new File([Empty], 'empty.png', { type: 'image/png' });
 
   return (
     <>
@@ -28,7 +28,7 @@ export const EditProfileImage = () => {
           <GreyButton onClick={close}>Отменить</GreyButton>
           <BlueButton
             onClick={() => {
-              profile?.editProfileImg(fileImg);
+              editProfileImg.mutate(fileImg ?? fallbackFile);
               console.log(fileImg);
               close();
             }}

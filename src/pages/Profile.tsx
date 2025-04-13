@@ -1,21 +1,20 @@
-import { useContext, useEffect } from 'react';
-import { ProfileForm } from '@modules/profile';
+import { ConfirmEmail, ProfileForm } from '@modules/profile';
 import { EditProfileImage } from '@modules/profile/components/EditProfileImage/EditProfileImage.tsx';
 import { EditProfileInfo } from '@modules/profile/components/EditProfileInfo/EditProfileInfo.tsx';
 import { EditProfilePassword } from '@modules/profile/components/EditProfilePassword/EditProfilePassword.tsx';
-import { ProfileContext } from '../app/context';
+import { useProfile } from '@modules/profile/hooks/useProfile.ts';
 
 export const Profile = () => {
-  const profile = useContext(ProfileContext);
+  const { data: user, isLoading, error } = useProfile();
 
-  useEffect(() => {
-    profile?.infoProfile();
-  }, [profile?.user]);
+  if (isLoading) return <p>Загрузка...</p>;
+  if (error) return <p>Ошибка: {error.message}</p>;
 
   return (
-    <ProfileForm user={profile?.user ?? undefined}>
+    <ProfileForm user={user}>
       <EditProfileImage />
-      <EditProfileInfo user={profile?.user ?? undefined} />
+      <EditProfileInfo user={user} />
+      <ConfirmEmail />
       <EditProfilePassword />
     </ProfileForm>
   );

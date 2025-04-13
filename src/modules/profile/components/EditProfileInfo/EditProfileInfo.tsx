@@ -1,9 +1,9 @@
-import { FC, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 import { IUser } from '@app-types';
 import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
+import { useProfileDelete } from '@modules/profile/hooks/useProfileDelete.ts';
 import {
   BlueButton,
   GreyButton,
@@ -14,7 +14,7 @@ import {
   RedButton,
 } from '@ui';
 
-import { ProfileContext } from '../../../../app/context';
+import { useProfileEditInfo } from '../../hooks/useProfileEditInfo';
 
 interface IEditProfileInfoProps {
   user?: IUser;
@@ -22,8 +22,8 @@ interface IEditProfileInfoProps {
 
 export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
   const [opened, { open, close }] = useDisclosure(false);
-  const profile = useContext(ProfileContext);
-  const navigate = useNavigate();
+  const profileEditInfo = useProfileEditInfo();
+  const profileDelete = useProfileDelete();
   const form = useForm({
     initialValues: {
       login: props?.user?.login ?? '',
@@ -46,7 +46,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       >
         <form
           onSubmit={form.onSubmit(values => {
-            profile?.editProfileInfo(values.login, values.email);
+            profileEditInfo.mutate(values);
             console.log(values);
           })}
         >
@@ -82,20 +82,11 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
         <Label title={'Почта'} text={props.user ? props.user?.email : ''} />
         <Flex>
           <BlueButton onClick={open}>Изменить</BlueButton>
-          <RedButton
-            onClick={() => profile?.deleteProfile().then(() => navigate('/'))}
-          >
+          <RedButton onClick={() => profileDelete.mutate()}>
             Удалить профиль
           </RedButton>
         </Flex>
       </Flex>
-
-      {/*<Grid.Col span={12}>*/}
-      {/*  <Label title={'Другая информация'} text={''} />*/}
-      {/*</Grid.Col>*/}
-
-
-
     </>
   );
 };

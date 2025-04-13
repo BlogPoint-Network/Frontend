@@ -1,8 +1,6 @@
 import { Container, Flex } from '@mantine/core';
 import { TagsFeed } from '@modules/channel/components/TagsFeed/TagsFeed.tsx';
-import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
-import { CommonFrame, Heading1, List } from '@ui';
+import { CommonFrame, Heading1 } from '@ui';
 
 export const Recommendations = () => {
   return (
@@ -21,7 +19,7 @@ export const Recommendations = () => {
             direction="column"
             w="100%"
           >
-            <List items={recommendationsExamples} renderItem={PostItem} />
+            {/*<List items={recommendationsExamples} renderItem={PostItem} />*/}
           </Flex>
         </Container>
       </CommonFrame>

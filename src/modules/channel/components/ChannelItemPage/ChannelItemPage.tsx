@@ -2,10 +2,10 @@ import { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IChannel, IPost } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
-import { useChannel, usePost } from '@hooks';
 import { Card, Flex, Image, Pagination, Text } from '@mantine/core';
 import { ChannelDescription } from '@modules/channel/components/ChannelDescription/ChannelDescription.tsx';
-import PostItem from '@modules/posts/components/PostItem/PostItem.tsx';
+import { useChannelById } from '@modules/channel/hooks/useChannelById.ts';
+import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, CommonFrame, Heading2, Heading4, List } from '@ui';
 
@@ -14,21 +14,21 @@ export const ChannelItemPage: FC = () => {
   const [posts, setPosts] = useState<IPost[] | []>([]);
   const [activePage, setPage] = useState(1);
 
-  const channelManager = useChannel();
-  const postManager = usePost();
   const navigate = useNavigate();
   const { id } = useParams();
+  const channelManager = useChannelById(Number(id));
 
   useEffect(() => {
     const test = async () => {
-      setChannel((await channelManager.getChannel(Number(id))) ?? null);
+      setChannel((await channelManager.data?.data) ?? null);
     };
     test();
   }, []);
+  const postController = usePosts(Number(id), activePage);
 
   useEffect(() => {
     const test = async () => {
-      setPosts((await postManager.getPosts(Number(id), activePage)) ?? []);
+      setPosts(postController.data?.data ?? []);
     };
     test();
   }, [activePage]);
@@ -160,7 +160,7 @@ export const ChannelItemPage: FC = () => {
         <BlueButton onClick={() => navigate(`/channel/${id + ''}/create-post`)}>
           Создать пост
         </BlueButton>
-        <List items={posts} renderItem={PostItem} />
+        {/*<List items={posts} renderItem={PostItem} />*/}
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>
     </>
