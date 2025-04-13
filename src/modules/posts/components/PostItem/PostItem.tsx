@@ -6,10 +6,6 @@ import like from '@assets/images/like.png';
 import view from '@assets/images/view.png';
 import { darkBackgroundColor, skyBlueColor } from '@constants';
 import { Button, Card, Container, Flex } from '@mantine/core';
-import { RichTextEditor } from '@mantine/tiptap';
-import TextAlign from '@tiptap/extension-text-align';
-import { useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
 import {
   BlueButton,
   ChannelIconImage,
@@ -23,29 +19,29 @@ import {
 } from '@ui';
 
 function PostItem(props: IPost): JSX.Element {
-  const content = props.content;
+  // const content = props.content;
   const navigate = useNavigate();
-  const editor = useEditor({
-    editable: false,
-    extensions: [
-      StarterKit,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-    ],
-    content,
-  });
+  // const editor = useEditor({
+  //   editable: false,
+  //   extensions: [
+  //     StarterKit,
+  //     TextAlign.configure({ types: ['heading', 'paragraph'] }),
+  //   ],
+  //   content,
+  // });
 
   // чтобы убрать padding с внутреннего элемента RichTextEditor
-  const editorRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (editorRef.current) {
-      const proseMirror = editorRef.current.querySelector(
-        '.tiptap.ProseMirror',
-      ) as HTMLElement;
-      if (proseMirror) {
-        proseMirror.style.padding = '0px';
-      }
-    }
-  }, []);
+  // const editorRef = useRef<HTMLDivElement | null>(null);
+  // useEffect(() => {
+  //   if (editorRef.current) {
+  //     const proseMirror = editorRef.current.querySelector(
+  //       '.tiptap.ProseMirror',
+  //     ) as HTMLElement;
+  //     if (proseMirror) {
+  //       proseMirror.style.padding = '0px';
+  //     }
+  //   }
+  // }, []);
 
   // нужно для динамического расчета строк
   const tagListRef = useRef<HTMLDivElement>(null);
@@ -148,30 +144,20 @@ function PostItem(props: IPost): JSX.Element {
             <Flex direction={'row'} gap="10px" wrap={'wrap'} ref={tagListRef}>
               <List items={props.tagList} renderItem={Tag} />
             </Flex>
-            <RichTextEditor editor={editor} bd={'none'} ref={editorRef}>
-              <Heading4
-                style={{
-                  display: '-webkit-box',
-                  WebkitBoxOrient: 'vertical',
-                  WebkitLineClamp: maxLines, // Динамическое ограничение строк
-                  overflow: 'hidden',
-                  textAlign: 'center',
-                }}
-              >
-                <RichTextEditor.Content />
-              </Heading4>
-            </RichTextEditor>
-            {/*<Heading4*/}
-            {/*  style={{*/}
-            {/*    display: '-webkit-box',*/}
-            {/*    WebkitBoxOrient: 'vertical',*/}
-            {/*    WebkitLineClamp: maxLines, // Динамическое ограничение строк*/}
-            {/*    overflow: 'hidden',*/}
-            {/*    textAlign: 'center',*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  {props.content}*/}
-            {/*</Heading4>*/}
+
+            {/*<RichTextEditor editor={editor} bd={'none'} ref={editorRef}>*/}
+            {/*  <Heading4*/}
+            {/*    style={{*/}
+            {/*      display: '-webkit-box',*/}
+            {/*      WebkitBoxOrient: 'vertical',*/}
+            {/*      WebkitLineClamp: maxLines, // Динамическое ограничение строк*/}
+            {/*      overflow: 'hidden',*/}
+            {/*      textAlign: 'center',*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <RichTextEditor.Content />*/}
+            {/*  </Heading4>*/}
+            {/*</RichTextEditor>*/}
           </Flex>
         </Flex>
 

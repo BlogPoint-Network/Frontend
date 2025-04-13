@@ -90,7 +90,10 @@ export const CreateChannelForm = () => {
               mt="sm"
               radius="lg"
               label={<Heading4 mb={5}>Категория канала</Heading4>}
-              data={categories}
+              data={categories.map(category => ({
+                value: category.id.toString(), // значение id как строка
+                label: category.name, // отображаемое имя категории
+              }))}
               {...form.getInputProps('category')}
             />
             <Heading4>Изображение канала</Heading4>

@@ -2,11 +2,12 @@ import { NavLink } from 'react-router-dom';
 import { pages } from '@components/AppShell/constants/pagesAndIcons.ts';
 import { skyBlueColor } from '@constants';
 import { Flex, Text } from '@mantine/core';
+import { Heading2 } from '@ui';
 
 export const Navigation = () => {
   return (
     <>
-      <h1>Навигация</h1>
+      <Heading2 fw={'600'}>Навигация</Heading2>
       {pages.map((page, index) => (
         <NavLink
           key={index}

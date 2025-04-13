@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { greyColor, skyBlueColor } from '@constants';
 import { Button, Container, Flex, Image, Text } from '@mantine/core';
+
 import { ProfileContext } from '../../../../app/context';
 
 export const Header = () => {
@@ -23,7 +24,7 @@ export const Header = () => {
 
   return (
     <Flex ml={{ sm: '0px', base: '20px' }} mt={{ sm: '0px', base: '-30px' }}>
-      <Flex align="center" ml={15}>
+      <Flex display={{ sm: 'flex', base: 'none' }} align="center" ml={15}>
         <Image radius="md" h={50} w="auto" src={'/icons/logo.png'} />
         <Text size="30px" w={200} fw={700}>
           BlogPoint

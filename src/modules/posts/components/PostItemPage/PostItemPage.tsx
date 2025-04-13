@@ -3,13 +3,7 @@ import { useParams } from 'react-router-dom';
 import { IPost } from '@app-types';
 import { usePost } from '@hooks';
 import { Card, Flex } from '@mantine/core';
-import { RichTextEditor } from '@mantine/tiptap';
-import TextAlign from '@tiptap/extension-text-align';
-import { useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
 import { Heading2 } from '@ui';
-import Image from '@tiptap/extension-image';
-import FileHandler from '@tiptap-pro/extension-file-handler';
 
 
 export const PostItemPage: FC = () => {
@@ -27,17 +21,17 @@ export const PostItemPage: FC = () => {
   }, []);
   const content = post?.content;
   console.log(content);
-  const editor = useEditor({
-    editable: false,
-    extensions: [
-      StarterKit,
-      Image,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      FileHandler.configure({
-        allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'], }),
-    ],
-    content,
-  });
+  // const editor = useEditor({
+  //   editable: false,
+  //   extensions: [
+  //     StarterKit,
+  //     Image,
+  //     TextAlign.configure({ types: ['heading', 'paragraph'] }),
+  //     FileHandler.configure({
+  //       allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'], }),
+  //   ],
+  //   content,
+  // });
 
   return (
     <Card
@@ -69,9 +63,9 @@ export const PostItemPage: FC = () => {
             {post?.title}
           </Heading2>
 
-          <RichTextEditor editor={editor} w={700} bd={'white'}>
-            <RichTextEditor.Content />
-          </RichTextEditor>
+          {/*<RichTextEditor editor={editor} w={700} bd={'white'}>*/}
+          {/*  <RichTextEditor.Content />*/}
+          {/*</RichTextEditor>*/}
         </Flex>
       </Flex>
     </Card>
