@@ -14,7 +14,7 @@ export const AppShell = () => {
       }}
       navbar={{
         width: 250,
-        breakpoint: 'sm',
+        breakpoint: 'md',
         collapsed: { mobile: !opened },
       }}
       padding="md"

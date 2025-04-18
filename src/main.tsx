@@ -10,6 +10,7 @@ import { App } from './App.tsx';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import '@mantine/core/styles.css';
+import { theme } from '@constants';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
           <ProfileContextProvider>
             <App />
             <ReactQueryDevtools initialIsOpen={false} />

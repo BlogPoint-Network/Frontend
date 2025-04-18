@@ -35,7 +35,7 @@ export const Header = () => {
 
       <Container></Container>
 
-      <Flex align="center" gap="md" justify="flex-end" mr={15}>
+      <Flex align="center" gap="md" justify="flex-end" mr={15} mt={{base: '5px', md: '0px'}}>
         <Button
           {...btnProps}
           bg={greyColor}

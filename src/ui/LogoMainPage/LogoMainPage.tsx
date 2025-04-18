@@ -1,5 +1,5 @@
 import { mainBackgroundColor } from '@constants';
-import { Container, Flex, Image } from '@mantine/core';
+import { Container, Flex, Image, Text } from '@mantine/core';
 
 export const LogoMainPage = () => {
   return (
@@ -17,8 +17,14 @@ export const LogoMainPage = () => {
       }}
     >
       <Flex align="center" justify="center" w="100%">
-        <Image h="80%" src={'icons/logo.png'} />
-        <span style={{ fontSize: '65px' }}>BlogPoint</span>
+        {/*<Image display={'none'} h="80%" src={'icons/logo.png'} />*/}
+        <Image
+          h={{ base: 'auto', xs: '80%' }}
+          w={{ base: '120px', xs: 'auto' }}
+          src={'icons/logo.png'}
+        />
+        {/*<span style={{ fontSize: '65px'}}>BlogPoint</span>*/}
+        <Text fz={{ base: '50px', xs: '65px' }}>BlogPoint</Text>
       </Flex>
     </Container>
   );

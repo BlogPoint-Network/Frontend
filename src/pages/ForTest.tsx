@@ -1,6 +1,5 @@
 import { IPost } from '@app-types';
-import { PostItemPage } from '@modules/posts';
-import { PostItem } from '@modules/posts/components/PostItem/PostItem.tsx';
+import { PostItem, PostItemPage } from '@modules/posts';
 
 export const ForTest = () => {
   const newExamplePost: IPost = {
@@ -49,6 +48,22 @@ export const ForTest = () => {
     <>
       <h2>Тест страниц постов</h2>
       <PostItemPage />
+      <PostItem
+        id={newExamplePost.id}
+        channelId={newExamplePost.channelId}
+        channelName={newExamplePost.channelName}
+        channelIcon={newExamplePost.channelIcon}
+        previewImage={newExamplePost.previewImage}
+        title={newExamplePost.title}
+        content={newExamplePost.content}
+        contentImages={newExamplePost.contentImages}
+        tags={newExamplePost.tags}
+        mediaFiles={newExamplePost.mediaFiles}
+        dateOfCreation={newExamplePost.dateOfCreation}
+        likes={newExamplePost.likes}
+        dislikes={newExamplePost.dislikes}
+        views={newExamplePost.views}
+      />
     </>
   );
 };

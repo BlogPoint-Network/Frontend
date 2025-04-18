@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
 import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BlueButton, GreyButton, Heading3, Heading4, Heading2 } from '@ui';
+import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
+
 import { useProfileEditImg } from '../../hooks/useProfileEditImg';
 
 export const EditProfileImage = () => {
@@ -47,7 +48,7 @@ export const EditProfileImage = () => {
         align={{ md: 'end', sm: 'start', base: 'start' }}
         direction={{ md: 'row', sm: 'column', base: 'column' }}
       >
-        <Image w={300} h={300} radius="md" src={Empty} />
+        <Image w={{ base: 250, xss: 300 }} h={300} radius="md" src={Empty} />
         <BlueButton
           onClick={() => {
             open();
