@@ -79,12 +79,13 @@ export const ChannelItem = (props: IChannel) => {
               align="center"
             >
               <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
-              <Text size="1.2rem">
+              <Text fz={{base: '1rem', xss: "1.2rem"}}>
                 <i>{addSpacesToNumber(props.subsCount)}</i>
               </Text>
             </Flex>
             <BlueButton
               mt={'15px'}
+              mr={{ base: '0px', xss: '15' }}
               onClick={() => navigate(`/channel/${props.id + ''}`)}
             >
               Перейти

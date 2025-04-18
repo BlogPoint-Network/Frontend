@@ -25,8 +25,8 @@ export const Header = () => {
   }, [profileContext?.user]);
 
   return (
-    <Flex ml={{ sm: '0px', base: '20px' }} mt={{ sm: '0px', base: '-30px' }}>
-      <Flex display={{ sm: 'flex', base: 'none' }} align="center" ml={15}>
+    <Flex ml={{ sm: '0px', base: '20px' }} mt={{ base: '-30px', sm: '0px' }}>
+      <Flex display={{ md: 'flex', base: 'none' }} align="center" ml={15}>
         <Image radius="md" h={50} w="auto" src={'/icons/logo.png'} />
         <Text size="30px" w={200} fw={700}>
           BlogPoint
@@ -35,7 +35,13 @@ export const Header = () => {
 
       <Container></Container>
 
-      <Flex align="center" gap="md" justify="flex-end" mr={15} mt={{base: '5px', md: '0px'}}>
+      <Flex
+        align="center"
+        gap="md"
+        justify="flex-end"
+        mr={15}
+        mt={{ base: '5px', sm: '-25px', md: '0px'}}
+      >
         <Button
           {...btnProps}
           bg={greyColor}

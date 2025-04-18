@@ -80,9 +80,9 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
         <Heading2>Информация о пользователе</Heading2>
         <Label title={'Логин'} text={props.user ? props.user?.login : ''} />
         <Label title={'Почта'} text={props.user ? props.user?.email : ''} />
-        <Flex>
-          <BlueButton onClick={open}>Изменить</BlueButton>
-          <RedButton onClick={() => profileDelete.mutate()}>
+        <Flex direction={{base: 'column', c620: 'row'}}>
+          <BlueButton w={{base: '160px', c620: 'auto'}} onClick={open}>Изменить</BlueButton>
+          <RedButton w={{base: '182px', c620: 'auto'}} onClick={() => profileDelete.mutate()}>
             Удалить профиль
           </RedButton>
         </Flex>

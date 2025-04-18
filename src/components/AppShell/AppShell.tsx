@@ -20,7 +20,7 @@ export const AppShell = () => {
       padding="md"
     >
       <AppShellMantine.Header>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
         <Header />
       </AppShellMantine.Header>
 
