@@ -4,6 +4,7 @@ import { Card, Container, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, Heading2, Heading4 } from '@ui';
 import { Category } from '@ui';
+import { addSpacesToNumber } from '@utils';
 
 export const ChannelItem = (props: IChannel) => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ export const ChannelItem = (props: IChannel) => {
               align="center"
             >
               <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
-              <Text fz={{base: '1rem', xss: "1.2rem"}}>
+              <Text fz={{ base: '1rem', xss: '1.2rem' }}>
                 <i>{addSpacesToNumber(props.subsCount)}</i>
               </Text>
             </Flex>
@@ -96,7 +97,3 @@ export const ChannelItem = (props: IChannel) => {
     </Card>
   );
 };
-
-function addSpacesToNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}

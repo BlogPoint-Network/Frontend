@@ -70,7 +70,7 @@ export const Dropzone: FC<FormDropzoneProps> = ({
           mih={220}
           style={{ pointerEvents: 'none' }}
         >
-          <Flex gap={'30px'} ml={'20px'}>
+          <Flex gap={'30px'} ml={'20px'} direction={{base: 'column', xs: 'row'}}>
             <div>
               {uploadStatus === 'success' && (
                 <IconCheck

@@ -7,7 +7,8 @@ import { ChannelDescription } from '@modules/channel/components/ChannelDescripti
 import { useChannelById } from '@modules/channel/hooks/useChannelById.ts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import { IconAccessible } from '@tabler/icons-react';
-import { BlueButton, CommonFrame, Heading2, Heading4, List } from '@ui';
+import { BlueButton, CommonFrame, Heading2, Heading4 } from '@ui';
+import { addSpacesToNumber } from '@utils';
 
 export const ChannelItemPage: FC = () => {
   const [channel, setChannel] = useState<IChannel | null>(null);
@@ -166,7 +167,3 @@ export const ChannelItemPage: FC = () => {
     </>
   );
 };
-
-function addSpacesToNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}

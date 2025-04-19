@@ -39,9 +39,9 @@ export const ForTest = () => {
       },
     ],
     dateOfCreation: '15:00',
-    likes: 45,
-    dislikes: 1,
-    views: 1352,
+    likes: 450200,
+    dislikes: 18000,
+    views: 1352345,
   };
 
   return (

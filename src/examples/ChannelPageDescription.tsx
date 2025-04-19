@@ -3,6 +3,7 @@ import { Card, Flex, Image, Text } from '@mantine/core';
 import { ChannelPageChannelDescriptionButtons } from './ChannelDescriptionOld/ChannelPageChannelDescriptionButtons.tsx';
 import { IconAccessible } from '@tabler/icons-react';
 import { Heading2, Heading4 } from '@ui';
+import { addSpacesToNumber } from '@utils';
 
 interface IChannelMyChannelDescriptionProps {
   id: number;
@@ -88,6 +89,4 @@ export const ChannelPageChannelDescription: FC<
   );
 };
 
-function addSpacesToNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
+

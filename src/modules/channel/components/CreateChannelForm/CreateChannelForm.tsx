@@ -112,10 +112,10 @@ export const CreateChannelForm = () => {
             {form.errors.image && <Text c="red">{form.errors.image}</Text>}
             <Flex
               mih={50}
-              gap="xs"
+              gap={{ base: '0', xs: 'xs' }}
               justify="center"
               align="center"
-              direction="row"
+              direction={{ base: 'column', xs: 'row' }}
             >
               <GreyButton
                 mt="sm"
