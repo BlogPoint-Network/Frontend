@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import { IPost } from '@app-types';
+import { useUploadFile } from '@hooks/useUploadFile.ts';
+import { Button, FileInput } from '@mantine/core';
 import { PostItem, PostItemPage } from '@modules/posts';
 
 export const ForTest = () => {
+  const [myFile, setMyFile] = useState<File | null>(null);
+  const fileLoader = useUploadFile();
+
   const newExamplePost: IPost = {
     id: '1',
     channelId: '1',
@@ -34,8 +40,16 @@ export const ForTest = () => {
     ],
     mediaFiles: [
       {
-        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
-        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        filename: 'image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
+      },
+      {
+        filename: 'image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
+      },
+      {
+        filename: 'image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/c9c819dd-b8d5-4061-98dd-7642bd5249b7.png',
       },
     ],
     dateOfCreation: '15:00',
@@ -64,6 +78,8 @@ export const ForTest = () => {
         dislikes={newExamplePost.dislikes}
         views={newExamplePost.views}
       />
+      <FileInput value={myFile} onChange={setMyFile} />
+      <Button onClick={() => fileLoader.mutate(myFile)}>Отправить</Button>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
 import { skyBlueColor } from '@constants';
-import { Card, Center, Flex, Grid, Image, Text } from '@mantine/core';
+import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
 import {
   BlueButton,
@@ -82,7 +82,7 @@ export const PostItem = (props: IPost) => {
         <Text lineClamp={3}>{extractTextFromHTML(props.content)}</Text>
       </Card.Section>
       <Card.Section pl="15" pr="15" mb="10">
-        <Flex direction={'row'} gap="10px" wrap={'wrap'}>
+        <Flex direction={'row'} gap="7px" wrap={'wrap'}>
           <List items={props.tags} renderItem={Tag} />
         </Flex>
       </Card.Section>
@@ -93,20 +93,14 @@ export const PostItem = (props: IPost) => {
           <Flex align="center" gap="md">
             <Flex align="center" gap="xs">
               <IconThumbUp size={28} />
-              <Heading5
-                fz={{ base: '14px', xs: '17px' }}
-                c="green"
-              >
+              <Heading5 fz={{ base: '14px', xs: '17px' }} c="green">
                 {addSpacesToNumber(Number(props.likes))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs">
               <IconThumbDown size={28} />
-              <Heading5
-                fz={{ base: '14px', xs: '17px' }}
-                c="red"
-              >
+              <Heading5 fz={{ base: '14px', xs: '17px' }} c="red">
                 {addSpacesToNumber(Number(props.dislikes))}
               </Heading5>
             </Flex>
@@ -115,54 +109,11 @@ export const PostItem = (props: IPost) => {
           {/* Просмотры справа */}
           <Flex align="center" gap="xs">
             <IconEye size={28} />
-            <Heading5
-              fz={{ base: '14px', xs: '17px' }}
-              c={skyBlueColor}
-            >
+            <Heading5 fz={{ base: '14px', xs: '17px' }} c={skyBlueColor}>
               {addSpacesToNumber(Number(props.views))}
             </Heading5>
           </Flex>
         </Flex>
-        {/*<Grid>*/}
-        {/*  <Grid.Col span={3} offset={addSpacesToNumber(Number(props.dislikes)).length > 5 ? 0 : 1}>*/}
-        {/*    <Center inline>*/}
-        {/*      <IconThumbUp size={35} />*/}
-        {/*      <Heading5*/}
-        {/*        fz={{base: '14px', sm: '17px'}}*/}
-        {/*        c={'green'}*/}
-        {/*        style={{ whiteSpace: 'nowrap' }}*/}
-        {/*     >*/}
-        {/*        {addSpacesToNumber(Number(props.likes))}*/}
-        {/*      </Heading5>*/}
-        {/*    </Center>*/}
-        {/*  </Grid.Col>*/}
-
-        {/*  <Grid.Col span={3} >*/}
-        {/*    <Center inline>*/}
-        {/*      <IconThumbDown size={35} />*/}
-        {/*      <Heading5*/}
-        {/*        fz={{base: '14px', sm: '17px'}}*/}
-        {/*        c={'red'}*/}
-        {/*        style={{ whiteSpace: 'nowrap' }}*/}
-        {/*      >*/}
-        {/*        {addSpacesToNumber(Number(props.dislikes))}*/}
-        {/*      </Heading5>*/}
-        {/*    </Center>*/}
-        {/*  </Grid.Col>*/}
-
-        {/*  <Grid.Col span="content" offset={addSpacesToNumber(Number(props.views)).length > 5 ? 1 : 0}>*/}
-        {/*    <Center inline>*/}
-        {/*      <IconEye size={35} />*/}
-        {/*      <Heading5*/}
-        {/*        fz={{base: '14px', sm: '17px'}}*/}
-        {/*        c={skyBlueColor}*/}
-        {/*        style={{ whiteSpace: 'nowrap' }}*/}
-        {/*      >*/}
-        {/*        {addSpacesToNumber(Number(props.views))}*/}
-        {/*      </Heading5>*/}
-        {/*    </Center>*/}
-        {/*  </Grid.Col>*/}
-        {/*</Grid>*/}
       </Card.Section>
       {/*читать*/}
       <Flex justify={'center'}>

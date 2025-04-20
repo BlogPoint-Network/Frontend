@@ -181,7 +181,7 @@ export const CreatePostForm = () => {
               gap="xs"
               justify="center"
               align="center"
-              direction="row"
+              direction={{ base: 'column', xs: 'row' }}
             >
               <GreyButton
                 mt="sm"

@@ -2,18 +2,19 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
-import { Box, Card, Center, Flex, Grid, Image } from '@mantine/core';
-import { IconEye, IconHeart, IconThumbDown } from '@tabler/icons-react';
+import { Box, Card, Flex, Grid, Image } from '@mantine/core';
+import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
 import {
   BlueButton,
   ChannelIconImage,
   Heading1,
-  Heading3,
+  Heading2,
   Heading4,
   Heading5,
   List,
   Tag,
 } from '@ui';
+import { addSpacesToNumber } from '@utils';
 import { renderImgContent } from '@utils/renderImgContent.ts';
 
 export const PostItemPage: FC = () => {
@@ -56,22 +57,22 @@ export const PostItemPage: FC = () => {
     ],
     mediaFiles: [
       {
-        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
-        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        filename: 'image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
       },
       {
-        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
-        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        filename: 'image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
       },
       {
-        filename: 'image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
-        url: 'http://localhost:9000/blogpoint-bucket/image/141b214a-4048-4131-b734-fa99afb42e62.jpg',
+        filename: 'image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
+        url: 'http://localhost:9000/blogpoint-bucket/image/1660c5db-e10f-4ad2-8a96-3f4a4f1d9250.png',
       },
     ],
     dateOfCreation: '15:00',
-    likes: 45,
-    dislikes: 1,
-    views: 1352,
+    likes: 450123,
+    dislikes: 1239,
+    views: 1352000,
   };
   // const [post, setPost] = useState<IPost | null>(newExamplePost);
   // const { channelId, postId } = useParams();
@@ -111,20 +112,30 @@ export const PostItemPage: FC = () => {
 
   return (
     <Card
+      w={'100%'}
+      pos={'relative'}
+      pb={'50px'}
+      pl={{ base: '25px', sm: '30px', lg: '40px' }}
+      pr={{ base: '25px', sm: '30px', lg: '40px' }}
       style={{
-        position: 'relative',
-        width: '1000px',
+        maxWidth: '1000px',
         borderRadius: '15px',
-        height: 'auto',
-        paddingBottom: '50px',
       }}
     >
       <Card.Section>
-        <Flex gap="lg" justify="center" align="center" direction="row">
-          <ChannelIconImage src={post?.channelIcon.url} />
-          <Heading3
+        <Flex
+          justify="flex-start"
+          align="center"
+          gap={{ base: 'sm', sm: 'lg' }}
+          mt="15"
+        >
+          <ChannelIconImage src={post.channelIcon.url} />
+          <Heading2
+            fz={{ base: '17px', sm: '22px', md: '26px' }}
+            pr={{ sm: '190px' }} // для кнопки подписаться
             fw="500"
-            onClick={() => navigate(`/channel/:${post?.channelId}`)}
+            truncate="end"
+            onClick={() => navigate(`/channel/:${post.channelId}`)}
             style={{
               color: isHovered ? 'blue' : 'black',
               transition: 'color 0.3s ease',
@@ -132,91 +143,100 @@ export const PostItemPage: FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {post?.channelName}
-          </Heading3>
-          <BlueButton mt={15} onClick={() => alert('Вы подписались')}>
+            {post.channelName.length > 25
+              ? post.channelName.substring(0, 25) + '...'
+              : post.channelName}
+          </Heading2>
+          <BlueButton
+            pos={'absolute'}
+            right={{ base: '0px', lg: '5px' }}
+            mt="10px"
+            display={{ base: 'none', sm: 'block' }}
+            onClick={() => alert('Вы подписались')}
+          >
             Подписаться
           </BlueButton>
         </Flex>
       </Card.Section>
       <Card.Section>
-        <Flex gap={'md'} justify="center" align="center" direction="column">
-          <Heading1 fw={'600'} ta="center" w={900}>
-            {post?.title}
-          </Heading1>
+        <Heading1 ta="center" m={'10px auto'}>
+          {post?.title}
+        </Heading1>
+      </Card.Section>
+      <Card.Section>
+        <Image
+          w="100%"
+          height={'auto'}
+          style={{ objectFit: 'contain' }}
+          src={post?.previewImage.url}
+          // ВЕРТИКАЛЬНОЕ ИЗОБРАЖЕНИЕ ТЕСТ
+          // src={
+          //   'https://images.unsplash.com/photo-1564754943164-e83c08469116?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D'
+          // }
+        />
+      </Card.Section>
+      <Card.Section>
+        <div dangerouslySetInnerHTML={{ __html: processedContent }} />
+      </Card.Section>
+      <Box w={'100%'} bg={greyColor} h={1} m={'15px -10px'} />
+      <Card.Section mt="10px" mb="20px">
+        <Flex direction={'row'} gap="7px" wrap={'wrap'}>
+          <List items={post.tags} renderItem={Tag} />
         </Flex>
       </Card.Section>
       <Card.Section>
-        <Center>
-          <Image w={900} src={post?.previewImage.url} />
-        </Center>
-      </Card.Section>
-      <Card.Section>
-        <Center>
-          <div
-            style={{ width: 900 }}
-            dangerouslySetInnerHTML={{ __html: processedContent }}
-          />
-        </Center>
-      </Card.Section>
-      <Center>
-        <Box w={950} bg={greyColor} h={1} m={15} />
-      </Center>
-      <Card.Section pl="15" pr="15" mb="10">
-        <Center>
-          <Flex direction={'row'} gap="10px" justify={'flex-start'}>
-            <List items={post.tags} renderItem={Tag} />
+        <Flex
+          justify={'space-between'}
+          m="auto 10px"
+          gap={'10px'}
+          direction={{ base: 'column', sm: 'row', md: 'column', lg: 'row' }}
+        >
+          <Heading4 fw={600}>Дата публикации {post?.dateOfCreation}</Heading4>
+          <Flex align="start" gap="md">
+            <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
+              <IconThumbUp size={35} />
+              <Heading5 c="green" fz={{ base: '14px', xs: '17px' }}>
+                {addSpacesToNumber(Number(post.likes))}
+              </Heading5>
+            </Flex>
+            <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
+              <IconThumbDown size={35} />
+              <Heading5 c="red" fz={{ base: '14px', xs: '17px' }}>
+                {addSpacesToNumber(Number(post.dislikes))}
+              </Heading5>
+            </Flex>
+            <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
+              <IconEye size={35} />
+              <Heading5 c={skyBlueColor} fz={{ base: '14px', xs: '17px' }}>
+                {addSpacesToNumber(Number(post.views))}
+              </Heading5>
+            </Flex>
           </Flex>
-        </Center>
+        </Flex>
       </Card.Section>
+      <Box w={'100%'} bg={greyColor} h={1} m={'15px -10px'} />
       <Card.Section>
-        <Center>
-          <Grid w={900}>
-            <Grid.Col span={4}>
-              <Heading4 fw={600}>
-                Дата публикации {post?.dateOfCreation}
-              </Heading4>
-            </Grid.Col>
-            <Grid.Col span={4} offset={4}>
-              <Grid>
-                <Grid.Col span={3}>
-                  <Center inline>
-                    <IconHeart size={35} />
-                    <Heading5 c={'green'}>{post?.likes}</Heading5>
-                  </Center>
-                </Grid.Col>
-                <Grid.Col span={3}>
-                  <Center inline>
-                    <IconThumbDown size={35} />
-                    <Heading5 c={'red'}>{post?.dislikes}</Heading5>
-                  </Center>
-                </Grid.Col>
-                <Grid.Col span={3}>
-                  <Center inline>
-                    <IconEye size={35} />
-                    <Heading5 c={skyBlueColor}>{post?.views}</Heading5>
-                  </Center>
-                </Grid.Col>
-              </Grid>
-            </Grid.Col>
-          </Grid>
-        </Center>
-      </Card.Section>
-      <Center>
-        <Box w={950} bg={greyColor} h={1} m={15} />
-      </Center>
-      <Card.Section>
-        <Grid grow ml={55}>
+        <Grid grow>
           {post.mediaFiles.length > 0 &&
             post.mediaFiles.map((item, index) => (
-              <Card withBorder key={index} w={'auto'} h={'auto'} m={5}>
+              <Card withBorder key={index} m={10}>
                 <Flex align="center" justify="space-between">
                   <div>
                     {getFileTypeFromUrl(item.url) === 'image' && (
-                      <img src={item.url} alt="uploaded" width={400} />
+                      <img
+                        src={item.url}
+                        alt="uploaded"
+                        width={'100%'}
+                        style={{ maxWidth: '400px' }}
+                      />
                     )}
                     {getFileTypeFromUrl(item.url) === 'video' && (
-                      <video src={item.url} controls width={400} />
+                      <video
+                        src={item.url}
+                        controls
+                        width={'100%'}
+                        style={{ maxWidth: '400px' }}
+                      />
                     )}
                     {getFileTypeFromUrl(item.url) === 'audio' && (
                       <audio src={item.url} controls />
