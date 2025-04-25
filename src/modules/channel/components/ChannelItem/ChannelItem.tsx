@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { IChannel } from '@app-types';
-import { Card, Container, Flex, Image, Text } from '@mantine/core';
-import { IconAccessible } from '@tabler/icons-react';
-import { BlueButton, Heading2, Heading4 } from '@ui';
+import { Card, Container, Flex, Image } from '@mantine/core';
+import { BlueButton, Heading2, Heading4, SubCount } from '@ui';
 import { Category } from '@ui';
-import { addSpacesToNumber } from '@utils';
 
 export const ChannelItem = (props: IChannel) => {
   const navigate = useNavigate();
@@ -30,6 +28,12 @@ export const ChannelItem = (props: IChannel) => {
         h="100%"
       >
         <Container w={{ base: '100%', sm: '100%', md: '280px' }}>
+          <SubCount
+            isJustifiedEnd={true}
+            display={{ base: 'flex', xs: 'none' }}
+            subNumber={props.subsCount}
+            mb={'20px'}
+          />
           <Image
             // minWidth: '140px',  не работает
             h={{ md: '100%', sm: '280px', base: '280px' }}
@@ -73,20 +77,14 @@ export const ChannelItem = (props: IChannel) => {
             </Heading4>
           </Flex>
           <Flex // Подписчики|кнопка
-            justify="space-between"
+            justify={{ base: 'center', xs: 'space-between' }}
           >
-            <Flex // ИконкаПодписчик|Число
-              gap="10px"
-              align="center"
-            >
-              <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
-              <Text fz={{ base: '1rem', xss: '1.2rem' }}>
-                <i>{addSpacesToNumber(props.subsCount)}</i>
-              </Text>
-            </Flex>
+            <SubCount
+              display={{ base: 'none', xs: 'flex' }}
+              subNumber={props.subsCount}
+            />
             <BlueButton
               mt={'15px'}
-              mr={{ base: '0px', xss: '15' }}
               onClick={() => navigate(`/channel/${props.id + ''}`)}
             >
               Перейти
