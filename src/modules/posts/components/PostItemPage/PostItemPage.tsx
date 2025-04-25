@@ -199,12 +199,14 @@ export const PostItemPage: FC = () => {
                 {addSpacesToNumber(Number(post.likes))}
               </Heading5>
             </Flex>
+
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconThumbDown size={35} />
               <Heading5 c="red" fz={{ base: '14px', xs: '17px' }}>
                 {addSpacesToNumber(Number(post.dislikes))}
               </Heading5>
             </Flex>
+
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconEye size={35} />
               <Heading5 c={skyBlueColor} fz={{ base: '14px', xs: '17px' }}>

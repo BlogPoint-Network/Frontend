@@ -7,7 +7,7 @@ import { ChannelDescription } from '@modules/channel/components/ChannelDescripti
 import { useChannelById } from '@modules/channel/hooks/useChannelById.ts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import { IconAccessible } from '@tabler/icons-react';
-import { BlueButton, CommonFrame, Heading2, Heading4 } from '@ui';
+import { BlueButton, CommonFrame, Heading2, Heading4, RedButton } from '@ui';
 import { addSpacesToNumber } from '@utils';
 
 export const ChannelItemPage: FC = () => {
@@ -36,7 +36,7 @@ export const ChannelItemPage: FC = () => {
 
   // для кнопок в описании
 
-  const isAdmin: boolean = false;
+  const isOwner: boolean = false;
   // Состояние для отслеживания текста и стилей кнопки
   const [isSubscribed, setIsSubscribed] = useState(false);
   // });
@@ -53,41 +53,65 @@ export const ChannelItemPage: FC = () => {
       <CommonFrame>
         <Card
           radius="md"
-          h="290px"
           m="15px 0px"
-          w="80%"
           bd="1px solid black"
           id={'PopularChannelItem' + (channel?.id ?? '')}
           style={{
-            minWidth: '700px',
-            maxWidth: '900px',
+            maxWidth: '800px',
             // width: '100%', // Чтобы она могла растягиваться до maxWidth
-            display: 'flex',
-            alignItems: 'start',
           }}
         >
           <Flex // картинка|текстовый блок
             w="100%"
-            direction="row"
+            direction={{ base: 'column', lg: 'row' }}
             gap="40px"
             // justify="space-between"
             h="100%"
           >
-            <div style={{ width: '280px' }}>
-              <Image
-                h="100%"
-                w="auto"
-                ml="auto"
-                mr="auto"
-                style={{
-                  // minWidth: '140px', // не работает
-                  maxWidth: '280px',
-                  border: '1px solid black',
-                  borderRadius: '30px',
-                }}
-                src={'/src/app/assets/images/EmptyPng.png'}
-              />
-            </div>
+            {/* УЗКИЕ ЭКРАНЫ */}
+            <Flex // Заглавие|описание
+              direction="column"
+              gap="10px"
+              display={{ base: 'flex', lg: 'none' }}
+            >
+              <Flex // Название|подписчики
+                justify="space-between"
+                gap="20px"
+              >
+                <Heading2 lineClamp={1}>
+                  {channel?.name ?? 'Тестовый канал канал канал канал канал'}
+                </Heading2>
+
+                {/* ШИРОКИЕ ЭКРАНЫ */}
+                <Flex // ИконкаПодписчик|Число
+                  gap="10px"
+                  align="center"
+                  justify={'flex-end'}
+                >
+                  <IconAccessible size="2.2rem" stroke={2.5} color="#3ec96f" />
+                  <Text size="1.2rem">
+                    <i>{addSpacesToNumber(channel?.subsCount ?? 0)}</i>
+                  </Text>
+                </Flex>
+              </Flex>
+              <Heading4 lineClamp={4}>
+                {channel?.description ??
+                  'Тестовое описание описание описание описание описание описание'}
+              </Heading4>
+            </Flex>
+
+            <Image
+              h={'280px'}
+              m={'auto'}
+              w={{ base: '280px', xs: 'auto', lg: '280px' }}
+              style={{
+                maxWidth: '370px',
+                minHeight: '280px',
+                border: '1px solid black',
+                borderRadius: '30px',
+              }}
+              src={'/src/app/assets/images/EmptyPng.png'}
+            />
             <Flex // Верхний блок|нижний блок
               direction="column"
               w="100%"
@@ -97,15 +121,21 @@ export const ChannelItemPage: FC = () => {
               <Flex // Заглавие|описание
                 direction="column"
                 gap="10px"
+                display={{ base: 'none', lg: 'flex' }}
               >
                 <Flex // Название|подписчики
                   justify="space-between"
                   gap="20px"
                 >
-                  <Heading2 lineClamp={1}>{channel?.name ?? ''}</Heading2>
+                  <Heading2 lineClamp={1}>
+                    {channel?.name ?? 'Тестовый канал канал канал канал канал'}
+                  </Heading2>
+
+                  {/* ШИРОКИЕ ЭКРАНЫ */}
                   <Flex // ИконкаПодписчик|Число
                     gap="10px"
                     align="center"
+                    justify={'flex-end'}
                   >
                     <IconAccessible
                       size="2.2rem"
@@ -117,36 +147,47 @@ export const ChannelItemPage: FC = () => {
                     </Text>
                   </Flex>
                 </Flex>
-                <Heading4 lineClamp={4}>{channel?.description ?? ''}</Heading4>
+                <Heading4 lineClamp={4}>
+                  {channel?.description ??
+                    'Тестовое описание описание описание описание описание описание'}
+                </Heading4>
               </Flex>
-              <ChannelDescription
-                channelName={channel?.name ?? ''}
-                description={channel?.description ?? ''}
-                subscriberNumber={channel?.subsCount ?? 0}
-              />
-              <div style={{ float: 'right' }}>
-                <BlueButton
-                  onClick={handleSubscribe}
-                  pos={'absolute'}
-                  style={{
-                    right: '0px',
-                    bottom: '0px',
-                    minWidth: '160px',
-                    ...buttonStyle,
-                  }}
-                >
-                  {isSubscribed ? 'Отписаться' : 'Подписаться'}
-                </BlueButton>
-                {isAdmin && (
+              <Flex
+                justify={'space-between'}
+                gap={{ base: '10px', xs: '60px' }}
+                direction={{ base: 'column', xs: 'row' }}
+              >
+                <ChannelDescription
+                  channelName={channel?.name ?? ''}
+                  description={channel?.description ?? ''}
+                  subscriberNumber={channel?.subsCount ?? 0}
+                />
+                {isOwner ? (
                   <BlueButton
-                    onClick={() => {}}
-                    pos={'absolute'}
-                    style={{ right: '0px', bottom: '0px', minWidth: '160px' }}
+                    onClick={handleSubscribe}
+                    style={{
+                      ...buttonStyle,
+                    }}
                   >
-                    Редактировать
+                    {isSubscribed ? 'Отписаться' : 'Подписаться'}
                   </BlueButton>
+                ) : (
+                  <RedButton
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Вы уверены, что хотите удалить свой канал?',
+                        )
+                      ) {
+                        const handleDelete = () => {};
+                        handleDelete(); // заменить на удаление
+                      }
+                    }}
+                  >
+                    Удалить
+                  </RedButton>
                 )}
-              </div>
+              </Flex>
             </Flex>
           </Flex>
         </Card>
