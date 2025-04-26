@@ -17,6 +17,7 @@ export * from './Line/Line';
 export * from './List/List.tsx';
 export * from './LogoMainPage/LogoMainPage.tsx';
 export * from './Media/PostMedia.tsx';
+export * from './SubCount/SubCount.tsx';
 export * from './Tag/Tag.tsx';
 export * from './TagMultiSelect/TagMultiSelect.tsx';
 export * from './CategorySelect/CategorySelect.tsx';

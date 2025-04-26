@@ -29,4 +29,10 @@ export const pages = [
     href: '../Test',
     label: 'Для тестов',
   },
+  {
+    name: 'Тестовая2',
+    icon: IconAbacus,
+    href: '../Test2',
+    label: 'Для тестов2',
+  },
 ];

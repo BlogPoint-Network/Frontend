@@ -4,6 +4,7 @@ import { CreatePostForm, PostItemPage } from '@modules/posts';
 import {
   CreateChannel,
   ForTest,
+  ForTest2,
   Login,
   MainPage,
   PopularChannels,
@@ -35,5 +36,6 @@ export const publicRoutes = [
   { path: '/register', component: Register, exact: true },
   { path: '/', component: MainPage, exact: true },
   { path: '/test', component: ForTest, exact: true },
+  { path: '/test2', component: ForTest2, exact: true },
   { path: '/popular-channels', component: PopularChannels, exact: true },
 ];

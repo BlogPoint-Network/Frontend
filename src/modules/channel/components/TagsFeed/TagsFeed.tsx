@@ -18,7 +18,7 @@ export const TagsFeed = () => {
       <Carousel
         id="recommendationFeed"
         // draggable={{ md: false, base: true }} // не работает
-        w={'320px'} // выравнивание по центру
+        w={{base: '210px', xss: '260px', sm: '320px'}} // выравнивание по центру
         ml={'60px'}
         // controlSize="50"
         type="container"
@@ -36,6 +36,7 @@ export const TagsFeed = () => {
             top: '50%',
             left: 'calc(-70px)', // сдвигает левую стрелку за пределы карусели
             right: 'calc(-70px)', // сдвигает правую стрелку за пределы карусели
+            // Для мобилок
           },
         }}
       >
@@ -52,6 +53,7 @@ export const TagsFeed = () => {
               >
                 <Menu.Target>
                   <Button
+                    p={'5px'}
                     w="100%"
                     bg={isTagSelected ? selectedTag?.color : 'transparent'}
                     style={{
@@ -60,7 +62,7 @@ export const TagsFeed = () => {
                     }}
                   >
                     <Heading4
-                      size={'20px'}
+                      fz={{base: '15px', xss: '18px', sm: '20px'}}
                       color={isTagSelected ? 'white' : category.color}
                     >
                       {isTagSelected ? `#${selectedTag?.name}` : category.name}

@@ -48,7 +48,7 @@ export const EditProfileImage = () => {
         align={{ md: 'end', sm: 'start', base: 'start' }}
         direction={{ md: 'row', sm: 'column', base: 'column' }}
       >
-        <Image w={300} h={300} radius="md" src={Empty} />
+        <Image w={{ base: 250, xss: 300 }} h={300} radius="md" src={Empty} />
         <BlueButton
           onClick={() => {
             open();

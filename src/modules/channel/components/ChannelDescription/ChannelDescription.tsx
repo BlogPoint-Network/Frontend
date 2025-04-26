@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Flex, Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { GreyButton, Heading1, Heading2, Heading4, Line } from '@ui';
 
 interface IChannelMyChannelDescriptionButtonsProps {
@@ -13,11 +13,14 @@ export const ChannelDescription: FC<
   IChannelMyChannelDescriptionButtonsProps
 > = props => {
   const [opened, { open, close }] = useDisclosure(false);
+  // для fullscreen
+  const isMobile = useMediaQuery('(max-width: 450px)');
+
   return (
     <>
       <Modal
-        padding="40px"
-        size="80%"
+        size="100%"
+        fullScreen={isMobile}
         opened={opened}
         onClose={close}
         title={<Heading1>Информация о канале</Heading1>}
@@ -39,11 +42,7 @@ export const ChannelDescription: FC<
         </Flex>
       </Modal>
 
-      <GreyButton
-        pos={'absolute'}
-        style={{ left: '0px', bottom: '0px' }}
-        onClick={open}
-      >
+      <GreyButton display={'inline'} onClick={open}>
         Подробнее
       </GreyButton>
     </>

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '@assets/images/logo.png';
 import { greyColor, skyBlueColor } from '@constants';
 import { useProfileLogout } from '@hooks/useProfileLogout.ts';
-import { Button, Container, Flex, Image, Text } from '@mantine/core';
+import { Button, Flex, Image, Text } from '@mantine/core';
+import { IconLogout } from '@tabler/icons-react';
 
 import { ProfileContext } from '../../../../app/context';
 
@@ -15,9 +15,9 @@ export const Header = () => {
     bd: 'solid black 1px',
   };
   const navigate = useNavigate();
+  const profileLogout = useProfileLogout();
   const profileContext = useContext(ProfileContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const logout = useProfileLogout();
 
   useEffect(() => {
     if (profileContext?.user != null) {
@@ -26,23 +26,48 @@ export const Header = () => {
   }, [profileContext?.user]);
 
   return (
-    <Flex ml={{ sm: '0px', base: '20px' }} mt={{ sm: '0px', base: '-30px' }}>
-      <Flex align="center" ml={15}>
-        <Image radius="md" h={50} w="auto" src={logo} />
-        <Text size="30px" w={200} fw={700}>
+    <Flex justify={'space-between'} w="100%">
+      {/* LOGO */}
+      <Flex
+        display={{ md: 'flex', base: isAuthenticated ? 'flex' : 'none' }}
+        align="center"
+        ml={15}
+      >
+        <Image radius="md" h={50} w="auto" src={'/icons/logo.png'} />
+        <Text size="30px" w={180} fw={700}>
           BlogPoint
         </Text>
       </Flex>
 
-      <Container></Container>
+      {/* LOGout для мобильных устройств */}
+      <Button
+        mt={'10px'}
+        variant="subtle"
+        onClick={() => profileLogout.mutate()}
+        display={{ md: 'none', base: isAuthenticated ? 'flex' : 'none' }}
+      >
+        <IconLogout color={skyBlueColor} size={'45px'} />
+      </Button>
 
-      <Flex align="center" gap="md" justify="flex-end" mr={15}>
+      {/* Основные кнопки */}
+      <Flex
+        display={{ md: 'flex', base: isAuthenticated ? 'none' : 'flex' }}
+        align="center"
+        gap="md"
+        justify="flex-end"
+        w={'100%'}
+        mr={15}
+        mt={{ base: '5px', md: '0px' }}
+      >
         <Button
           {...btnProps}
           bg={greyColor}
           onClick={() => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            isAuthenticated ? alert(logout) : navigate('login');
+            if (isAuthenticated) {
+              profileLogout.mutate();
+            } else {
+              navigate('login');
+            }
           }}
         >
           <Text size="lg" c="black">

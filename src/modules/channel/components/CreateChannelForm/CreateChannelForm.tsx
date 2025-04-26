@@ -27,19 +27,14 @@ export const CreateChannelForm = () => {
   const profile = useContext(ProfileContext);
   const navigate = useNavigate();
 
-  const categoryOptions = categories.map(category => ({
-    value: category.id.toString(), // value должен быть string
-    label: category.name,
-  }));
-
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
       name: '',
       description: '',
       category: '',
-      // imageLogo: File || null,
-      ownerId: profile?.user?.id.toString() ?? '',
+      imageBanner: '',
+      imageLogo: '',
     },
     validate: {
       name: value =>
@@ -51,7 +46,7 @@ export const CreateChannelForm = () => {
           ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
       category: value => (value ? null : 'Выберите категорию канала из списка'),
-      // imageLogo: value => (value ? null : 'Загрузите корректное изображение'),
+      imageLogo: value => (value ? null : 'Загрузите корректное изображение'),
     },
   });
 
@@ -69,7 +64,14 @@ export const CreateChannelForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            createChannel.mutate(values);
+            createChannel.mutate({
+              name: values.name,
+              description: values.description,
+              category: values.category,
+              imageBanner: values.imageBanner,
+              imageLogo: values.imageLogo,
+              ownerId: profile?.user?.id ?? '',
+            });
           })}
         >
           <Flex direction="column" gap="md">
@@ -94,7 +96,10 @@ export const CreateChannelForm = () => {
               mt="sm"
               radius="lg"
               label={<Heading4 mb={5}>Категория канала</Heading4>}
-              data={categoryOptions}
+              data={categories.map(category => ({
+                value: category.id.toString(), // значение id как строка
+                label: category.name, // отображаемое имя категории
+              }))}
               {...form.getInputProps('category')}
             />
             <Heading4>Изображение канала</Heading4>
@@ -107,10 +112,10 @@ export const CreateChannelForm = () => {
             {form.errors.image && <Text c="red">{form.errors.image}</Text>}
             <Flex
               mih={50}
-              gap="xs"
+              gap={{ base: '0', xs: 'xs' }}
               justify="center"
               align="center"
-              direction="row"
+              direction={{ base: 'column', xs: 'row' }}
             >
               <GreyButton
                 mt="sm"

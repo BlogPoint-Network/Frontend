@@ -1,27 +1,30 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { greyColor, skyBlueColor } from '@constants';
-import { Card, Flex, Image, Pagination, Text } from '@mantine/core';
+import { Card, Flex, Image, Pagination } from '@mantine/core';
 import { ChannelDescription } from '@modules/channel/components/ChannelDescription/ChannelDescription.tsx';
 import { useClearSubscribe } from '@modules/channel/hooks/useClearSubscribe.ts';
 import { useGetChannelById } from '@modules/channel/hooks/useGetChannelById.ts';
 import { useSetSubscribe } from '@modules/channel/hooks/useSetSubscribe.ts';
-import { PostItem } from '@modules/posts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
-import { IconAccessible } from '@tabler/icons-react';
-import { BlueButton, CommonFrame, Heading2, Heading4, List } from '@ui';
+import {
+  BlueButton,
+  CommonFrame,
+  Heading2,
+  Heading4,
+  RedButton,
+  SubCount,
+} from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
 
 export const ChannelItemPage: FC = () => {
   const [activePage, setPage] = useState(1);
-
   const navigate = useNavigate();
   const { id } = useParams();
   const channelManager = useGetChannelById(Number(id)).data?.data.data;
   const posts = usePosts(Number(id), activePage);
-  const isAdmin: boolean = false;
-  // Состояние для отслеживания текста и стилей кнопки
+
   const [isSubscribed, setIsSubscribed] = useState(false);
   const setSubscribe = useSetSubscribe();
   const clearSubscribe = useClearSubscribe();
@@ -48,50 +51,66 @@ export const ChannelItemPage: FC = () => {
       <CommonFrame>
         <Card
           radius="md"
-          h="290px"
           m="15px 0px"
-          w="80%"
           bd="1px solid black"
           id={'PopularChannelItem' + (channelManager?.id ?? '')}
           style={{
-            minWidth: '700px',
-            maxWidth: '900px',
-            // width: '100%', // Чтобы она могла растягиваться до maxWidth
-            display: 'flex',
-            alignItems: 'start',
+            maxWidth: '800px',
           }}
         >
-          <Flex // картинка|текстовый блок
-            w="100%"
-            direction="row"
+          <Flex // основной flex-контейнер
+            direction={{ base: 'column', lg: 'row' }}
             gap="40px"
-            // justify="space-between"
             h="100%"
+            w="100%"
+            justify="space-between"
           >
-            <div style={{ width: '280px' }}>
-              <Image
-                h="100%"
-                w="auto"
-                ml="auto"
-                mr="auto"
-                style={{
-                  // minWidth: '140px', // не работает
-                  maxWidth: '280px',
-                  border: '1px solid black',
-                  borderRadius: '30px',
-                }}
-                src={'/src/app/assets/images/EmptyPng.png'}
-              />
-            </div>
-            <Flex // Верхний блок|нижний блок
+            {/* МАЛЫЕ ЭКРАНЫ */}
+            <Flex // для скрытия
+              direction="column"
+              gap="10px"
+              display={{ base: 'flex', lg: 'none' }}
+            >
+              <Flex // Название|подписчики
+                justify="space-between"
+                gap="20px"
+              >
+                <Heading2 lineClamp={1}>{channelManager?.name ?? ''}</Heading2>
+                <SubCount
+                  isJustifiedEnd={true}
+                  subNumber={channelManager?.subsCount}
+                />
+              </Flex>
+              <Heading4 lineClamp={4}>
+                {channelManager?.description ?? ''}
+              </Heading4>
+            </Flex>
+
+            {/* Изображение канала */}
+            <Image
+              h="280px"
+              m="auto"
+              w={{ base: '280px', xs: 'auto', lg: '280px' }}
+              style={{
+                maxWidth: '370px',
+                minHeight: '280px',
+                border: '1px solid black',
+                borderRadius: '30px',
+              }}
+              src={'/src/app/assets/images/EmptyPng.png'}
+            />
+
+            <Flex // расположение кнопок и подписчиков
               direction="column"
               w="100%"
               justify="space-between"
-              pos={'relative'}
+              pos="relative"
             >
-              <Flex // Заглавие|описание
+              {/* ШИРОКИЕ ЭКРАНЫ*/}
+              <Flex // для скрытия
                 direction="column"
                 gap="10px"
+                display={{ base: 'none', lg: 'flex' }}
               >
                 <Flex // Название|подписчики
                   justify="space-between"
@@ -100,56 +119,52 @@ export const ChannelItemPage: FC = () => {
                   <Heading2 lineClamp={1}>
                     {channelManager?.name ?? ''}
                   </Heading2>
-                  <Flex // ИконкаПодписчик|Число
-                    gap="10px"
-                    align="center"
-                  >
-                    <IconAccessible
-                      size="2.2rem"
-                      stroke={2.5}
-                      color="#3ec96f"
-                    />
-                    <Text size="1.2rem">
-                      <i>{addSpacesToNumber(channelManager?.subsCount ?? 0)}</i>
-                    </Text>
-                  </Flex>
+                  <SubCount
+                    isJustifiedEnd={true}
+                    subNumber={channelManager?.subsCount}
+                  />
                 </Flex>
                 <Heading4 lineClamp={4}>
                   {channelManager?.description ?? ''}
                 </Heading4>
               </Flex>
-              <ChannelDescription
-                channelName={channelManager?.name ?? ''}
-                description={channelManager?.description ?? ''}
-                subscriberNumber={channelManager?.subsCount ?? 0}
-              />
-              <div style={{ float: 'right' }}>
-                <BlueButton
-                  onClick={toggleSubscribe}
-                  pos={'absolute'}
-                  style={{
-                    right: '0px',
-                    bottom: '0px',
-                    minWidth: '160px',
-                    ...buttonStyle,
-                  }}
-                >
-                  {isSubscribed ? 'Отписаться' : 'Подписаться'}
-                </BlueButton>
-                {isAdmin && (
-                  <BlueButton
-                    onClick={() => {}}
-                    pos={'absolute'}
-                    style={{ right: '0px', bottom: '0px', minWidth: '160px' }}
+              <Flex // нижние кнопки
+                justify={{ base: 'center', lg: 'space-between' }}
+                gap={{ base: '10px', xs: '60px' }}
+                direction={{ base: 'column', xs: 'row' }}
+              >
+                <ChannelDescription
+                  channelName={channelManager?.name ?? ''}
+                  description={channelManager?.description ?? ''}
+                  subscriberNumber={channelManager?.subsCount ?? 0}
+                />
+                {(profile?.user ??
+                profile?.user?.id == channelManager?.ownerId) ? (
+                  <RedButton
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Вы уверены, что хотите удалить свой канал?',
+                        )
+                      ) {
+                        const handleDelete = () => {};
+                        handleDelete();
+                      }
+                    }}
                   >
-                    Редактировать
+                    Удалить
+                  </RedButton>
+                ) : (
+                  <BlueButton onClick={toggleSubscribe} style={buttonStyle}>
+                    {isSubscribed ? 'Отписаться' : 'Подписаться'}
                   </BlueButton>
                 )}
-              </div>
+              </Flex>
             </Flex>
           </Flex>
         </Card>
       </CommonFrame>
+
       <Flex
         gap="md"
         justify="center"
@@ -160,13 +175,9 @@ export const ChannelItemPage: FC = () => {
         <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
           Создать пост
         </BlueButton>
-        <List items={posts} renderItem={PostItem} />
+        {/*<List items={posts} renderItem={PostItem} />*/}
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>
     </>
   );
 };
-
-function addSpacesToNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}

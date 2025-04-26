@@ -1,11 +1,11 @@
 import { Header } from '@components/AppShell/components/Header/Header.tsx';
 import { Navigation } from '@components/AppShell/components/Navigation/Navigation.tsx';
-import { AppShell as AppShellMantine, Burger } from '@mantine/core';
+import { AppShell as AppShellMantine, Burger, Flex } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import AppRouter from '@routes/components/AppRouter/AppRouter.tsx';
 
 export const AppShell = () => {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
 
   return (
     <AppShellMantine
@@ -14,18 +14,20 @@ export const AppShell = () => {
       }}
       navbar={{
         width: 250,
-        breakpoint: 'sm',
+        breakpoint: 'md',
         collapsed: { mobile: !opened },
       }}
       padding="md"
     >
       <AppShellMantine.Header>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Header />
+        <Flex display={{ base: 'flex', md: 'block' }} justify={'space-between'}>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="lg" />
+          <Header />
+        </Flex>
       </AppShellMantine.Header>
 
       <AppShellMantine.Navbar p="md">
-        <Navigation />
+        <Navigation closeMenu={close} />
       </AppShellMantine.Navbar>
 
       <AppShellMantine.Main bg="rgb(241 241 241)">

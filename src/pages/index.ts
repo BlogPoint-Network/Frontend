@@ -1,5 +1,6 @@
 export * from './CreateChannel.tsx';
 export * from './ForTest';
+export * from './ForTest2';
 export * from './Login';
 export * from './MainPage.tsx';
 export * from './PopularChannels.tsx';
