@@ -1,5 +1,5 @@
 export interface IMedia {
-  // name: string;
+  name: string;
   filename: string;
   url: string;
 }

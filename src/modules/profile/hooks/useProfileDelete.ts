@@ -10,7 +10,7 @@ export const useProfileDelete = () => {
   const navigate = useNavigate();
   const controller = useMutation({
     mutationKey: ['user'],
-    mutationFn: () => UserService.deleteUser(),
+    mutationFn: (code: string) => UserService.deleteUser(code),
     onSuccess: () => {
       localStorage.clear();
       profile?.setUser(null);

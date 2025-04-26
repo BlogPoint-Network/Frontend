@@ -1,4 +1,5 @@
 import { ICategory } from '@app-types/ICategory.ts';
+import { IMedia } from '@app-types/IMedia.ts';
 
 export interface IChannel {
   id: number;
@@ -7,7 +8,5 @@ export interface IChannel {
   description: string;
   ownerId: number;
   subsCount: number;
-  imageLogo: string | null;
-  imageBanner: string | null;
-  imageURL?: string | null;
+  imageLogo: IMedia;
 }

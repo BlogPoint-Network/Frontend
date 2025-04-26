@@ -20,6 +20,7 @@ export const useProfileRegister = () => {
     },
     onError: error => {
       console.log(error);
+      navigate('/register');
     },
   });
 

@@ -1,4 +1,4 @@
-import { IContentImage, IMedia, ITag } from '@app-types';
+import { IMedia, ITag } from '@app-types';
 
 export interface IPost {
   id: string;
@@ -8,7 +8,7 @@ export interface IPost {
   previewImage: IMedia;
   title: string;
   content: string;
-  contentImages: IContentImage[];
+  contentImages: IMedia[];
   tags: ITag[];
   mediaFiles: IMedia[];
   dateOfCreation: string;

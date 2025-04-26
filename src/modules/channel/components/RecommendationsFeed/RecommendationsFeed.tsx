@@ -39,9 +39,7 @@ export const RecommendationsFeed = () => {
       }}
     >
       {recommendationsExamples.map(el => (
-        <Carousel.Slide key={el.id}>
-
-        </Carousel.Slide>
+        <Carousel.Slide key={el.id} />
       ))}
     </Carousel>
   );

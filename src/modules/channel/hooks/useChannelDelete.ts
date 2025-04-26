@@ -10,7 +10,7 @@ export function useChannelDelete() {
     },
     onSuccess: () => {
       console.log('Успешное удаление');
-      navigate('/');
+      navigate('/user-channels');
     },
   });
   return controller;

@@ -6,5 +6,5 @@ export function usePosts(channelId: number, page: number) {
     queryKey: ['posts'],
     queryFn: () => PostService.getPosts(channelId, page),
   });
-  return controller;
+  return controller.data?.data.data ?? [];
 }

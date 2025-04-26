@@ -1,10 +1,10 @@
 import { ChannelService } from '@api';
 import { useQuery } from '@tanstack/react-query';
 
-export function useChannelSubscription() {
+export function useGetChannelById(id: number) {
   const controller = useQuery({
-    queryKey: ['subscriptionChannels'],
-    queryFn: () => ChannelService.getSubscription(),
+    queryKey: ['channel'],
+    queryFn: () => ChannelService.getChannel(id),
   });
   return controller;
 }

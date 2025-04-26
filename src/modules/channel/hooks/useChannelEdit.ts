@@ -1,25 +1,24 @@
 import { ChannelService } from '@api';
+import { IMedia } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
 interface ChannelEditParams {
-  id: string;
+  channelId: number;
   name: string;
-  category: string;
+  categoryId: number;
   description: string;
-  imageLogo: string | null;
-  imageBanner: string | null;
+  imageLogo: IMedia | null;
 }
 
 export function useChannelEdit() {
   const controller = useMutation({
     mutationFn: async (modifiedChannel: ChannelEditParams) => {
       return await ChannelService.editChannel(
-        modifiedChannel.id,
-        modifiedChannel.name,
-        modifiedChannel.category,
+        modifiedChannel.channelId,
+        modifiedChannel.categoryId,
         modifiedChannel.description,
+        modifiedChannel.name,
         modifiedChannel.imageLogo,
-        modifiedChannel.imageBanner,
       );
     },
     onError: error => {

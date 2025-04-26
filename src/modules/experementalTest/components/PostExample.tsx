@@ -1,9 +1,23 @@
-import { FC, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IPost } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
-import { Box, Card, Center, Flex, Grid, Image } from '@mantine/core';
-import { useGetPostById } from '@modules/posts/hooks/useGetPostById.ts';
-import { IconEye, IconHeart, IconThumbDown } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Box,
+  Card,
+  Center,
+  Flex,
+  Grid,
+  Image,
+} from '@mantine/core';
+import {
+  IconEye,
+  IconHeart,
+  IconHeartFilled,
+  IconThumbDown,
+  IconThumbDownFilled,
+} from '@tabler/icons-react';
 import {
   BlueButton,
   ChannelIconImage,
@@ -16,15 +30,17 @@ import {
 } from '@ui';
 import { renderImgContent } from '@utils/renderImgContent.ts';
 
-export const PostItemPage: FC = () => {
-  const { postId } = useParams();
+interface IProps {
+  post: IPost;
+}
+
+export const PostExample = (props: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const post = useGetPostById(Number(postId));
 
   const processedContent = renderImgContent(
-    post?.content ?? '',
-    post?.contentImages ?? [],
+    props.post?.content ?? '',
+    props.post?.contentImages ?? [],
   );
   const getFileType = (filename: string): string => {
     const ext = filename.split('.').pop()?.toLowerCase();
@@ -44,6 +60,18 @@ export const PostItemPage: FC = () => {
   const getFileTypeFromUrl = (url: string): string => {
     return getFileType(url);
   };
+  const [userReaction, setUserReaction] = useState<'like' | 'dislike' | null>(
+    null,
+  );
+  const handleReaction = (type: 'like' | 'dislike') => {
+    if (userReaction === type) {
+      // Нажал повторно — убираем реакцию
+      setUserReaction(null);
+    } else {
+      // Смена реакции или новая реакция
+      setUserReaction(type);
+    }
+  };
 
   return (
     <Card
@@ -57,10 +85,10 @@ export const PostItemPage: FC = () => {
     >
       <Card.Section>
         <Flex gap="lg" justify="center" align="center" direction="row">
-          <ChannelIconImage src={post?.channelIcon.url} />
+          <ChannelIconImage src={props.post?.channelIcon.url} />
           <Heading3
             fw="500"
-            onClick={() => navigate(`/channel/:${post?.channelId}`)}
+            onClick={() => navigate(`/channel/:${props.post?.channelId}`)}
             style={{
               color: isHovered ? 'blue' : 'black',
               transition: 'color 0.3s ease',
@@ -68,7 +96,7 @@ export const PostItemPage: FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {post?.channelName}
+            {props.post?.channelName}
           </Heading3>
           <BlueButton mt={15} onClick={() => alert('Вы подписались')}>
             Подписаться
@@ -78,13 +106,13 @@ export const PostItemPage: FC = () => {
       <Card.Section>
         <Flex gap={'md'} justify="center" align="center" direction="column">
           <Heading1 fw={'600'} ta="center" w={900}>
-            {post?.title}
+            {props.post?.title}
           </Heading1>
         </Flex>
       </Card.Section>
       <Card.Section>
         <Center>
-          <Image w={900} src={post?.previewImage.url} />
+          <Image w={900} src={props.post?.previewImage.url} />
         </Center>
       </Card.Section>
       <Card.Section>
@@ -101,8 +129,8 @@ export const PostItemPage: FC = () => {
       <Card.Section pl="15" pr="15" mb="10">
         <Center>
           <Flex direction={'row'} gap="10px" justify={'flex-start'}>
-            {post?.tags ? (
-              <List items={post.tags} renderItem={Tag} />
+            {props.post?.tags ? (
+              <List items={props.post.tags} renderItem={Tag} />
             ) : (
               <Heading5>Тегов не обноружено</Heading5>
             )}
@@ -114,27 +142,51 @@ export const PostItemPage: FC = () => {
           <Grid w={900}>
             <Grid.Col span={4}>
               <Heading4 fw={600}>
-                Дата публикации {post?.dateOfCreation}
+                Дата публикации {props.post?.dateOfCreation}
               </Heading4>
             </Grid.Col>
             <Grid.Col span={4} offset={4}>
               <Grid>
                 <Grid.Col span={3}>
                   <Center inline>
-                    <IconHeart size={35} />
-                    <Heading5 c={'green'}>{post?.likes}</Heading5>
+                    <ActionIcon variant="transparent" size={50} color={'red'}>
+                      {userReaction === 'like' ? (
+                        <IconHeartFilled
+                          size={35}
+                          onClick={() => handleReaction('like')}
+                        />
+                      ) : (
+                        <IconHeart
+                          size={35}
+                          onClick={() => handleReaction('like')}
+                        />
+                      )}
+                    </ActionIcon>
+                    <Heading5 c={'green'}>{props.post?.likes}</Heading5>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <Center inline>
-                    <IconThumbDown size={35} />
-                    <Heading5 c={'red'}>{post?.dislikes}</Heading5>
+                    <ActionIcon variant="transparent" size={50}>
+                      {userReaction === 'dislike' ? (
+                        <IconThumbDownFilled
+                          size={35}
+                          onClick={() => handleReaction('dislike')}
+                        />
+                      ) : (
+                        <IconThumbDown
+                          size={35}
+                          onClick={() => handleReaction('dislike')}
+                        />
+                      )}
+                    </ActionIcon>
+                    <Heading5 c={'red'}>{props.post?.dislikes}</Heading5>
                   </Center>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <Center inline>
                     <IconEye size={35} />
-                    <Heading5 c={skyBlueColor}>{post?.views}</Heading5>
+                    <Heading5 c={skyBlueColor}>{props.post?.views}</Heading5>
                   </Center>
                 </Grid.Col>
               </Grid>
@@ -147,9 +199,9 @@ export const PostItemPage: FC = () => {
       </Center>
       <Card.Section>
         <Grid grow ml={55}>
-          {post?.mediaFiles ? (
-            post.mediaFiles.length > 0 &&
-            post.mediaFiles.map((item, index) => (
+          {props.post?.mediaFiles ? (
+            props.post.mediaFiles.length > 0 &&
+            props.post.mediaFiles.map((item, index) => (
               <Card withBorder key={index} w={'auto'} h={'auto'} m={5}>
                 <Flex align="center" justify="space-between">
                   <div>

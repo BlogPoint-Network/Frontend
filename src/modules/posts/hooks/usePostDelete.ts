@@ -1,17 +1,15 @@
 import { PostService } from '@api';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
-interface DeletePostParams {
-  postId: string;
-  channelId: string;
-}
-
-export function usePostDelete() {
+export function usePostDelete(channelId: number) {
+  const navigate = useNavigate();
   const controller = useMutation({
-    mutationFn: async ({ channelId, postId }: DeletePostParams) => {
-      return await PostService.deletePost(String(channelId), String(postId));
+    mutationFn: async (postId: number) => {
+      return await PostService.deletePost(postId);
     },
     onSuccess: () => {
+      navigate(`/channel/${channelId}`);
       console.log('Успешное удаление поста');
     },
     onError: error => {

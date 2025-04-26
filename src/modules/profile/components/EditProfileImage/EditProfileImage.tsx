@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Empty from '@assets/images/EmptyPng.png';
 import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BlueButton, GreyButton, Heading3, Heading4, Heading2 } from '@ui';
+import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
+
 import { useProfileEditImg } from '../../hooks/useProfileEditImg';
 
 export const EditProfileImage = () => {

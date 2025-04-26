@@ -3,7 +3,6 @@ import { IChannel } from '@app-types';
 import { Card, Container, Flex, Image, Text } from '@mantine/core';
 import { IconAccessible } from '@tabler/icons-react';
 import { BlueButton, Heading2, Heading4 } from '@ui';
-import { Category } from '@ui';
 
 export const ChannelItem = (props: IChannel) => {
   const navigate = useNavigate();
@@ -40,8 +39,8 @@ export const ChannelItem = (props: IChannel) => {
               border: '1px solid black',
             }}
             src={
-              props.imageURL
-                ? props.imageURL
+              props.imageLogo
+                ? props.imageLogo.url
                 : '../../../public/assets/images/icons/default_post.jpg'
             }
           />
@@ -61,11 +60,11 @@ export const ChannelItem = (props: IChannel) => {
             <Heading2 lineClamp={1} fw="bold" td="underline">
               {props.name}
             </Heading2>
-            <Category
-              name={props.name}
-              color={props.category.color}
-              id={props.id}
-            />
+            {/*<Category*/}
+            {/*  name={props.name}*/}
+            {/*  color={props.category.color}*/}
+            {/*  id={props.id}*/}
+            {/*/>*/}
 
             <Heading4 lineClamp={3} mt={'5px'}>
               {props.description}

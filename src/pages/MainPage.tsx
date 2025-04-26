@@ -1,10 +1,11 @@
 import { Container, Flex } from '@mantine/core';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
-import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
-import { popularChannelsExamples } from '@modules/channel/constants/popularChannelsExamples.ts';
+// import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
+import { useGetPopularChannels } from '@modules/channel/hooks/useGetPopularChannels.ts';
 import { CommonFrame, Heading1, List, LogoMainPage } from '@ui';
 
 export const MainPage = () => {
+  const popularChannels = useGetPopularChannels();
   return (
     <>
       <CommonFrame>
@@ -27,7 +28,7 @@ export const MainPage = () => {
             direction="column"
             w="100%"
           >
-            <List items={popularChannelsExamples} renderItem={ChannelItem} />
+            <List items={popularChannels} renderItem={ChannelItem} />
           </Flex>
         </Container>
       </CommonFrame>

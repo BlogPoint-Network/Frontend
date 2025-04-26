@@ -15,9 +15,9 @@ export const Header = () => {
     bd: 'solid black 1px',
   };
   const navigate = useNavigate();
-  const profileLogout = useProfileLogout();
   const profileContext = useContext(ProfileContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const logout = useProfileLogout();
 
   useEffect(() => {
     if (profileContext?.user != null) {
@@ -42,7 +42,7 @@ export const Header = () => {
           bg={greyColor}
           onClick={() => {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            isAuthenticated ? profileLogout.mutate() : navigate('login');
+            isAuthenticated ? alert(logout) : navigate('login');
           }}
         >
           <Text size="lg" c="black">

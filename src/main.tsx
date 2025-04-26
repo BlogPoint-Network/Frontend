@@ -5,7 +5,7 @@ import { MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { ProfileContextProvider } from './app/context';
+import { ProfileContextProvider } from './app/context/ProfileContextProvider.tsx';
 import { App } from './App.tsx';
 
 import '@mantine/core/styles.css';

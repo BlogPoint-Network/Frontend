@@ -1,11 +1,16 @@
 import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { Loader } from '@mantine/core';
 import { privateRoutes, publicRoutes } from '@routes/routes';
 
 import { ProfileContext } from '../../../context';
 
 const AppRouter = () => {
   const profileAuth = useContext(ProfileContext);
+
+  if (profileAuth?.isLoading) {
+    return <Loader size={50} />;
+  }
 
   return (
     <Routes>

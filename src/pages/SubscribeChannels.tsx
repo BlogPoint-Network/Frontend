@@ -1,19 +1,12 @@
 import { Container, Flex } from '@mantine/core';
+import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
 import { ChannelsFeed } from '@modules/channel/components/ChannelsFeed/ChannelsFeed.tsx';
-import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
+import { useGetSubscription } from '@modules/channel/hooks/useGetSubscription.ts';
 import { CommonFrame, Heading1, List } from '@ui';
-import { PostItem } from '@modules/posts';
 
 export const SubscribeChannels = () => {
-  // const channelManager = useChannel();
-  // const [channels, setChannels] = useState<IChannel[]>(testChannelProps);
-  //
-  // useEffect(() => {
-  //   const test = async () => {
-  //     setChannels((await channelManager.getSubscription()) ?? testChannelProps);
-  //   };
-  //   test();
-  // }, []);
+  const subscribeChannels = useGetSubscription();
+  console.log(subscribeChannels);
 
   return (
     <CommonFrame>
@@ -30,7 +23,7 @@ export const SubscribeChannels = () => {
           direction="column"
           w="100%"
         >
-          <List items={recommendationsExamples} renderItem={PostItem} />
+          <List items={subscribeChannels} renderItem={ChannelItem} />
         </Flex>
       </Container>
     </CommonFrame>

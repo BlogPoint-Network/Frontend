@@ -52,8 +52,9 @@ export const CreatePostForm = () => {
     // 🔹 2. Загружаем previewImage
     const previewResponse = await uploadFile.mutateAsync(previewImg);
     const previewImageData: IMedia = {
-      filename: previewResponse.filename,
-      url: previewResponse.url,
+      name: '',
+      filename: previewResponse.data.data.filename,
+      url: previewResponse.data.data.url,
     };
 
     // 🔹 3. Загружаем изображения из контента
@@ -62,8 +63,8 @@ export const CreatePostForm = () => {
         const response = await uploadFile.mutateAsync(img.file);
         return {
           name: img.name,
-          filename: response.filename,
-          url: response.url,
+          filename: response.data.data.filename,
+          url: response.data.data.url,
         };
       }),
     );
@@ -73,8 +74,9 @@ export const CreatePostForm = () => {
       mediaFiles.map(async file => {
         const response = await uploadFile.mutateAsync(file.file);
         return {
-          filename: response.filename,
-          url: response.url,
+          name: '',
+          filename: response.data.data.filename,
+          url: response.data.data.url,
         };
       }),
     );

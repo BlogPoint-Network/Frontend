@@ -2,7 +2,6 @@ import {
   IconAbacus,
   IconChartBarPopular,
   IconHome,
-  IconQuestionMark,
   IconTrendingUp,
   IconUser,
   IconUserHeart,
@@ -12,7 +11,7 @@ import {
 export const pages = [
   { label: 'Главная', icon: IconHome, href: '../' },
   { label: 'Профиль', icon: IconUser, href: '../Profile' },
-  { label: 'Подписки', icon: IconUserHeart, href: '../channel-subscribe' },
+  { label: 'Подписки', icon: IconUserHeart, href: '../subscribe-channels' },
   { label: 'Мои каналы', icon: IconUsersGroup, href: '../user-channels' },
   {
     label: 'Рекомендации',
@@ -23,11 +22,6 @@ export const pages = [
     label: 'Популярные каналы',
     icon: IconTrendingUp,
     href: '../popular-channels',
-  },
-  {
-    label: 'Рейтинг каналов',
-    icon: IconQuestionMark,
-    href: '../RatingOfChannels',
   },
   {
     name: 'Тестовая',

@@ -1,13 +1,13 @@
 // import { FC, ReactNode, useContext, useEffect, useLayoutEffect } from 'react';
 // import { Loader } from '@mantine/core';
-// import { useProfile } from '@modules/profile/hooks/useProfile';
+// import { useGetProfile } from '@modules/profile/hooks/useGetProfile';
 //
 // interface IProfileLoaderProps {
 //   children?: ReactNode;
 // }
 //
 // export const ProfileLoader: FC<IProfileLoaderProps> = props => {
-//   const profileManager = useProfile();
+//   const profileManager = useGetProfile();
 //
 //   useLayoutEffect(() => {
 //     if (profileController) profileController.infoUserMutation.mutate();

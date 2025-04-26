@@ -2,18 +2,20 @@ import { ConfirmEmail, ProfileForm } from '@modules/profile';
 import { EditProfileImage } from '@modules/profile/components/EditProfileImage/EditProfileImage.tsx';
 import { EditProfileInfo } from '@modules/profile/components/EditProfileInfo/EditProfileInfo.tsx';
 import { EditProfilePassword } from '@modules/profile/components/EditProfilePassword/EditProfilePassword.tsx';
-import { useProfile } from '@modules/profile/hooks/useProfile.ts';
+import { useGetProfile } from '@modules/profile/hooks/useGetProfile.ts';
 
 export const Profile = () => {
-  const { data: user, isLoading, error } = useProfile();
+  const userController = useGetProfile();
+  const currentUser = userController.data?.data.data;
 
-  if (isLoading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error.message}</p>;
+  if (userController.isLoading) return <p>Загрузка...</p>;
+  if (userController.error)
+    return <p>Ошибка: {userController.error.message}</p>;
 
   return (
-    <ProfileForm user={user}>
+    <ProfileForm user={currentUser}>
       <EditProfileImage />
-      <EditProfileInfo user={user} />
+      <EditProfileInfo user={currentUser} />
       <ConfirmEmail />
       <EditProfilePassword />
     </ProfileForm>

@@ -1,1 +1,1 @@
-export * from './constants/MyExamplePost'
+export * from './components/PostExample';

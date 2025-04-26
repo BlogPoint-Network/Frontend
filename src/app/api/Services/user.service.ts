@@ -1,12 +1,12 @@
 import { api } from '@api/instance.ts';
-import { IUser } from '@app-types';
+import { IMedia, IUser } from '@app-types';
 import { AxiosResponse } from 'axios';
 
 export class UserService {
   static async loginUser(
     login: string,
     password: string,
-  ): Promise<AxiosResponse<{ user: IUser } & { token: string }>> {
+  ): Promise<AxiosResponse<{ message: string }>> {
     return api.post('/login', { login, password });
   }
 
@@ -14,50 +14,71 @@ export class UserService {
     email: string,
     login: string,
     password: string,
-  ): Promise<AxiosResponse<{ user: IUser }>> {
+  ): Promise<AxiosResponse<{ message: string }>> {
     return api.post('/register', { login, email, password });
   }
 
-  static async logoutUser(): Promise<void> {
-    return api.post('/logout');
+  static async deleteUser(
+    code: string,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.delete('/deleteUser', { data: code });
   }
 
-  static async deleteUser(): Promise<AxiosResponse<IUser>> {
-    return api.delete('/deleteprofile');
-  }
-
-  static async infoUser(): Promise<AxiosResponse<IUser>> {
+  static async infoUser(): Promise<
+    AxiosResponse<{ data: IUser } & { message: string }>
+  > {
     return api.get('/user');
   }
 
   static async editProfileInfo(
     email: string,
     login: string,
-  ): Promise<AxiosResponse<{ user: IUser }>> {
-    return api.patch('/editprofile', {
+  ): Promise<AxiosResponse<{ data: IUser } & { message: string }>> {
+    return api.patch('/editProfile', {
       login,
       email,
     });
   }
 
   static async editProfileImg(
-    img: File | null,
+    img: IMedia | null,
   ): Promise<AxiosResponse<{ user: IUser }>> {
-    return api.post('/editprofile', { img });
+    return api.post('/editProfile', { img });
   }
 
   static async editProfilePassword(
     oldPassword: string,
     newPassword: string,
-  ): Promise<AxiosResponse<{ user: IUser }>> {
-    return api.post('/editprofile', { oldPassword, newPassword });
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.post('/changePassword', { oldPassword, newPassword });
   }
 
-  static async requestEmailVerification() {
-    return api.post('/requestemailverification');
+  static async requestEmailVerification(): Promise<
+    AxiosResponse<{ message: string }>
+  > {
+    return api.post('/requestEmailVerification');
   }
 
   static async verifyEmail(data: { code: string }) {
-    return api.post('/verifyemail', data);
+    return api.post('/verifyEmail', data);
+  }
+
+  static async requestPasswordReset(
+    email: string,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.post('/requestPasswordReset', { email });
+  }
+
+  static async resetPassword(
+    code: string,
+    password: string,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.post('/resetPassword', { code, password });
+  }
+
+  static async requestDeletionVerification(): Promise<
+    AxiosResponse<{ message: string }>
+  > {
+    return api.post('/requestDeletionVerification');
   }
 }

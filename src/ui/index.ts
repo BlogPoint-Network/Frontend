@@ -19,3 +19,4 @@ export * from './LogoMainPage/LogoMainPage.tsx';
 export * from './Media/PostMedia.tsx';
 export * from './Tag/Tag.tsx';
 export * from './TagMultiSelect/TagMultiSelect.tsx';
+export * from './CategorySelect/CategorySelect.tsx';

@@ -20,6 +20,7 @@ export default defineConfig({
       '@routes': '/src/app/routes',
       '@api': '/src/app/api',
       '@assets': '/src/app/assets',
+      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
     },
   },
 });

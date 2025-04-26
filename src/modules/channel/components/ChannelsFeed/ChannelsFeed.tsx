@@ -65,7 +65,7 @@ export const ChannelsFeed = () => {
                 pr={'10px'}
               >
                 <Flex direction={'row'} align={'center'}>
-                  <ChannelIconImage src={channel.imageURL} />
+                  <ChannelIconImage src={channel.imageLogo} />
                   <Container>
                     <Heading4
                       w={'240px'}

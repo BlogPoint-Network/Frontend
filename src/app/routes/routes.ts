@@ -8,7 +8,6 @@ import {
   MainPage,
   PopularChannels,
   Profile,
-  RatingOfChannels,
   Recommendations,
   Register,
   SubscribeChannels,
@@ -17,11 +16,11 @@ import {
 
 export const privateRoutes = [
   { path: '/profile', component: Profile, exact: true },
-  { path: '/channels-subscribe', component: SubscribeChannels, exact: true },
   { path: '/user-channels', component: UserChannels, exact: true },
   { path: '/recommendations', component: Recommendations, exact: true },
   { path: '/create-channel', component: CreateChannel, exact: true },
   { path: '/channel/:id/create-post', component: CreatePostForm, exact: true },
+  { path: '/subscribe-channels', component: SubscribeChannels, exact: true },
 ];
 
 export const publicRoutes = [
@@ -37,5 +36,4 @@ export const publicRoutes = [
   { path: '/', component: MainPage, exact: true },
   { path: '/test', component: ForTest, exact: true },
   { path: '/popular-channels', component: PopularChannels, exact: true },
-  { path: '/rating-of-channels', component: RatingOfChannels, exact: true },
 ];

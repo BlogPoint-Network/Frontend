@@ -1,26 +1,28 @@
+import { useNavigate } from 'react-router-dom';
 import { ChannelService } from '@api';
+import { IMedia } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
 interface CreateChannelParams {
   name: string;
-  category: string;
   description: string;
-  ownerId: string;
-  imageLogo: string | null;
-  imageBanner: string | null;
+  category: number;
+  imageLogo: IMedia;
 }
 
 export function useChannelCreate() {
+  const navigate = useNavigate();
   const controller = useMutation({
     mutationFn: async (newChannel: CreateChannelParams) => {
       return await ChannelService.createChannel(
         newChannel.name,
         newChannel.category,
-        newChannel.ownerId,
-        newChannel.ownerId,
+        newChannel.description,
         newChannel.imageLogo,
-        newChannel.imageBanner,
       );
+    },
+    onSuccess: data => {
+      navigate(`/channel/${data.data.data.id}`);
     },
     onError: error => {
       console.error('Ошибка при создании канала', error);

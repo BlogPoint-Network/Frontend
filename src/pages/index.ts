@@ -4,7 +4,6 @@ export * from './Login';
 export * from './MainPage.tsx';
 export * from './PopularChannels.tsx';
 export * from './Profile';
-export * from './RatingOfChannels.tsx';
 export * from './Recommendations.tsx';
 export * from './Register';
 export * from './SubscribeChannels.tsx';

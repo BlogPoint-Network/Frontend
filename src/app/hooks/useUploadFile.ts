@@ -7,7 +7,7 @@ export function useUploadFile() {
       return await FileService.upload(file);
     },
     onSuccess: data => {
-      return data;
+      return data.data.data;
     },
     onError: error => {
       console.error(error);

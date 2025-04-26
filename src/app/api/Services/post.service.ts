@@ -1,5 +1,5 @@
 import { api } from '@api/instance.ts';
-import { IContentImage, IMedia, IPost, ITag } from '@app-types';
+import { IMedia, IPost } from '@app-types';
 import { AxiosResponse } from 'axios';
 
 export class PostService {
@@ -8,11 +8,11 @@ export class PostService {
     previewImage: IMedia,
     title: string,
     content: string,
-    contentImages: IContentImage[],
-    tags: ITag[],
+    contentImages: IMedia[],
+    tags: number[],
     mediaFiles: IMedia[],
-  ): Promise<AxiosResponse<{ post: IPost }>> {
-    return api.post('/createpost', {
+  ): Promise<AxiosResponse<{ data: IPost } & { massage: string }>> {
+    return api.post('/createPost', {
       channelId,
       previewImage,
       title,
@@ -25,16 +25,18 @@ export class PostService {
   }
 
   static async editPost(
-    channelId: string,
+    postId: number,
     previewImage: IMedia,
+    channelLogo: IMedia,
     title: string,
     content: string,
-    contentImages: IContentImage[],
-    tags: ITag[],
+    contentImages: IMedia[],
+    tags: number[],
     mediaFiles: IMedia[],
-  ): Promise<AxiosResponse<{ post: IPost }>> {
-    return api.patch('/editpost', {
-      channelId,
+  ): Promise<AxiosResponse<{ data: IPost } & { message: string }>> {
+    return api.patch('/editPost', {
+      postId,
+      channelLogo,
       previewImage,
       title,
       content,
@@ -45,23 +47,28 @@ export class PostService {
   }
 
   static async deletePost(
-    channelId: string,
-    postId: string,
-  ): Promise<AxiosResponse<{ post: IPost }>> {
-    return api.delete('/deletepost', { data: { channelId, postId } });
+    id: number,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.delete(`/deletePost/${id}`);
   }
 
   static async getPosts(
     channelId: number,
     page: number,
-  ): Promise<AxiosResponse<IPost[]>> {
-    return api.get(`/getposts/?channelId=${channelId}&page=${page}`);
+  ): Promise<AxiosResponse<{ data: IPost[] } & { message: string }>> {
+    return api.get(`/getPosts/${channelId}?page=${page}`);
   }
 
   static async getPostById(
     postId: number,
-    channelId: number,
-  ): Promise<AxiosResponse<IPost>> {
-    return api.get(`/getpost/?postId=${postId}&channelId=${channelId}`);
+  ): Promise<AxiosResponse<{ data: IPost } & { message: string }>> {
+    return api.get(`/getPost/${postId}`);
+  }
+
+  static async setReaction(
+    postId: number,
+    reaction: string,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    return api.post(`/setReaction/`, { postId, reaction });
   }
 }

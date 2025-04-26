@@ -1,14 +1,14 @@
 import { PostService } from '@api';
 import { useMutation } from '@tanstack/react-query';
-import { IContentImage, IMedia, ITag } from '@app-types';
+import { IContentImage, IMedia } from '@app-types';
 
 interface CreatePostParams {
   channelId: string;
-  previewImage: IMedia;
-  title: string;
   content: string;
+  tags: number[];
+  title: string;
+  previewImage: IMedia;
   contentImages: IContentImage[];
-  tags: ITag[];
   mediaFiles: IMedia[];
 }
 
@@ -26,7 +26,7 @@ export function usePostCreate() {
       );
     },
     onError: error => {
-      console.error('Ошибка при создании поста:', error);
+      console.error('Ошибка при создании поста:', error.message);
       alert('Не удалось создать пост');
     },
   });

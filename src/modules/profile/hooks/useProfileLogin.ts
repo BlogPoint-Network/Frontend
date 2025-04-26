@@ -12,14 +12,14 @@ export const useProfileLogin = () => {
     mutationKey: ['user'],
     mutationFn: ({ login, password }: { login: string; password: string }) =>
       UserService.loginUser(login, password),
-    onSuccess: data => {
-      localStorage.setItem('token', data.data.token);
-      profile?.setUser(data.data.user);
+    onSuccess: async () => {
+      const user = await UserService.infoUser();
+      profile?.setUser(user.data.data);
       navigate('/profile');
     },
     onError: error => {
       console.log(error);
-      navigate('/');
+      navigate('/login');
     },
   });
 
