@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IChannel, IPost } from '@app-types';
 import { greyColor, skyBlueColor } from '@constants';
@@ -14,6 +14,8 @@ import {
   RedButton,
   SubCount,
 } from '@ui';
+
+import { ProfileContext } from '../../../../app/context';
 
 export const ChannelItemPage: FC = () => {
   const [channel, setChannel] = useState<IChannel | null>(null);
@@ -40,6 +42,7 @@ export const ChannelItemPage: FC = () => {
   }, [activePage]);
 
   const isOwner: boolean = true;
+  const profileContext = useContext(ProfileContext);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const handleSubscribe = () => {
     setIsSubscribed(prev => !prev);
@@ -138,7 +141,8 @@ export const ChannelItemPage: FC = () => {
                   description={channel?.description ?? ''}
                   subscriberNumber={channel?.subsCount ?? 0}
                 />
-                {isOwner ? (
+                {(profileContext?.user ??
+                profileContext?.user?.id == channel?.ownerId) ? (
                   <RedButton
                     onClick={() => {
                       if (
@@ -151,7 +155,8 @@ export const ChannelItemPage: FC = () => {
                       }
                     }}
                   >
-                    Удалить
+                    {(profileContext?.user &&
+                      profileContext?.user?.id) ? profileContext?.user?.id: 'Не удалить'}
                   </RedButton>
                 ) : (
                   <BlueButton onClick={handleSubscribe} style={buttonStyle}>
