@@ -5,7 +5,7 @@ import { useEmailVerification } from '@modules/profile/hooks/useEmailVerificatio
 import { useVerifyEmail } from '@modules/profile/hooks/useVerifyEmail.ts';
 import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
 
-export const EditEmailCode: FC = () => {
+export const ConfirmEmail: FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
