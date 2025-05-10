@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Flex, Group, rem, Text } from '@mantine/core';
 import {
   Dropzone as MantineDropzone,
@@ -26,6 +27,7 @@ export const Dropzone: FC<FormDropzoneProps> = ({
   onRejectFile,
   ...props
 }) => {
+  const { l } = useLanguage();
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'accept' | 'reject' | 'success'
   >('idle');
@@ -41,8 +43,7 @@ export const Dropzone: FC<FormDropzoneProps> = ({
     onRejectFile();
     setUploadStatus('reject');
     if (fileRejections.length > 0) {
-      form.errors.image =
-        'Файл слишком большой или имеет неподдерживаемый формат';
+      form.errors.image = l.errorImage;
     }
     console.log('Изображение отклонено', fileRejections);
   };
@@ -70,7 +71,11 @@ export const Dropzone: FC<FormDropzoneProps> = ({
           mih={220}
           style={{ pointerEvents: 'none' }}
         >
-          <Flex gap={'30px'} ml={'20px'} direction={{base: 'column', xs: 'row'}}>
+          <Flex
+            gap={'30px'}
+            ml={'20px'}
+            direction={{ base: 'column', xs: 'row' }}
+          >
             <div>
               {uploadStatus === 'success' && (
                 <IconCheck
@@ -104,11 +109,9 @@ export const Dropzone: FC<FormDropzoneProps> = ({
               )}
             </div>
             <div>
-              <Heading3 lh={1.2}>
-                Нажмите, чтобы выбрать изображение или перетащите его в это поле
-              </Heading3>
+              <Heading3 lh={1.2}>{l.dropzoneHeading}</Heading3>
               <Text size="sm" c="dimmed" inline mt={15}>
-                Размером не более 200Кб
+                {l.dropzoneLimits}
               </Text>
             </div>
           </Flex>

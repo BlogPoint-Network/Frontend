@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '@constants/categories.ts';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import {
   Flex,
   Group,
@@ -23,6 +24,7 @@ import {
 import { ProfileContext } from '../../../../app/context';
 
 export const CreateChannelForm = () => {
+  const { l } = useLanguage();
   const createChannel = useChannelCreate();
   const profile = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -38,15 +40,13 @@ export const CreateChannelForm = () => {
     },
     validate: {
       name: value =>
-        value.length < 3 || value.length > 60
-          ? 'Название канала должно быть длиннее 3 символов и не более 60 символов'
-          : null,
+        value.length < 3 || value.length > 60 ? l.validationChannelName : null,
       description: value =>
         value && (value.length < 10 || value.length > 500)
-          ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
+          ? l.validationChannelDescription
           : null,
-      category: value => (value ? null : 'Выберите категорию канала из списка'),
-      imageLogo: value => (value ? null : 'Загрузите корректное изображение'),
+      category: value => (value ? null : l.validationChannelCategory),
+      imageLogo: value => (value ? null : l.validationChannelImage),
     },
   });
 
@@ -60,7 +60,7 @@ export const CreateChannelForm = () => {
 
   return (
     <FormBox>
-      <Heading1>Создание канала</Heading1>
+      <Heading1>{l.channelCreation}</Heading1>
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
@@ -79,30 +79,30 @@ export const CreateChannelForm = () => {
               size="md"
               mt="sm"
               radius="lg"
-              label={<Heading4 mb={5}>Название канала</Heading4>}
-              placeholder="Введите название канала"
+              label={<Heading4 mb={5}>{l.channelName}</Heading4>}
+              placeholder={l.enterChannelName}
               {...form.getInputProps('name')}
             />
             <Textarea
               size="md"
               mt="sm"
               radius="lg"
-              label={<Heading4 mb={10}>Описание канала</Heading4>}
-              placeholder="Введите описание"
+              label={<Heading4 mb={10}>{l.channelDescription}</Heading4>}
+              placeholder={l.enterChannelDescription}
               {...form.getInputProps('description')}
             />
             <NativeSelect
               size="md"
               mt="sm"
               radius="lg"
-              label={<Heading4 mb={5}>Категория канала</Heading4>}
+              label={<Heading4 mb={5}>{l.channelCategory}</Heading4>}
               data={categories.map(category => ({
                 value: category.id.toString(), // значение id как строка
                 label: category.name, // отображаемое имя категории
               }))}
               {...form.getInputProps('category')}
             />
-            <Heading4>Изображение канала</Heading4>
+            <Heading4>{l.channelImage}</Heading4>
             <Dropzone
               form={form}
               onDropFile={handleDropFile}
@@ -122,10 +122,10 @@ export const CreateChannelForm = () => {
                 w={'fit-content'}
                 onClick={() => navigate('/user-channels')}
               >
-                Отменить
+                {l.btnCancel}
               </GreyButton>
               <BlueButton type="submit" mt="sm" w={'fit-content'}>
-                Подтвердить
+                {l.btnConfirm}
               </BlueButton>
             </Flex>
           </Flex>

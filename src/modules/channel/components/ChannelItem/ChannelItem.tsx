@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { IChannel } from '@app-types';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Card, Container, Flex, Image } from '@mantine/core';
 import { BlueButton, Heading2, Heading4, SubCount } from '@ui';
 import { Category } from '@ui';
 
 export const ChannelItem = (props: IChannel) => {
+  const { l } = useLanguage();
   const navigate = useNavigate();
 
   return (
@@ -87,7 +89,7 @@ export const ChannelItem = (props: IChannel) => {
               mt={'15px'}
               onClick={() => navigate(`/channel/${props.id + ''}`)}
             >
-              Перейти
+              {l.btnGo}
             </BlueButton>
           </Flex>
         </Flex>

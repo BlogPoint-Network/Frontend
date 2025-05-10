@@ -46,8 +46,8 @@ export const useLanguage = (defaultLang: Language = 'ru') => {
       setLocalLang(lang as Language);
     } else {
       profileChangeLanguage.mutate(lang);
-      window.location.reload();
     }
+    window.location.reload();
   };
 
   const l = translations[language] || translations[defaultLang];

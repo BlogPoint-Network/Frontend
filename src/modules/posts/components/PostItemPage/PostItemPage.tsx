@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { greyColor, skyBlueColor } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Box, Card, Flex, Grid, Image } from '@mantine/core';
 import { useGetPostById } from '@modules/posts/hooks/useGetPostById.ts';
 import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
@@ -16,6 +17,7 @@ import { addSpacesToNumber } from '@utils';
 import { renderImgContent } from '@utils/renderImgContent.ts';
 
 export const PostItemPage: FC = () => {
+  const { l } = useLanguage();
   const { postId } = useParams();
   const post = useGetPostById(Number(postId));
   const [isHovered, setIsHovered] = useState(false);
@@ -77,20 +79,18 @@ export const PostItemPage: FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {
-              post?.channelName && post?.channelName.length > 25
+            {post?.channelName && post?.channelName.length > 25
               ? post.channelName.substring(0, 25) + '...'
-              : post?.channelName
-            }
+              : post?.channelName}
           </Heading2>
           <BlueButton
             pos={'absolute'}
             right={{ base: '0px', lg: '5px' }}
             mt="10px"
             display={{ base: 'none', sm: 'block' }}
-            onClick={() => alert('Вы подписались')}
+            onClick={() => alert(l.youSubscribedNow)}
           >
-            Подписаться
+            {l.btnSubscribe}
           </BlueButton>
         </Flex>
       </Card.Section>
@@ -127,7 +127,7 @@ export const PostItemPage: FC = () => {
           gap={'10px'}
           direction={{ base: 'column', sm: 'row', md: 'column', lg: 'row' }}
         >
-          <Heading4 fw={600}>Дата публикации {post?.dateOfCreation}</Heading4>
+          <Heading4 fw={600}>{l.dateOfPublication} {post?.dateOfCreation}</Heading4>
           <Flex align="start" gap="md">
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconThumbUp size={35} />
@@ -185,7 +185,7 @@ export const PostItemPage: FC = () => {
               </Card>
             ))
           ) : (
-            <Heading5>Файлы не прикрепили</Heading5>
+            <Heading5>{l.noFiles}</Heading5>
           )}
         </Grid>
       </Card.Section>

@@ -3,23 +3,25 @@ import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem
 // import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
 import { useGetPopularChannels } from '@modules/channel/hooks/useGetPopularChannels.ts';
 import { CommonFrame, Heading1, List, LogoMainPage } from '@ui';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const MainPage = () => {
+  const { l } = useLanguage();
   const popularChannels = useGetPopularChannels();
+
   return (
     <>
       <CommonFrame>
         <LogoMainPage />
         <Container id="recommendationPostsContainer">
           <Heading1 ta="center" mb="40px">
-            {}
-            Рекомендации
+            {l.recommendations}
           </Heading1>
           {/*<RecommendationsFeed />*/}
         </Container>
         <Container id="popularChannelsContainer" mb="40px">
           <Heading1 ta="center" mb="40px">
-            Популярные каналы
+            {l.popularChannels}
           </Heading1>
           <Flex
             id="PopularChannelFeed"

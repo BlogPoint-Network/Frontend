@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Button, Card, Flex, Group, Stack, Text } from '@mantine/core';
 import { Dropzone } from '@mantine/dropzone';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface MediaFile {
   file: File;
@@ -14,6 +15,8 @@ interface FileLoaderProps {
 }
 
 export const FileLoader: FC<FileLoaderProps> = ({ files, setFiles }) => {
+  const { l } = useLanguage();
+
   // Обработка добавленных файлов
   const handleFiles = (newFiles: File[]) => {
     const newMedia = newFiles.map(file => {
@@ -42,7 +45,7 @@ export const FileLoader: FC<FileLoaderProps> = ({ files, setFiles }) => {
       {/* Поле загрузки файлов */}
       <Dropzone onDrop={handleFiles} accept={['image/*', 'video/*', 'audio/*']}>
         <Group p="center">
-          <Text>Перетащите файлы или нажмите для выбора</Text>
+          <Text>{l.fileLoaderSeveralFiles}</Text>
         </Group>
       </Dropzone>
 
@@ -65,7 +68,7 @@ export const FileLoader: FC<FileLoaderProps> = ({ files, setFiles }) => {
                   <Text size="sm">{item.file.name}</Text>
                 </div>
                 <Button color="red" size="xs" onClick={() => removeFile(index)}>
-                  Удалить
+                  {l.btnDelete}
                 </Button>
               </Flex>
             </Card>

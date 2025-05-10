@@ -14,8 +14,10 @@ import {
   Tag,
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const PostItem = (props: IPost) => {
+  const { l } = useLanguage();
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const extractTextFromHTML = (html: string): string => {
@@ -123,7 +125,7 @@ export const PostItem = (props: IPost) => {
             navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
           }
         >
-          Читать
+          {l.btnRead}
         </BlueButton>
       </Flex>
     </Card>

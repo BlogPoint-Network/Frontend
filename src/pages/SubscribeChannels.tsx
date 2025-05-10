@@ -3,8 +3,10 @@ import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem
 import { ChannelsFeed } from '@modules/channel/components/ChannelsFeed/ChannelsFeed.tsx';
 import { useGetSubscription } from '@modules/channel/hooks/useGetSubscription.ts';
 import { CommonFrame, Heading1, List } from '@ui';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const SubscribeChannels = () => {
+  const { l } = useLanguage();
   const subscribeChannels = useGetSubscription();
   console.log(subscribeChannels);
 
@@ -13,7 +15,7 @@ export const SubscribeChannels = () => {
       <Container id="MySubscribeChannelsContainer" mb="40px">
         <ChannelsFeed />
         <Heading1 ta="center" mb="40px" mt={'10px'}>
-          Мои подписки
+          {l.subscriptions}
         </Heading1>
         <Flex
           id="RecommendationsFeed"

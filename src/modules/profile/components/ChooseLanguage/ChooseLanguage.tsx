@@ -45,7 +45,7 @@ export const ChooseLanguage: FC<IEditProfileInfoProps> = props => {
             mt="sm"
             mb="sm"
             radius="lg"
-            label={<Heading4 mb={5}>{l.chooseLanguage}</Heading4>}
+            label={<Heading4 mb={5}>{l.selectLanguage}</Heading4>}
             data={Object.entries(languages).map(([value, label]) => ({
               value, // 'en', 'ru', ...
               label, // 'English', 'Russian', ...
@@ -69,7 +69,7 @@ export const ChooseLanguage: FC<IEditProfileInfoProps> = props => {
 
       <Flex direction={'column'} gap={'15px'} mb={'20px'}>
         <Label
-          title={'Язык'}
+          title={l.language}
           text={props.user?.language ? languages[props.user.language] : ''}
         />
         <BlueButton w={{ base: '160px' }} onClick={open}>

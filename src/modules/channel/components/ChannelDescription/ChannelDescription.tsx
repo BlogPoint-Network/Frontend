@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Flex, Modal } from '@mantine/core';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { GreyButton, Heading1, Heading2, Heading4, Line } from '@ui';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface IChannelMyChannelDescriptionButtonsProps {
   channelName: string;
@@ -12,6 +13,7 @@ interface IChannelMyChannelDescriptionButtonsProps {
 export const ChannelDescription: FC<
   IChannelMyChannelDescriptionButtonsProps
 > = props => {
+  const { l } = useLanguage();
   const [opened, { open, close }] = useDisclosure(false);
   // для fullscreen
   const isMobile = useMediaQuery('(max-width: 450px)');
@@ -23,7 +25,7 @@ export const ChannelDescription: FC<
         fullScreen={isMobile}
         opened={opened}
         onClose={close}
-        title={<Heading1>Информация о канале</Heading1>}
+        title={<Heading1>{l.channelInfo}</Heading1>}
         // для отступа снизу при прокрутке*
       >
         <Flex
@@ -33,7 +35,7 @@ export const ChannelDescription: FC<
           direction="column"
         >
           <Heading4 fs="italic">
-            Количество подписчиков: {props.subscriberNumber}
+            {l.subsCount}: {props.subscriberNumber}
           </Heading4>
           <Line h="2px" />
           <Heading2>{props.channelName}</Heading2>
@@ -43,7 +45,7 @@ export const ChannelDescription: FC<
       </Modal>
 
       <GreyButton display={'inline'} onClick={open}>
-        Подробнее
+        {l.btnDetails}
       </GreyButton>
     </>
   );

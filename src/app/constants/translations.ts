@@ -21,22 +21,56 @@ export const translations = {
     newPassword: 'Новый пароль',
     confirmPassword: 'Подтвердите новый пароль',
     changingUserLanguage: 'Изменение языка пользователя',
-    chooseLanguage: 'Выберите язык',
+    selectLanguage: 'Выберите язык',
     // Навигация
     navigation: 'Навигация',
     // Главная
     homePage: 'Главная страница',
     // Подписки
-    subscriptions: 'Подписки',
+    subscriptions: 'Мои подписки',
     // Мои каналы
     myChannels: 'Мои каналы',
     // Рекомендации
     recommendations: 'Рекомендации',
     // Популярные каналы
     popularChannels: 'Популярные каналы',
+    // Канал
+    channelInfo: 'Информация о канале',
+    subsCount: 'Число подписчиков',
+    areYouSureDeleteChannel: 'Вы уверены, что хотите удалить свой канал?',
+    youSubscribedNow: 'Вы подписались!',
+    // Пост
+    noFiles: 'Файлы не прикреплены',
+    dateOfPublication: 'Дата публикации',
     // Тесты
     forTest: 'Для тестов',
     forTest2: 'Для тестов 2',
+
+    // Формы
+    // Авторизация
+    userAuthorization: 'Авторизация пользователя',
+    createAccount: 'Создайте аккаунт',
+    notRegisteredYet: 'Еще не зарегестрированы?',
+    // Регистрация
+    enterPassword: 'Введите пароль',
+    enterRepeatPassword: 'Подтвердите пароль',
+    userRegistration: 'Регистрация пользователя',
+    // Создание канала
+    channelCreation: 'Создание канала',
+    channelName: 'Название канала',
+    channelDescription: 'Описание канала',
+    channelCategory: 'Категория канала',
+    channelImage: 'Изображение канала',
+    enterChannelName: 'Введите название канала',
+    enterChannelDescription: 'Введите описание канала',
+    // Создание Поста
+    postCreation: 'Создание поста',
+    postTags: 'Теги поста',
+    postContent: 'Содержание поста',
+    imagePreview: 'Превью изображения',
+    postName: 'Название поста',
+    enterPostName: 'Введите название поста',
+    selectTags: 'Выберите теги',
 
     // Кнопки
 
@@ -48,6 +82,12 @@ export const translations = {
     // Профиль
     btnVerifyEmail: 'Подтвердите почту',
     btnDeleteProfile: 'Удалить профиль',
+    // Мои каналы
+    btnCreateChannel: 'Создать новый канал',
+    // Канал
+    btnCreatePost: 'Создать пост',
+    btnSubscribe: 'Подписаться',
+    btnUnsubscribe: 'Отписаться',
     // Общие кнопки
     btnChange: 'Изменить',
     btnLoad: 'Загрузить',
@@ -55,19 +95,40 @@ export const translations = {
     btnCancel: 'Отменить',
     btnDelete: 'Удалить',
     btnConfirm: 'Подтвердить',
+    btnGo: 'Перейти',
+    btnDetails: 'Подробнее',
+    btnRead: 'Читать',
 
     // Валидация
 
+    // Пользователь
     validationLogin: 'Логин должен содержать более 5 символов',
     validationEmail: 'Некорректная почта',
     validationPassword: 'Пароль должен состоять из не менее 8 символов',
     validationConfirmPassword: 'Пароли не совпадают',
+    // Канал
+    validationChannelName:
+      'Название канала должно быть длиннее 3 символов и не более 60 символов',
+    validationChannelDescription:
+      'Описание должно быть длиннее 10 символов и не более 500 символов',
+    validationChannelCategory: 'Выберите категорию канала из списка',
+    validationChannelImage: 'Загрузите корректное изображение',
 
     // Ошибки
 
     error: 'Ошибка',
     errorCodeInternal: 'Ошибка при отправке кода',
     errorIncorrectCode: 'Неверный код',
+    errorImage: 'Файл слишком большой или имеет неподдерживаемый формат',
+
+    // Другое
+
+    // DropZone
+    dropzoneHeading:
+      'Нажмите, чтобы выбрать изображение или перетащите его в это поле',
+    dropzoneLimits: 'Размером не более 200Кб',
+    // FileLoader
+    fileLoaderSeveralFiles: 'Перетащите файлы или нажмите для выбора файлов',
   },
 
   en: {
@@ -93,23 +154,57 @@ export const translations = {
     newPassword: 'New password',
     confirmPassword: 'Confirm new password',
     changingUserLanguage: 'Changing user language',
-    chooseLanguage: 'Choose language',
+    selectLanguage: 'Select language',
     // Navigation
     navigation: 'Navigation',
     // Home Page
     homePage: 'Home page',
     // Subscriptions
-    subscriptions: 'Subscriptions',
+    subscriptions: 'My subscriptions',
     // My Channels
     myChannels: 'My Channels',
     // Recommendations
     recommendations: 'Recommendations',
     // Popular Channels
     popularChannels: 'Popular Channels',
+    // Channel
+    channelInfo: 'Channel information',
+    subsCount: 'Number of subscribers',
+    areYouSureDeleteChannel: 'Are you sure you want to delete your channel?',
+    youSubscribedNow: 'You are subscribed now!',
+    // Post
+    noFiles: 'No files attached',
+    dateOfPublication: 'Date of publication',
+
     // Test
     forTest: 'For test',
     forTest2: 'For test2',
 
+    // Forms
+    // Login
+    userAuthorization: 'User authorization',
+    createAccount: 'Create an account',
+    notRegisteredYet: 'Not registered yet?',
+    // Registration
+    enterPassword: 'Enter the password',
+    enterRepeatPassword: 'Confirm the password',
+    userRegistration: 'User registration',
+    // Channel Creation
+    channelCreation: 'Channel creation',
+    channelName: 'Channel name',
+    channelDescription: 'Channel description',
+    channelCategory: 'Channel category',
+    channelImage: 'Channel image',
+    enterChannelName: 'Enter channel name',
+    enterChannelDescription: 'Enter channel description',
+    // Post Creation
+    postCreation: 'Post creation',
+    postTags: 'Tags of the post',
+    postContent: 'Content of the post',
+    imagePreview: 'Image preview',
+    postName: 'Name of the post',
+    enterPostName: 'Enter the name of the post',
+    selectTags: 'Select tags',
 
     // Buttons
 
@@ -121,6 +216,12 @@ export const translations = {
     // Profile
     btnVerifyEmail: 'Verify email',
     btnDeleteProfile: 'Delete profile',
+    // My Channels
+    btnCreateChannel: 'Create a new channel',
+    // Channel
+    btnCreatePost: 'Create a post',
+    btnSubscribe: 'Subscribe',
+    btnUnsubscribe: 'Unsubscribe',
     // Common buttons
     btnChange: 'Edit',
     btnLoad: 'Upload',
@@ -128,18 +229,38 @@ export const translations = {
     btnCancel: 'Cancel',
     btnDelete: 'Delete',
     btnConfirm: 'Confirm',
+    btnGo: 'Go',
+    btnDetails: 'Details',
+    btnRead: 'Read',
 
     // Validation
 
+    // User
     validationLogin: 'Login must contain more then 5 symbols',
     validationEmail: 'Incorrect email',
     validationPassword: 'The password must be at least 8 characters long.',
     validationConfirmPassword: "Passwords aren't equal",
+    // Channel
+    validationChannelName:
+      'The channel name must be longer than 3 characters and no more than 60 characters',
+    validationChannelDescription:
+      'The description must be longer than 10 characters and no more than 500 characters',
+    validationChannelCategory: 'Select channel category from the list',
+    validationChannelImage: 'Upload the correct image',
 
-    // Other
+    // Errors
 
     error: 'Error',
     errorCodeInternal: 'Error when sending the code',
     errorIncorrectCode: 'Incorrect code',
+    errorImage: 'The file is too large or has an unsupported format',
+
+    // Other
+
+    // DropZone
+    dropzoneHeading: 'Click to select an image or drag it to this field',
+    dropzoneLimits: 'The size is not more than 200KB',
+    // FileLoader
+    fileLoaderSeveralFiles: 'Drag and drop files or click to select files',
   },
 };

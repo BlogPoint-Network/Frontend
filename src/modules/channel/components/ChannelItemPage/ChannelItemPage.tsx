@@ -17,8 +17,10 @@ import {
 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const ChannelItemPage: FC = () => {
+  const { l } = useLanguage();
   const [activePage, setPage] = useState(1);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -143,20 +145,18 @@ export const ChannelItemPage: FC = () => {
                   <RedButton
                     onClick={() => {
                       if (
-                        window.confirm(
-                          'Вы уверены, что хотите удалить свой канал?',
-                        )
+                        window.confirm(l.areYouSureDeleteChannel)
                       ) {
                         const handleDelete = () => {};
                         handleDelete();
                       }
                     }}
                   >
-                    Удалить
+                    {l.btnDelete}
                   </RedButton>
                 ) : (
                   <BlueButton onClick={toggleSubscribe} style={buttonStyle}>
-                    {isSubscribed ? 'Отписаться' : 'Подписаться'}
+                    {isSubscribed ? l.btnSubscribe : l.btnUnsubscribe}
                   </BlueButton>
                 )}
               </Flex>
@@ -173,7 +173,7 @@ export const ChannelItemPage: FC = () => {
         wrap="nowrap"
       >
         <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
-          Создать пост
+          {l.btnCreatePost}
         </BlueButton>
         {/*<List items={posts} renderItem={PostItem} />*/}
         <Pagination value={activePage} onChange={setPage} total={10} />

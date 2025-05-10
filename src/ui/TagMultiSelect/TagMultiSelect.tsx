@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ICategory, ITag } from '@app-types';
 import { Combobox, useCombobox } from '@mantine/core';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface TagMultiSelectProps {
   tags: ITag[];
@@ -15,6 +16,7 @@ export const TagMultiSelect: React.FC<TagMultiSelectProps> = ({
   selectedTags,
   onChange,
 }) => {
+  const { l } = useLanguage();
   const [search, setSearch] = useState('');
   const combobox = useCombobox({
     onDropdownClose: () => setSearch(''), // Очищаем поиск при закрытии
@@ -84,7 +86,7 @@ export const TagMultiSelect: React.FC<TagMultiSelectProps> = ({
               </span>
             ))
           ) : (
-            <span style={{ color: '#aaa' }}>Выберите теги...</span>
+            <span style={{ color: '#aaa' }}>{l.selectTags}</span>
           )}
         </div>
       </Combobox.Target>
