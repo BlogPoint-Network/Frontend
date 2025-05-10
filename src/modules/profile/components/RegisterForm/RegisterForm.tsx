@@ -1,4 +1,5 @@
-import { Group, TextInput } from '@mantine/core';
+import { languages } from '@constants';
+import { Group, NativeSelect, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationEmail,
@@ -21,7 +22,13 @@ export const RegisterForm = () => {
 
   const form = useForm<IRegistrationData>({
     mode: 'uncontrolled',
-    initialValues: { login: '', email: '', password: '', repeatPassword: '' },
+    initialValues: {
+      login: '',
+      email: '',
+      password: '',
+      repeatPassword: '',
+      language: Object.keys(languages)[0],
+    },
     validate: {
       login: validationLogin,
       email: validationEmail,
@@ -50,6 +57,19 @@ export const RegisterForm = () => {
               {...form.getInputProps(field.key)}
             />
           ))}
+          <NativeSelect
+            size="md"
+            mt="sm"
+            mb="sm"
+            radius="lg"
+            label={<Heading4 mb={5}>Выберите язык</Heading4>}
+            data={Object.entries(languages).map(([value, label]) => ({
+              value, // 'en', 'ru', ...
+              label, // 'English', 'Russian', ...
+            }))}
+            key={form.key('language')}
+            {...form.getInputProps('language')}
+          />
           <BlueButton type="submit" mt="sm">
             Подтвердить
           </BlueButton>

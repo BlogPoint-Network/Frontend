@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
-import { Group, PasswordInput, TextInput } from '@mantine/core';
+import { Flex, Group, PasswordInput, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import {
   validationLogin,
@@ -48,6 +49,12 @@ export const LoginForm = () => {
           <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
             Подтвердить
           </BlueButton>
+          <Flex display={{ base: 'block', c620: 'none' }}>
+            <Text>
+              Ещё не зарегистрированы?
+            </Text>
+            <Link to={'/register'}>Создайте аккаунт</Link>
+          </Flex>
         </form>
       </Group>
     </FormBox>

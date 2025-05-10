@@ -6,12 +6,14 @@ import { useDisclosure } from '@mantine/hooks';
 import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
 
 import { useProfileEditPsw } from '@modules/profile/hooks/useProfileEditPsw.ts';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface IEditProfilePasswordProps {
   user?: IUser;
 }
 
 export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
+  const { l } = useLanguage();
   const [opened, { open, close }] = useDisclosure(false);
   const changePassword = useProfileEditPsw();
   const form = useForm({
@@ -23,11 +25,9 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
 
     validate: {
       oldPassword: (value: string) =>
-        value.length < 8 ? 'Пороль должен состоять из 8 символов' : null,
-      newPassword: (value: string) =>
-        value.length < 8 ? 'Пороль должен состоять из 8 символов' : null,
+        value.length < 8 ? l.validationPassword : null,
       repeatPassword: (value, values) =>
-        value !== values.newPassword ? 'Пароли не совпадают' : null,
+        value !== values.newPassword ? l.validationConfirmPassword : null,
     },
   });
   return (
@@ -35,7 +35,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Изменение пароля пользователя</Heading3>}
+        title={<Heading3>{l.changingUserPassword}</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -44,18 +44,18 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
         >
           <Flex gap={'10px'} direction="column">
             <TextInput
-              label={<Heading4>Старый пароль</Heading4>}
+              label={<Heading4>{l.oldPassword}</Heading4>}
               key={form.key('oldPassword')}
               {...form.getInputProps('oldPassword')}
             />
             <TextInput
-              label={<Heading4>Новый пароль</Heading4>}
+              label={<Heading4>{l.newPassword}</Heading4>}
               key={form.key('newPassword')}
               {...form.getInputProps('newPassword')}
             />
 
             <TextInput
-              label={<Heading4>Подтвердите новый пароль</Heading4>}
+              label={<Heading4>{l.confirmPassword}</Heading4>}
               key={form.key('repeatPassword')}
               {...form.getInputProps('repeatPassword')}
             />
@@ -67,16 +67,16 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
                 close();
               }}
             >
-              Отменить
+              {l.btnCancel}
             </GreyButton>
-            <BlueButton type="submit">Сохранить</BlueButton>
+            <BlueButton type="submit">{l.btnSave}</BlueButton>
           </Group>
         </form>
       </Modal>
 
       <Flex direction={'column'} gap={'15px'} align={'start'}>
-        <Label title={'Пароль'} text="########" />
-        <BlueButton onClick={open}>Изменить</BlueButton>
+        <Label title={l.password} text="########" />
+        <BlueButton onClick={open}>{l.btnChange}</BlueButton>
       </Flex>
     </>
   );

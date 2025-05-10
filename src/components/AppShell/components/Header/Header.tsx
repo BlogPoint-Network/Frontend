@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { greyColor, skyBlueColor } from '@constants';
+import { greyColor, languages, skyBlueColor } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { useProfileLogout } from '@hooks/useProfileLogout.ts';
-import { Button, Flex, Image, Text } from '@mantine/core';
+import { Button, Flex, Image, Select, Text } from '@mantine/core';
 import { IconLogout } from '@tabler/icons-react';
 
 import { ProfileContext } from '../../../../app/context';
@@ -18,6 +19,7 @@ export const Header = () => {
   const profileLogout = useProfileLogout();
   const profileContext = useContext(ProfileContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { language, setLanguage, l } = useLanguage();
 
   useEffect(() => {
     if (profileContext?.user != null) {
@@ -71,20 +73,48 @@ export const Header = () => {
           }}
         >
           <Text size="lg" c="black">
-            {isAuthenticated ? 'Выйти' : 'Войти'}
+            {isAuthenticated ? l.btnLogout : l.btnLogin}
           </Text>
         </Button>
         <Button
           {...btnProps}
           bg={skyBlueColor}
+          display={{ base: 'none', c620: 'block' }}
           onClick={() => {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             isAuthenticated ? navigate('profile') : navigate('register');
           }}
         >
-          <Text size="lg">{isAuthenticated ? 'Профиль' : 'Регистрация'}</Text>
+          <Text size="lg">
+            {isAuthenticated ? l.btnProfile : l.btnRegister}
+          </Text>
         </Button>
       </Flex>
+      <Select
+        mt={'8'}
+        color={'red'}
+        ml={'20'}
+        mr={'10'}
+        w={'80'}
+        size="sm"
+        radius="xl"
+        styles={{
+          input: {
+            border: '3px solid #6BA4E8', // цвет и толщина границы
+            borderRadius: '60px', // полностью круглая форма
+            color: '#6BA4E8',
+            fontSize: '22px',
+            fontWeight: 'bold',
+            minWidth: '80px',
+          },
+        }}
+        value={language}
+        onChange={value => setLanguage(value ?? 'ru')}
+        data={Object.entries(languages).map(([value]) => ({
+          value: value,
+          label: value,
+        }))}
+      />
     </Flex>
   );
 };

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IUser } from '@app-types';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
@@ -21,6 +22,7 @@ interface IEditProfileInfoProps {
 }
 
 export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
+  const { l } = useLanguage();
   const [opened, { open, close }] = useDisclosure(false);
   const profileEditInfo = useProfileEditInfo();
   const profileDelete = useProfileDelete();
@@ -31,9 +33,8 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
     },
 
     validate: {
-      login: value =>
-        value.length < 5 ? 'Логин должен состоять болше чем 6 символов' : null,
-      email: value => (/^\S+@\S+$/.test(value) ? null : 'Неправильная почта'),
+      login: value => (value.length < 5 ? l.validationLogin : null),
+      email: value => (/^\S+@\S+$/.test(value) ? null : l.validationEmail),
     },
   });
 
@@ -42,7 +43,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Изменение информации пользователя</Heading3>}
+        title={<Heading3>{l.changingUserInformation}</Heading3>}
       >
         <form
           onSubmit={form.onSubmit(values => {
@@ -52,12 +53,12 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
         >
           <Flex gap={'10px'} direction="column">
             <TextInput
-              label={<Heading4>Логин</Heading4>}
+              label={<Heading4>{l.login}</Heading4>}
               key={form.key('login')}
               {...form.getInputProps('login')}
             />
             <TextInput
-              label={<Heading4>Почта</Heading4>}
+              label={<Heading4>{l.email}</Heading4>}
               key={form.key('email')}
               {...form.getInputProps('email')}
             />
@@ -69,21 +70,28 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
                 close();
               }}
             >
-              Отменить
+              {l.btnCancel}
             </GreyButton>
-            <BlueButton type="submit">Сохранить</BlueButton>
+            <BlueButton type="submit">{l.btnSave}</BlueButton>
           </Group>
         </form>
       </Modal>
 
       <Flex direction={'column'} gap={'15px'} mb={'20px'}>
-        <Heading2>Информация о пользователе</Heading2>
-        <Label title={'Логин'} text={props.user ? props.user?.login : ''} />
-        <Label title={'Почта'} text={props.user ? props.user?.email : ''} />
-        <Flex direction={{base: 'column', c620: 'row'}}>
-          <BlueButton w={{base: '160px', c620: 'auto'}} onClick={open}>Изменить</BlueButton>
-          <RedButton w={{base: '182px', c620: 'auto'}} onClick={() => profileDelete.mutate()}>
-            Удалить профиль
+        <Heading2>{l.changingUserInformation}</Heading2>
+        <Label title={l.login} text={props.user ? props.user?.login : ''} />
+        <Label title={l.password} text={props.user ? props.user?.email : ''} />
+        <Flex
+          direction={{ base: 'column', c620: 'row', md: 'column', lg: 'row' }}
+        >
+          <BlueButton w="160px" onClick={open}>
+            {l.btnChange}
+          </BlueButton>
+          <RedButton
+            w='182px'
+            onClick={() => profileDelete.mutate()}
+          >
+            {l.btnDeleteProfile}
           </RedButton>
         </Flex>
       </Flex>

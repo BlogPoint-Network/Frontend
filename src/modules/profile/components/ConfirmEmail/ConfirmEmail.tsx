@@ -4,8 +4,10 @@ import { useDisclosure } from '@mantine/hooks';
 import { useEmailVerification } from '@modules/profile/hooks/useEmailVerification.ts';
 import { useVerifyEmail } from '@modules/profile/hooks/useVerifyEmail.ts';
 import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const ConfirmEmail: FC = () => {
+  const { l } = useLanguage();
   const [opened, { open, close }] = useDisclosure(false);
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
@@ -18,11 +20,11 @@ export const ConfirmEmail: FC = () => {
   const handleRequestCode = () => {
     confirmEmail.mutate(undefined, {
       onSuccess: data => {
-        setMessage(data.data.message || 'Код отправлен!');
+        setMessage(data.data.message || l.codeSent);
         setErrorMessage('');
       },
       onError: (error: Error) => {
-        setErrorMessage(error.message || 'Ошибка при отправке кода.');
+        setErrorMessage(error.message || l.errorCodeInternal);
       },
     });
   };
@@ -30,13 +32,13 @@ export const ConfirmEmail: FC = () => {
   const handleVerifyCode = () => {
     verifyEmail.mutate(code, {
       onSuccess: data => {
-        setMessage(data.data.message || 'Почта подтверждена!');
+        setMessage(data.data.message || l.emailConfirmed);
         setEmailVerified(true);
         setErrorMessage('');
         close();
       },
       onError: (error: Error) => {
-        setErrorMessage(error.message || 'Неверный код.');
+        setErrorMessage(error.message || l.errorIncorrectCode);
       },
     });
   };
@@ -47,41 +49,43 @@ export const ConfirmEmail: FC = () => {
       <Modal
         opened={opened}
         onClose={close}
-        title={<Heading3>Подтверждение почты</Heading3>}
+        title={<Heading3>{l.emailVerification}</Heading3>}
       >
         <Flex direction="column" gap="10px">
           {message && <p style={{ color: 'green' }}>{message}</p>}
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
           <TextInput
-            placeholder="Введите код из email"
-            label={<Heading4>Код подтверждения</Heading4>}
+            placeholder={l.enterTheCodeFromTheEmail}
+            label={<Heading4>{l.confirmationCode}</Heading4>}
             value={code}
             onChange={e => setCode(e.currentTarget.value)}
           />
 
           <Group justify="flex-end">
-            <GreyButton onClick={close}>Отменить</GreyButton>
-            <BlueButton onClick={handleVerifyCode}>Подтвердить</BlueButton>
+            <GreyButton onClick={close}>{l.btnCancel}</GreyButton>
+            <BlueButton onClick={handleVerifyCode}>{l.btnConfirm}</BlueButton>
           </Group>
         </Flex>
       </Modal>
 
-      <Flex direction={'column'} gap={'15px'} align={'start'}>
-        <Heading4 mt={'-15px'} mb={'-5px'}>
-          Верификация почты
-        </Heading4>
-        <BlueButton
-          style={{ width: 'auto' }}
-          onClick={() => {
-            handleRequestCode();
-            open();
-          }}
-          disabled={emailVerified}
-        >
-          {emailVerified ? 'Почта подтверждена' : 'Подтвердить почту'}
-        </BlueButton>
-      </Flex>
+      {!emailVerified && (
+        <Flex direction={'column'} gap={'15px'} align={'start'}>
+          <Heading4 mt={'-15px'} mb={'-5px'}>
+            {l.emailVerification}
+          </Heading4>
+          <BlueButton
+            style={{ width: 'auto' }}
+            onClick={() => {
+              handleRequestCode();
+              open();
+            }}
+            disabled={emailVerified}
+          >
+            {l.btnVerifyEmail}
+          </BlueButton>
+        </Flex>
+      )}
     </>
   );
 };

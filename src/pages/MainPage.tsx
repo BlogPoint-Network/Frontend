@@ -12,6 +12,7 @@ export const MainPage = () => {
         <LogoMainPage />
         <Container id="recommendationPostsContainer">
           <Heading1 ta="center" mb="40px">
+            {}
             Рекомендации
           </Heading1>
           {/*<RecommendationsFeed />*/}
