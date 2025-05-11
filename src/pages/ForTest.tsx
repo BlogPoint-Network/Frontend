@@ -1,11 +1,13 @@
 import { PostExample } from '@modules/experementalTest';
-import { examplePost } from '@modules/posts';
+import { examplePost, PostItem, PostItemPage } from '@modules/posts';
+import { ChannelItemPage } from '@modules/channel';
 
 export const ForTest = () => {
   return (
     <>
       <h2>Страница для тестов</h2>
-      <PostExample post={examplePost} />
+      <PostItemPage />
+      <PostItem post={examplePost} />
     </>
   );
 };

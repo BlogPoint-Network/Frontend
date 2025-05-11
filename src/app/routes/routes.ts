@@ -1,6 +1,6 @@
 import { Unauthorized } from '@components/Other/Unauthorized.tsx';
 import { ChannelItemPage } from '@modules/channel';
-import { CreatePostForm, PostItemPage } from '@modules/posts';
+import { CreatePostForm, EditPostForm, PostItemPage } from '@modules/posts';
 import {
   CreateChannel,
   ForTest,
@@ -22,6 +22,11 @@ export const privateRoutes = [
   { path: '/create-channel', component: CreateChannel, exact: true },
   { path: '/channel/:id/create-post', component: CreatePostForm, exact: true },
   { path: '/subscribe-channels', component: SubscribeChannels, exact: true },
+  {
+    path: '/channel/:channelId/post/:postId/editPost',
+    component: EditPostForm,
+    exact: true,
+  },
 ];
 
 export const publicRoutes = [

@@ -1,6 +1,6 @@
 import { PostService } from '@api';
-import { useMutation } from '@tanstack/react-query';
 import { IContentImage, IMedia } from '@app-types';
+import { useMutation } from '@tanstack/react-query';
 
 interface CreatePostParams {
   channelId: string;

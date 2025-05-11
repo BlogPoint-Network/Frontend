@@ -28,7 +28,7 @@ interface BlobInfo {
   blob: () => Blob;
 }
 
-export const CreatePostForm = () => {
+export const EditPostForm = () => {
   const apiKey = 'qup8181vvir7d4vosyyut4evohlj4r0h4w84vsbbhx4k0k2y';
   const uploadFile = useUploadFile();
   const navigate = useNavigate();

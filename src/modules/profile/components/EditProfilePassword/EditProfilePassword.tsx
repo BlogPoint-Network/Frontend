@@ -23,9 +23,9 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
 
     validate: {
       oldPassword: (value: string) =>
-        value.length < 8 ? 'Пороль должен состоять из 8 символов' : null,
+        value.length < 8 ? 'Пароль должен состоять из 8 символов' : null,
       newPassword: (value: string) =>
-        value.length < 8 ? 'Пороль должен состоять из 8 символов' : null,
+        value.length < 8 ? 'Пароль должен состоять из 8 символов' : null,
       repeatPassword: (value, values) =>
         value !== values.newPassword ? 'Пароли не совпадают' : null,
     },
@@ -75,7 +75,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       </Modal>
 
       <Flex direction={'column'} gap={'15px'} align={'start'}>
-        <Label title={'Пароль'} text="########" />
+        <Label title={'Пароль'} text="**************" />
         <BlueButton onClick={open}>Изменить</BlueButton>
       </Flex>
     </>

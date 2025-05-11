@@ -28,7 +28,6 @@ export const CreateChannelForm = () => {
   const navigate = useNavigate();
 
   const form = useForm({
-    mode: 'uncontrolled',
     initialValues: {
       name: '',
       description: '',
@@ -37,26 +36,28 @@ export const CreateChannelForm = () => {
       imageLogo: '',
     },
     validate: {
-      name: value =>
+      name: (value: string) =>
         value.length < 3 || value.length > 60
           ? 'Название канала должно быть длиннее 3 символов и не более 60 символов'
           : null,
-      description: value =>
+      description: (value: string) =>
         value && (value.length < 10 || value.length > 500)
           ? 'Описание должно быть длиннее 10 символов и не более 500 символов'
           : null,
-      category: value => (value ? null : 'Выберите категорию канала из списка'),
-      imageLogo: value => (value ? null : 'Загрузите корректное изображение'),
+      category: (value: string) =>
+        value !== '' ? null : 'Выберите категорию канала из списка',
+      imageLogo: (value: string) =>
+        value ? null : 'Загрузите корректное изображение',
     },
   });
 
   // для DropZone, иначе придется делать с провайдером для формы
-  const handleDropFile = (image: File) => {
-    form.setFieldValue('imageLogo', image);
-  };
-  const handleRejectFile = () => {
-    form.setFieldValue('imageLogo', null);
-  };
+  // const handleDropFile = (image: File) => {
+  //   form.setFieldValue('imageLogo', image);
+  // };
+  // const handleRejectFile = () => {
+  //   form.setFieldValue('imageLogo', null);
+  // };
 
   return (
     <FormBox>
@@ -64,14 +65,9 @@ export const CreateChannelForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            createChannel.mutate({
-              name: values.name,
-              description: values.description,
-              category: values.category,
-              imageBanner: values.imageBanner,
-              imageLogo: values.imageLogo,
-              ownerId: profile?.user?.id ?? '',
-            });
+            const categoryIndex = Number(values.category);
+            console.log(values.description);
+
           })}
         >
           <Flex direction="column" gap="md">
@@ -81,6 +77,7 @@ export const CreateChannelForm = () => {
               radius="lg"
               label={<Heading4 mb={5}>Название канала</Heading4>}
               placeholder="Введите название канала"
+              key={form.key('name')}
               {...form.getInputProps('name')}
             />
             <Textarea
@@ -89,6 +86,7 @@ export const CreateChannelForm = () => {
               radius="lg"
               label={<Heading4 mb={10}>Описание канала</Heading4>}
               placeholder="Введите описание"
+              key={form.key('description')}
               {...form.getInputProps('description')}
             />
             <NativeSelect
@@ -100,14 +98,15 @@ export const CreateChannelForm = () => {
                 value: category.id.toString(), // значение id как строка
                 label: category.name, // отображаемое имя категории
               }))}
+              key={form.key('category')}
               {...form.getInputProps('category')}
             />
             <Heading4>Изображение канала</Heading4>
-            <Dropzone
-              form={form}
-              onDropFile={handleDropFile}
-              onRejectFile={handleRejectFile}
-            />
+            {/*<Dropzone*/}
+            {/*  form={form}*/}
+            {/*  onDropFile={handleDropFile}*/}
+            {/*  onRejectFile={handleRejectFile}*/}
+            {/*/>*/}
             {/* Отображение ошибки */}
             {form.errors.image && <Text c="red">{form.errors.image}</Text>}
             <Flex

@@ -15,7 +15,11 @@ import {
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
 
-export const PostItem = (props: IPost) => {
+interface IProps {
+  post: IPost;
+}
+
+export const PostItem = (props: IProps) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const extractTextFromHTML = (html: string): string => {
@@ -30,7 +34,7 @@ export const PostItem = (props: IPost) => {
       shadow="sm"
       radius="md"
       bd="1px solid black"
-      id={'RecommendationPost' + props.id}
+      id={'RecommendationPost' + props.post.id}
       w={{ base: '345px', xs: '400px', sm: '450px' }}
       style={{
         position: 'relative',
@@ -48,12 +52,12 @@ export const PostItem = (props: IPost) => {
           ml={{ base: '10px', sm: '20' }}
           mr={{ base: '5px', xs: '0px', sm: '15px' }}
         >
-          <ChannelIconImage src={props.channelIcon.url} />
+          <ChannelIconImage src={props.post.channelIcon.url} />
           <Flex justify={'space-between'} w="80%">
             <Heading4
               fw="500"
               truncate="end"
-              onClick={() => navigate(`/channel/:${props.channelId}`)}
+              onClick={() => navigate(`/channel/:${props.post.channelId}`)}
               style={{
                 color: isHovered ? 'blue' : 'black',
                 transition: 'color 0.3s ease',
@@ -62,28 +66,28 @@ export const PostItem = (props: IPost) => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {props.channelName.length > 25
-                ? props.channelName.substring(0, 25) + '...'
-                : props.channelName}
+              {props.post.channelName.length > 25
+                ? props.post.channelName.substring(0, 25) + '...'
+                : props.post.channelName}
             </Heading4>
             <Heading5 fz={{ base: '14px', xs: '17px' }}>
-              {props.dateOfCreation}
+              {props.post.dateOfCreation}
             </Heading5>
           </Flex>
         </Flex>
       </Card.Section>
       <Card.Section>
-        <Image src={props.previewImage.url} />
+        <Image src={props.post.previewImage.url} />
       </Card.Section>
       <Heading2 fw={'600'} lineClamp={2} ta="center">
-        {props.title}
+        {props.post.title}
       </Heading2>
       <Card.Section pl="15" pr="15" mb="10">
-        <Text lineClamp={3}>{extractTextFromHTML(props.content)}</Text>
+        <Text lineClamp={3}>{extractTextFromHTML(props.post.content)}</Text>
       </Card.Section>
       <Card.Section pl="15" pr="15" mb="10">
         <Flex direction={'row'} gap="7px" wrap={'wrap'}>
-          <List items={props.tags} renderItem={Tag} />
+          <List items={props.post.tags} renderItem={Tag} />
         </Flex>
       </Card.Section>
       {/*лайки дизлайки просмотры*/}
@@ -94,14 +98,14 @@ export const PostItem = (props: IPost) => {
             <Flex align="center" gap="xs">
               <IconThumbUp size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="green">
-                {addSpacesToNumber(Number(props.likes))}
+                {addSpacesToNumber(Number(props.post.likes))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs">
               <IconThumbDown size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="red">
-                {addSpacesToNumber(Number(props.dislikes))}
+                {addSpacesToNumber(Number(props.post.dislikes))}
               </Heading5>
             </Flex>
           </Flex>
@@ -110,7 +114,7 @@ export const PostItem = (props: IPost) => {
           <Flex align="center" gap="xs">
             <IconEye size={28} />
             <Heading5 fz={{ base: '14px', xs: '17px' }} c={skyBlueColor}>
-              {addSpacesToNumber(Number(props.views))}
+              {addSpacesToNumber(Number(props.post.views))}
             </Heading5>
           </Flex>
         </Flex>
@@ -120,7 +124,7 @@ export const PostItem = (props: IPost) => {
         <BlueButton
           mb="0px"
           onClick={() =>
-            navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
+            navigate(`/channel/${props.post.channelId + ''}/post/${props.post.id + ''}`)
           }
         >
           Читать

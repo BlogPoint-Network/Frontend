@@ -14,10 +14,11 @@ import {
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
 import { renderImgContent } from '@utils/renderImgContent.ts';
+import { examplePost } from '@modules/posts';
 
 export const PostItemPage: FC = () => {
   const { postId } = useParams();
-  const post = useGetPostById(Number(postId));
+  const post = examplePost;
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
@@ -154,7 +155,7 @@ export const PostItemPage: FC = () => {
       </Card.Section>
       <Box w={'100%'} bg={greyColor} h={1} m={'15px -10px'} />
       <Card.Section>
-        <Grid grow ml={55}>
+        <Grid grow>
           {post?.mediaFiles ? (
             post.mediaFiles.length > 0 &&
             post?.mediaFiles.map((item, index) => (
