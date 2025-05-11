@@ -38,3 +38,4 @@
    ```bash
    docker-compose down -v
 
+Swagger открывается по адресу http://localhost:8000/swagger
