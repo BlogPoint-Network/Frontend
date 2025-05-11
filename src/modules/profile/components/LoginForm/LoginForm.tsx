@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
-import { Group, PasswordInput, TextInput } from '@mantine/core';
+import { useLanguage } from '@hooks/useLanguage.ts';
+import { Flex, Group, PasswordInput, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import {
-  validationLogin,
-  validationPassword,
-} from '@modules/profile/constants/validation.ts';
 import { useProfileLogin } from '@modules/profile/hooks/useProfileLogin.ts';
+import { useValidationMessages } from '@modules/profile/hooks/useValidationMessages.ts';
 import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
 export const LoginForm = () => {
+  const { validationLogin, validationPassword } = useValidationMessages();
+  const { l } = useLanguage();
   const profileLogin = useProfileLogin();
 
   const form = useForm({
@@ -17,12 +18,12 @@ export const LoginForm = () => {
     validate: {
       login: validationLogin,
       password: validationPassword,
-    },
+    }
   });
 
   return (
     <FormBox>
-      <Heading1>Авторизация пользователя</Heading1>
+      <Heading1>{l.userAuthorization}</Heading1>
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
@@ -33,7 +34,7 @@ export const LoginForm = () => {
             size="md"
             mt="sm"
             radius="lg"
-            label={<Heading4 mb="5px">Логин</Heading4>}
+            label={<Heading4 mb="5px">{l.login}</Heading4>}
             key={form.key('login')}
             {...form.getInputProps('login')}
           />
@@ -41,13 +42,17 @@ export const LoginForm = () => {
             size="md"
             mt="sm"
             radius="lg"
-            label={<Heading4 mb="5px">Пароль</Heading4>}
+            label={<Heading4 mb="5px">{l.password}</Heading4>}
             key={form.key('password')}
             {...form.getInputProps('password')}
           />
           <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
-            Подтвердить
+            {l.btnConfirm}
           </BlueButton>
+          <Flex display={{ base: 'block', c620: 'none' }}>
+            <Text>{l.notRegisteredYet}</Text>
+            <Link to={'/register'}>{l.createAccount}</Link>
+          </Flex>
         </form>
       </Group>
     </FormBox>

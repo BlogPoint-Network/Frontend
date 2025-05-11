@@ -1,4 +1,3 @@
-import { Unauthorized } from '@components/Other/Unauthorized.tsx';
 import { ChannelItemPage } from '@modules/channel';
 import { CreatePostForm, EditPostForm, PostItemPage } from '@modules/posts';
 import {
@@ -30,7 +29,6 @@ export const privateRoutes = [
 ];
 
 export const publicRoutes = [
-  { path: '/unauthorised', component: Unauthorized, exact: true },
   { path: '/channel/:id', component: ChannelItemPage, exact: true },
   {
     path: '/channel/:channelId/post/:postId',

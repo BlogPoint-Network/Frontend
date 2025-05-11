@@ -8,7 +8,7 @@ export const channelsExamples: IChannel[] = [
     category: { id: 9, name: 'Туризм и путешествия', color: '#ff911c' },
     description: 'Туры в Киргизию и Таджикистан!',
     subsCount: 11917021,
-    imageURL: '/src/app/assets/images/post/post_image_tall.jpg',
+    imageLogo: '/src/app/assets/images/post/post_image_tall.jpg',
   },
   {
     id: 2,
@@ -18,6 +18,6 @@ export const channelsExamples: IChannel[] = [
     description:
       'Последние новинки мира технологий, обзоры гаджетов, советы по использованию и сравнительные тесты – всё это вы найдете на нашем канале.',
     subsCount: 61879,
-    imageURL: '/src/app/assets/images/post/post_image_wide.jpg',
+    imageLogo: '/src/app/assets/images/post/post_image_wide.jpg',
   },
 ];

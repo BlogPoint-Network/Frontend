@@ -17,6 +17,7 @@ import {
   TagMultiSelect,
 } from '@ui';
 import { processHtmlContent } from '@utils/processContentAndFiles.ts';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface MediaFile {
   file: File;
@@ -29,6 +30,7 @@ interface BlobInfo {
 }
 
 export const CreatePostForm = () => {
+  const { l } = useLanguage();
   const apiKey = 'qup8181vvir7d4vosyyut4evohlj4r0h4w84vsbbhx4k0k2y';
   const uploadFile = useUploadFile();
   const navigate = useNavigate();
@@ -100,15 +102,15 @@ export const CreatePostForm = () => {
   return (
     <>
       <FormBox>
-        <Heading1>Создание поста</Heading1>
+        <Heading1>{l.postCreation}</Heading1>
         <Group justify="center" grow>
           <Flex direction="column" gap="md">
             <TextInput
               size="md"
               mt="sm"
               radius="lg"
-              label={<Heading4 mb={5}>Название поста</Heading4>}
-              placeholder="Введите название поста"
+              label={<Heading4 mb={5}>{l.postName}</Heading4>}
+              placeholder={l.enterPostName}
               value={title}
               onChange={event => setTitle(event.target.value)}
             />
@@ -118,13 +120,13 @@ export const CreatePostForm = () => {
               size="md"
               mt="sm"
               radius="lg"
-              label={<Heading4 mb={5}>Превью изображение</Heading4>}
+              label={<Heading4 mb={5}>{l.imagePreview}</Heading4>}
               value={previewImg}
               onChange={setPreviewImg}
             />
             <div style={{ margin: '15px 0 0 0' }} id="Редактор">
               <Input.Wrapper
-                label={<Heading4 mb={5}>Содержание поста</Heading4>}
+                label={<Heading4 mb={5}>{l.postContent}</Heading4>}
                 size="20px"
                 pb="5px"
               />
@@ -172,7 +174,7 @@ export const CreatePostForm = () => {
               />
             </div>
             <Input.Wrapper
-              label={<Heading4>Теги поста</Heading4>}
+              label={<Heading4>{l.selectTags}</Heading4>}
               size="20px"
             />
             <TagMultiSelect
@@ -194,7 +196,7 @@ export const CreatePostForm = () => {
                 w={'fit-content'}
                 onClick={() => navigate(`/channel/${id}`)}
               >
-                Отменить
+                {l.btnCancel}
               </GreyButton>
               <BlueButton
                 type="submit"
@@ -202,7 +204,7 @@ export const CreatePostForm = () => {
                 w={'fit-content'}
                 onClick={handleSubmit}
               >
-                Подтвердить
+                {l.btnConfirm}
               </BlueButton>
             </Flex>
           </Flex>

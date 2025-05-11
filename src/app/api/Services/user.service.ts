@@ -1,6 +1,7 @@
 import { api } from '@api/instance.ts';
 import { IMedia, IUser } from '@app-types';
 import { AxiosResponse } from 'axios';
+import { translations } from '@constants';
 
 export class UserService {
   static async loginUser(
@@ -14,8 +15,9 @@ export class UserService {
     email: string,
     login: string,
     password: string,
+    language: string,
   ): Promise<AxiosResponse<{ message: string }>> {
-    return api.post('/register', { login, email, password });
+    return api.post('/register', { login, email, password, language });
   }
 
   static async deleteUser(
@@ -38,6 +40,15 @@ export class UserService {
       login,
       email,
     });
+  }
+
+  static async changeLanguage(
+    language: string,
+  ): Promise<AxiosResponse<{ message: string }>> {
+    if (!(language in translations)) {
+      throw new Error('Invalid language');
+    }
+    return api.patch('/languageUpdate', { language });
   }
 
   static async editProfileImg(

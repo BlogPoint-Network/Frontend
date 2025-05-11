@@ -11,6 +11,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import '@mantine/core/styles.css';
 import { theme } from '@constants';
+import { LanguageProvider } from './app/context/LanguageContextProvider.tsx';
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,9 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <MantineProvider theme={theme}>
           <ProfileContextProvider>
-            <App />
+            <LanguageProvider>
+              <App />
+            </LanguageProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </ProfileContextProvider>
         </MantineProvider>

@@ -10,11 +10,13 @@ export const useProfileRegister = () => {
       login,
       email,
       password,
+      language,
     }: {
       email: string;
       login: string;
       password: string;
-    }) => UserService.registerUser(email, login, password),
+      language: string;
+    }) => UserService.registerUser(email, login, password, language),
     onSuccess: () => {
       navigate('/login');
     },

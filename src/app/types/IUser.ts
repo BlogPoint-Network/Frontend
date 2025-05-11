@@ -3,4 +3,5 @@ export interface IUser {
   email: string;
   login: string;
   isVerified: boolean;
+  language: string;
 }
