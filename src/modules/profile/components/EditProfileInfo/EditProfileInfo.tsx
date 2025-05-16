@@ -80,7 +80,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
       <Flex direction={'column'} gap={'15px'} mb={'20px'}>
         <Heading2>{l.changingUserInformation}</Heading2>
         <Label title={l.login} text={props.user ? props.user?.login : ''} />
-        <Label title={l.password} text={props.user ? props.user?.email : ''} />
+        <Label title={l.email} text={props.user ? props.user?.email : ''} />
         <Flex
           direction={{ base: 'column', c620: 'row', md: 'column', lg: 'row' }}
         >
