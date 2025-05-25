@@ -1,6 +1,6 @@
 export interface ITag {
   id: number;
-  category_id: number;
+  categoryId: number;
   name: string;
   color: string;
 }

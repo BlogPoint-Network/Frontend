@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { skyBlueColor } from '@constants';
 import { useLanguage } from '@hooks/useLanguage.ts';
@@ -7,10 +8,14 @@ import { useProfileLogin } from '@modules/profile/hooks/useProfileLogin.ts';
 import { useValidationMessages } from '@modules/profile/hooks/useValidationMessages.ts';
 import { BlueButton, FormBox, Heading1, Heading4 } from '@ui';
 
+import { CookieContext } from '../../../../app/context';
+
 export const LoginForm = () => {
   const { validationLogin, validationPassword } = useValidationMessages();
   const { l } = useLanguage();
   const profileLogin = useProfileLogin();
+  const { consent, forceShowBanner } = useContext(CookieContext)!;
+  // const [showResetPassword, setShowResetPassword] = useState(false);
 
   const form = useForm({
     mode: 'uncontrolled',
@@ -18,8 +23,14 @@ export const LoginForm = () => {
     validate: {
       login: validationLogin,
       password: validationPassword,
-    }
+    },
   });
+
+  // useEffect(() => {
+  //   if (profileLogin.error) {
+  //     setShowResetPassword(true);
+  //   }
+  // }, [profileLogin.error]);
 
   return (
     <FormBox>
@@ -27,6 +38,11 @@ export const LoginForm = () => {
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
+            if (consent !== 'accepted') {
+              alert('Вы должны принять cookies, чтобы войти.');
+              forceShowBanner();
+              return;
+            }
             profileLogin.mutate(values);
           })}
         >
@@ -49,6 +65,16 @@ export const LoginForm = () => {
           <BlueButton type="submit" mt="sm" bg={skyBlueColor}>
             {l.btnConfirm}
           </BlueButton>
+          {/*{showResetPassword && (*/}
+          {/*  <Flex mt="sm" direction="column">*/}
+          {/*    <Heading4 c="red">Неудачная попытка входа</Heading4>*/}
+          {/*    <Link to="" style={{ color: 'black' }} onClick={}>*/}
+          {/*      <Heading4>*/}
+          {/*        Если забыли пароль нажмите чтобы восстановить*/}
+          {/*      </Heading4>*/}
+          {/*    </Link>*/}
+          {/*  </Flex>*/}
+          {/*)}*/}
           <Flex display={{ base: 'block', c620: 'none' }}>
             <Text>{l.notRegisteredYet}</Text>
             <Link to={'/register'}>{l.createAccount}</Link>

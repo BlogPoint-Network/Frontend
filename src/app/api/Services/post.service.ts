@@ -4,22 +4,22 @@ import { AxiosResponse } from 'axios';
 
 export class PostService {
   static async createPost(
-    channelId: string,
-    previewImage: IMedia,
-    title: string,
+    channelId: number,
     content: string,
-    contentImages: IMedia[],
     tags: number[],
-    mediaFiles: IMedia[],
+    title: string,
+    previewImageId: number,
+    postImages: number[],
+    postFiles: number[],
   ): Promise<AxiosResponse<{ data: IPost } & { massage: string }>> {
     return api.post('/createPost', {
       channelId,
-      previewImage,
+      previewImageId,
       title,
       content,
-      contentImages,
+      postImages,
       tags,
-      mediaFiles,
+      postFiles,
       token: localStorage.getItem('token'),
     });
   }

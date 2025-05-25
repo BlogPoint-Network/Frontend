@@ -1,7 +1,7 @@
 import { api } from '@api/instance.ts';
 import { IMedia, IUser } from '@app-types';
-import { AxiosResponse } from 'axios';
 import { translations } from '@constants';
+import { AxiosResponse } from 'axios';
 
 export class UserService {
   static async loginUser(
@@ -20,10 +20,10 @@ export class UserService {
     return api.post('/register', { login, email, password, language });
   }
 
-  static async deleteUser(
-    code: string,
-  ): Promise<AxiosResponse<{ message: string }>> {
-    return api.delete('/deleteUser', { data: code });
+  static async deleteUser(data: {
+    code: string;
+  }): Promise<AxiosResponse<{ message: string }>> {
+    return api.delete('/deleteUser', { data });
   }
 
   static async infoUser(): Promise<
@@ -91,5 +91,9 @@ export class UserService {
     AxiosResponse<{ message: string }>
   > {
     return api.post('/requestDeletionVerification');
+  }
+
+  static async logoutUser(): Promise<AxiosResponse<{ message: string }>> {
+    return api.post('/logout');
   }
 }

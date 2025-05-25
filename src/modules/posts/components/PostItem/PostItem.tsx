@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
 import { skyBlueColor } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
 import {
@@ -14,13 +15,8 @@ import {
   Tag,
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
-interface IProps {
-  post: IPost;
-}
-
-export const PostItem = (props: IProps) => {
+export const PostItem = (props: IPost) => {
   const { l } = useLanguage();
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -36,7 +32,7 @@ export const PostItem = (props: IProps) => {
       shadow="sm"
       radius="md"
       bd="1px solid black"
-      id={'RecommendationPost' + props.post.id}
+      id={'RecommendationPost' + props.id}
       w={{ base: '345px', xs: '400px', sm: '450px' }}
       style={{
         position: 'relative',
@@ -54,12 +50,12 @@ export const PostItem = (props: IProps) => {
           ml={{ base: '10px', sm: '20' }}
           mr={{ base: '5px', xs: '0px', sm: '15px' }}
         >
-          <ChannelIconImage src={props.post.channelIcon.url} />
+          <ChannelIconImage src={props.channelIcon.url} />
           <Flex justify={'space-between'} w="80%">
             <Heading4
               fw="500"
               truncate="end"
-              onClick={() => navigate(`/channel/:${props.post.channelId}`)}
+              onClick={() => navigate(`/channel/:${props.channelId}`)}
               style={{
                 color: isHovered ? 'blue' : 'black',
                 transition: 'color 0.3s ease',
@@ -68,28 +64,28 @@ export const PostItem = (props: IProps) => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {props.post.channelName.length > 25
-                ? props.post.channelName.substring(0, 25) + '...'
-                : props.post.channelName}
+              {props.channelName.length > 25
+                ? props.channelName.substring(0, 25) + '...'
+                : props.channelName}
             </Heading4>
             <Heading5 fz={{ base: '14px', xs: '17px' }}>
-              {props.post.dateOfCreation}
+              {props.createdAt}
             </Heading5>
           </Flex>
         </Flex>
       </Card.Section>
       <Card.Section>
-        <Image src={props.post.previewImage.url} />
+        <Image src={props.previewImage.url} />
       </Card.Section>
       <Heading2 fw={'600'} lineClamp={2} ta="center">
-        {props.post.title}
+        {props.title}
       </Heading2>
       <Card.Section pl="15" pr="15" mb="10">
-        <Text lineClamp={3}>{extractTextFromHTML(props.post.content)}</Text>
+        <Text lineClamp={3}>{extractTextFromHTML(props.content)}</Text>
       </Card.Section>
       <Card.Section pl="15" pr="15" mb="10">
         <Flex direction={'row'} gap="7px" wrap={'wrap'}>
-          <List items={props.post.tags} renderItem={Tag} />
+          <List items={props.tags} renderItem={Tag} />
         </Flex>
       </Card.Section>
       {/*лайки дизлайки просмотры*/}
@@ -100,14 +96,14 @@ export const PostItem = (props: IProps) => {
             <Flex align="center" gap="xs">
               <IconThumbUp size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="green">
-                {addSpacesToNumber(Number(props.post.likes))}
+                {addSpacesToNumber(Number(props.likesCount))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs">
               <IconThumbDown size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="red">
-                {addSpacesToNumber(Number(props.post.dislikes))}
+                {addSpacesToNumber(Number(props.dislikesCount))}
               </Heading5>
             </Flex>
           </Flex>
@@ -116,7 +112,7 @@ export const PostItem = (props: IProps) => {
           <Flex align="center" gap="xs">
             <IconEye size={28} />
             <Heading5 fz={{ base: '14px', xs: '17px' }} c={skyBlueColor}>
-              {addSpacesToNumber(Number(props.post.views))}
+              {addSpacesToNumber(Number(props.views))}
             </Heading5>
           </Flex>
         </Flex>
@@ -126,7 +122,7 @@ export const PostItem = (props: IProps) => {
         <BlueButton
           mb="0px"
           onClick={() =>
-            navigate(`/channel/${props.post.channelId + ''}/post/${props.post.id + ''}`)
+            navigate(`/channel/${props.channelId + ''}/post/${props.id + ''}`)
           }
         >
           {l.btnRead}

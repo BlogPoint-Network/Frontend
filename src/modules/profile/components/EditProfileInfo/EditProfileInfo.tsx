@@ -4,7 +4,6 @@ import { useLanguage } from '@hooks/useLanguage.ts';
 import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
-import { useProfileDelete } from '@modules/profile/hooks/useProfileDelete.ts';
 import {
   BlueButton,
   GreyButton,
@@ -12,7 +11,6 @@ import {
   Heading3,
   Heading4,
   Label,
-  RedButton,
 } from '@ui';
 
 import { useProfileEditInfo } from '../../hooks/useProfileEditInfo';
@@ -25,7 +23,6 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
   const { l } = useLanguage();
   const [opened, { open, close }] = useDisclosure(false);
   const profileEditInfo = useProfileEditInfo();
-  const profileDelete = useProfileDelete();
   const form = useForm({
     initialValues: {
       login: props?.user?.login ?? '',
@@ -87,12 +84,6 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
           <BlueButton w="160px" onClick={open}>
             {l.btnChange}
           </BlueButton>
-          <RedButton
-            w='182px'
-            onClick={() => profileDelete.mutate()}
-          >
-            {l.btnDeleteProfile}
-          </RedButton>
         </Flex>
       </Flex>
     </>

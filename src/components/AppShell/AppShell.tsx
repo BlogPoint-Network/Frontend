@@ -1,11 +1,15 @@
 import { Header } from '@components/AppShell/components/Header/Header.tsx';
 import { Navigation } from '@components/AppShell/components/Navigation/Navigation.tsx';
+import { CookieConsentBanner } from '@components/CookieConsentBanner/CookieConsentBanner.tsx';
 import { AppShell as AppShellMantine, Burger, Flex } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import AppRouter from '@routes/components/AppRouter/AppRouter.tsx';
+import { useContext } from 'react';
+import { CookieContext } from '../../app/context';
 
 export const AppShell = () => {
   const [opened, { toggle, close }] = useDisclosure();
+  const { showBanner } = useContext(CookieContext)!;
 
   return (
     <AppShellMantine
@@ -33,6 +37,10 @@ export const AppShell = () => {
       <AppShellMantine.Main bg="rgb(241 241 241)">
         <AppRouter />
       </AppShellMantine.Main>
+
+      <AppShellMantine.Footer p="md" zIndex={999} h={100} hidden={!showBanner}>
+        <CookieConsentBanner />
+      </AppShellMantine.Footer>
     </AppShellMantine>
   );
 };

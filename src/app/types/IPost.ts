@@ -11,8 +11,8 @@ export interface IPost {
   contentImages: IMedia[];
   tags: ITag[];
   mediaFiles: IMedia[];
-  dateOfCreation: string;
-  likes: number;
-  dislikes: number;
+  createdAt: string;
+  likesCount: number;
+  dislikesCount: number;
   views: number;
 }

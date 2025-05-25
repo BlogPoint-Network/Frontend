@@ -1,10 +1,14 @@
-import { ConfirmEmail, ProfileForm } from '@modules/profile';
+import { useLanguage } from '@hooks/useLanguage.ts';
+import {
+  ConfirmDeleteProfile,
+  ConfirmEmail,
+  ProfileForm,
+} from '@modules/profile';
 import { ChooseLanguage } from '@modules/profile/components/ChooseLanguage/ChooseLanguage.tsx';
 import { EditProfileImage } from '@modules/profile/components/EditProfileImage/EditProfileImage.tsx';
 import { EditProfileInfo } from '@modules/profile/components/EditProfileInfo/EditProfileInfo.tsx';
 import { EditProfilePassword } from '@modules/profile/components/EditProfilePassword/EditProfilePassword.tsx';
 import { useGetProfile } from '@modules/profile/hooks/useGetProfile.ts';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const Profile = () => {
   const { l } = useLanguage();
@@ -20,11 +24,12 @@ export const Profile = () => {
 
   return (
     <ProfileForm user={currentUser}>
-      <EditProfileImage />
+      {/*<EditProfileImage image={currentUser.} />*/}
       <EditProfileInfo user={currentUser} />
       <ConfirmEmail />
       <EditProfilePassword />
       <ChooseLanguage user={currentUser} />
+      <ConfirmDeleteProfile />
     </ProfileForm>
   );
 };

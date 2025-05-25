@@ -5,12 +5,12 @@ import { useMutation } from '@tanstack/react-query';
 export function useChannelDelete() {
   const navigate = useNavigate();
   const controller = useMutation({
-    mutationFn: async (id: string) => {
+    mutationFn: async (id: number) => {
       return await ChannelService.deleteChannel(id);
     },
     onSuccess: () => {
-      console.log('Успешное удаление');
-      navigate('/user-channels');
+      setTimeout(() => navigate('/user-channels'), 100);
+;
     },
   });
   return controller;

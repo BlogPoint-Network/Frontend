@@ -1,23 +1,26 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { greyColor, skyBlueColor } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Card, Flex, Image, Pagination } from '@mantine/core';
 import { ChannelDescription } from '@modules/channel/components/ChannelDescription/ChannelDescription.tsx';
+import { useChannelDelete } from '@modules/channel/hooks/useChannelDelete.ts';
 import { useClearSubscribe } from '@modules/channel/hooks/useClearSubscribe.ts';
 import { useGetChannelById } from '@modules/channel/hooks/useGetChannelById.ts';
 import { useSetSubscribe } from '@modules/channel/hooks/useSetSubscribe.ts';
+import { PostItem } from '@modules/posts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
 import {
   BlueButton,
   CommonFrame,
   Heading2,
   Heading4,
+  List,
   RedButton,
   SubCount,
 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const ChannelItemPage: FC = () => {
   const { l } = useLanguage();
@@ -25,6 +28,7 @@ export const ChannelItemPage: FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const channelManager = useGetChannelById(Number(id)).data?.data.data;
+  const channelDelete = useChannelDelete();
   const posts = usePosts(Number(id), activePage);
 
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -144,11 +148,8 @@ export const ChannelItemPage: FC = () => {
                 profile?.user?.id == channelManager?.ownerId) ? (
                   <RedButton
                     onClick={() => {
-                      if (
-                        window.confirm(l.areYouSureDeleteChannel)
-                      ) {
-                        const handleDelete = () => {};
-                        handleDelete();
+                      if (window.confirm(l.areYouSureDeleteChannel)) {
+                        channelDelete.mutate(Number(id));
                       }
                     }}
                   >
@@ -175,7 +176,7 @@ export const ChannelItemPage: FC = () => {
         <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
           {l.btnCreatePost}
         </BlueButton>
-        {/*<List items={posts} renderItem={PostItem} />*/}
+        <List items={posts} renderItem={PostItem} />
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>
     </>

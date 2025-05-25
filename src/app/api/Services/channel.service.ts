@@ -5,15 +5,13 @@ import { AxiosResponse } from 'axios';
 export class ChannelService {
   static async createChannel(
     name: string,
-    category: number,
+    categoryId: number,
     description: string,
-    imageLogo: IMedia,
   ): Promise<AxiosResponse<{ data: IChannel } & { message: string }>> {
     return api.post('/createChannel', {
       name,
-      category,
+      categoryId,
       description,
-      imageLogo,
     });
   }
 
@@ -70,7 +68,7 @@ export class ChannelService {
   }
 
   static async deleteChannel(
-    id: string,
+    id: number,
   ): Promise<AxiosResponse<{ message: string }>> {
     return api.delete(`/deleteChannel/${id}`);
   }
