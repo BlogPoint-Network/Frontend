@@ -5,12 +5,11 @@ import { useMutation } from '@tanstack/react-query';
 interface EditPostParams {
   postId: number;
   previewImage: IMedia;
-  channelLogo: IMedia;
   title: string;
   content: string;
-  contentImages: IMedia[];
+  postImages: number[];
   tags: number[];
-  mediaFiles: IMedia[];
+  postFiles: number[];
 }
 
 export function usePostEdit() {
@@ -19,12 +18,11 @@ export function usePostEdit() {
       return await PostService.editPost(
         modifiedPost.postId,
         modifiedPost.previewImage,
-        modifiedPost.channelLogo,
         modifiedPost.title,
         modifiedPost.content,
-        modifiedPost.contentImages,
         modifiedPost.tags,
-        modifiedPost.mediaFiles,
+        modifiedPost.postImages,
+        modifiedPost.postFiles,
       );
     },
     onError: error => {

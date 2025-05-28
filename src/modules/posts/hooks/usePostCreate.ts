@@ -6,10 +6,10 @@ interface CreatePostParams {
   channelId: number;
   content: string;
   tags: number[];
-  title: string;
   previewImageId: number;
   postImages: number[];
   postFiles: number[];
+  title: string;
 }
 
 export function usePostCreate() {
@@ -19,11 +19,11 @@ export function usePostCreate() {
       return await PostService.createPost(
         newPost.channelId,
         newPost.content,
-        newPost.tags,
-        newPost.postFiles,
-        newPost.previewImageId,
         newPost.title,
+        newPost.previewImageId,
         newPost.postImages,
+        newPost.postFiles,
+        newPost.tags,
       );
     },
     onSuccess: data => {

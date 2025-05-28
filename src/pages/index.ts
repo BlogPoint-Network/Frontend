@@ -9,3 +9,4 @@ export * from './Recommendations.tsx';
 export * from './Register';
 export * from './SubscribeChannels.tsx';
 export * from './UserChannels.tsx';
+export * from './EditPost.tsx'

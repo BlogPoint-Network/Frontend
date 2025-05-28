@@ -8,11 +8,11 @@ export interface IPost {
   previewImage: IMedia;
   title: string;
   content: string;
-  contentImages: IMedia[];
+  postImages: IMedia[];
   tags: ITag[];
-  mediaFiles: IMedia[];
+  postFiles: IMedia[];
   createdAt: string;
   likesCount: number;
   dislikesCount: number;
-  views: number;
+  viewsCount: number;
 }

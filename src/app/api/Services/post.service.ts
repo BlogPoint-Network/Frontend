@@ -6,43 +6,40 @@ export class PostService {
   static async createPost(
     channelId: number,
     content: string,
-    tags: number[],
     title: string,
     previewImageId: number,
     postImages: number[],
     postFiles: number[],
+    tags: number[],
   ): Promise<AxiosResponse<{ data: IPost } & { massage: string }>> {
     return api.post('/createPost', {
       channelId,
-      previewImageId,
-      title,
       content,
+      title,
+      previewImageId,
       postImages,
-      tags,
       postFiles,
-      token: localStorage.getItem('token'),
+      tags,
     });
   }
 
   static async editPost(
     postId: number,
     previewImage: IMedia,
-    channelLogo: IMedia,
     title: string,
     content: string,
-    contentImages: IMedia[],
+    postImages: number[],
     tags: number[],
-    mediaFiles: IMedia[],
+    postFiles: number[],
   ): Promise<AxiosResponse<{ data: IPost } & { message: string }>> {
     return api.patch('/editPost', {
       postId,
-      channelLogo,
       previewImage,
       title,
       content,
-      contentImages,
+      postImages,
       tags,
-      mediaFiles,
+      postFiles,
     });
   }
 

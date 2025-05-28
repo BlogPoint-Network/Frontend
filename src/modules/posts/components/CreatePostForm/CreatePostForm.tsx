@@ -7,6 +7,7 @@ import { FileInput, Flex, Group, Input } from '@mantine/core';
 import { TextInput } from '@mantine/core';
 import { FileLoader } from '@modules/experementalTest/components/FileLoader.tsx';
 import { usePostCreate } from '@modules/posts/hooks/usePostCreate.ts';
+import { useProcessHtmlContent } from '@modules/posts/utils/processHtmlContent.ts';
 import { Editor } from '@tinymce/tinymce-react';
 import {
   BlueButton,
@@ -16,7 +17,6 @@ import {
   Heading4,
   TagMultiSelect,
 } from '@ui';
-import { processHtmlContent } from '@utils/processContentAndFiles.ts';
 
 interface MediaFile {
   file: File;
@@ -34,6 +34,7 @@ export const CreatePostForm = () => {
   const uploadFile = useUploadFile();
   const navigate = useNavigate();
   const postCreate = usePostCreate();
+  const processHtmlContent = useProcessHtmlContent();
 
   const [title, setTitle] = useState('');
   const { id } = useParams(); //channel id
@@ -48,8 +49,8 @@ export const CreatePostForm = () => {
 
   const handleSubmit = async () => {
     // 🔹 1. Обрабатываем контент и выделяем изображения
-    const processedContent = processHtmlContent(content);
-    console.log('Обработал контент');
+    const { content: processContent, postImages } =
+      await processHtmlContent(content);
 
     // 🔹 2. Загружаем previewImage
     const previewResponse = await uploadFile.mutateAsync({
@@ -59,45 +60,29 @@ export const CreatePostForm = () => {
     const previewImageData = {
       id: previewResponse.data.data.id,
     };
-    console.log('Обработал превью');
 
-    // 🔹 3. Загружаем изображения из контента
-    const uploadedImages = await Promise.all(
-      processedContent.images.map(async img => {
-        const response = await uploadFile.mutateAsync({
-          file: img.file,
-          type: 'image',
-        });
-        return {
-          id: response.data.data.id,
-        };
-      }),
-    );
-    console.log('Обработал контент изображения');
-
-    // 🔹 4. Загружаем медиафайлы
+    // 🔹 3. Загружаем медиафайлы
     const uploadedMediaFiles = await Promise.all(
       mediaFiles.map(async file => {
         const response = await uploadFile.mutateAsync({
           file: file.file,
-          type: null,
+          type: file.type === 'image' ? 'image' : null,
         });
         return {
           id: response.data.data.id,
         };
       }),
     );
-    console.log('Обработал контент');
 
     // 🔹 5. Создаем объект поста
     postCreate.mutate({
       channelId: Number(id),
-      previewImageId: previewImageData.id,
+      content: processContent,
       title: title,
-      content: processedContent.content,
-      postImages: uploadedImages.map(img => img.id),
-      tags: selectTagIds,
+      previewImageId: previewImageData.id,
+      postImages: postImages,
       postFiles: uploadedMediaFiles.map(img => img.id),
+      tags: selectTagIds,
     });
   };
 

@@ -15,6 +15,7 @@ import {
   Tag,
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
+import EmptyPng from '@assets/images/EmptyPng.png';
 
 export const PostItem = (props: IPost) => {
   const { l } = useLanguage();
@@ -50,24 +51,24 @@ export const PostItem = (props: IPost) => {
           ml={{ base: '10px', sm: '20' }}
           mr={{ base: '5px', xs: '0px', sm: '15px' }}
         >
-          <ChannelIconImage src={props.channelIcon.url} />
+          <ChannelIconImage src={props?.channelIcon?.url || EmptyPng} />
           <Flex justify={'space-between'} w="80%">
-            <Heading4
-              fw="500"
-              truncate="end"
-              onClick={() => navigate(`/channel/:${props.channelId}`)}
-              style={{
-                color: isHovered ? 'blue' : 'black',
-                transition: 'color 0.3s ease',
-                maxWidth: 'calc(100% - 50px)',
-              }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {props.channelName.length > 25
-                ? props.channelName.substring(0, 25) + '...'
-                : props.channelName}
-            </Heading4>
+            {/*<Heading4*/}
+            {/*  fw="500"*/}
+            {/*  truncate="end"*/}
+            {/*  onClick={() => navigate(`/channel/:${props.channelId}`)}*/}
+            {/*  style={{*/}
+            {/*    color: isHovered ? 'blue' : 'black',*/}
+            {/*    transition: 'color 0.3s ease',*/}
+            {/*    maxWidth: 'calc(100% - 50px)',*/}
+            {/*  }}*/}
+            {/*  onMouseEnter={() => setIsHovered(true)}*/}
+            {/*  onMouseLeave={() => setIsHovered(false)}*/}
+            {/*>*/}
+            {/*  {props.channelName.length > 25*/}
+            {/*    ? props.channelName.substring(0, 25) + '...'*/}
+            {/*    : props.channelName}*/}
+            {/*</Heading4>*/}
             <Heading5 fz={{ base: '14px', xs: '17px' }}>
               {props.createdAt}
             </Heading5>
@@ -112,7 +113,7 @@ export const PostItem = (props: IPost) => {
           <Flex align="center" gap="xs">
             <IconEye size={28} />
             <Heading5 fz={{ base: '14px', xs: '17px' }} c={skyBlueColor}>
-              {addSpacesToNumber(Number(props.views))}
+              {addSpacesToNumber(Number(props.viewsCount))}
             </Heading5>
           </Flex>
         </Flex>
