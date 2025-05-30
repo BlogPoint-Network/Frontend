@@ -56,7 +56,7 @@ export const PostItem = (props: IPost) => {
             <Heading4
               fw="500"
               truncate="end"
-              onClick={() => navigate(`/channel/:${props.channel.id}`)}
+              onClick={() => navigate(`/channel/${props.channel.id}`)}
               style={{
                 color: isHovered ? 'blue' : 'black',
                 transition: 'color 0.3s ease',

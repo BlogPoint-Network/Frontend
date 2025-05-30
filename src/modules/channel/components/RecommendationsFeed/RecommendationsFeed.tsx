@@ -8,6 +8,7 @@ export const RecommendationsFeed = () => {
   return (
     <Carousel
       id="recommendationFeed"
+      align="center"
       // draggable={{ md: false, base: true }} // не работает
       slideSize={{ md: '33%', base: '100%' }}
       w={{ lg: '1400px', base: '450px' }} // выравнивание по центру

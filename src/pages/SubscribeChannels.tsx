@@ -1,14 +1,13 @@
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Container, Flex } from '@mantine/core';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
 import { ChannelsFeed } from '@modules/channel/components/ChannelsFeed/ChannelsFeed.tsx';
 import { useGetSubscription } from '@modules/channel/hooks/useGetSubscription.ts';
 import { CommonFrame, Heading1, List } from '@ui';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const SubscribeChannels = () => {
   const { l } = useLanguage();
   const subscribeChannels = useGetSubscription();
-  console.log(subscribeChannels);
 
   return (
     <CommonFrame>

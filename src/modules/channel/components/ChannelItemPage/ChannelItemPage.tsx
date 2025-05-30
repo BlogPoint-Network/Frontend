@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { greyColor, skyBlueColor } from '@constants';
 import { useLanguage } from '@hooks/useLanguage.ts';
@@ -7,6 +7,7 @@ import { ChannelDescription } from '@modules/channel/components/ChannelDescripti
 import { useChannelDelete } from '@modules/channel/hooks/useChannelDelete.ts';
 import { useClearSubscribe } from '@modules/channel/hooks/useClearSubscribe.ts';
 import { useGetChannelById } from '@modules/channel/hooks/useGetChannelById.ts';
+import { useGetSubscription } from '@modules/channel/hooks/useGetSubscription.ts';
 import { useSetSubscribe } from '@modules/channel/hooks/useSetSubscribe.ts';
 import { PostItem } from '@modules/posts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
@@ -29,7 +30,16 @@ export const ChannelItemPage: FC = () => {
   const { id } = useParams();
   const channelManager = useGetChannelById(Number(id)).data?.data.data;
   const channelDelete = useChannelDelete();
+  const channelId = channelManager?.id;
   const posts = usePosts(Number(id), activePage);
+  const subscriptionData = useGetSubscription();
+
+  useEffect(() => {
+    if (!subscriptionData || !channelId) return;
+
+    const subscribedChannelIds = subscriptionData.map(channel => channel.id);
+    setIsSubscribed(subscribedChannelIds.includes(channelId));
+  }, [subscriptionData, channelId]);
 
   const [isSubscribed, setIsSubscribed] = useState(false);
   const setSubscribe = useSetSubscribe();
@@ -42,12 +52,11 @@ export const ChannelItemPage: FC = () => {
     : { backgroundColor: skyBlueColor, color: 'white' };
 
   const toggleSubscribe = () => {
-    const userId = profile?.user?.id ?? 0;
-    if (isSubscribed) {
-      clearSubscribe.mutate(userId);
+    if (isSubscribed && channelId) {
+      clearSubscribe.mutate(channelId);
       setIsSubscribed(false);
-    } else {
-      setSubscribe.mutate(userId);
+    } else if (channelId) {
+      setSubscribe.mutate(channelId);
       setIsSubscribed(true);
     }
   };
@@ -144,8 +153,7 @@ export const ChannelItemPage: FC = () => {
                   description={channelManager?.description ?? ''}
                   subscriberNumber={channelManager?.subsCount ?? 0}
                 />
-                {(profile?.user ??
-                profile?.user?.id == channelManager?.ownerId) ? (
+                {profile?.user?.id === channelManager?.ownerId ? (
                   <RedButton
                     onClick={() => {
                       if (window.confirm(l.areYouSureDeleteChannel)) {
@@ -157,7 +165,7 @@ export const ChannelItemPage: FC = () => {
                   </RedButton>
                 ) : (
                   <BlueButton onClick={toggleSubscribe} style={buttonStyle}>
-                    {isSubscribed ? l.btnSubscribe : l.btnUnsubscribe}
+                    {isSubscribed ? l.btnUnsubscribe : l.btnSubscribe}
                   </BlueButton>
                 )}
               </Flex>

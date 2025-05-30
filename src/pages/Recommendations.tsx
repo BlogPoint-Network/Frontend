@@ -1,10 +1,13 @@
 import { useLanguage } from '@hooks/useLanguage.ts';
 import { Container, Flex } from '@mantine/core';
 import { TagsFeed } from '@modules/channel/components/TagsFeed/TagsFeed.tsx';
-import { CommonFrame, Heading1 } from '@ui';
+import { PostItem } from '@modules/posts';
+import { useGetRecommendedPosts } from '@modules/posts/hooks/useGetRecommendedPosts.ts';
+import { CommonFrame, Heading1, List } from '@ui';
 
 export const Recommendations = () => {
   const { l } = useLanguage();
+  const recommendedPosts = useGetRecommendedPosts(1);
 
   return (
     <>
@@ -22,7 +25,7 @@ export const Recommendations = () => {
             direction="column"
             w="100%"
           >
-            {/*<List items={recommendationsExamples} renderItem={PostItem} />*/}
+            <List items={recommendedPosts} renderItem={PostItem} />
           </Flex>
         </Container>
       </CommonFrame>

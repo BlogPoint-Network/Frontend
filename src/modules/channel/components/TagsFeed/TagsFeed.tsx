@@ -14,7 +14,7 @@ export const TagsFeed = () => {
   };
 
   return (
-    <Flex>
+    <Flex align="center">
       <Carousel
         id="recommendationFeed"
         // draggable={{ md: false, base: true }} // не работает
@@ -42,7 +42,7 @@ export const TagsFeed = () => {
       >
         {categories.map((category: ICategory) => {
           // если тег выбран, меняет стили кнопок
-          const isTagSelected = selectedTag?.category_id == category.id;
+          const isTagSelected = selectedTag?.categoryId == category.id;
           return (
             <Carousel.Slide key={category.id}>
               <Menu
