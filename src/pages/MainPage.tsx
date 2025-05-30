@@ -4,7 +4,6 @@ import { RecommendationsFeed } from '@modules/channel/components/Recommendations
 import { useGetPopularChannels } from '@modules/channel/hooks/useGetPopularChannels.ts';
 import { CommonFrame, Heading1, List, LogoMainPage } from '@ui';
 import { useLanguage } from '@hooks/useLanguage.ts';
-import { CommonFrame, List, LogoMainPage } from '@ui';
 
 export const MainPage = () => {
   const { l } = useLanguage();

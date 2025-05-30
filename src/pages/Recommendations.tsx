@@ -3,8 +3,7 @@ import { Container, Flex, Text } from '@mantine/core';
 import { TagsFeed } from '@modules/channel/components/TagsFeed/TagsFeed.tsx';
 import { PostItem } from '@modules/posts';
 import { useGetRecommendedPosts } from '@modules/posts/hooks/useGetRecommendedPosts.ts';
-import { CommonFrame, Heading1, List } from '@ui';
-import { CommonFrame } from '@ui';
+import { CommonFrame, List } from '@ui';
 
 export const Recommendations = () => {
   const { l } = useLanguage();
