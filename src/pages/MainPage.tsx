@@ -1,7 +1,7 @@
 import { useLanguage } from '@hooks/useLanguage.ts';
 import { Container, Flex, Text } from '@mantine/core';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
-// import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
+import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
 import { useGetPopularChannels } from '@modules/channel/hooks/useGetPopularChannels.ts';
 import { CommonFrame, List, LogoMainPage } from '@ui';
 
@@ -19,7 +19,7 @@ export const MainPage = () => {
           <Text fz={{ base: '40px', xs: '48px' }} ta="center" fw="600" pt="10px" pb="10px">
             {l.recommendations}
           </Text>
-          {/*<RecommendationsFeed />*/}
+          <RecommendationsFeed />
         </Container>
         <Container id="popularChannelsContainer" mb="40px">
           {/* Heading1 слишком широк на мобилках*/}
@@ -43,6 +43,7 @@ export const MainPage = () => {
             gap="30px"
             direction="column"
             w="100%"
+            align="center"
           >
             <List items={popularChannels} renderItem={ChannelItem} />
           </Flex>

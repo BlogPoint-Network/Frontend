@@ -3,15 +3,20 @@ import Empty from '@assets/images/EmptyPng.png';
 import { useLanguage } from '@hooks/useLanguage.ts';
 import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useUploadUserLogo } from '@modules/profile/hooks/useUploadUserLogo.ts';
-import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
+import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
+import {
+  useUploadChannelLogo
+} from '@modules/channel/hooks/useUploadChannelLogo.ts';
+import { useParams } from 'react-router-dom';
 
-export const EditProfileImage = () => {
+export const EditChannelImage = () => {
   const { l } = useLanguage();
+  const { id } = useParams();
+  const channelId = Number(id);
+  const editChannelLogo = useUploadChannelLogo();
 
   const [fileImg, setFileImg] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const editProfileImg = useUploadUserLogo();
 
   return (
     <>
@@ -20,7 +25,9 @@ export const EditProfileImage = () => {
         onClose={close}
         title={<Heading3>{l.userImage}</Heading3>}
       >
-        <Heading4>{l.yourImage}</Heading4>
+        <Heading4 mt={'20px'} mb={'10px'}>
+          {l.channelImage}
+        </Heading4>
         <FileInput
           accept="image/png,image/jpeg,image/jpg"
           value={fileImg}
@@ -31,7 +38,7 @@ export const EditProfileImage = () => {
           <BlueButton
             onClick={() => {
               if (fileImg) {
-                editProfileImg.mutate(fileImg);
+                editChannelLogo.mutate({ fileImg, channelId });
               } else {
                 console.log('Error editing Image');
               }
@@ -43,10 +50,11 @@ export const EditProfileImage = () => {
         </Group>
       </Modal>
 
-      <Heading2>{l.userImage}</Heading2>
+      <Heading4 mt={'20px'} mb={'10px'}>
+        {l.channelImage}
+      </Heading4>
       <Flex
         mih={50}
-        mb={'20px'}
         gap="md"
         justify="flex-start"
         align={{ md: 'end', sm: 'start', base: 'start' }}

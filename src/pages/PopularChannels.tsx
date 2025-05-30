@@ -21,6 +21,7 @@ export const PopularChannels = () => {
             gap="30px"
             direction="column"
             w="100%"
+            align={'center'}
           >
             <List items={popularChannels} renderItem={ChannelItem} />
           </Flex>

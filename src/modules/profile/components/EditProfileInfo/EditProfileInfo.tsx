@@ -62,6 +62,7 @@ export const EditProfileInfo: FC<IEditProfileInfoProps> = props => {
           </Flex>
           <Group mt="lg" justify="flex-end">
             <GreyButton
+              w={{base: '120px', xs: 'auto'}}
               onClick={() => {
                 form.reset();
                 close();

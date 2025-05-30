@@ -13,7 +13,7 @@ export const ChannelItem = (props: IChannel) => {
     <Card
       radius="md"
       h={{ md: '290px', sm: 'fit-content', base: 'fit-content' }}
-      w={{ md: '800px', sm: 'fit-content', base: 'fit-content' }}
+      w={{ md: '400px', sm: 'fit-content', base: 'fit-content' }}
       m="15px 0px"
       bd="1px solid black"
       id={'PopularChannelItem' + props.id}

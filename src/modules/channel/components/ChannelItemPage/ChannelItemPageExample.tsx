@@ -7,6 +7,7 @@ import { ChannelDescription } from '@modules/channel/components/ChannelDescripti
 import { useChannelDelete } from '@modules/channel/hooks/useChannelDelete.ts';
 import { useClearSubscribe } from '@modules/channel/hooks/useClearSubscribe.ts';
 import { useGetChannelById } from '@modules/channel/hooks/useGetChannelById.ts';
+import { useGetSubscription } from '@modules/channel/hooks/useGetSubscription.ts';
 import { useSetSubscribe } from '@modules/channel/hooks/useSetSubscribe.ts';
 import { PostItem } from '@modules/posts';
 import { usePosts } from '@modules/posts/hooks/usePosts.ts';
@@ -21,9 +22,6 @@ import {
 } from '@ui';
 
 import { ProfileContext } from '../../../../app/context';
-import {
-  useGetSubscription
-} from '@modules/channel/hooks/useGetSubscription.ts';
 
 export const ChannelItemPage: FC = () => {
   const { l } = useLanguage();
@@ -31,8 +29,8 @@ export const ChannelItemPage: FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const channelManager = useGetChannelById(Number(id)).data?.data.data;
-  const channelId = channelManager?.id;
   const channelDelete = useChannelDelete();
+  const channelId = channelManager?.id;
   const posts = usePosts(Number(id), activePage);
   const subscriptionData = useGetSubscription();
 
@@ -62,10 +60,6 @@ export const ChannelItemPage: FC = () => {
       setIsSubscribed(true);
     }
   };
-
-  if (!channelManager) {
-    return <div>Loading...</div>; // или спиннер
-  }
 
   return (
     <>
@@ -118,11 +112,8 @@ export const ChannelItemPage: FC = () => {
                 border: '1px solid black',
                 borderRadius: '30px',
               }}
-              src={
-                // 'http://localhost:9000/blogpoint-bucket/image/24420024-8e9b-4a8a-9a31-216336f5afb3.png'
-                channelManager?.imageLogo?.url ||
-                '/src/app/assets/images/EmptyPng.png'
-              }
+              src={'/src/app/assets/images/EmptyPng.png'}
+
             />
 
             <Flex // расположение кнопок и подписчиков
@@ -155,7 +146,6 @@ export const ChannelItemPage: FC = () => {
               </Flex>
               <Flex // нижние кнопки
                 justify={{ base: 'center', lg: 'space-between' }}
-                align={'end'}
                 gap={{ base: '10px', xs: '60px' }}
                 direction={{ base: 'column', xs: 'row' }}
               >
@@ -165,26 +155,15 @@ export const ChannelItemPage: FC = () => {
                   subscriberNumber={channelManager?.subsCount ?? 0}
                 />
                 {profile?.user?.id === channelManager?.ownerId ? (
-                  <>
-                    <Flex direction={'column'}>
-                      <BlueButton
-                        onClick={() =>
-                          navigate(`/channel/${channelManager?.id}/edit`)
-                        }
-                      >
-                        {l.btnEdit}
-                      </BlueButton>
-                      <RedButton
-                        onClick={() => {
-                          if (window.confirm(l.areYouSureDeleteChannel)) {
-                            channelDelete.mutate(Number(id));
-                          }
-                        }}
-                      >
-                        {l.btnDelete}
-                      </RedButton>
-                    </Flex>
-                  </>
+                  <RedButton
+                    onClick={() => {
+                      if (window.confirm(l.areYouSureDeleteChannel)) {
+                        channelDelete.mutate(Number(id));
+                      }
+                    }}
+                  >
+                    {l.btnDelete}
+                  </RedButton>
                 ) : (
                   <BlueButton onClick={toggleSubscribe} style={buttonStyle}>
                     {isSubscribed ? l.btnUnsubscribe : l.btnSubscribe}
@@ -203,11 +182,9 @@ export const ChannelItemPage: FC = () => {
         direction="column"
         wrap="nowrap"
       >
-        {profile?.user?.id === channelManager?.ownerId && (
-          <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
-            {l.btnCreatePost}
-          </BlueButton>
-        )}
+        <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
+          {l.btnCreatePost}
+        </BlueButton>
         <List items={posts} renderItem={PostItem} />
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>

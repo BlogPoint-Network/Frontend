@@ -1,5 +1,5 @@
 import { api } from '@api/instance.ts';
-import { IChannel, IMedia } from '@app-types';
+import { IChannel } from '@app-types';
 import { AxiosResponse } from 'axios';
 
 export class ChannelService {
@@ -56,14 +56,12 @@ export class ChannelService {
     categoryId: number,
     name: string,
     description: string,
-    imageLogo: IMedia | null,
   ): Promise<AxiosResponse<{ data: IChannel } & { message: string }>> {
     return api.patch('/editChannel', {
       channelId,
       name,
       categoryId,
       description,
-      imageLogo,
     });
   }
 

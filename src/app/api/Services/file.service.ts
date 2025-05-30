@@ -33,4 +33,26 @@ export class FileService {
   ): Promise<AxiosResponse<{ data: IMedia } & { message: string }>> {
     return api.post('/uploadUserLogo', file);
   }
+
+  static async uploadChannelLogo(
+    file: File | null,
+    channelId: number,
+  ): Promise<AxiosResponse<{ data: IMedia } & { message: string }>> {
+    if (!file) throw new Error('Файл не выбран');
+
+    const formData = new FormData();
+    formData.append('file', file); // сам файл
+
+    const response = await api.post(
+      `/uploadChannelLogo/${channelId}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+
+    return response;
+  }
 }
