@@ -57,7 +57,7 @@ export const EditProfileImage = () => {
             open();
           }}
         >
-          {l.btnLoad}
+          {l.btnChange}
         </BlueButton>
       </Flex>
     </>
