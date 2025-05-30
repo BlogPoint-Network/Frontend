@@ -33,9 +33,9 @@ export const useLanguage = (defaultLang: Language = 'ru') => {
   }, [isAuthenticated, profileLanguage]);
 
   const language = isAuthenticated
-    ? ((profileLanguage && profileLanguage in translations
-        ? profileLanguage
-        : defaultLang) as Language)
+    ? ((!(profileLanguage && profileLanguage in translations)
+        ? defaultLang
+        : profileLanguage) as Language)
     : localLang;
 
   const setLanguage = (lang: string) => {
