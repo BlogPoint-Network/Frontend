@@ -1,10 +1,8 @@
-import { IMedia, ITag } from '@app-types';
+import { IChannel, IMedia, ITag } from '@app-types';
 
 export interface IPost {
   id: number;
-  channelId: string;
-  channelName: string;
-  channelIcon: IMedia;
+  channel: IChannel;
   previewImage: IMedia;
   title: string;
   content: string;

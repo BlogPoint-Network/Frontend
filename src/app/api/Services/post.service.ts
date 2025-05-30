@@ -62,6 +62,12 @@ export class PostService {
     return api.get(`/getPost/${postId}`);
   }
 
+  static async getRecommendedPosts(
+    page: number,
+  ): Promise<AxiosResponse<{ data: IPost[] } & { messege: string }>> {
+    return api.get(`/getRecommendedPosts`, { data: page });
+  }
+
   static async setReaction(
     postId: number,
     reaction: string,

@@ -1,8 +1,10 @@
 import { skyBlueColor } from '@constants';
 import { Carousel } from '@mantine/carousel';
-import { recommendationsExamples } from '@modules/channel/constants/recomendationExamples.ts';
+import { PostItem } from '@modules/posts';
+import { useGetRecommendedPosts } from '@modules/posts/hooks/useGetRecommendedPosts.ts';
 
 export const RecommendationsFeed = () => {
+  const recommendedPosts = useGetRecommendedPosts(1);
   return (
     <Carousel
       id="recommendationFeed"
@@ -38,8 +40,23 @@ export const RecommendationsFeed = () => {
         },
       }}
     >
-      {recommendationsExamples.map(el => (
-        <Carousel.Slide key={el.id} />
+      {recommendedPosts.map(el => (
+        <Carousel.Slide key={el.id}>
+          <PostItem
+            id={el.id}
+            channel={el.channel}
+            previewImage={el.previewImage}
+            title={el.title}
+            content={el.content}
+            postImages={el.postImages}
+            tags={el.tags}
+            postFiles={el.postFiles}
+            createdAt={el.createdAt}
+            likesCount={el.likesCount}
+            dislikesCount={el.dislikesCount}
+            viewsCount={el.viewsCount}
+          />
+        </Carousel.Slide>
       ))}
     </Carousel>
   );

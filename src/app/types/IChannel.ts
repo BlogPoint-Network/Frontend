@@ -8,5 +8,5 @@ export interface IChannel {
   description: string;
   ownerId: number;
   subsCount: number;
-  imageLogo: IMedia;
+  logo: IMedia;
 }

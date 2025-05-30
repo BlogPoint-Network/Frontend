@@ -29,7 +29,6 @@ export const PostItemPage: FC = () => {
     post?.content ?? '',
     post?.postImages ?? [],
   );
-  console.log(processedContent);
   const getFileType = (filename: string): string => {
     const ext = filename.split('.').pop()?.toLowerCase();
     if (!ext) return 'unknown';
@@ -68,13 +67,13 @@ export const PostItemPage: FC = () => {
           gap={{ base: 'sm', sm: 'lg' }}
           mt="15"
         >
-          <ChannelIconImage src={post?.channelIcon?.url || EmptyPng} />
+          <ChannelIconImage src={post?.channel?.logo?.url || EmptyPng} />
           <Heading2
             fz={{ base: '17px', sm: '22px', md: '26px' }}
             pr={{ sm: '190px' }} // для кнопки подписаться
             fw="500"
             truncate="end"
-            onClick={() => navigate(`/channel/:${post?.channelId}`)}
+            onClick={() => navigate(`/channel/:${post?.channel.id}`)}
             style={{
               color: isHovered ? 'blue' : 'black',
               transition: 'color 0.3s ease',
@@ -82,9 +81,9 @@ export const PostItemPage: FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {post?.channelName && post?.channelName.length > 25
-              ? post.channelName.substring(0, 25) + '...'
-              : post?.channelName}
+            {post?.channel.name && post?.channel.name.length > 25
+              ? post.channel.name.substring(0, 25) + '...'
+              : post?.channel.name}
           </Heading2>
           <BlueButton
             pos={'absolute'}
@@ -128,7 +127,10 @@ export const PostItemPage: FC = () => {
           direction={{ base: 'column', sm: 'row', md: 'column', lg: 'row' }}
         >
           <Heading4 fw={600}>
-            {l.dateOfPublication} {post?.createdAt}
+            {l.dateOfPublication}{' '}
+            {post?.createdAt
+              ? new Date(post.createdAt).toLocaleString()
+              : 'Дата не указана'}
           </Heading4>
           <Flex align="start" gap="md">
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>

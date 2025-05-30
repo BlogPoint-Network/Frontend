@@ -1,13 +1,13 @@
 import { Container, Flex } from '@mantine/core';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
-// import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
+import { RecommendationsFeed } from '@modules/channel/components/RecommendationsFeed/RecommendationsFeed.tsx';
 import { useGetPopularChannels } from '@modules/channel/hooks/useGetPopularChannels.ts';
 import { CommonFrame, Heading1, List, LogoMainPage } from '@ui';
 import { useLanguage } from '@hooks/useLanguage.ts';
-
 export const MainPage = () => {
   const { l } = useLanguage();
   const popularChannels = useGetPopularChannels();
+
 
   return (
     <>
@@ -17,7 +17,7 @@ export const MainPage = () => {
           <Heading1 ta="center" mb="40px">
             {l.recommendations}
           </Heading1>
-          {/*<RecommendationsFeed />*/}
+          <RecommendationsFeed />
         </Container>
         <Container id="popularChannelsContainer" mb="40px">
           <Heading1 ta="center" mb="40px">
