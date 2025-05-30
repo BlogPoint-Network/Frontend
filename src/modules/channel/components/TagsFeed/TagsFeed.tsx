@@ -18,8 +18,8 @@ export const TagsFeed = () => {
       <Carousel
         id="recommendationFeed"
         // draggable={{ md: false, base: true }} // не работает
-        w={{base: '210px', xss: '260px', sm: '320px'}} // выравнивание по центру
-        ml={'60px'}
+        w={{base: '210px', md: '320px'}} // выравнивание по центру
+        ml={{base: '30px', xs: '60px'}}
         // controlSize="50"
         type="container"
         slideSize={{ base: '100%', '300px': '100%', '500px': '33.333333%' }}

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useUploadFile } from '@hooks/useUploadFile.ts';
 import { Button, FileInput } from '@mantine/core';
-import { ChannelItemPage } from '@modules/channel';
 import { ChannelItem } from '@modules/channel/components/ChannelItem/ChannelItem.tsx';
 import { channelsExamples } from '@modules/channel/constants/channelsExamples.ts';
 import { PostItem, PostItemPage } from '@modules/posts';
+import { examplePost as testChannel } from '@modules/posts';
 // удалить
 
 export const ForTest2 = () => {
@@ -25,6 +25,22 @@ export const ForTest2 = () => {
         ownerId={channelsExamples[0].ownerId}
         name={channelsExamples[0].name}
       />
+      <PostItem
+        id={testChannel.id}
+        channelId={testChannel.channelId}
+        channelName={testChannel.channelName}
+        channelIcon={testChannel.channelIcon}
+        previewImage={testChannel.previewImage}
+        title={testChannel.title}
+        content={testChannel.content}
+        contentImages={testChannel.contentImages}
+        tags={testChannel.tags}
+        mediaFiles={testChannel.mediaFiles}
+        dateOfCreation={testChannel.dateOfCreation}
+        likes={testChannel.likes}
+        dislikes={testChannel.dislikes}
+        views={testChannel.views}
+        />
       <PostItemPage />
     </>
   );

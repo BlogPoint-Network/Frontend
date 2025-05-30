@@ -1,21 +1,35 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { categories } from '@constants/categories.ts';
 import { useLanguage } from '@hooks/useLanguage.ts';
-import { Flex, Group, NativeSelect, Textarea, TextInput } from '@mantine/core';
+import {
+  Flex,
+  Group,
+  NativeSelect,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useChannelCreate } from '@modules/channel/hooks/useChannelCreate.ts';
+import { EditChannelImage } from '@modules/channel/components/EditChannelImage/EditChannelImage.tsx';
+import { useChannelEdit } from '@modules/channel/hooks/useChannelEdit.ts';
+import { useGetChannelById } from '@modules/channel/hooks/useGetChannelById.ts';
 import { BlueButton, FormBox, GreyButton, Heading1, Heading4 } from '@ui';
 
-export const CreateChannelForm = () => {
+
+
+export const EditChannel = () => {
   const { l } = useLanguage();
-  const createChannel = useChannelCreate();
   const navigate = useNavigate();
+  const editChannel = useChannelEdit();
+  const { id } = useParams();
+  const channelId = Number(id);
+  const channel = useGetChannelById(channelId);
 
   const form = useForm({
     initialValues: {
-      name: '',
-      description: '',
-      categoryId: 1,
+      name: channel.data?.data.data.name ?? '',
+      description: channel.data?.data.data.description ?? '',
+      categoryId: channel.data?.data.data.category.id ?? 1,
+      channelId: channelId,
     },
     validate: {
       name: value =>
@@ -33,17 +47,19 @@ export const CreateChannelForm = () => {
 
   return (
     <FormBox>
-      <Heading1>{l.channelCreation}</Heading1>
+      <Heading1>{l.channelEditing}</Heading1>
       <Group justify="center" grow>
         <form
           onSubmit={form.onSubmit(values => {
-            createChannel.mutate({
+            editChannel.mutate({
+              channelId: channelId,
               name: values.name,
-              description: values.description,
               categoryId: Number(values.categoryId),
+              description: values.description,
             });
           })}
         >
+          <EditChannelImage />
           <Flex direction="column" gap="md">
             <TextInput
               size="md"
@@ -80,11 +96,7 @@ export const CreateChannelForm = () => {
               align="center"
               direction={{ base: 'column', xs: 'row' }}
             >
-              <GreyButton
-                mt="sm"
-                w={'fit-content'}
-                onClick={() => navigate('/user-channels')}
-              >
+              <GreyButton onClick={() => navigate(`/channel/${channelId}`)} mt="sm" w={'fit-content'}>
                 {l.btnCancel}
               </GreyButton>
               <BlueButton type="submit" mt="sm" w={'fit-content'}>

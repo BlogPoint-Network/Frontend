@@ -1,4 +1,5 @@
 import { ChannelItemPage } from '@modules/channel';
+import { EditChannel } from '@modules/channel/components/EditChannel/EditChannel.tsx';
 import { CreatePostForm, PostItemPage } from '@modules/posts';
 import {
   CreateChannel,
@@ -22,6 +23,7 @@ export const privateRoutes = [
   { path: '/create-channel', component: CreateChannel, exact: true },
   { path: '/channel/:id/create-post', component: CreatePostForm, exact: true },
   { path: '/subscribe-channels', component: SubscribeChannels, exact: true },
+  { path: '/channel/:id/edit', component: EditChannel, exact: true },
   {
     path: '/channel/:channelId/post/:postId/editPost',
     component: EditPost,

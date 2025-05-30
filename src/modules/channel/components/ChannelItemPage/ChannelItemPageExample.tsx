@@ -61,10 +61,6 @@ export const ChannelItemPage: FC = () => {
     }
   };
 
-  if (!channelManager) {
-    return <div>Loading...</div>; // или спиннер
-  }
-
   return (
     <>
       <CommonFrame>
@@ -116,10 +112,8 @@ export const ChannelItemPage: FC = () => {
                 border: '1px solid black',
                 borderRadius: '30px',
               }}
-              src={
-                channelManager?.logo?.url ||
-                '/src/app/assets/images/EmptyPng.png'
-              }
+              src={'/src/app/assets/images/EmptyPng.png'}
+
             />
 
             <Flex // расположение кнопок и подписчиков
@@ -152,7 +146,6 @@ export const ChannelItemPage: FC = () => {
               </Flex>
               <Flex // нижние кнопки
                 justify={{ base: 'center', lg: 'space-between' }}
-                align={'end'}
                 gap={{ base: '10px', xs: '60px' }}
                 direction={{ base: 'column', xs: 'row' }}
               >
@@ -162,26 +155,15 @@ export const ChannelItemPage: FC = () => {
                   subscriberNumber={channelManager?.subsCount ?? 0}
                 />
                 {profile?.user?.id === channelManager?.ownerId ? (
-                  <>
-                    <Flex direction={'column'}>
-                      <BlueButton
-                        onClick={() =>
-                          navigate(`/channel/${channelManager?.id}/edit`)
-                        }
-                      >
-                        {l.btnEdit}
-                      </BlueButton>
-                      <RedButton
-                        onClick={() => {
-                          if (window.confirm(l.areYouSureDeleteChannel)) {
-                            channelDelete.mutate(Number(id));
-                          }
-                        }}
-                      >
-                        {l.btnDelete}
-                      </RedButton>
-                    </Flex>
-                  </>
+                  <RedButton
+                    onClick={() => {
+                      if (window.confirm(l.areYouSureDeleteChannel)) {
+                        channelDelete.mutate(Number(id));
+                      }
+                    }}
+                  >
+                    {l.btnDelete}
+                  </RedButton>
                 ) : (
                   <BlueButton onClick={toggleSubscribe} style={buttonStyle}>
                     {isSubscribed ? l.btnUnsubscribe : l.btnSubscribe}
@@ -200,11 +182,9 @@ export const ChannelItemPage: FC = () => {
         direction="column"
         wrap="nowrap"
       >
-        {profile?.user?.id === channelManager?.ownerId && (
-          <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
-            {l.btnCreatePost}
-          </BlueButton>
-        )}
+        <BlueButton onClick={() => navigate(`/channel/${id}/create-post`)}>
+          {l.btnCreatePost}
+        </BlueButton>
         <List items={posts} renderItem={PostItem} />
         <Pagination value={activePage} onChange={setPage} total={10} />
       </Flex>

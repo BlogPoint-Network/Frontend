@@ -30,27 +30,31 @@ export const Header = () => {
   return (
     <Flex justify={'space-between'} w="100%">
       {/* LOGO */}
-      <Flex
-        display={{ md: 'flex', base: isAuthenticated ? 'flex' : 'none' }}
-        align="center"
-        ml={15}
-      >
-        <Image radius="md" h={50} w="auto" src={'/icons/logo.png'} />
-        <Text size="30px" w={180} fw={700}>
+      <Flex align="center" ml={15}>
+        <Image
+          display={{
+            base: 'none',
+            s500: isAuthenticated ? 'flex' : 'none',
+            md: 'flex',
+          }}
+          radius="md"
+          h={50}
+          w="auto"
+          src={'/icons/logo.png'}
+        />
+        <Text
+          display={{
+            base: 'none',
+            s500: isAuthenticated ? 'flex' : 'none',
+            md: 'flex',
+          }}
+          size="30px"
+          w={180}
+          fw={700}
+        >
           BlogPoint
         </Text>
       </Flex>
-
-      {/* LOGout для мобильных устройств */}
-      <Button
-        mt={'10px'}
-        variant="subtle"
-        onClick={() => profileLogout.mutate()}
-        display={{ md: 'none', base: isAuthenticated ? 'flex' : 'none' }}
-      >
-        <IconLogout color={skyBlueColor} size={'45px'} />
-      </Button>
-
       {/* Основные кнопки */}
       <Flex
         display={{ md: 'flex', base: isAuthenticated ? 'none' : 'flex' }}
@@ -90,31 +94,43 @@ export const Header = () => {
           </Text>
         </Button>
       </Flex>
-      <Select
-        mt={'8'}
-        color={'red'}
-        ml={'20'}
-        mr={'10'}
-        w={'80'}
-        size="sm"
-        radius="xl"
-        styles={{
-          input: {
-            border: '3px solid #6BA4E8', // цвет и толщина границы
-            borderRadius: '60px', // полностью круглая форма
-            color: '#6BA4E8',
-            fontSize: '22px',
-            fontWeight: 'bold',
-            minWidth: '80px',
-          },
-        }}
-        value={language}
-        onChange={value => setLanguage(value ?? 'ru')}
-        data={Object.entries(languages).map(([value]) => ({
-          value: value,
-          label: value,
-        }))}
-      />
+      {/* Переключение языка + Logout для малых экранов */}
+      <Flex>
+        <Select
+          mt={'8'}
+          color={'red'}
+          ml={'20'}
+          mr={'10'}
+          w={'80'}
+          size="sm"
+          radius="xl"
+          styles={{
+            input: {
+              border: '3px solid #6BA4E8', // цвет и толщина границы
+              borderRadius: '60px', // полностью круглая форма
+              color: '#6BA4E8',
+              fontSize: '22px',
+              fontWeight: 'bold',
+              minWidth: '80px',
+            },
+          }}
+          value={language}
+          onChange={value => setLanguage(value ?? 'ru')}
+          data={Object.entries(languages).map(([value]) => ({
+            value: value,
+            label: value,
+          }))}
+        />
+        {/* LOGout для мобильных устройств */}
+        <Button
+          mt={'10px'}
+          variant="subtle"
+          onClick={() => profileLogout.mutate()}
+          display={{ md: 'none', base: isAuthenticated ? 'flex' : 'none' }}
+        >
+          <IconLogout color={skyBlueColor} size={'45px'} />
+        </Button>
+      </Flex>
     </Flex>
   );
 };

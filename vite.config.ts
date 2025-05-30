@@ -4,29 +4,16 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: '0.0.0.0', // 👈 Это позволяет принимать подключения извне
+    port: 5173,
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt'],
-      manifest: {
-        name: 'BlogPoint',
-        short_name: 'BlogPoint',
-        description: 'Blogging Platform',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: '/icons/logo-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/icons/logo-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
-      },
+      manifest: false,
     }),
   ],
   resolve: {
@@ -45,7 +32,6 @@ export default defineConfig({
       '@routes': '/src/app/routes',
       '@api': '/src/app/api',
       '@assets': '/src/app/assets',
-      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
     },
   },
 });

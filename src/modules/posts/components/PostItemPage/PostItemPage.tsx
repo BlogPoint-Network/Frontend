@@ -127,10 +127,7 @@ export const PostItemPage: FC = () => {
           direction={{ base: 'column', sm: 'row', md: 'column', lg: 'row' }}
         >
           <Heading4 fw={600}>
-            {l.dateOfPublication}{' '}
-            {post?.createdAt
-              ? new Date(post.createdAt).toLocaleString()
-              : 'Дата не указана'}
+            {l.dateOfPublication} {post?.createdAt.slice(0, 10)}
           </Heading4>
           <Flex align="start" gap="md">
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>

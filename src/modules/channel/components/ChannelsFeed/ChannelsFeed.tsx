@@ -21,11 +21,9 @@ export const ChannelsFeed = () => {
       <Carousel
         id="SubscribeFeed"
         // draggable={{ md: false, base: true }} // не работает
-        w={'320px'} // выравнивание по центру
-        ml={'60px'}
-        // controlSize="50"
+        w={{ base: '240px', xs: '320px' }} // выравнивание по центру
+        ml="30px"
         type="container"
-        slideSize={{ base: '100%', '300px': '100%', '500px': '33.333333%' }}
         loop
         align="start"
         styles={{
@@ -49,7 +47,7 @@ export const ChannelsFeed = () => {
             <Carousel.Slide key={channel.id}>
               <Button
                 h={'50px'}
-                w="320px"
+                w={{ base: '240px', xs: '320px' }}
                 variant={'outline'}
                 onClick={() => handleSelectChannel(channel)}
                 style={{
@@ -66,9 +64,8 @@ export const ChannelsFeed = () => {
               >
                 <Flex direction={'row'} align={'center'}>
                   <ChannelIconImage src={channel.imageLogo} />
-                  <Container>
+                  <Container w={{ base: '180px', xs: '260px' }}>
                     <Heading4
-                      w={'240px'}
                       style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}
                     >
                       {channel.name}

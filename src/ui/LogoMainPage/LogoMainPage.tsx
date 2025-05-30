@@ -24,7 +24,7 @@ export const LogoMainPage = () => {
           src={'icons/logo.png'}
         />
         {/*<span style={{ fontSize: '65px'}}>BlogPoint</span>*/}
-        <Text fz={{ base: '50px', xs: '65px' }}>BlogPoint</Text>
+        <Text fz={{ base: '50px', c500: '65px' }}>BlogPoint</Text>
       </Flex>
     </Container>
   );

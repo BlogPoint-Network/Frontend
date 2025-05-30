@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { PostService } from '@api';
 import { useMutation } from '@tanstack/react-query';
+import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface CreatePostParams {
   channelId: number;
@@ -13,6 +14,7 @@ interface CreatePostParams {
 }
 
 export function usePostCreate() {
+  const { l } = useLanguage();
   const navigate = useNavigate();
   const controller = useMutation({
     mutationFn: async (newPost: CreatePostParams) => {
@@ -33,7 +35,7 @@ export function usePostCreate() {
     },
     onError: error => {
       console.error('Ошибка при создании поста:', error.message);
-      alert('Не удалось создать пост');
+      alert(l.errorCreatingPost);
     },
   });
   return controller;

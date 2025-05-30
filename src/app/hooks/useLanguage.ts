@@ -10,7 +10,8 @@ type Language = keyof typeof translations;
 
 export const useLanguage = (defaultLang: Language = 'ru') => {
   const profileContext = useContext(ProfileContext);
-  const profileChangeLanguage = useProfileChangeLanguage(); // ✅ всегда вызываем
+  const profileChangeLanguage = useProfileChangeLanguage();
+
   const [localLang, setLocalLang] = useState<Language>(() => {
     const savedLang = localStorage.getItem(LANGUAGE_KEY);
     return savedLang && savedLang in translations
@@ -19,8 +20,11 @@ export const useLanguage = (defaultLang: Language = 'ru') => {
   });
 
   const isAuthenticated = !!profileContext?.user;
+
+  // Получаем язык из профиля, если пользователь авторизован
   const profileLanguage = profileContext?.user?.language;
 
+  // Синхронизируем локальное состояние с языком из профиля при изменении
   useEffect(() => {
     if (isAuthenticated && profileLanguage && profileLanguage in translations) {
       setLocalLang(profileLanguage as Language);
@@ -40,11 +44,10 @@ export const useLanguage = (defaultLang: Language = 'ru') => {
     if (!isAuthenticated) {
       localStorage.setItem(LANGUAGE_KEY, lang);
       setLocalLang(lang as Language);
-      window.location.reload();
     } else {
-      profileChangeLanguage.mutate(lang); // ✅ вызов мутации
-      window.location.reload();
+      profileChangeLanguage.mutate(lang);
     }
+    window.location.reload();
   };
 
   const l = translations[language] || translations[defaultLang];

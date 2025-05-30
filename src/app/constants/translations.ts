@@ -71,6 +71,8 @@ export const translations = {
     postName: 'Название поста',
     enterPostName: 'Введите название поста',
     selectTags: 'Выберите теги',
+    // Изменение канала
+    channelEditing: 'Редактирование канала',
 
     // Кнопки
 
@@ -98,6 +100,7 @@ export const translations = {
     btnGo: 'Перейти',
     btnDetails: 'Подробнее',
     btnRead: 'Читать',
+    btnEdit: 'Редактировать',
 
     // Валидация
 
@@ -120,6 +123,11 @@ export const translations = {
     errorCodeInternal: 'Ошибка при отправке кода',
     errorIncorrectCode: 'Неверный код',
     errorImage: 'Файл слишком большой или имеет неподдерживаемый формат',
+    errorChannelCreation: 'Не удалось создать канал',
+    errorEditingChannel: 'Не удалось изменить канал',
+    errorCreatingPost: 'Не удалось создать пост',
+    errorDeletingPost: 'Не удалось удалить пост',
+    errorEditingPost: 'Не удалось изменить пост',
 
     // Другое
 
@@ -205,6 +213,8 @@ export const translations = {
     postName: 'Name of the post',
     enterPostName: 'Enter the name of the post',
     selectTags: 'Select tags',
+    // Channel editing
+    channelEditing: 'Channel editing',
 
     // Buttons
 
@@ -232,6 +242,7 @@ export const translations = {
     btnGo: 'Go',
     btnDetails: 'Details',
     btnRead: 'Read',
+    btnEdit: 'Edit',
 
     // Validation
 
@@ -254,6 +265,11 @@ export const translations = {
     errorCodeInternal: 'Error when sending the code',
     errorIncorrectCode: 'Incorrect code',
     errorImage: 'The file is too large or has an unsupported format',
+    errorChannelCreation: "Couldn't create channel",
+    errorEditingChannel: "Couldn't edit the channel",
+    errorCreatingPost: "Couldn't create a post",
+    errorDeletingPost: "Couldn't delete the post",
+    errorEditingPost: "Couldn't edit the post",
 
     // Other
 
