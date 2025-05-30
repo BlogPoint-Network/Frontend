@@ -1,28 +1,34 @@
+import { useNavigate } from 'react-router-dom';
 import { PostService } from '@api';
 import { useMutation } from '@tanstack/react-query';
-import { IContentImage, IMedia } from '@app-types';
 
 interface CreatePostParams {
-  channelId: string;
+  channelId: number;
   content: string;
   tags: number[];
+  previewImageId: number;
+  postImages: number[];
+  postFiles: number[];
   title: string;
-  previewImage: IMedia;
-  contentImages: IContentImage[];
-  mediaFiles: IMedia[];
 }
 
 export function usePostCreate() {
+  const navigate = useNavigate();
   const controller = useMutation({
     mutationFn: async (newPost: CreatePostParams) => {
       return await PostService.createPost(
         newPost.channelId,
-        newPost.previewImage,
-        newPost.title,
         newPost.content,
-        newPost.contentImages,
+        newPost.title,
+        newPost.previewImageId,
+        newPost.postImages,
+        newPost.postFiles,
         newPost.tags,
-        newPost.mediaFiles,
+      );
+    },
+    onSuccess: data => {
+      navigate(
+        `/channel/${data.data.data.channelId + ''}/post/${data.data.data.id + ''}`,
       );
     },
     onError: error => {

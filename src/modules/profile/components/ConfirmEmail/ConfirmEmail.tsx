@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Flex, Group, Modal, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useEmailVerification } from '@modules/profile/hooks/useEmailVerification.ts';
 import { useVerifyEmail } from '@modules/profile/hooks/useVerifyEmail.ts';
 import { BlueButton, GreyButton, Heading3, Heading4 } from '@ui';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 export const ConfirmEmail: FC = () => {
   const { l } = useLanguage();

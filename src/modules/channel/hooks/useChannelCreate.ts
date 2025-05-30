@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { ChannelService } from '@api';
-import { IMedia } from '@app-types';
 import { useMutation } from '@tanstack/react-query';
 
 interface CreateChannelParams {
   name: string;
   description: string;
-  category: number;
-  imageLogo: IMedia;
+  categoryId: number;
 }
 
 export function useChannelCreate() {
@@ -16,9 +14,8 @@ export function useChannelCreate() {
     mutationFn: async (newChannel: CreateChannelParams) => {
       return await ChannelService.createChannel(
         newChannel.name,
-        newChannel.category,
+        newChannel.categoryId,
         newChannel.description,
-        newChannel.imageLogo,
       );
     },
     onSuccess: data => {

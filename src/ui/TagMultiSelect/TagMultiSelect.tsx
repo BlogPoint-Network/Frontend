@@ -6,14 +6,14 @@ import { useLanguage } from '@hooks/useLanguage.ts';
 interface TagMultiSelectProps {
   tags: ITag[];
   categories: ICategory[];
-  selectedTags: ITag[];
-  onChange: (tags: ITag[]) => void;
+  selectedTagIds: number[];
+  onChange: (tagIds: number[]) => void;
 }
 
 export const TagMultiSelect: React.FC<TagMultiSelectProps> = ({
   tags,
   categories,
-  selectedTags,
+  selectedTagIds,
   onChange,
 }) => {
   const { l } = useLanguage();
@@ -21,16 +21,17 @@ export const TagMultiSelect: React.FC<TagMultiSelectProps> = ({
   const combobox = useCombobox({
     onDropdownClose: () => setSearch(''), // Очищаем поиск при закрытии
   });
+  const selectedTags = tags.filter(tag => selectedTagIds.includes(tag.id));
 
   const filteredTags = tags.filter(tag =>
     tag.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   const toggleTag = (tag: ITag) => {
-    const isSelected = selectedTags.some(t => t.id === tag.id);
+    const isSelected = selectedTagIds.includes(tag.id);
     const newSelection = isSelected
-      ? selectedTags.filter(t => t.id !== tag.id)
-      : [...selectedTags, tag];
+      ? selectedTagIds.filter(id => id !== tag.id)
+      : [...selectedTagIds, tag.id];
 
     onChange(newSelection);
   };

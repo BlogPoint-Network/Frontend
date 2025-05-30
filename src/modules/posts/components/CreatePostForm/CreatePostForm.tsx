@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IContentImage, IMedia, ITag } from '@app-types';
 import { categories, tags } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { useUploadFile } from '@hooks/useUploadFile.ts';
 import { FileInput, Flex, Group, Input } from '@mantine/core';
 import { TextInput } from '@mantine/core';
 import { FileLoader } from '@modules/experementalTest/components/FileLoader.tsx';
 import { usePostCreate } from '@modules/posts/hooks/usePostCreate.ts';
+import { useProcessHtmlContent } from '@modules/posts/utils/processHtmlContent.ts';
 import { Editor } from '@tinymce/tinymce-react';
 import {
   BlueButton,
@@ -16,8 +17,6 @@ import {
   Heading4,
   TagMultiSelect,
 } from '@ui';
-import { processHtmlContent } from '@utils/processContentAndFiles.ts';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface MediaFile {
   file: File;
@@ -35,12 +34,13 @@ export const CreatePostForm = () => {
   const uploadFile = useUploadFile();
   const navigate = useNavigate();
   const postCreate = usePostCreate();
+  const processHtmlContent = useProcessHtmlContent();
 
   const [title, setTitle] = useState('');
   const { id } = useParams(); //channel id
   const [previewImg, setPreviewImg] = useState<File | null>(null);
   const [content, setContent] = useState<string>('');
-  const [selectTags, setSelectTags] = useState<ITag[]>([]);
+  const [selectTagIds, setSelectTagIds] = useState<number[]>([]);
   const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([]);
 
   const handleEditorChange = (newContent: string) => {
@@ -49,49 +49,40 @@ export const CreatePostForm = () => {
 
   const handleSubmit = async () => {
     // 🔹 1. Обрабатываем контент и выделяем изображения
-    const processedContent = processHtmlContent(content);
+    const { content: processContent, postImages } =
+      await processHtmlContent(content);
 
     // 🔹 2. Загружаем previewImage
-    const previewResponse = await uploadFile.mutateAsync(previewImg);
-    const previewImageData: IMedia = {
-      name: '',
-      filename: previewResponse.data.data.filename,
-      url: previewResponse.data.data.url,
+    const previewResponse = await uploadFile.mutateAsync({
+      file: previewImg,
+      type: 'image',
+    });
+    const previewImageData = {
+      id: previewResponse.data.data.id,
     };
 
-    // 🔹 3. Загружаем изображения из контента
-    const uploadedImages: IContentImage[] = await Promise.all(
-      processedContent.images.map(async img => {
-        const response = await uploadFile.mutateAsync(img.file);
-        return {
-          name: img.name,
-          filename: response.data.data.filename,
-          url: response.data.data.url,
-        };
-      }),
-    );
-
-    // 🔹 4. Загружаем медиафайлы
-    const uploadedMediaFiles: IMedia[] = await Promise.all(
+    // 🔹 3. Загружаем медиафайлы
+    const uploadedMediaFiles = await Promise.all(
       mediaFiles.map(async file => {
-        const response = await uploadFile.mutateAsync(file.file);
+        const response = await uploadFile.mutateAsync({
+          file: file.file,
+          type: file.type === 'image' ? 'image' : null,
+        });
         return {
-          name: '',
-          filename: response.data.data.filename,
-          url: response.data.data.url,
+          id: response.data.data.id,
         };
       }),
     );
 
     // 🔹 5. Создаем объект поста
     postCreate.mutate({
-      channelId: id ?? '',
-      previewImage: previewImageData,
+      channelId: Number(id),
+      content: processContent,
       title: title,
-      content: processedContent.content,
-      contentImages: uploadedImages,
-      tags: selectTags,
-      mediaFiles: uploadedMediaFiles,
+      previewImageId: previewImageData.id,
+      postImages: postImages,
+      postFiles: uploadedMediaFiles.map(img => img.id),
+      tags: selectTagIds,
     });
   };
 
@@ -176,8 +167,8 @@ export const CreatePostForm = () => {
             <TagMultiSelect
               tags={tags}
               categories={categories}
-              selectedTags={selectTags}
-              onChange={setSelectTags}
+              selectedTagIds={selectTagIds}
+              onChange={setSelectTagIds}
             />
             <FileLoader files={mediaFiles} setFiles={setMediaFiles} />
             <Flex

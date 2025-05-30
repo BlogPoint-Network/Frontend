@@ -1,25 +1,36 @@
 import { api } from '@api/instance.ts';
+import { IMedia } from '@app-types';
 import { AxiosResponse } from 'axios';
-
-interface UploadResponse {
-  filename: string;
-  url: string;
-}
 
 export class FileService {
   static async upload(
     file: File | null,
-  ): Promise<AxiosResponse<{ data: UploadResponse } & { message: string }>> {
+    type: string | null,
+  ): Promise<AxiosResponse<{ data: IMedia } & { message: string }>> {
     if (!file) throw new Error('Файл не выбран');
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file); // сам файл
+    if (type) {
+      formData.append('type', type); // обычное текстовое поле
+    }
 
-    const response = await api.post('/uploadFile', formData);
-    return response.data;
+    const response = await api.post('/uploadFile', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return response;
   }
 
-  static async deleteFile(filename: string) {
-    return api.delete(`/deleteFile`, { data: { filename } });
+  static async deleteFile(id: number) {
+    return api.delete(`/deleteFile`, { data: { id } });
+  }
+
+  static async uploadUserLogo(
+    file: File,
+  ): Promise<AxiosResponse<{ data: IMedia } & { message: string }>> {
+    return api.post('/uploadUserLogo', file);
   }
 }

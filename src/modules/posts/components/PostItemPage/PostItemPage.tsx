@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import EmptyPng from '@assets/images/EmptyPng.png';
 import { greyColor, skyBlueColor } from '@constants';
 import { useLanguage } from '@hooks/useLanguage.ts';
 import { Box, Card, Flex, Grid, Image } from '@mantine/core';
@@ -8,6 +9,7 @@ import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
 import {
   BlueButton,
   ChannelIconImage,
+  GreyButton,
   Heading1,
   Heading2,
   Heading4,
@@ -25,8 +27,9 @@ export const PostItemPage: FC = () => {
 
   const processedContent = renderImgContent(
     post?.content ?? '',
-    post?.contentImages ?? [],
+    post?.postImages ?? [],
   );
+  console.log(processedContent);
   const getFileType = (filename: string): string => {
     const ext = filename.split('.').pop()?.toLowerCase();
     if (!ext) return 'unknown';
@@ -65,7 +68,7 @@ export const PostItemPage: FC = () => {
           gap={{ base: 'sm', sm: 'lg' }}
           mt="15"
         >
-          <ChannelIconImage src={post?.channelIcon.url} />
+          <ChannelIconImage src={post?.channelIcon?.url || EmptyPng} />
           <Heading2
             fz={{ base: '17px', sm: '22px', md: '26px' }}
             pr={{ sm: '190px' }} // для кнопки подписаться
@@ -105,12 +108,9 @@ export const PostItemPage: FC = () => {
           height={'auto'}
           style={{ objectFit: 'contain' }}
           src={post?.previewImage.url}
-          // ВЕРТИКАЛЬНОЕ ИЗОБРАЖЕНИЕ ТЕСТ
-          // src={
-          //   'https://images.unsplash.com/photo-1564754943164-e83c08469116?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D'
-          // }
         />
       </Card.Section>
+      <Box w={'100%'} bg={greyColor} h={1} m={'15px -10px'} />
       <Card.Section>
         <div dangerouslySetInnerHTML={{ __html: processedContent }} />
       </Card.Section>
@@ -127,26 +127,28 @@ export const PostItemPage: FC = () => {
           gap={'10px'}
           direction={{ base: 'column', sm: 'row', md: 'column', lg: 'row' }}
         >
-          <Heading4 fw={600}>{l.dateOfPublication} {post?.dateOfCreation}</Heading4>
+          <Heading4 fw={600}>
+            {l.dateOfPublication} {post?.createdAt}
+          </Heading4>
           <Flex align="start" gap="md">
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconThumbUp size={35} />
               <Heading5 c="green" fz={{ base: '14px', xs: '17px' }}>
-                {addSpacesToNumber(Number(post?.likes))}
+                {addSpacesToNumber(Number(post?.likesCount))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconThumbDown size={35} />
               <Heading5 c="red" fz={{ base: '14px', xs: '17px' }}>
-                {addSpacesToNumber(Number(post?.dislikes))}
+                {addSpacesToNumber(Number(post?.dislikesCount))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs" style={{ whiteSpace: 'nowrap' }}>
               <IconEye size={35} />
               <Heading5 c={skyBlueColor} fz={{ base: '14px', xs: '17px' }}>
-                {addSpacesToNumber(Number(post?.views))}
+                {addSpacesToNumber(Number(post?.viewsCount))}
               </Heading5>
             </Flex>
           </Flex>
@@ -154,10 +156,10 @@ export const PostItemPage: FC = () => {
       </Card.Section>
       <Box w={'100%'} bg={greyColor} h={1} m={'15px -10px'} />
       <Card.Section>
-        <Grid grow ml={55}>
-          {post?.mediaFiles ? (
-            post.mediaFiles.length > 0 &&
-            post?.mediaFiles.map((item, index) => (
+        <Grid grow>
+          {post?.postFiles ? (
+            post.postFiles.length > 0 &&
+            post?.postFiles.map((item, index) => (
               <Card withBorder key={index} m={10}>
                 <Flex align="center" justify="space-between">
                   <div>
@@ -188,6 +190,11 @@ export const PostItemPage: FC = () => {
             <Heading5>{l.noFiles}</Heading5>
           )}
         </Grid>
+      </Card.Section>
+      <Card.Section>
+        <GreyButton onClick={() => navigate('/')}>
+          Редактировать пост
+        </GreyButton>
       </Card.Section>
     </Card>
   );

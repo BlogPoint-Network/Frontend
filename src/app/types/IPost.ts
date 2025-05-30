@@ -1,18 +1,18 @@
 import { IMedia, ITag } from '@app-types';
 
 export interface IPost {
-  id: string;
+  id: number;
   channelId: string;
   channelName: string;
   channelIcon: IMedia;
   previewImage: IMedia;
   title: string;
   content: string;
-  contentImages: IMedia[];
+  postImages: IMedia[];
   tags: ITag[];
-  mediaFiles: IMedia[];
-  dateOfCreation: string;
-  likes: number;
-  dislikes: number;
-  views: number;
+  postFiles: IMedia[];
+  createdAt: string;
+  likesCount: number;
+  dislikesCount: number;
+  viewsCount: number;
 }

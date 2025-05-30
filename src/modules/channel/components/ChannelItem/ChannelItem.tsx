@@ -68,12 +68,13 @@ export const ChannelItem = (props: IChannel) => {
             <Heading2 lineClamp={1} fw="bold" td="underline">
               {props.name}
             </Heading2>
-            {/*<Category*/}
-            {/*  name={props.name}*/}
-            {/*  color={props.category.color}*/}
-            {/*  id={props.id}*/}
-            {/*/>*/}
-
+            {props.category !== null && (
+              <Category
+                name={props.category.name}
+                color={props.category.color}
+                id={props.id}
+              />
+            )}
             <Heading4 lineClamp={3} mt={'5px'}>
               {props.description}
             </Heading4>

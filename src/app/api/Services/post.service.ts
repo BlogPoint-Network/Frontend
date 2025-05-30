@@ -4,45 +4,42 @@ import { AxiosResponse } from 'axios';
 
 export class PostService {
   static async createPost(
-    channelId: string,
-    previewImage: IMedia,
-    title: string,
+    channelId: number,
     content: string,
-    contentImages: IMedia[],
+    title: string,
+    previewImageId: number,
+    postImages: number[],
+    postFiles: number[],
     tags: number[],
-    mediaFiles: IMedia[],
   ): Promise<AxiosResponse<{ data: IPost } & { massage: string }>> {
     return api.post('/createPost', {
       channelId,
-      previewImage,
-      title,
       content,
-      contentImages,
+      title,
+      previewImageId,
+      postImages,
+      postFiles,
       tags,
-      mediaFiles,
-      token: localStorage.getItem('token'),
     });
   }
 
   static async editPost(
     postId: number,
     previewImage: IMedia,
-    channelLogo: IMedia,
     title: string,
     content: string,
-    contentImages: IMedia[],
+    postImages: number[],
     tags: number[],
-    mediaFiles: IMedia[],
+    postFiles: number[],
   ): Promise<AxiosResponse<{ data: IPost } & { message: string }>> {
     return api.patch('/editPost', {
       postId,
-      channelLogo,
       previewImage,
       title,
       content,
-      contentImages,
+      postImages,
       tags,
-      mediaFiles,
+      postFiles,
     });
   }
 

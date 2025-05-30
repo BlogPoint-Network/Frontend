@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from '@app-types';
 import { skyBlueColor } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Card, Flex, Image, Text } from '@mantine/core';
 import { IconEye, IconThumbDown, IconThumbUp } from '@tabler/icons-react';
 import {
@@ -14,7 +15,7 @@ import {
   Tag,
 } from '@ui';
 import { addSpacesToNumber } from '@utils';
-import { useLanguage } from '@hooks/useLanguage.ts';
+import EmptyPng from '@assets/images/EmptyPng.png';
 
 export const PostItem = (props: IPost) => {
   const { l } = useLanguage();
@@ -50,26 +51,26 @@ export const PostItem = (props: IPost) => {
           ml={{ base: '10px', sm: '20' }}
           mr={{ base: '5px', xs: '0px', sm: '15px' }}
         >
-          <ChannelIconImage src={props.channelIcon.url} />
+          <ChannelIconImage src={props?.channelIcon?.url || EmptyPng} />
           <Flex justify={'space-between'} w="80%">
-            <Heading4
-              fw="500"
-              truncate="end"
-              onClick={() => navigate(`/channel/:${props.channelId}`)}
-              style={{
-                color: isHovered ? 'blue' : 'black',
-                transition: 'color 0.3s ease',
-                maxWidth: 'calc(100% - 50px)',
-              }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {props.channelName.length > 25
-                ? props.channelName.substring(0, 25) + '...'
-                : props.channelName}
-            </Heading4>
+            {/*<Heading4*/}
+            {/*  fw="500"*/}
+            {/*  truncate="end"*/}
+            {/*  onClick={() => navigate(`/channel/:${props.channelId}`)}*/}
+            {/*  style={{*/}
+            {/*    color: isHovered ? 'blue' : 'black',*/}
+            {/*    transition: 'color 0.3s ease',*/}
+            {/*    maxWidth: 'calc(100% - 50px)',*/}
+            {/*  }}*/}
+            {/*  onMouseEnter={() => setIsHovered(true)}*/}
+            {/*  onMouseLeave={() => setIsHovered(false)}*/}
+            {/*>*/}
+            {/*  {props.channelName.length > 25*/}
+            {/*    ? props.channelName.substring(0, 25) + '...'*/}
+            {/*    : props.channelName}*/}
+            {/*</Heading4>*/}
             <Heading5 fz={{ base: '14px', xs: '17px' }}>
-              {props.dateOfCreation}
+              {props.createdAt}
             </Heading5>
           </Flex>
         </Flex>
@@ -96,14 +97,14 @@ export const PostItem = (props: IPost) => {
             <Flex align="center" gap="xs">
               <IconThumbUp size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="green">
-                {addSpacesToNumber(Number(props.likes))}
+                {addSpacesToNumber(Number(props.likesCount))}
               </Heading5>
             </Flex>
 
             <Flex align="center" gap="xs">
               <IconThumbDown size={28} />
               <Heading5 fz={{ base: '14px', xs: '17px' }} c="red">
-                {addSpacesToNumber(Number(props.dislikes))}
+                {addSpacesToNumber(Number(props.dislikesCount))}
               </Heading5>
             </Flex>
           </Flex>
@@ -112,7 +113,7 @@ export const PostItem = (props: IPost) => {
           <Flex align="center" gap="xs">
             <IconEye size={28} />
             <Heading5 fz={{ base: '14px', xs: '17px' }} c={skyBlueColor}>
-              {addSpacesToNumber(Number(props.views))}
+              {addSpacesToNumber(Number(props.viewsCount))}
             </Heading5>
           </Flex>
         </Flex>

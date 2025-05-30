@@ -1,11 +1,11 @@
 import { FC, useEffect } from 'react';
 import { IUser } from '@app-types';
 import { languages } from '@constants';
+import { useLanguage } from '@hooks/useLanguage.ts';
 import { Flex, Group, Modal, NativeSelect } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { BlueButton, GreyButton, Heading3, Heading4, Label } from '@ui';
-import { useLanguage } from '@hooks/useLanguage.ts';
 
 interface IEditProfileInfoProps {
   user?: IUser;

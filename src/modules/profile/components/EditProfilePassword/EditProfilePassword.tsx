@@ -26,6 +26,8 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
     validate: {
       oldPassword: (value: string) =>
         value.length < 8 ? l.validationPassword : null,
+      newPassword: (value: string) =>
+        value.length < 8 ? l.validationPassword : null,
       repeatPassword: (value, values) =>
         value !== values.newPassword ? l.validationConfirmPassword : null,
     },
@@ -75,7 +77,7 @@ export const EditProfilePassword: FC<IEditProfilePasswordProps> = () => {
       </Modal>
 
       <Flex direction={'column'} gap={'15px'} align={'start'}>
-        <Label title={l.password} text="########" />
+        <Label title={l.password} text="***********" />
         <BlueButton onClick={open}>{l.btnChange}</BlueButton>
       </Flex>
     </>

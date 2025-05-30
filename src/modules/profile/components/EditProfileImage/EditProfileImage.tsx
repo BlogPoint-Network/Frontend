@@ -3,17 +3,20 @@ import Empty from '@assets/images/EmptyPng.png';
 import { useLanguage } from '@hooks/useLanguage.ts';
 import { FileInput, Flex, Group, Image, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useUploadUserLogo } from '@modules/profile/hooks/useUploadUserLogo.ts';
 import { BlueButton, GreyButton, Heading2, Heading3, Heading4 } from '@ui';
+import { IUser } from '@app-types';
 
-import { useProfileEditImg } from '../../hooks/useProfileEditImg';
+interface IEditProfileInfoProps {
+  user?: IUser;
+}
 
 export const EditProfileImage = () => {
-  const {l} = useLanguage();
+  const { l } = useLanguage();
 
   const [fileImg, setFileImg] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const editProfileImg = useProfileEditImg();
-  const fallbackFile = new File([Empty], 'empty.png', { type: 'image/png' });
+  const editProfileImg = useUploadUserLogo();
 
   return (
     <>
@@ -32,8 +35,7 @@ export const EditProfileImage = () => {
           <GreyButton onClick={close}>{l.btnCancel}</GreyButton>
           <BlueButton
             onClick={() => {
-              editProfileImg.mutate(fileImg ?? fallbackFile);
-              console.log(fileImg);
+              editProfileImg.mutate(fileImg);
               close();
             }}
           >

@@ -1,15 +1,17 @@
-import { IContentImage } from '@app-types';
+interface PostImage {
+  id: number;
+  url: string;
+}
 
-export const renderImgContent = (
-  content: string,
-  images: IContentImage[],
-) => {
-  let renderedContent = content;
-
-  images.forEach(image => {
-    const imgTag = `<img src="${image.url}" alt="${image.name}" style="max-width: 100%; height: auto;"/>`;
-    renderedContent = renderedContent.replace(`<${image.name}>`, imgTag);
+export function renderImgContent(content: string, postImages: PostImage[]): string {
+  console.log(`Поступило: ${postImages}`);
+  // Обрабатываем <img id="77"> или <img id=77> и подобные
+  return content.replace(/<img\s+[^>]*id=["']?(\d+)["']?[^>]*>/gi, (match, idStr) => {
+    const id = parseInt(idStr, 10);
+    const image = postImages.find(img => img.id === id);
+    if (image) {
+      return `<img src="${image.url}" />`;
+    }
+    return match;
   });
-
-  return renderedContent;
-};
+}

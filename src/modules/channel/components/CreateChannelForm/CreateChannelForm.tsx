@@ -1,42 +1,21 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '@constants/categories.ts';
 import { useLanguage } from '@hooks/useLanguage.ts';
-import {
-  Flex,
-  Group,
-  NativeSelect,
-  Text,
-  Textarea,
-  TextInput,
-} from '@mantine/core';
+import { Flex, Group, NativeSelect, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useChannelCreate } from '@modules/channel/hooks/useChannelCreate.ts';
-import {
-  BlueButton,
-  Dropzone,
-  FormBox,
-  GreyButton,
-  Heading1,
-  Heading4,
-} from '@ui';
-
-import { ProfileContext } from '../../../../app/context';
+import { BlueButton, FormBox, GreyButton, Heading1, Heading4 } from '@ui';
 
 export const CreateChannelForm = () => {
   const { l } = useLanguage();
   const createChannel = useChannelCreate();
-  const profile = useContext(ProfileContext);
   const navigate = useNavigate();
 
   const form = useForm({
-    mode: 'uncontrolled',
     initialValues: {
       name: '',
       description: '',
-      category: '',
-      imageBanner: '',
-      imageLogo: '',
+      categoryId: 0,
     },
     validate: {
       name: value =>
@@ -45,18 +24,12 @@ export const CreateChannelForm = () => {
         value && (value.length < 10 || value.length > 500)
           ? l.validationChannelDescription
           : null,
-      category: value => (value ? null : l.validationChannelCategory),
-      imageLogo: value => (value ? null : l.validationChannelImage),
+      categoryId: value =>
+        value !== null && value !== undefined
+          ? null
+          : l.validationChannelCategory,
     },
   });
-
-  // для DropZone, иначе придется делать с провайдером для формы
-  const handleDropFile = (image: File) => {
-    form.setFieldValue('imageLogo', image);
-  };
-  const handleRejectFile = () => {
-    form.setFieldValue('imageLogo', null);
-  };
 
   return (
     <FormBox>
@@ -67,10 +40,7 @@ export const CreateChannelForm = () => {
             createChannel.mutate({
               name: values.name,
               description: values.description,
-              category: values.category,
-              imageBanner: values.imageBanner,
-              imageLogo: values.imageLogo,
-              ownerId: profile?.user?.id ?? '',
+              categoryId: Number(values.categoryId),
             });
           })}
         >
@@ -100,16 +70,9 @@ export const CreateChannelForm = () => {
                 value: category.id.toString(), // значение id как строка
                 label: category.name, // отображаемое имя категории
               }))}
-              {...form.getInputProps('category')}
+              key={form.key('categoryId')}
+              {...form.getInputProps('categoryId')}
             />
-            <Heading4>{l.channelImage}</Heading4>
-            <Dropzone
-              form={form}
-              onDropFile={handleDropFile}
-              onRejectFile={handleRejectFile}
-            />
-            {/* Отображение ошибки */}
-            {form.errors.image && <Text c="red">{form.errors.image}</Text>}
             <Flex
               mih={50}
               gap={{ base: '0', xs: 'xs' }}
